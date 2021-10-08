@@ -1,6 +1,6 @@
 export interface Genre {
     id: number,
     title: string,
-    description,
+    description: string,
     enabled: boolean
 }

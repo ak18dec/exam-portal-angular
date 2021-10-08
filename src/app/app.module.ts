@@ -39,6 +39,10 @@ import { ProfileComponent } from './pages/admin/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SubjectsComponent } from './pages/admin/subjects/subjects.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { CategoriesComponent } from './pages/admin/categories/categories.component';
+import { InstructionsComponent } from './pages/admin/instructions/instructions.component';
+import { QuestionsComponent } from './pages/admin/questions/questions.component';
+import { TopicsComponent } from './pages/admin/topics/topics.component';
 
 
 @NgModule({
@@ -56,7 +60,11 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     ProfileComponent,
     SignupComponent,
     SubjectsComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    CategoriesComponent,
+    InstructionsComponent,
+    QuestionsComponent,
+    TopicsComponent
   ],
   imports: [
     BrowserModule,
