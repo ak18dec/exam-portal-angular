@@ -93,11 +93,11 @@ export class QuestionsComponent implements OnInit {
 
   }
 
-  toggleQuestionStatus() {
+  toggleQuestionStatus(quesId: number, index: number) {
 
   }
 
-  submitForm(questionForm) {
+  submitForm(questionForm: any) {
 
     console.log(this.newQuestionChoices)
 
