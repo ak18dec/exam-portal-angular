@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Proficiency } from 'src/app/models/proficiency';
+import { Question } from 'src/app/models/question';
+import { QuestionChoice } from 'src/app/models/questionchoice';
+import { Topic } from 'src/app/models/topic';
 
 @Component({
   selector: 'app-questions',
