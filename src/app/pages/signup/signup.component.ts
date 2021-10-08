@@ -103,7 +103,7 @@ export class SignupComponent implements OnInit {
   }
 
 
-  isUsernameValid(username: string): string {
+  isUsernameValid(username: string) {
 
     if (username) {
       username = username.trim();
@@ -124,7 +124,7 @@ export class SignupComponent implements OnInit {
     return null;
   }
 
-  isPasswordValid(password: string): string {
+  isPasswordValid(password: string) {
 
     if (password) {
       password = password.trim();
@@ -137,7 +137,7 @@ export class SignupComponent implements OnInit {
     return null;
   }
 
-  isFirstNameValid(firstname: string): string {
+  isFirstNameValid(firstname: string) {
 
     if (firstname) {
       firstname = firstname.trim();
@@ -154,7 +154,7 @@ export class SignupComponent implements OnInit {
 
   }
 
-  isEmailValid(email: string): string {
+  isEmailValid(email: string) {
     if (email) {
       email = email.trim();
     }
@@ -171,12 +171,11 @@ export class SignupComponent implements OnInit {
   }
 
   isduplicateData(data: any): string[] {
-    let message = [];
+    let message: string[] = [];
     this.userService.duplicateDataCheck(data).subscribe((resp: any) => {
       message = resp.data
-      return message;
     });
-    return null;
+    return message;
   }
 
 

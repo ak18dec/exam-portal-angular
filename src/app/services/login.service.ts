@@ -66,11 +66,11 @@ export class LoginService {
     return obsof4;
   }
 
-  public storeUser(user){
+  public storeUser(user: any){
     localStorage.setItem('user',JSON.stringify(user));
   }
 
-  public storeToken(token){
+  public storeToken(token: any){
     localStorage.setItem('token', token);
     return true;
   }
