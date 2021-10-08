@@ -1,0 +1,25 @@
+
+.mt75 {
+    margin-top: 75px;
+  }
+  
+  .full-width {
+    width: 90%;
+  }
+  
+  .btn-spacd {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  
+  /* ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    zoom: 0.9;
+  } */
+  
+  ::ng-deep .error-snackbar {
+    white-space: pre-wrap
+  }

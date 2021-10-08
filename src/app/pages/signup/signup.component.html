@@ -1,1 +1,64 @@
-<p>signup works!</p>
+<div class="bootstrap-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="container">
+          <mat-card>
+            <div class="col-md-4" style="display: inline-block; float: left;">
+              <div class="container text-center mt75">
+                <object class="reg-logo" type="image/svg+xml" data="../../../assets/logo_blue.svg"></object>
+              </div>
+              <h2 class="text-center logo-font">Register Here !!</h2>
+            </div>
+            <div class="offset-md-5 mt30">
+              <form [formGroup]="signupForm" (ngSubmit)="register()" autocomplete="off" aria-autocomplete="none">
+  
+                <!-- <div class="mb20 mt30">
+                  <mat-radio-group aria-label="User Type" formControlName="role"><span class="ml5 mr20">User Type</span>
+                    <mat-radio-button value="1" color="primary" class="ml20 mr20">Admin</mat-radio-button>
+                    <mat-radio-button value="2" checked color="primary" class="ml20 mr20">Basic</mat-radio-button>
+                  </mat-radio-group>
+                </div> -->
+    
+    
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>User Name</mat-label>
+                  <input matInput placeholder="Enter here" formControlName="username">
+                </mat-form-field>
+    
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input type="password" matInput placeholder="Enter here" formControlName="password">
+                </mat-form-field>
+    
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>First Name</mat-label>
+                  <input matInput placeholder="Enter here" formControlName="firstName">
+                </mat-form-field>
+    
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput placeholder="Enter here" formControlName="lastName">
+                </mat-form-field>
+    
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput placeholder="Enter here" formControlName="email">
+                </mat-form-field>
+    
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Phone</mat-label>
+                  <input type="number" matInput placeholder="Enter here" formControlName="phone">
+                </mat-form-field>
+    
+                <div class="container btn-spacd text-center">
+                  <button mat-raised-button color="primary" type="submit">Register</button>
+                  <span class="col-md-2"></span>
+                  <button style="min-width: 84.08px;" mat-raised-button type="reset" (click)="reset()"> Clear </button>
+                </div>
+              </form>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
