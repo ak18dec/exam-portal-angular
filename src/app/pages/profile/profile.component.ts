@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  profile: any;
 
-  ngOnInit(): void {
+  constructor(private profileService: ProfileService) { }
+
+  ngOnInit() {
+    this.profileService.getProfile(3).subscribe((res: any)=>{
+      this.profile = res;
+    })
   }
 
 }

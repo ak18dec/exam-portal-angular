@@ -1,1 +1,34 @@
-<p>profile works!</p>
+<mat-card>
+    <h2 class="logo-font">Your Profile Details</h2>
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="container" *ngIf="profile">
+                <div class="container text-center">
+                    <img src="../../../assets/profiles/admin_profile.jpg" 
+                    alt=""
+                    class="profile-image">
+                    <!-- <h1 class="mt20 logo-font">{{ profile.firstName + ' ' +profile.lastName }}</h1> -->
+                    <h1 class="mt20 logo-font">{{ profile }}</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <div class="col-md-3 offset-md-3" style="display: inline-block;">
+                            <!-- <mat-card class="mt10">User Name</mat-card>
+                            <mat-card class="mt10">Email</mat-card>
+                            <mat-card class="mt10">Phone</mat-card> -->
+                            <mat-card class="mt10">Role</mat-card>
+                            <mat-card class="mt10">Status</mat-card>
+                        </div>
+                        <div class="col-md-5" style="display: inline-block; margin-left: -20px;">
+                            <!-- <mat-card class="mt10">{{ profile.username }}</mat-card>
+                            <mat-card class="mt10">{{ profile.email }}</mat-card>
+                            <mat-card class="mt10">{{ profile.phone }}</mat-card> -->
+                            <mat-card class="mt10">ADMIN</mat-card>
+                            <mat-card class="mt10">Active</mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
