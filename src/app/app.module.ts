@@ -16,6 +16,7 @@ import { ProfileComponent } from './pages/admin/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SubjectsComponent } from './pages/admin/subjects/subjects.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
