@@ -10,6 +10,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { CategoriesComponent } from './pages/admin/categories/categories.component';
+import { TopicsComponent } from './pages/admin/topics/topics.component';
+import { QuestionsComponent } from './pages/admin/questions/questions.component';
 
 const routes: Routes = [
   {
@@ -52,22 +55,22 @@ const routes: Routes = [
         path: 'subjects',
         component: SubjectsComponent
       },
-      // {
-      //   path: 'categories',
-      //   component: CategoriesComponent
-      // },
-      // {
-      //   path: 'topics',
-      //   component: TopicsComponent
-      // },
+      {
+        path: 'categories',
+        component: CategoriesComponent
+      },
+      {
+        path: 'topics',
+        component: TopicsComponent
+      },
       {
         path: 'quizzes',
         component: ComingSoonComponent
       },
-      // {
-      //   path: 'questions',
-      //   component: QuestionsComponent
-      // },
+      {
+        path: 'questions',
+        component: QuestionsComponent
+      },
       {
         path: 'answers',
         component: ComingSoonComponent

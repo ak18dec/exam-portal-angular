@@ -91,7 +91,7 @@ export class CategoriesComponent implements OnInit {
     // )
   }
 
-  submitForm(categoryForm) {
+  submitForm(categoryForm: any) {
     // console.log(this.newSubjectData);
     
     // if(!this.newSubjectData.title){

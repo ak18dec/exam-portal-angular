@@ -91,7 +91,7 @@ export class TopicsComponent implements OnInit {
     // )
   }
 
-  submitForm(topicForm) {
+  submitForm(topicForm: any) {
     // console.log(this.newSubjectData);
     
     // if(!this.newSubjectData.title){
