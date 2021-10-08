@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,83 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginData:any = {
+    username: '',
+    password: ''
+  }
 
-  ngOnInit(): void {
+  constructor(private _snackBar: MatSnackBar, private loginService: LoginService, private router: Router) { }
+
+  ngOnInit() {
+    this.loginData.username = '';
+    this.loginData.password = '';
+  }
+
+  login(logForm: any) {
+
+    if(!this.loginData.username && !this.loginData.password){
+      this._snackBar.open('Please provide credentials','',{
+        duration: 3000
+      });
+      return;
+    }
+
+    if(!this.loginData.username){
+      this._snackBar.open('Username is required','',{
+        duration: 3000
+      });
+      return;
+    }
+
+    if(!this.loginData.password){
+      this._snackBar.open('Password is required','',{
+        duration:3000
+      });
+      return;
+    }
+
+    // request to server to generate token
+    this.loginService.generateToken(this.loginData).subscribe(
+      (data: any)=>{
+        console.log(`success data ${data.token}`);
+        this.loginService.storeToken(data);
+        this.loginService.getCurrentUser().subscribe(
+          (user: any) => {
+            this.loginService.storeUser(user);
+            console.log(user);
+            //redirect .... ADMIN: admin-dashboard
+            //redirect ....NORMAL: user-dashboard
+            if(this.loginService.getUserRole() === 'ADMIN'){
+
+              //admin dashboard
+              this.router.navigate(['admin']);
+              this.loginService.loginStatusSubject.next(true);
+
+            }else if (this.loginService.getUserRole() === 'BASIC'){
+              
+              //basic user dashboard
+              this.router.navigate(['user-dashboard']);
+              this.loginService.loginStatusSubject.next(true);
+            
+            }else{
+              this.loginService.logout();
+            }
+            
+          },
+          (error)=>{
+            this._snackBar.open('Error while fetching current user !!!','', {
+              duration: 3000
+            })
+          }
+        );
+      },
+      (error)=>{
+        console.log(`error data ${error}`);
+        this._snackBar.open('Invalid Credentials !!!','', {
+          duration: 3000
+        })
+      }
+    );
   }
 
 }
