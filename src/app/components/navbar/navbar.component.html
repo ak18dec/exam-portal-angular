@@ -1,1 +1,40 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary" class="logo-font">
+    <a
+      routerLink="/"
+      mat-icon-button class="example-icon" 
+      aria-label="Example icon-button with menu icon">
+     <mat-icon class="portal-logo-align">menu_book</mat-icon>
+    </a>
+   <span class="mt5">Exam Portal</span>
+   <span class="example-spacer"></span>
+   <a
+    *ngIf="!userLoggedIn"
+    [routerLink]="'/login'"
+    mat-icon-button class="example-icon favorite-icon" 
+    aria-label="Example icon-button with heart icon">
+    <span class="logo-font">Login</span>
+  </a>
+  
+   <a
+   *ngIf="!userLoggedIn"
+    [routerLink]="'/signup'"
+    mat-icon-button class="example-icon favorite-icon mr20 ml20" 
+    aria-label="Example icon-button with heart icon">
+    <span class="logo-font">Register</span>
+  </a>
+  
+  <a
+   *ngIf="userLoggedIn" (click)="logout()"
+    mat-icon-button class="example-icon favorite-icon mr20 ml20" 
+    aria-label="Example icon-button with heart icon">
+    <span class="logo-font">Logout</span>
+  </a>
+  
+  <a
+   *ngIf="userLoggedIn"
+    mat-icon-button class="example-icon favorite-icon mr20 ml20" 
+    aria-label="Example icon-button with heart icon">
+    <span class="logo-font">{{ currentUser.username }} </span>
+  </a>
+   
+  </mat-toolbar>

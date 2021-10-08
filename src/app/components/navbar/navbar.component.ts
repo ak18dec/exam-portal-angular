@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  userLoggedIn: boolean = false;
+  currentUser: any = null;
 
-  ngOnInit(): void {
+  constructor(private loginService: LoginService, private router: Router) { }
+
+  ngOnInit() {
+    this.loginService.loginStatusSubject.subscribe(
+      data=>{
+        this.userLoggedIn = this.loginService.isLoggedIn();
+        this.currentUser = this.loginService.getUser();
+    });
+  }
+
+  public logout(){
+    this.loginService.logout();
+    this.userLoggedIn = false;
+    this.currentUser = null;
+    this.loginService.loginStatusSubject.next(true);
+    this.router.navigate(['']);
   }
 
 }

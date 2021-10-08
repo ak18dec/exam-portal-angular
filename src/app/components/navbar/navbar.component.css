@@ -1,0 +1,8 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.custom-toolbar-height {
+    min-height: 30px !important; 
+    height: 55px !important;
+}
