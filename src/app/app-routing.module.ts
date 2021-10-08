@@ -1,5 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { GenresComponent } from './pages/admin/genres/genres.component';
+import { ProfileComponent } from './pages/admin/profile/profile.component';
+import { SubjectsComponent } from './pages/admin/subjects/subjects.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   {
@@ -20,7 +30,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
-    canActivate: [AdminGuard],
+    //canActivate: [AdminGuard],
     children: [
       {
         path: '',
@@ -42,22 +52,22 @@ const routes: Routes = [
         path: 'subjects',
         component: SubjectsComponent
       },
-      {
-        path: 'categories',
-        component: CategoriesComponent
-      },
-      {
-        path: 'topics',
-        component: TopicsComponent
-      },
+      // {
+      //   path: 'categories',
+      //   component: CategoriesComponent
+      // },
+      // {
+      //   path: 'topics',
+      //   component: TopicsComponent
+      // },
       {
         path: 'quizzes',
         component: ComingSoonComponent
       },
-      {
-        path: 'questions',
-        component: QuestionsComponent
-      },
+      // {
+      //   path: 'questions',
+      //   component: QuestionsComponent
+      // },
       {
         path: 'answers',
         component: ComingSoonComponent
@@ -68,7 +78,7 @@ const routes: Routes = [
     path: 'user-dashboard',
     component: UserDashboardComponent,
     pathMatch: 'full',
-    canActivate: [UserGuard]
+    //canActivate: [UserGuard]
   }
 ];
 
