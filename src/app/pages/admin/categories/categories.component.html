@@ -1,1 +1,95 @@
-<p>categories works!</p>
+<mat-card>
+    <div class="logo-font mb20 mt5">
+      <h3 *ngIf="!newCategory" style="display: inline;">Categories</h3>
+  
+      <mat-icon *ngIf="newCategory" style="display: inline; font-size: 16px; vertical-align: -2px;" class="cursor-pointer"
+        (click)="backToCategories()">arrow_back_ios_new
+      </mat-icon>
+      <h3 *ngIf="newCategory" style="display: inline;" class="logo-font cursor-pointer" (click)="backToCategories()">Back to
+        Categories</h3>
+  
+      <button *ngIf="!newCategory" style="float: right;margin-top: -5px;" mat-flat-button color="primary"
+        (click)="addCategory()" class="logo-font">Add Category</button>
+    </div>
+  
+    <div *ngIf="!newCategory; else newCategoryTemplate">
+      <mat-list>
+        <mat-list-item *ngFor="let c of categories;let i=index;let l=count" [ngClass]="{ 'inactive-text': !c.enabled }">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          
+          <div mat-line class="mat-item-with-chip"> {{ c.title }}</div>
+          <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;" [disabled]="!c.enabled">
+            <!-- <mat-chip appearance="outline">{{ getGenreName(s.genreId) }}</mat-chip> -->
+          </mat-chip-list>
+          <div mat-line style="font-size: 11px;">{{ c.description }}</div>
+          
+  
+          <!-- 3 dot menu -->
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+  
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editCategory(c)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteCategory(c.id)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+            <button mat-menu-item (click)="toggleCategoryStatus(c.id, i)">
+              <mat-icon>{{ c.enabled ? 'notifications_off' : 'notifications_on' }}</mat-icon>
+              <span>{{ c.enabled ? 'Disable' : 'Enable' }}</span>
+            </button>
+          </mat-menu>
+  
+          <mat-divider *ngIf="i < l-1"></mat-divider>
+  
+        </mat-list-item>
+      </mat-list>
+    </div>
+  
+  </mat-card>
+  <ng-template #newCategoryTemplate>
+    <div class="bootstarp-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <mat-card-subtitle>New Category</mat-card-subtitle>
+  
+            <form #categoryForm="ngForm" autocomplete="off">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input autofocus required type="text" name="title" matInput placeholder="Enter title"
+                  [(ngModel)]="newCategoryData.title">
+              </mat-form-field>
+  
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea name="description" matInput [(ngModel)]="newCategoryData.description"
+                  placeholder="Enter description" rows="7"></textarea>
+              </mat-form-field>
+  
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Subject</mat-label>
+                <mat-select [(ngModel)]="newCategoryData.subjectId" name="subject">
+                  <mat-option *ngFor="let option of subjectsList" [value]="option.id">
+                    {{option.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> 
+  
+  
+  
+              <button mat-flat-button color="primary" type="submit" (click)="submitForm(categoryForm)"
+                class="logo-font-bold">Save</button>
+              <span class="col-md-2"></span>
+              <button mat-stroked-button color="primary" type="reset" (click)="categoryForm.reset()" type="reset"
+                class="logo-font-bold">Clear</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
