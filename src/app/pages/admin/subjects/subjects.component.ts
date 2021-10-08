@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject } from 'src/app/models/subject';
+import { GenreService } from 'src/app/services/genre.service';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-subjects',
@@ -115,7 +119,7 @@ export class SubjectsComponent implements OnInit {
     )
   }
 
-  submitForm(subjectForm) {
+  submitForm(subjectForm: any) {
     console.log(this.newSubjectData);
     
     if(!this.newSubjectData.title){

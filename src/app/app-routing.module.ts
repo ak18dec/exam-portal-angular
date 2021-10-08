@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { GenresComponent } from './pages/admin/genres/genres.component';
-import { ProfileComponent } from './pages/admin/profile/profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { SubjectsComponent } from './pages/admin/subjects/subjects.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
