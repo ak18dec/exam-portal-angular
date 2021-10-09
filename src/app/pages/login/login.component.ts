@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private _snackBar: MatSnackBar, private loginService: LoginService, private router: Router) { }
+  constructor(private _snackBar: MatSnackBar, private loginService: LoginService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.loginData.username = '';
@@ -49,8 +50,8 @@ export class LoginComponent implements OnInit {
     this.loginService.generateToken(this.loginData).subscribe(
       (data: any)=>{
         console.log(`success data ${data.token}`);
-        this.loginService.storeToken(data);
-        this.loginService.getCurrentUser().subscribe(
+        this.loginService.storeToken(data.token);
+        this.userService.getUserByUsername(this.loginData.username, data.token).subscribe(
           (user: any) => {
             this.loginService.storeUser(user);
             console.log(user);

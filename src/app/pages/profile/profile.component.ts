@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -18,12 +19,13 @@ export class ProfileComponent implements OnInit {
 
   userId: number = 3;
 
-  constructor(private userService: UserService, private fb: FormBuilder) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private loginService: LoginService) { }
 
   ngOnInit() {
-    this.userService.getUserDetailsById(this.userId).subscribe(
+    const token = this.loginService.getToken();
+    const currentUser = this.loginService.getUser();
+    this.userService.getUserByUsername(currentUser.username, token).subscribe(
       (data) => {
-        // this.profile = data;
         console.log('on success');
         console.log(data);
         this.profile = data;
@@ -68,7 +70,9 @@ export class ProfileComponent implements OnInit {
       phone : updatedForm.get('phone')?.value,
     }
 
-    this.userService.updateUser(updatedUser, this.userId).subscribe(
+    const token = this.loginService.getToken();
+
+    this.userService.updateUser(updatedUser, this.userId, token).subscribe(
       (data) => {
         console.log('on successfull update')
         console.log(data);

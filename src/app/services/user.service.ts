@@ -8,26 +8,46 @@ import baseUrl from './helper';
 })
 export class UserService {
 
-  APP_URL = 'https://i-exam.herokuapp.com';
-
   constructor(private http: HttpClient) { }
 
   //GET APIs
-  getUserDetailsById(userId: number) {
+  getUserDetailsById(userId: number, token: any) {
     const headerDict = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
       'Access-Control-Allow-Origin' : '*',
       'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmtpdCIsImV4cCI6MTYzMzgyNjk1NSwiaWF0IjoxNjMzNzkwOTU1fQ.PPmFE7CiT_0OoN6zVO-lRNYvY7G-uby_hZJBxnf2tRg'
+      'Authorization' : `Bearer ${token}`
     }
     
     const requestOptions = {                                                                                                                                                                                 
       headers: new HttpHeaders(headerDict), 
     };
 
-    let url = `${this.APP_URL}/users/${userId}`;
+    let url = `${baseUrl}/users/${userId}`;
+    let response =  this.http.get(url, requestOptions);
+    console.log(response);
+    return response;
+  }
+
+  getUserByUsername(username: string, token: any) {
+    console.log('inside getuserbyusername; checking token value')
+    console.log(token)
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Authorization' : `Bearer ${token}`
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict), 
+    };
+
+    let url = `${baseUrl}/users?username=${username}`;
     let response =  this.http.get(url, requestOptions);
     console.log(response);
     return response;
@@ -46,20 +66,21 @@ export class UserService {
   
   
   //UPDATE APIs
-  updateUser(newUser: User, userId: number) {
+  updateUser(newUser: User, userId: number, token: any) {
     const headerDict = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
       'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+      'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Authorization' : `Bearer ${token}`
     }
     
     const requestOptions = {                                                                                                                                                                                 
       headers: new HttpHeaders(headerDict), 
     };
 
-    let url = `${this.APP_URL}/users/${userId}`;
+    let url = `${baseUrl}/users/${userId}`;
     let response =  this.http.put(url, newUser, requestOptions);
     console.log(response);
     return response;
