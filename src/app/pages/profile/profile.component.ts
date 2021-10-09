@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from './profile.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,12 +12,73 @@ export class ProfileComponent implements OnInit {
 
   profile: any;
 
-  constructor(private profileService: ProfileService) { }
+  profileForm: FormGroup;
+
+  emailPattern = "[A-Za-z0-9.'_%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
+
+  userId: number = 3;
+
+  constructor(private userService: UserService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.profileService.getProfile(3).subscribe((res: any)=>{
-      this.profile = res;
-    })
+    this.userService.getUserDetailsById(this.userId).subscribe(
+      (data) => {
+        // this.profile = data;
+        console.log('on success');
+        console.log(data);
+        this.profile = data;
+        this.createForm(this.profile);
+      },
+      (error) => {
+        console.log('On error')
+        console.log(error);
+      }
+    )
+
+    
+  }
+
+  createForm(oldData: any) {
+    this.profileForm = this.fb.group({
+      username: [oldData.username, [Validators.required, Validators.maxLength(10)]],
+      password: [oldData.password, [Validators.required]],
+      firstName: [oldData.firstName, [Validators.required, Validators.maxLength(25)]],
+      lastName: [oldData.lastName, [Validators.maxLength(25)]],
+      email: [oldData.email, [Validators.required, Validators.pattern(this.emailPattern)]],
+      phone: [oldData.phone]
+    });
+  }
+
+  reset() {
+    this.profileForm.get('username')?.setValue(this.profile.username);
+    this.profileForm.get('password')?.setValue(this.profile.password);
+    this.profileForm.get('firstName')?.setValue(this.profile.firstName);
+    this.profileForm.get('lastName')?.setValue(this.profile.lastName);
+    this.profileForm.get('email')?.setValue(this.profile.email);
+    this.profileForm.get('phone')?.setValue(this.profile.phone);
+  }
+
+  updateProfile(updatedForm: FormGroup) {
+    let updatedUser: User = {
+      username : updatedForm.get('username')?.value,
+      password : updatedForm.get('password')?.value,
+      firstName : updatedForm.get('firstName')?.value,
+      lastName : updatedForm.get('lastName')?.value,
+      email : updatedForm.get('email')?.value,
+      phone : updatedForm.get('phone')?.value,
+    }
+
+    this.userService.updateUser(updatedUser, this.userId).subscribe(
+      (data) => {
+        console.log('on successfull update')
+        console.log(data);
+      },
+      (error) => {
+        console.log('on error update')
+        console.log(error);
+      }
+    )
+    
   }
 
 }

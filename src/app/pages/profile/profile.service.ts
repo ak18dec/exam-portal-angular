@@ -13,7 +13,7 @@ export class ProfileService {
   
   constructor(private http: HttpClient) { }
 
-  getProfile(userId: number): Observable<any> {
+  getProfile(userId: number) {
     const headerDict = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -26,7 +26,11 @@ export class ProfileService {
       headers: new HttpHeaders(headerDict), 
     };
 
-    let url = `${this.APP_URL}/test`;
-    return this.http.get(url, requestOptions);
+    // let response =  this.http.get(url, { responseType: 'text' });
+
+    let url = `${this.APP_URL}/users/${userId}`;
+    let response =  this.http.get(url, requestOptions);
+    console.log(response);
+    return response;
   }
 }

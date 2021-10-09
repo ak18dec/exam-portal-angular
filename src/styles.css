@@ -36,6 +36,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 30px;
 }
 
+.mt50 {
+    margin-top: 50px;
+}
+
 .ml20 {
     margin-left: 20px !important;
 }
@@ -81,4 +85,8 @@ input.mat-input-element {
     font-size: 12px !important;
     margin-bottom: 5px !important;
     margin-left: -3px !important;
-  }
+}
+
+.text-center {
+    text-align: center !important;
+}
