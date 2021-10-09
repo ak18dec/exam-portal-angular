@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
 
 ## Live Demo
-The application can be accessed on url [exam-portal](https://ak18dec.github.io/exam-portal-angular/)
+The application can be accessed on url [exam-portal](https://ak18dec.github.io/exam-portal-angular/index.html)
 
 ## Development server
 
