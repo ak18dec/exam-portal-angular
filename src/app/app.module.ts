@@ -43,6 +43,7 @@ import { CategoriesComponent } from './pages/admin/categories/categories.compone
 import { InstructionsComponent } from './pages/admin/instructions/instructions.component';
 import { QuestionsComponent } from './pages/admin/questions/questions.component';
 import { TopicsComponent } from './pages/admin/topics/topics.component';
+import { authInterceptorProviders } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -90,7 +91,7 @@ import { TopicsComponent } from './pages/admin/topics/topics.component';
     MatChipsModule,
     MatSlideToggleModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
