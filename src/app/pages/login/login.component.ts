@@ -49,9 +49,8 @@ export class LoginComponent implements OnInit {
     // request to server to generate token
     this.loginService.generateToken(this.loginData).subscribe(
       (data: any)=>{
-        console.log(`success data ${data.token}`);
         this.loginService.storeToken(data.token);
-        this.userService.getUserByUsername(this.loginData.username, data.token).subscribe(
+        this.userService.getUserByUsername(this.loginData.username).subscribe(
           (user: any) => {
             this.loginService.storeUser(user);
             console.log(user);

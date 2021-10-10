@@ -17,27 +17,19 @@ export class ProfileComponent implements OnInit {
 
   emailPattern = "[A-Za-z0-9.'_%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
 
-  userId: number = 3;
-
   constructor(private userService: UserService, private fb: FormBuilder, private loginService: LoginService) { }
 
   ngOnInit() {
-    const token = this.loginService.getToken();
     const currentUser = this.loginService.getUser();
-    this.userService.getUserByUsername(currentUser.username, token).subscribe(
+    this.userService.getUserByUsername(currentUser.username).subscribe(
       (data) => {
-        console.log('on success');
-        console.log(data);
         this.profile = data;
         this.createForm(this.profile);
       },
       (error) => {
-        console.log('On error')
         console.log(error);
       }
     )
-
-    
   }
 
   createForm(oldData: any) {
@@ -70,19 +62,13 @@ export class ProfileComponent implements OnInit {
       phone : updatedForm.get('phone')?.value,
     }
 
-    const token = this.loginService.getToken();
-
-    this.userService.updateUser(updatedUser, this.userId, token).subscribe(
+    this.userService.updateUser(updatedUser, this.profile.id).subscribe(
       (data) => {
-        console.log('on successfull update')
         console.log(data);
       },
       (error) => {
-        console.log('on error update')
         console.log(error);
       }
     )
-    
   }
-
 }

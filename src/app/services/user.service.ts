@@ -11,14 +11,14 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   //GET APIs
-  getUserDetailsById(userId: number, token: any) {
+  getUserDetailsById(userId: number) {
     let url = `${baseUrl}/users/${userId}`;
     let response =  this.http.get(url);
     console.log(response);
     return response;
   }
 
-  getUserByUsername(username: string, token: any) {
+  getUserByUsername(username: string) {
     let url = `${baseUrl}/users?username=${username}`;
     let response =  this.http.get(url);
     console.log(response);
@@ -38,7 +38,7 @@ export class UserService {
   
   
   //UPDATE APIs
-  updateUser(newUser: User, userId: number, token: any) {
+  updateUser(newUser: User, userId: number) {
     let url = `${baseUrl}/users/${userId}`;
     let response =  this.http.put(url, newUser);
     console.log(response);

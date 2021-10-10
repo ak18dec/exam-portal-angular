@@ -52,6 +52,7 @@ export class LoginService {
 
   public storeUser(user: any){
     let user_lite = {
+      userId: user.id,
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
