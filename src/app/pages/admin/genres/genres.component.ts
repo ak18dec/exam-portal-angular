@@ -41,7 +41,7 @@ export class GenresComponent implements OnInit {
 
   getAllGenres(){
     this.genreService.getGenres().subscribe(
-      (res)=>{
+      (res: any)=>{
         this.genres = res;
       },
       (error)=>{
@@ -89,7 +89,7 @@ export class GenresComponent implements OnInit {
   createNewGenre(){
     this.genreService.addGenre(this.newGenreData).subscribe(
       (data: any)=>{
-        this.genres = data;
+        this.genres.push(data);
         this._snackBar.open(`${this.newGenreData.title} is added successfully to list`,'',{
           duration: 3000
         });
@@ -109,14 +109,19 @@ export class GenresComponent implements OnInit {
   }
 
   updateGenre(){
-    this.genreService.updateGenre(this.newGenreData).subscribe(
+    this.genreService.updateGenre(this.newGenreData, this.newGenreData.id).subscribe(
       (data)=>{
-        this.genres = data;
-        this._snackBar.open('Genre updated successfully','',{
-          duration: 3000
-        });
+        if (data) {
+          let idxToUpdate = this.genres.findIndex(g=>g.id === this.newGenreData.id);
+          this.genres[idxToUpdate].title = this.newGenreData.title;
+          this.genres[idxToUpdate].description = this.newGenreData.description;
 
-        this.freshForm();
+          this._snackBar.open('Genre updated successfully', '', {
+            duration: 3000
+          });
+          this.freshForm();
+        }
+        
 
       },
       (error)=>{
@@ -132,13 +137,18 @@ export class GenresComponent implements OnInit {
   }
 
   toggleGenreStatus(id: number, idx: number){
-    this.genreService.toggleGenreState(id).subscribe(
+
+    let oldState = this.genres[idx].enabled;
+    this.genres[idx].enabled = !oldState;
+
+    this.genreService.toggleGenreState(this.genres[idx], id).subscribe(
       (res)=>{
-        this.genres = res;
-        let status = this.genres[idx].enabled ? 'enabled' : 'disabled';
-        this._snackBar.open(`Genre ${status} successfully`,'',{
-          duration: 3000
-        });
+        if (res) {
+          let status = this.genres[idx].enabled ? 'enabled' : 'disabled';
+          this._snackBar.open(`Genre ${status} successfully`, '', {
+            duration: 3000
+          });
+        }
       },
       (error)=>{
         this._snackBar.open(error,'',{
@@ -160,11 +170,16 @@ export class GenresComponent implements OnInit {
   deleteGenre(id: number){
     this.genreService.deleteGenre(id).subscribe(
       (res)=>{
-        this.genres = res;
-        this._snackBar.open(`Genre removed successfully`,'',{
-          duration: 3000
-        });
-        this.freshForm();
+        if (res) {
+          let idxToDelete = this.genres.findIndex(g => g.id === id);
+          this.genres.splice(idxToDelete, 1);
+
+          this._snackBar.open(`Genre removed successfully`, '', {
+            duration: 3000
+          });
+          this.freshForm();
+        }
+        
       },
       (error)=>{
         this._snackBar.open(error,'',{

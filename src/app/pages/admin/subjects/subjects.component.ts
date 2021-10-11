@@ -32,7 +32,7 @@ export class SubjectsComponent implements OnInit {
     this.genresList.length = 0;
     this.genreService.getGenres().subscribe(
       (data)=>{
-        data.forEach(d=>this.genresList.push({id: d.id, label: d.title, enabled: d.enabled}));
+        // data.forEach(d=>this.genresList.push({id: d.id, label: d.title, enabled: d.enabled}));
       },
       (error)=>{
         this._snackBar.open('Error while fetching genres list','',{

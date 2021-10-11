@@ -1,29 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Genre } from '../models/genre';
-
-const genres: Genre[] = [
-  {
-    id : 1,
-    title: 'Technology',
-    description:'This genre is related to IT & Tech',
-    enabled : true
-  },
-  {
-    id : 2,
-    title: 'History',
-    description:'This genre is related to History',
-    enabled: true
-  },
-  {
-    id : 3,
-    title: 'Medical',
-    description:'This genre is related to Medical Science',
-    enabled: false
-  }
-];
-
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +14,14 @@ export class GenreService {
   
   //GET APIs
 
-  public getGenres(){
-    return of(genres);
+  public getGenres() : Observable<Genre>{
+    let url = `${baseUrl}/genres/`;
+    return this.http.get<Genre>(url);
   }
 
-  public getGenre(title: string){
-    return of(genres.find(g=> g.title === title));
-  }
+  // public getGenre(title: string){
+  //   return of(genres.find(g=> g.title === title));
+  // }
 
   //CREATE APIs
 
@@ -53,73 +33,60 @@ export class GenreService {
       enabled: true
     };
 
-    genreData.id = genres.length + 1;
     genreData.title = newGenreData.title;
     genreData.description = newGenreData.description;
 
-    genres.push(genreData);
+    let url = `${baseUrl}/genres/`;
 
-    return of(genres);
+    return this.http.post<Genre>(url, genreData);
   
   }
 
   //UPDATE APIs
 
-  public updateGenre(editGenreData: Genre){
+  public updateGenre(editGenreData: Genre, id: number){
 
-    let idxToUpdate = genres.findIndex(g=>g.id === editGenreData.id);
-
-    genres[idxToUpdate].title = editGenreData.title;
-    genres[idxToUpdate].description = editGenreData.description;
-
-    return of(genres);
+    let url = `${baseUrl}/genres/${id}`;
+    return this.http.put<boolean>(url, editGenreData);
 
   }
 
-  public toggleGenreState(id: number){
+  public toggleGenreState(toggledGenre: Genre, id: number) {
 
-    let idxToToggle = genres.findIndex(g=>g.id === id);
-    let oldState = genres[idxToToggle].enabled;
-
-    genres[idxToToggle].enabled = !oldState;
-
-    return of(genres);
+    return this.updateGenre(toggledGenre, id)
 
   }
 
-  public toggleGenres(){
-    genres.forEach(g=>{
-      let oldState = g.enabled;
-      g.enabled = !oldState;
-    });
-  }
+  // public toggleGenres(){
+  //   genres.forEach(g=>{
+  //     let oldState = g.enabled;
+  //     g.enabled = !oldState;
+  //   });
+  // }
 
-  public enableAllGenres(){
-    genres.forEach(g=>g.enabled = true);
+  // public enableAllGenres(){
+  //   genres.forEach(g=>g.enabled = true);
 
-    return of(genres);
-  }
+  //   return of(genres);
+  // }
 
-  public disableAllGenres(){
-    genres.forEach(g=>g.enabled = false);
+  // public disableAllGenres(){
+  //   genres.forEach(g=>g.enabled = false);
 
-    return of(genres);
-  }
+  //   return of(genres);
+  // }
 
   //DELETE APIs
 
   public deleteGenre(id: any){
 
-    let idxToDelete = genres.findIndex(g=>g.id === id);
-
-    genres.splice(idxToDelete, 1);
-
-    return of(genres);
+    let url = `${baseUrl}/genres/${id}`;
+    return this.http.delete<boolean>(url);
 
   }
   
-  public deleteAllGenres(){
-    genres.length = 0;
-    return of(genres);
-  }
+  // public deleteAllGenres(){
+  //   genres.length = 0;
+  //   return of(genres);
+  // }
 }
