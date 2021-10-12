@@ -121,8 +121,6 @@ export class GenresComponent implements OnInit {
           });
           this.freshForm();
         }
-        
-
       },
       (error)=>{
         this._snackBar.open(error,'',{
@@ -179,7 +177,6 @@ export class GenresComponent implements OnInit {
           });
           this.freshForm();
         }
-        
       },
       (error)=>{
         this._snackBar.open(error,'',{

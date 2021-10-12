@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Genre } from 'src/app/models/genre';
 import { Subject } from 'src/app/models/subject';
 import { GenreService } from 'src/app/services/genre.service';
 import { SubjectService } from 'src/app/services/subject.service';
@@ -31,8 +32,12 @@ export class SubjectsComponent implements OnInit {
     this.getAllSubjects();
     this.genresList.length = 0;
     this.genreService.getGenres().subscribe(
-      (data)=>{
-        // data.forEach(d=>this.genresList.push({id: d.id, label: d.title, enabled: d.enabled}));
+      (data: any)=>{
+        data.forEach((d: { id: any; title: any; enabled: any; })=> {
+          if(d.enabled){
+            this.genresList.push({id: d.id, label: d.title, enabled: d.enabled});
+          }
+        });
       },
       (error)=>{
         this._snackBar.open('Error while fetching genres list','',{
@@ -44,7 +49,7 @@ export class SubjectsComponent implements OnInit {
 
   getAllSubjects() {
     this.subjectService.getSubjects().subscribe(
-      (res) => {
+      (res: any) => {
         this.subjects = res;
       },
       (error) => {
@@ -88,11 +93,15 @@ export class SubjectsComponent implements OnInit {
   deleteSubject(id: number){
     this.subjectService.deleteSubject(id).subscribe(
       (res)=>{
-        this.subjects = res;
-        this._snackBar.open(`Subject removed successfully`,'',{
-          duration: 3000
-        });
-        this.freshForm();
+        if(res){
+          let idxToDelete = this.subjects.findIndex(s => s.id === id);
+          this.subjects.splice(idxToDelete, 1);
+
+          this._snackBar.open(`Subject removed successfully`,'',{
+            duration: 3000
+          });
+          this.freshForm();
+        }
       },
       (error)=>{
         this._snackBar.open(error,'',{
@@ -103,13 +112,18 @@ export class SubjectsComponent implements OnInit {
   }
 
   toggleSubjectStatus(id: number, idx: number){
-    this.subjectService.toggleSubjectState(id).subscribe(
-      (res)=>{
-        this.subjects = res;
-        let status = this.subjects[idx].enabled ? 'enabled' : 'disabled';
-        this._snackBar.open(`Subject ${status} successfully`,'',{
-          duration: 3000
-        });
+
+    let oldState = this.subjects[idx].enabled;
+    this.subjects[idx].enabled = !oldState;
+
+    this.subjectService.toggleSubjectState(this.subjects[idx],id).subscribe(
+      (res) => {
+        if (res) {
+          let status = this.subjects[idx].enabled ? 'enabled' : 'disabled';
+          this._snackBar.open(`Subject ${status} successfully`, '', {
+            duration: 3000
+          });
+        }
       },
       (error)=>{
         this._snackBar.open(error,'',{
@@ -120,21 +134,12 @@ export class SubjectsComponent implements OnInit {
   }
 
   submitForm(subjectForm: any) {
-    console.log(this.newSubjectData);
     
     if(!this.newSubjectData.title){
       this._snackBar.open('Please provide subject title','',{
         duration: 3000
       });
       return;
-    }
-
-    //if genre is inactive then subject will automatically become inactive
-    let genreStatus = this.genresList.find(g=> g.id === this.newSubjectData.genreId).enabled;
-    if(!genreStatus){
-      this.newSubjectData.enabled = false;
-    }else{
-      this.newSubjectData.enabled = true;
     }
 
     if(this.addBtnClicked){
@@ -147,15 +152,21 @@ export class SubjectsComponent implements OnInit {
 
   updateSubject(){
 
-    this.subjectService.updateSubject(this.newSubjectData).subscribe(
+    this.subjectService.updateSubject(this.newSubjectData, this.newSubjectData.id).subscribe(
       (data)=>{
-        this.subjects = data;
-        this._snackBar.open('Subject updated successfully','',{
-          duration: 3000
-        });
-
-        this.freshForm();
-
+        if(data) {
+          let idxToUpdate = this.subjects.findIndex(g=>g.id === this.newSubjectData.id);
+          this.subjects[idxToUpdate].title = this.newSubjectData.title;
+          this.subjects[idxToUpdate].description = this.newSubjectData.description;
+          this.subjects[idxToUpdate].genreId = this.newSubjectData.genreId;
+          this.subjects[idxToUpdate].enabled = this.newSubjectData.enabled;
+          
+          this._snackBar.open('Subject updated successfully','',{
+            duration: 3000
+          });
+  
+          this.freshForm();
+        }
       },
       (error)=>{
         this._snackBar.open(error,'',{
@@ -168,8 +179,8 @@ export class SubjectsComponent implements OnInit {
 
   createSubject(){
     this.subjectService.addSubject(this.newSubjectData).subscribe(
-      (res)=>{
-        this.subjects = res;
+      (data)=>{
+        this.subjects.push(data);
         this._snackBar.open(`${this.newSubjectData.title} is added successfully to list`,'',{
           duration: 3000
         });

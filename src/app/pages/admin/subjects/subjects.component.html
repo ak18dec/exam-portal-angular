@@ -13,7 +13,7 @@
     </div>
   
     <div *ngIf="!newSubject; else newSubjectTemplate">
-      <mat-list>
+      <mat-list *ngIf="subjects">
         <mat-list-item *ngFor="let s of subjects;let i=index;let l=count" [ngClass]="{ 'inactive-text': !s.enabled }">
           <mat-icon mat-list-icon>folder</mat-icon>
           
@@ -30,7 +30,7 @@
   
   
           <div mat-line class="mat-item-with-chip"> {{ s.title }}</div>
-          <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;" [disabled]="!s.enabled">
+          <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;" [disabled]="!s.enabled" *ngIf="genresList && genresList.length > 0">
             <mat-chip appearance="outline">{{ getGenreName(s.genreId) }}</mat-chip>
           </mat-chip-list>
           <div mat-line style="font-size: 11px;">{{ s.description }}</div>

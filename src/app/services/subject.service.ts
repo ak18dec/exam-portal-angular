@@ -1,45 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { Subject } from '../models/subject';
-
-const subjects: Subject[] = [
-  {
-    id: 1,
-    title: 'Maths',
-    description: 'Maths Description',
-    genreId: 1,
-    enabled: true
-  },
-  {
-    id: 2,
-    title: 'Biology',
-    description: 'Biology Description',
-    genreId: 3,
-    enabled: true
-  },
-  {
-    id: 3,
-    title: 'Zoology',
-    description: 'Zoology Description',
-    genreId: 3,
-    enabled: true
-  },
-  {
-    id: 4,
-    title: 'Computer Networking',
-    description: 'CN Description',
-    genreId: 1,
-    enabled: true
-  },
-  {
-    id: 5,
-    title: 'Databases',
-    description: 'DB Description',
-    genreId: 1,
-    enabled: true
-  }
-];
+import baseUrl from './helper';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -51,21 +14,22 @@ export class SubjectService {
   constructor(private http: HttpClient) { }
 
   //GET APIs
-  public getSubjects(){
-    return of(subjects);
+  public getSubjects() : Observable<Subject>{
+    let url = `${baseUrl}/subjects/`;
+    return this.http.get<Subject>(url);
   }
 
-  public getSubject(id: number){
-    return of(subjects.find(s=> s.id === id));
-  }
+  // public getSubject(id: number){
+  //   return of(subjects.find(s=> s.id === id));
+  // }
 
-  public getSubjectByGenre(genreId:number, id:number){
-    return of(subjects.filter(s=>s.genreId === genreId).find(s1=>s1.id === id));
-  }
+  // public getSubjectByGenre(genreId:number, id:number){
+  //   return of(subjects.filter(s=>s.genreId === genreId).find(s1=>s1.id === id));
+  // }
 
-  public getAllSubjectsByGenre(){
-    return of(subjects.filter(s=>s.genreId))
-  }
+  // public getAllSubjectsByGenre(){
+  //   return of(subjects.filter(s=>s.genreId))
+  // }
 
 
   //CREATE APIs
@@ -79,69 +43,61 @@ export class SubjectService {
       enabled: true
     }
 
-    subj.id = subjects.length + 1;
     subj.title = newSubject.title;
     subj.description = newSubject.description;
     subj.genreId = newSubject.genreId;
     subj.enabled = newSubject.enabled;
 
-    subjects.push(subj);
+    let url = `${baseUrl}/subjects/`;
 
-    return of(subjects);
+    return this.http.post<Subject>(url, subj);
+    
   }
 
-  public addSubjects(subjectList: Subject[]){
-    return of(subjects.concat(subjectList));
-  }
+  // public addSubjects(subjectList: Subject[]){
+  //   return of(subjects.concat(subjectList));
+  // }
   
   
   //UPDATE APIs
 
-  public updateSubject(editSubj: Subject){
-    let idxToUpdate = subjects.findIndex(s=>s.id === editSubj.id);
+  public updateSubject(editSubj: Subject, id: number){
+    
+    let url = `${baseUrl}/subjects/${id}`;
+    return this.http.put<boolean>(url, editSubj);
 
-    subjects[idxToUpdate].title = editSubj.title;
-    subjects[idxToUpdate].description = editSubj.description;
-    subjects[idxToUpdate].genreId = editSubj.genreId;
-    subjects[idxToUpdate].enabled = editSubj.enabled;
-
-    return of(subjects);
   }
 
-  public toggleSubjectState(id: number){
-    let idxToToggle = subjects.findIndex(s=>s.id === id);
-    let ss = subjects[idxToToggle].enabled;
-
-    subjects[idxToToggle].enabled = !ss;
-
-    return of(subjects);
+  public toggleSubjectState(toggledSubject: Subject, id: number){
+    
+    return this.updateSubject(toggledSubject, id);
   }
 
-  public toggleSubjectsState(){
-    subjects.forEach(s=> {
-      let oldState = s.enabled;
-      s.enabled = !oldState;
-    });
-    return of(subjects);
-  }
+  // public toggleSubjectsState(){
+  //   subjects.forEach(s=> {
+  //     let oldState = s.enabled;
+  //     s.enabled = !oldState;
+  //   });
+  //   return of(subjects);
+  // }
 
-  public toggleSubjectByGenre(genreId: number, id: number){
-    let idxToToggle = subjects.filter(s => s.genreId === genreId).findIndex(s1=> s1.id === id);
-    let oldState = subjects[idxToToggle].enabled;
+  // public toggleSubjectByGenre(genreId: number, id: number){
+  //   let idxToToggle = subjects.filter(s => s.genreId === genreId).findIndex(s1=> s1.id === id);
+  //   let oldState = subjects[idxToToggle].enabled;
 
-    subjects[idxToToggle].enabled = !oldState;
+  //   subjects[idxToToggle].enabled = !oldState;
 
-    return subjects;
-  }
+  //   return subjects;
+  // }
 
-  public toggleSubjectsByGenre(genreId: number){
-    subjects.filter(s=> s.genreId === genreId).forEach(s1 => {
-      let oldState = s1.enabled;
-      s1.enabled = !oldState;
-    })
+  // public toggleSubjectsByGenre(genreId: number){
+  //   subjects.filter(s=> s.genreId === genreId).forEach(s1 => {
+  //     let oldState = s1.enabled;
+  //     s1.enabled = !oldState;
+  //   })
 
-    return of(subjects);
-  }
+  //   return of(subjects);
+  // }
   
 
   
@@ -149,37 +105,32 @@ export class SubjectService {
 
   public deleteSubject(id: number){
 
-    let idxToDelete = subjects.findIndex(s=>s.id === id);
-
-    subjects.splice(idxToDelete, 1);
-
-    return of(subjects);
+    let url = `${baseUrl}/subjects/${id}`;
+    return this.http.delete<boolean>(url);
 
   }
 
-  public deleteAllSubjects(){
-    subjects.length = 0;
-    return of(subjects);
-  }
+  // public deleteAllSubjects(){
+  //   subjects.length = 0;
+  //   return of(subjects);
+  // }
 
-  public deleteSubjectByGenre(genreId: number, id: number){
-    let idxToDelete = subjects.filter(s=> s.genreId === genreId).findIndex(s1=>s1.id === id);
+  // public deleteSubjectByGenre(genreId: number, id: number){
+  //   let idxToDelete = subjects.filter(s=> s.genreId === genreId).findIndex(s1=>s1.id === id);
     
-    subjects.splice(idxToDelete,1);
+  //   subjects.splice(idxToDelete,1);
 
-    return of(subjects);
+  //   return of(subjects);
 
-  }
+  // }
 
-  public deleteSubjectsByGenre(genreId: number){
-    return of(subjects.filter(s=>s.genreId !== genreId));
-  }
+  // public deleteSubjectsByGenre(genreId: number){
+  //   return of(subjects.filter(s=>s.genreId !== genreId));
+  // }
 
 
-  public captureSubjectGenre(){
-    console.log(`Selected Genre is ${this.genreSelected}`)
-  }
-
-  
+  // public captureSubjectGenre(){
+  //   console.log(`Selected Genre is ${this.genreSelected}`)
+  // }
 
 }
