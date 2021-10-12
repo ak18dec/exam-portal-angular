@@ -1,17 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Category } from '../models/category';
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
     //GET APIs
 
-    public getCategories() {
-
-    }
+  public getCategories(): Observable<Category> {
+    let url = `${baseUrl}/categories/`;
+    return this.http.get<Category>(url);
+  }
   
     public getCategory(){
   
@@ -29,9 +34,25 @@ export class CategoryService {
   
     //CREATE APIs
   
-    public addCategory(){
-  
+  public addCategory(newCategory: Category) {
+    let category: Category = {
+      id: 0,
+      title: '',
+      description: '',
+      subjectId: 0,
+      enabled: true
     }
+
+    category.title = newCategory.title;
+    category.description = newCategory.description;
+    category.subjectId = newCategory.subjectId;
+    category.enabled = newCategory.enabled;
+
+    let url = `${baseUrl}/categories/`;
+
+    return this.http.post<Category>(url, category);
+
+  }
   
     public addCategories(){
   
@@ -41,12 +62,13 @@ export class CategoryService {
     
     //UPDATE APIs
   
-    public updateCategory(){
-  
+    public updateCategory(editCateg: Category, id: number){
+      let url = `${baseUrl}/categories/${id}`;
+      return this.http.put<boolean>(url, editCateg);
     }
   
-    public toggleCategoryState(){
-  
+    public toggleCategoryState(toggledCateggory: Category, id: number){
+      return this.updateCategory(toggledCateggory, id);
     }
   
     public toggleCategoriesState(){
@@ -65,8 +87,9 @@ export class CategoryService {
     
     //DELETE APIs
     
-    public deleteCategory(){
-  
+    public deleteCategory(id: number){
+      let url = `${baseUrl}/categories/${id}`;
+      return this.http.delete<boolean>(url);
     }
   
     public deleteAllCategories(){

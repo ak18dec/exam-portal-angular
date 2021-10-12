@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Genre } from 'src/app/models/genre';
 import { Subject } from 'src/app/models/subject';
 import { GenreService } from 'src/app/services/genre.service';
 import { SubjectService } from 'src/app/services/subject.service';
