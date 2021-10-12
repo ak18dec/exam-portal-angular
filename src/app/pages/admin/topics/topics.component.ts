@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Topic } from 'src/app/models/topic';
+import { CategoryService } from 'src/app/services/category.service';
+import { TopicService } from 'src/app/services/topic.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-topics',
@@ -10,7 +14,7 @@ export class TopicsComponent implements OnInit {
   newTopic: boolean = false;
 
   addBtnClicked: boolean = false;
-  topics: any[] = [];
+  topics: Topic[] = [];
   categoriesList: any[] = [];
 
   newTopicData: any = {
@@ -21,10 +25,39 @@ export class TopicsComponent implements OnInit {
     enabled: true
   }
 
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar, private topicService: TopicService, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.freshForm();
+    this.getAllTopics();
+    this.categoriesList.length = 0;
+    this.categoryService.getCategories().subscribe(
+      (data: any) => {
+        data.forEach((d: { id: any; title: any; enabled: any; }) => {
+          if(d.enabled){
+            this.categoriesList.push({id: d.id, label: d.title, enabled: d.enabled});
+          }
+        });
+      },
+      (error)=>{
+        this._snackBar.open('Error while fetching categories list','',{
+          duration: 3000
+        });
+      }
+    );
+  }
+
+  getAllTopics() {
+    this.topicService.getTopics().subscribe(
+      (res: any) => {
+        this.topics = res;
+      },
+      (error) => {
+        this._snackBar.open('Error while fetching topics list','',{
+          duration: 3000
+        });
+      } 
+    )
   }
 
   freshForm(){
@@ -58,63 +91,110 @@ export class TopicsComponent implements OnInit {
   }
 
   deleteTopic(id: number){
-    // this.subjectService.deleteSubject(id).subscribe(
-    //   (res)=>{
-    //     this.subjects = res;
-    //     this._snackBar.open(`Subject removed successfully`,'',{
-    //       duration: 3000
-    //     });
-    //     this.freshForm();
-    //   },
-    //   (error)=>{
-    //     this._snackBar.open(error,'',{
-    //       duration: 3000
-    //     });
-    //   }
-    // );
+    this.topicService.deleteTopic(id).subscribe(
+      (res)=>{
+        if(res){
+          let idxToDelete = this.topics.findIndex(t => t.id === id);
+          this.topics.splice(idxToDelete, 1);
+
+          this._snackBar.open(`Topic removed successfully`,'',{
+            duration: 3000
+          });
+          this.freshForm();
+        }
+      },
+      (error)=>{
+        this._snackBar.open(error,'',{
+          duration: 3000
+        });
+      }
+    );
   }
 
   toggleTopicStatus(id: number, idx: number){
-    // this.subjectService.toggleSubjectState(id).subscribe(
-    //   (res)=>{
-    //     this.subjects = res;
-    //     let status = this.subjects[idx].enabled ? 'enabled' : 'disabled';
-    //     this._snackBar.open(`Subject ${status} successfully`,'',{
-    //       duration: 3000
-    //     });
-    //   },
-    //   (error)=>{
-    //     this._snackBar.open(error,'',{
-    //       duration: 3000
-    //     });
-    //   }
-    // )
+    let oldState = this.topics[idx].enabled;
+    this.topics[idx].enabled = !oldState;
+
+    this.topicService.toggleTopicState(this.topics[idx],id).subscribe(
+      (res) => {
+        if (res) {
+          let status = this.topics[idx].enabled ? 'enabled' : 'disabled';
+          this._snackBar.open(`Topic ${status} successfully`, '', {
+            duration: 3000
+          });
+        }
+      },
+      (error)=>{
+        this._snackBar.open(error,'',{
+          duration: 3000
+        });
+      }
+    )
   }
 
   submitForm(topicForm: any) {
-    // console.log(this.newSubjectData);
-    
-    // if(!this.newSubjectData.title){
-    //   this._snackBar.open('Please provide subject title','',{
-    //     duration: 3000
-    //   });
-    //   return;
-    // }
+    if(!this.newTopicData.title){
+      this._snackBar.open('Please provide Topic title','',{
+        duration: 3000
+      });
+      return;
+    }
 
-    // //if genre is inactive then subject will automatically become inactive
-    // let genreStatus = this.genresList.find(g=> g.id === this.newSubjectData.genreId).enabled;
-    // if(!genreStatus){
-    //   this.newSubjectData.enabled = false;
-    // }else{
-    //   this.newSubjectData.enabled = true;
-    // }
-
-    // if(this.addBtnClicked){
-    //   this.createSubject();
-    // }else{
-    //   this.updateSubject();
-    // }
+    if(this.addBtnClicked){
+      this.createTopic();
+    }else{
+      this.updateTopic();
+    }
     
+  }
+
+  updateTopic(){
+
+    this.topicService.updateTopic(this.newTopicData, this.newTopicData.id).subscribe(
+      (data)=>{
+        if(data) {
+          let idxToUpdate = this.topics.findIndex(c=>c.id === this.newTopicData.id);
+          this.topics[idxToUpdate].title = this.newTopicData.title;
+          this.topics[idxToUpdate].description = this.newTopicData.description;
+          this.topics[idxToUpdate].categoryId = this.newTopicData.categoryId;
+          this.topics[idxToUpdate].enabled = this.newTopicData.enabled;
+          
+          this._snackBar.open('Topic updated successfully','',{
+            duration: 3000
+          });
+  
+          this.freshForm();
+        }
+      },
+      (error)=>{
+        this._snackBar.open(error,'',{
+          duration: 3000
+        });
+      }
+    );
+
+  }
+
+  createTopic(){
+    this.topicService.addTopic(this.newTopicData).subscribe(
+      (data)=>{
+        this.topics.push(data);
+        this._snackBar.open(`${this.newTopicData.title} is added successfully to list`,'',{
+          duration: 3000
+        });
+
+        this.freshForm();
+      },
+      (error)=>{
+        this._snackBar.open(error,'',{
+          duration: 3000
+        });
+      }
+    )
+  }
+
+  getCategoryName(categoryId: number) {
+    return this.categoriesList.find(c => c.id === categoryId).label;
   }
 
 

@@ -11,29 +11,29 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-    //GET APIs
+  //GET APIs
 
   public getCategories(): Observable<Category> {
     let url = `${baseUrl}/categories/`;
     return this.http.get<Category>(url);
   }
-  
-    public getCategory(){
-  
-    }
-  
-    public getCategoriesBySubject(){
-  
-    }
-  
-    public getCategoryBySubject(){
-  
-    }
-  
-  
-  
-    //CREATE APIs
-  
+
+  public getCategory() {
+
+  }
+
+  public getCategoriesBySubject() {
+
+  }
+
+  public getCategoryBySubject() {
+
+  }
+
+
+
+  //CREATE APIs
+
   public addCategory(newCategory: Category) {
     let category: Category = {
       id: 0,
@@ -53,56 +53,56 @@ export class CategoryService {
     return this.http.post<Category>(url, category);
 
   }
-  
-    public addCategories(){
-  
-    }
-    
-    
-    
-    //UPDATE APIs
-  
-    public updateCategory(editCateg: Category, id: number){
-      let url = `${baseUrl}/categories/${id}`;
-      return this.http.put<boolean>(url, editCateg);
-    }
-  
-    public toggleCategoryState(toggledCateggory: Category, id: number){
-      return this.updateCategory(toggledCateggory, id);
-    }
-  
-    public toggleCategoriesState(){
-  
-    }
-  
-    public toggleCategroyBySubject(){
-  
-    }
-  
-    public toggleCategoriesBySubject(){
-  
-    }
-    
-    
-    
-    //DELETE APIs
-    
-    public deleteCategory(id: number){
-      let url = `${baseUrl}/categories/${id}`;
-      return this.http.delete<boolean>(url);
-    }
-  
-    public deleteAllCategories(){
-  
-    }
-  
-    public deleteCategoryBySubject(){
-  
-    }
-  
-    public deleteCategoriesBySubject(){
-      
-    }
-  
-    
+
+  public addCategories() {
+
+  }
+
+
+
+  //UPDATE APIs
+
+  public updateCategory(editCateg: Category, id: number) {
+    let url = `${baseUrl}/categories/${id}`;
+    return this.http.put<boolean>(url, editCateg);
+  }
+
+  public toggleCategoryState(toggledCateggory: Category, id: number) {
+    return this.updateCategory(toggledCateggory, id);
+  }
+
+  public toggleCategoriesState() {
+
+  }
+
+  public toggleCategroyBySubject() {
+
+  }
+
+  public toggleCategoriesBySubject() {
+
+  }
+
+
+
+  //DELETE APIs
+
+  public deleteCategory(id: number) {
+    let url = `${baseUrl}/categories/${id}`;
+    return this.http.delete<boolean>(url);
+  }
+
+  public deleteAllCategories() {
+
+  }
+
+  public deleteCategoryBySubject() {
+
+  }
+
+  public deleteCategoriesBySubject() {
+
+  }
+
+
 }

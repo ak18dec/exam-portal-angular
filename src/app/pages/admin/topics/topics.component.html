@@ -13,13 +13,13 @@
     </div>
   
     <div *ngIf="!newTopic; else newTopicTemplate">
-      <mat-list>
+      <mat-list *ngIf="topics">
         <mat-list-item *ngFor="let t of topics;let i=index;let l=count" [ngClass]="{ 'inactive-text': !t.enabled }">
           <mat-icon mat-list-icon>folder</mat-icon>
           
           <div mat-line class="mat-item-with-chip"> {{ t.title }}</div>
-          <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;" [disabled]="!t.enabled">
-            <!-- <mat-chip appearance="outline">{{ getGenreName(s.genreId) }}</mat-chip> -->
+          <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;" [disabled]="!t.enabled" *ngIf="categoriesList && categoriesList.length > 0">
+            <mat-chip appearance="outline">{{ getCategoryName(t.categoryId) }}</mat-chip>
           </mat-chip-list>
           <div mat-line style="font-size: 11px;">{{ t.description }}</div>
           
