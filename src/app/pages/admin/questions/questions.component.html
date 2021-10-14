@@ -14,22 +14,22 @@
     </div>
   
     <div *ngIf="!newQuestion; else newQuestionTemplate">
-      <mat-list>
+      <mat-list *ngIf="questions">
         <mat-list-item *ngFor="let q of questions;let i=index;let l=count" [ngClass]="{ 'inactive-text': !q.enabled }">
           <mat-icon mat-list-icon>folder</mat-icon>
   
           <div mat-line class="mat-item-with-chip"> {{ q.title }}</div>
-          <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;"
+          <!-- <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;"
             [disabled]="!q.enabled">
-            <!-- <mat-chip appearance="outline">{{ getGenreName(s.genreId) }}</mat-chip> -->
-          </mat-chip-list>
+            <mat-chip appearance="outline">{{ getGenreName(s.genreId) }}</mat-chip>
+          </mat-chip-list> -->
   
   
           <mat-chip-list appearance="outline" class="mychip" style="float: left !important; width: 100% !important;"
             [disabled]="!q.enabled">
             <mat-chip appearance="outline">{{ getQuestionProficiency(q.proficiencyId) }}</mat-chip>
           </mat-chip-list>
-          <div mat-line style="font-size: 11px;">{{ q.content }}</div>
+          <div mat-line style="font-size: 11px;">{{ q.description }}</div>
   
   
           <!-- 3 dot menu -->
@@ -78,7 +78,7 @@
   
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Content</mat-label>
-                  <textarea name="description" matInput [(ngModel)]="newQuestionData.content"
+                  <textarea name="description" matInput [(ngModel)]="newQuestionData.description"
                     placeholder="Enter question here" rows="7"></textarea>
                 </mat-form-field>
   
@@ -87,30 +87,30 @@
                 <!-- Option 1 -->
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Option 1</mat-label>
-                  <input autofocus type="text" name="title" matInput placeholder="Enter title"
-                    [(ngModel)]="newQuestionChoices[0].content">
+                  <input autofocus type="text" name="option1Text" matInput placeholder="Enter option 1"
+                    [(ngModel)]="newQuestionChoices[0].description">
                 </mat-form-field>
   
   
                 <!-- Option 2 -->
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Option 2</mat-label>
-                  <input autofocus type="text" name="title" matInput placeholder="Enter title"
-                    [(ngModel)]="newQuestionChoices[1].content">
+                  <input autofocus type="text" name="option2Text" matInput placeholder="Enter option 2"
+                    [(ngModel)]="newQuestionChoices[1].description">
                 </mat-form-field>
   
                 <!-- Option 3 -->
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Option 3</mat-label>
-                  <input autofocus type="text" name="title" matInput placeholder="Enter title"
-                    [(ngModel)]="newQuestionChoices[2].content">
+                  <input autofocus type="text" name="option3Text" matInput placeholder="Enter option 3"
+                    [(ngModel)]="newQuestionChoices[2].description">
                 </mat-form-field>
   
                 <!-- Option 4 -->
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Option 4</mat-label>
-                  <input autofocus type="text" name="title" matInput placeholder="Enter title"
-                    [(ngModel)]="newQuestionChoices[3].content">
+                  <input autofocus type="text" name="option4Text" matInput placeholder="Enter option 4"
+                    [(ngModel)]="newQuestionChoices[3].description">
                 </mat-form-field>
   
   
@@ -128,29 +128,28 @@
                   <mat-label>Topic</mat-label>
                   <mat-select [(ngModel)]="newQuestionData.topicId" name="topic">
                     <mat-option *ngFor="let topc of topicsList" [value]="topc.id">
-                      {{ topc.title }}
+                      {{ topc.label }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
   
                 <mat-card-subtitle style="display: inline;">Proficieny</mat-card-subtitle>
-                <div class="mb20 mt20 full-width">
-                  <mat-radio-group aria-label="User Type" formControlName="role" appearance="outline">
-                    <mat-radio-button value="1" checked color="primary" class="mr20 col-md-2" style="margin-left: -15px;">
-                      Easy</mat-radio-button>
-                    <mat-radio-button value="2" color="primary" class="ml20 mr20 col-md-2">Medium</mat-radio-button>
-                    <mat-radio-button value="3" color="primary" class="ml20 mr20 col-md-2">Hard</mat-radio-button>
+                <div class="mt20 full-width" style="margin-bottom: 95px;">
+                  <mat-radio-group aria-label="Proficieny Level" appearance="outline" *ngFor="let prof of proficiencyList;let i = index">
+
+                    <mat-radio-button [value]="i+1" [checked]="prof.id == newQuestionData.proficiencyId" color="primary" 
+                    class="mr20 col-md-2" >{{ prof.level }}</mat-radio-button>
                   </mat-radio-group>
                 </div>
   
                 <!-- option 1 is correct -->
-                <mat-slide-toggle color="primary" name="option1" [(ngModel)]="newQuestionChoices[0].correct" style="margin-top: 160px; margin-bottom: 65px;">Correct</mat-slide-toggle>
+                <mat-slide-toggle color="primary" name="option1" [(ngModel)]="newQuestionChoices[0].correct" style="margin-bottom: 35px;">Correct</mat-slide-toggle>
   
                 <!-- option 2 is correct -->
-                <mat-slide-toggle color="primary" name="option2" [(ngModel)]="newQuestionChoices[1].correct" style="margin-bottom: 65px;">Correct</mat-slide-toggle>
+                <mat-slide-toggle color="primary" name="option2" [(ngModel)]="newQuestionChoices[1].correct" style="margin-bottom: 35px;">Correct</mat-slide-toggle>
   
                 <!-- option 3 is correct -->
-                <mat-slide-toggle color="primary" name="option3" [(ngModel)]="newQuestionChoices[2].correct" style="margin-bottom: 65px;">Correct</mat-slide-toggle>
+                <mat-slide-toggle color="primary" name="option3" [(ngModel)]="newQuestionChoices[2].correct" style="margin-bottom: 35px;">Correct</mat-slide-toggle>
   
                 <!-- option 4 is correct -->
                 <mat-slide-toggle color="primary" name="option4" [(ngModel)]="newQuestionChoices[3].correct">Correct</mat-slide-toggle>

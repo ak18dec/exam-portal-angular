@@ -1,6 +1,6 @@
 export interface QuestionChoice {
     id: number;
-    content: string;
+    description: string;
     enabled: boolean;
     correct: boolean;
     questionId: number;
