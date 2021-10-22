@@ -44,6 +44,8 @@ import { InstructionsComponent } from './pages/admin/instructions/instructions.c
 import { QuestionsComponent } from './pages/admin/questions/questions.component';
 import { TopicsComponent } from './pages/admin/topics/topics.component';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
+import { QuizComponent } from './pages/admin/quiz/quiz.component';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { authInterceptorProviders } from './interceptors/auth.interceptor';
     CategoriesComponent,
     InstructionsComponent,
     QuestionsComponent,
-    TopicsComponent
+    TopicsComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,9 @@ import { authInterceptorProviders } from './interceptors/auth.interceptor';
     MatAutocompleteModule,
     MatSelectModule,
     MatChipsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true })
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
