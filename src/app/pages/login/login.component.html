@@ -7,7 +7,7 @@
                         <object class="reg-logo" type="image/svg+xml" data="assets/logo_blue.svg"></object>
                     </div>
 
-                    <h2 class="text-center logo-font">Login Here !!</h2>
+                    <h2 class="text-center logo-font" style="font-size: 14px;">Login to continue</h2>
                     
                     <form #logForm="ngForm" autocomplete="off">
                         
@@ -29,9 +29,9 @@
                         </mat-form-field>
                     
                         <div class="container btn-spacd text-center">
-                            <button mat-raised-button color="primary" type="submit" style="min-width: 84.08px;" (click)="login(logForm)">Login</button>
+                            <button mat-flat-button color="primary" type="submit" style="min-width: 84.08px;" (click)="login(logForm)">Login</button>
                             <span class="col-md-2"></span>
-                            <button type="reset" mat-raised-button style="min-width: 84.08px;" (click)="logForm.reset()">Reset</button>
+                            <button type="reset" mat-stroked-button style="min-width: 84.08px;" (click)="logForm.reset()">Reset</button>
                         </div>
                     </form>
                     

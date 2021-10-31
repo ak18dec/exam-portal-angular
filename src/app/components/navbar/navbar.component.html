@@ -5,14 +5,14 @@
       aria-label="Example icon-button with menu icon">
      <mat-icon class="portal-logo-align">menu_book</mat-icon>
     </a>
-   <span class="mt5">Exam Portal</span>
+   <span class="mt5" style="font-weight: bold;">Exam Portal</span>
    <span class="example-spacer"></span>
    <a
     *ngIf="!userLoggedIn"
     [routerLink]="'/login'"
     mat-icon-button class="example-icon favorite-icon" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font">Login</span>
+    <span class="logo-font" style="font-weight: bold;">Login</span>
   </a>
   
    <a
@@ -20,21 +20,21 @@
     [routerLink]="'/signup'"
     mat-icon-button class="example-icon favorite-icon mr20 ml20" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font">Register</span>
+    <span class="logo-font" style="font-weight: bold;">Register</span>
   </a>
   
   <a
    *ngIf="userLoggedIn" (click)="logout()"
     mat-icon-button class="example-icon favorite-icon mr20 ml20" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font">Logout</span>
+    <span class="logo-font" style="font-weight: bold;">Logout</span>
   </a>
   
   <a
    *ngIf="userLoggedIn"
     mat-icon-button class="example-icon favorite-icon mr20 ml20" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font">{{ currentUser.username }} </span>
+    <span class="logo-font" style="font-weight: bold;">{{ currentUser.username }} </span>
   </a>
    
   </mat-toolbar>

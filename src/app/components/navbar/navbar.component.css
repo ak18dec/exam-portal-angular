@@ -6,3 +6,13 @@
     min-height: 30px !important; 
     height: 55px !important;
 }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: .5em .2em .5em .2em;
+}
+
+
+::ng-deep .mat-toolbar.mat-primary {
+    background: none;
+    color: #000;
+}

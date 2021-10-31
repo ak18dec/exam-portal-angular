@@ -7,7 +7,7 @@
               <div class="container text-center mt75">
                 <object class="reg-logo" type="image/svg+xml" data="assets/logo_blue.svg"></object>
               </div>
-              <h2 class="text-center logo-font">Register Here !!</h2>
+              <h2 class="text-center logo-font" style="font-size: 14px;">Create an account</h2>
             </div>
             <div class="offset-md-5 mt30">
               <form [formGroup]="signupForm" (ngSubmit)="register()" autocomplete="off" aria-autocomplete="none">
@@ -51,9 +51,9 @@
                 </mat-form-field>
     
                 <div class="container btn-spacd text-center">
-                  <button mat-raised-button color="primary" type="submit">Register</button>
+                  <button mat-flat-button color="primary" type="submit">Register</button>
                   <span class="col-md-2"></span>
-                  <button style="min-width: 84.08px;" mat-raised-button type="reset" (click)="reset()"> Clear </button>
+                  <button style="min-width: 84.08px;" mat-stroked-button type="reset" (click)="reset()"> Clear </button>
                 </div>
               </form>
             </div>

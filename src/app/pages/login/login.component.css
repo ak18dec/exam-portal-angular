@@ -1,0 +1,4 @@
+::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+    border: 1.2px solid #E1E5EA;
+}
