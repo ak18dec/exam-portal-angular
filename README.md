@@ -28,3 +28,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Notes about different layouts style
+The default layout have a sidebar and a content area, in that area we can put plenty of things, tables, cards or other dashboards . But what about login and sign up pages ? Will they fit in it?
+
+Obviously login and signup pages won’t fit in the default layout, we can adapt it to support those pages but what about performance? Do we need all the components to run a login page?
+Well, what I’ve did in this tutorial is the answer to these questions, default layout   Will be dedicated to the dash, articles, posts lists ... and login/signup pages will need an additional layout, and its module will contain only Login and Signup components!
