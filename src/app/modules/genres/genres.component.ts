@@ -8,7 +8,7 @@ import { Genre } from 'src/app/models/genre';
 @Component({
   selector: 'app-genres',
   templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.css']
+  styleUrls: ['./genres.component.scss']
 })
 export class GenresComponent implements OnInit {
 

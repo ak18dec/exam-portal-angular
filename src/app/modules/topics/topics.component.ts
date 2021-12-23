@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-topics',
   templateUrl: './topics.component.html',
-  styleUrls: ['./topics.component.css']
+  styleUrls: ['./topics.component.scss']
 })
 export class TopicsComponent implements OnInit {
 
