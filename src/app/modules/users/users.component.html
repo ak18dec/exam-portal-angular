@@ -4,7 +4,7 @@
         <mat-label>Filter</mat-label>
         <input matInput placeholder="Ex. John Doe" (keyup)="applyFilter($event)">
     </mat-form-field>
-    <button mat-flat-button color="primary" class="add-user-btn" (click)="openAddUserForm()">
+    <button mat-flat-button color="primary" class="add-user-btn" routerLink="/admin/users/new">
         <mat-icon>add_circle_outline</mat-icon>
         Add User</button>
 </div>

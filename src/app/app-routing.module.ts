@@ -14,6 +14,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
+import { UserComponent } from './modules/users/user/user.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent
+      },
+      {
+        path: 'users/new',
+        component: UserComponent,
+        pathMatch: 'full'
       },
       {
         path: 'genres',
