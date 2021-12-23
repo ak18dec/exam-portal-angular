@@ -16,6 +16,11 @@ import { UtilsModule } from '../utils/utils.module';
   imports: [
     CommonModule,
     UtilsModule
+  ],
+  exports:[
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent
   ]
 })
 export class SharedModule { }
