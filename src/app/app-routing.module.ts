@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
-import { GenresComponent } from './pages/admin/genres/genres.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { SubjectsComponent } from './pages/admin/subjects/subjects.component';
-import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
-import { CategoriesComponent } from './pages/admin/categories/categories.component';
-import { TopicsComponent } from './pages/admin/topics/topics.component';
-import { QuestionsComponent } from './pages/admin/questions/questions.component';
+import { LoginComponent } from './layouts/home/login/login.component';
+import { SignupComponent } from './layouts/home/signup/signup.component';
+import { CategoriesComponent } from './modules/categories/categories.component';
+import { GenresComponent } from './modules/genres/genres.component';
+import { QuestionsComponent } from './modules/questions/questions.component';
+import { SubjectsComponent } from './modules/subjects/subjects.component';
+import { TopicsComponent } from './modules/topics/topics.component';
+import { DefaultsComponent } from './layouts/defaults/defaults.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { ProfileComponent } from './modules/profile/profile.component';
+import { HomeComponent } from './layouts/home/home.component';
 
 const routes: Routes = [
   {
@@ -32,12 +32,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: DashboardComponent,
+    component: DefaultsComponent,
     //canActivate: [AdminGuard],
     children: [
       {
         path: '',
-        component: WelcomeComponent
+        component: DashboardComponent
       },
       {
         path: 'profile',
@@ -64,7 +64,7 @@ const routes: Routes = [
         component: TopicsComponent
       },
       {
-        path: 'quizzes',
+        path: 'quizes',
         component: ComingSoonComponent
       },
       {

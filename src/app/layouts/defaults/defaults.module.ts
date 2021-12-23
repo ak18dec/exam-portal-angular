@@ -11,6 +11,8 @@ import { SubjectsComponent } from 'src/app/modules/subjects/subjects.component';
 import { TopicsComponent } from 'src/app/modules/topics/topics.component';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ProfileComponent } from 'src/app/modules/profile/profile.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -25,11 +27,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
     QuizComponent,
     SubjectsComponent,
     GenresComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
     UtilsModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ]
 })
 export class DefaultsModule { }

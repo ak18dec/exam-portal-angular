@@ -46,6 +46,27 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+  ],
+  exports: [
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatTableModule,
+    MatRadioModule,
+    MatPaginatorModule,
+    MatMenuModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class UtilsModule { }
