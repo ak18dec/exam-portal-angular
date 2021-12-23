@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FlexLayoutModule
   ],
   exports: [
     MatCardModule,
@@ -67,7 +69,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FlexLayoutModule
   ]
 })
 export class UtilsModule { }
