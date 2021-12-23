@@ -13,6 +13,7 @@ import { DefaultsComponent } from './layouts/defaults/defaults.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { HomeComponent } from './layouts/home/home.component';
+import { UsersComponent } from './modules/users/users.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,7 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: ComingSoonComponent
+        component: UsersComponent
       },
       {
         path: 'genres',

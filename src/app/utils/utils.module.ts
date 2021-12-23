@@ -22,6 +22,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSortModule
   ],
   exports: [
     MatCardModule,
@@ -70,7 +72,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     HttpClientModule,
     MatSidenavModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSortModule
   ]
 })
 export class UtilsModule { }

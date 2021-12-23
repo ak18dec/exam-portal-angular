@@ -13,6 +13,7 @@ import { UtilsModule } from 'src/app/utils/utils.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfileComponent } from 'src/app/modules/profile/profile.component';
 import { RouterModule } from '@angular/router';
+import { UsersComponent } from 'src/app/modules/users/users.component';
 
 
 
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     QuizComponent,
     SubjectsComponent,
     GenresComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
