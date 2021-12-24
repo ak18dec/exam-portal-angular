@@ -16,6 +16,8 @@ import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
 import { UserComponent } from './modules/users/user/user.component';
 import { QuestionComponent } from './modules/questions/question/question.component';
+import { InstructionsComponent } from './modules/instructions/instructions.component';
+import { InstructionComponent } from './modules/instructions/instruction/instruction.component';
 
 const routes: Routes = [
   {
@@ -84,8 +86,12 @@ const routes: Routes = [
         component: QuestionComponent
       },
       {
-        path: 'answers',
-        component: ComingSoonComponent
+        path: 'instructions',
+        component: InstructionsComponent
+      },
+      {
+        path: 'instructions/new',
+        component: InstructionComponent
       }
     ]
   },

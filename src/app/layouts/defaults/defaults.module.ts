@@ -17,6 +17,7 @@ import { UsersComponent } from 'src/app/modules/users/users.component';
 import { UserComponent } from 'src/app/modules/users/user/user.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionComponent } from 'src/app/modules/questions/question/question.component';
+import { InstructionComponent } from 'src/app/modules/instructions/instruction/instruction.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { QuestionComponent } from 'src/app/modules/questions/question/question.c
     ProfileComponent,
     UsersComponent,
     UserComponent,
-    QuestionComponent
+    QuestionComponent,
+    InstructionComponent
   ],
   imports: [
     CommonModule,
