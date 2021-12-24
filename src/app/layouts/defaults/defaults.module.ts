@@ -15,7 +15,8 @@ import { ProfileComponent } from 'src/app/modules/profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { UsersComponent } from 'src/app/modules/users/users.component';
 import { UserComponent } from 'src/app/modules/users/user/user.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { QuestionComponent } from 'src/app/modules/questions/question/question.component';
 
 
 @NgModule({
@@ -31,13 +32,15 @@ import { UserComponent } from 'src/app/modules/users/user/user.component';
     GenresComponent,
     ProfileComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    QuestionComponent
   ],
   imports: [
     CommonModule,
     UtilsModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    CKEditorModule
   ]
 })
 export class DefaultsModule { }

@@ -206,7 +206,7 @@ export class SubjectsComponent implements OnInit {
 
   subjects: Subject[]=[];
 
-  columns: string[] = ['id','title', 'description', 'genreId','enabled']
+  columns: string[] = ['id','title', 'description', 'genreId','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;

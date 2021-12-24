@@ -193,7 +193,7 @@ export class GenresComponent implements OnInit {
 
   genres: Genre[]=[];
 
-  columns: string[] = ['id','title', 'description', 'enabled']
+  columns: string[] = ['id','title', 'description', 'enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;

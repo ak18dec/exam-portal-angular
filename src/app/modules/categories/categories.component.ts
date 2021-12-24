@@ -205,7 +205,7 @@ export class CategoriesComponent implements OnInit {
 
   categories: Category[]=[];
 
-  columns: string[] = ['id','title', 'description', 'subjectId', 'enabled']
+  columns: string[] = ['id','title', 'description', 'subjectId', 'enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;

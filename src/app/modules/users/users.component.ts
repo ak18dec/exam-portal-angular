@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
 
   users: User[];
 
-  columns: string[] = ['firstName', 'lastName', 'email', 'phone']
+  columns: string[] = ['firstName', 'lastName', 'email', 'phone','action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;

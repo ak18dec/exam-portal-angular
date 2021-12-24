@@ -15,6 +15,7 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
 import { UserComponent } from './modules/users/user/user.component';
+import { QuestionComponent } from './modules/questions/question/question.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: 'questions',
         component: QuestionsComponent
+      },
+      {
+        path: 'questions/new',
+        component: QuestionComponent
       },
       {
         path: 'answers',
