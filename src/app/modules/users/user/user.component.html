@@ -1,38 +1,92 @@
-<a routerLink="/admin/users" style="text-decoration: none;">
-    <mat-icon >arrow_back_ios_new</mat-icon>
+<a routerLink="/admin/users" style="text-decoration: none; display: inline;">
+    <mat-icon>arrow_back_ios_new</mat-icon>
+    <h2 style="display: inline;">Back to list</h2>
 </a>
 
-<div>
-    upload photo
+<div class="new-user-form-container">
 
-    <mat-divider></mat-divider>
-    
-    name -- first & last
-    
-    <mat-divider></mat-divider>
-    
-    email
-    
-    <mat-divider></mat-divider>
-    
-    password 
-    
-    <mat-divider></mat-divider>
-    
-    phone
+    <mat-card>
+        <mat-card-title>Add New User</mat-card-title>
 
-    <mat-divider></mat-divider>
+        <mat-card-content>
 
-    status
+            <form>
 
-    <mat-divider></mat-divider>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-form-field appearance="standard">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="Enter first name">
+                </mat-form-field>
 
-    role
+                <mat-form-field appearance="standard">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Enter last name">
+                </mat-form-field>
 
-    <mat-divider></mat-divider>
 
-    Add Button 
+
+                <br>
+
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-form-field appearance="standard">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter email">
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <br>
+
+                <mat-icon matSuffix>manage_accounts</mat-icon>
+                <mat-form-field appearance="standard">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Enter username">
+                </mat-form-field>
+
+                <br>
+
+                <mat-icon matSuffix>call</mat-icon>
+                <mat-form-field appearance="standard">
+                    <mat-label>Phone</mat-label>
+                    <input matInput placeholder="Enter phone no">
+                </mat-form-field>
+
+                <br>
+
+                <span>
+                    <mat-icon matSuffix>security</mat-icon>
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button value="1">Admin</mat-radio-button>
+                        <mat-radio-button value="2">Basic</mat-radio-button>
+                    </mat-radio-group>
+                </span>
+
+                <br>
+                <mat-icon matSuffix>tag_faces</mat-icon>
+                <mat-radio-group aria-label="Select Status">
+                    <mat-radio-button value="1">Active</mat-radio-button>
+                    <mat-radio-button value="2">Inactive</mat-radio-button>
+                </mat-radio-group>
+
+                <br>
+
+                <mat-card-actions align="start"
+                    style="display: flex; flex-direction: column;width: 25%;margin-left: 3%;">
+                    <button mat-flat-button color="primary">Create</button>
+                    <br>
+                    <button mat-stroked-button>Cancel</button>
+                </mat-card-actions>
+
+            </form>
+
+        </mat-card-content>
+    </mat-card>
 </div>
 
-
-
+  
