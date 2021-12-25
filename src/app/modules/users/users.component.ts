@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -13,42 +14,53 @@ export class UsersComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
 
-  users: User[];
+  users: User[] = [];
 
-  columns: string[] = ['firstName', 'lastName', 'email', 'phone','action']
+  columns: string[] = ['sno','firstName', 'lastName', 'email', 'phone','action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.users = [
-      {
-        username: 'ankii123',
-        firstName: 'Ankit',
-        lastName: 'Kumar',
-        email: 'ankit@demo.com',
-        password: '12345678',
-        phone:'9876543210'
+    this.userService.getUsers().subscribe(
+      (res: any) =>{
+        this.users = res;
+        this.dataSource = new MatTableDataSource(this.users);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       },
-      {
-        username: 'ankit345',
-        firstName: 'Rajat',
-        lastName: 'Sharma',
-        email: 'rajat@demo.com',
-        password: 'password',
-        phone:'1234567890'
-      },
-      {
-        username: 'moh123',
-        firstName: 'Mohit',
-        lastName: 'Pawar',
-        email: 'mohit@demo.com',
-        password: '134pasdwd',
-        phone:'4567891230'
+      (error) => {
+        console.log(error)
       }
-    ]
+      )
+    // this.users = [
+    //   {
+    //     username: 'ankii123',
+    //     firstName: 'Ankit',
+    //     lastName: 'Kumar',
+    //     email: 'ankit@demo.com',
+    //     password: '12345678',
+    //     phone:'9876543210'
+    //   },
+    //   {
+    //     username: 'ankit345',
+    //     firstName: 'Rajat',
+    //     lastName: 'Sharma',
+    //     email: 'rajat@demo.com',
+    //     password: 'password',
+    //     phone:'1234567890'
+    //   },
+    //   {
+    //     username: 'moh123',
+    //     firstName: 'Mohit',
+    //     lastName: 'Pawar',
+    //     email: 'mohit@demo.com',
+    //     password: '134pasdwd',
+    //     phone:'4567891230'
+    //   }
+    // ]
     this.dataSource = new MatTableDataSource(this.users);
 
     this.dataSource.sort = this.sort;

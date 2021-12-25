@@ -25,6 +25,10 @@ export class UserService {
     return response;
   }
 
+  getUsers(){
+    return this.http.get(`${baseUrl}/users/`);
+  }
+
   
   //CREATE APIs
   
