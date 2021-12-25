@@ -39,13 +39,13 @@ export class SubjectService {
       id: 0,
       title: '',
       description: '',
-      genreId: 0,
+      // genreId: 0,
       enabled: true
     }
 
     subj.title = newSubject.title;
     subj.description = newSubject.description;
-    subj.genreId = newSubject.genreId;
+    // subj.genreId = newSubject.genreId;
     subj.enabled = newSubject.enabled;
 
     let url = `${baseUrl}/subjects/`;

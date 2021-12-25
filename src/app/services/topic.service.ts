@@ -25,13 +25,15 @@ export class TopicService {
       id: 0,
       title: '',
       description: '',
-      categoryId: 0,
+      // categoryId: 0,
+      subjectId: 0,
       enabled: true
     }
 
     topic.title = newTopic.title;
     topic.description = newTopic.description;
-    topic.categoryId = newTopic.categoryId;
+    // topic.categoryId = newTopic.categoryId;
+    topic.subjectId = newTopic.subjectId;
     topic.enabled = newTopic.enabled;
 
     let url = `${baseUrl}/topics/`;

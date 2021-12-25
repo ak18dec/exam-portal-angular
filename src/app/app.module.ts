@@ -23,6 +23,7 @@ import { HomeModule } from './layouts/home/home.module';
     WelcomeComponent,
     ComingSoonComponent,
     UserDashboardComponent,
+    
   ],
   imports: [
     BrowserModule,

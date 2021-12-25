@@ -18,6 +18,7 @@ import { UserComponent } from 'src/app/modules/users/user/user.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionComponent } from 'src/app/modules/questions/question/question.component';
 import { InstructionComponent } from 'src/app/modules/instructions/instruction/instruction.component';
+import { SubjectDialogComponent } from 'src/app/modules/subjects/subject-dialog/subject-dialog.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { InstructionComponent } from 'src/app/modules/instructions/instruction/i
     UsersComponent,
     UserComponent,
     QuestionComponent,
-    InstructionComponent
+    InstructionComponent,
+    SubjectDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -23,7 +23,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSortModule } from '@angular/material/sort';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -49,7 +49,8 @@ import { MatSortModule } from '@angular/material/sort';
     ReactiveFormsModule,
     HttpClientModule,
     FlexLayoutModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
   ],
   exports: [
     MatCardModule,
@@ -73,7 +74,8 @@ import { MatSortModule } from '@angular/material/sort';
     HttpClientModule,
     MatSidenavModule,
     FlexLayoutModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule
   ]
 })
 export class UtilsModule { }

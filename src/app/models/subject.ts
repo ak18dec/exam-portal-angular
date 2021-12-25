@@ -2,6 +2,6 @@ export interface Subject {
     id: number,
     title: string,
     description: string,
-    genreId: number,
+    // genreId: number,
     enabled: boolean
 }

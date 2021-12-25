@@ -7,6 +7,9 @@ import { SubjectService } from 'src/app/services/subject.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { SubjectDialogComponent } from './subject-dialog/subject-dialog.component';
+
 
 @Component({
   selector: 'app-subjects',
@@ -206,12 +209,15 @@ export class SubjectsComponent implements OnInit {
 
   subjects: Subject[]=[];
 
-  columns: string[] = ['id','title', 'description', 'genreId','enabled', 'action']
+  columns: string[] = ['id','title', 'description','enabled', 'action']
+
+  animal: string;
+  name: string;
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -220,21 +226,21 @@ export class SubjectsComponent implements OnInit {
         id: 1,
         title: 'Mathematics',
         description: 'Dummy Text',
-        genreId: 3,
+        // genreId: 3,
         enabled: true
       },
       {
         id: 2,
         title: 'History',
         description: 'Dummy Text',
-        genreId: 1,
+        // genreId: 1,
         enabled: true
       },
       {
         id: 3,
         title: 'Dance',
         description: 'Dummy Text',
-        genreId: 2,
+        // genreId: 2,
         enabled: true
       }
     ]
@@ -250,6 +256,15 @@ export class SubjectsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  openDialog(): void {
+    let dialogRef = this.dialog.open(SubjectDialogComponent, {
+      width: '300px',
+      data: { name: this.name, animal: this.animal }
+    });
 
-
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 }

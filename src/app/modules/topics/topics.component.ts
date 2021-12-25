@@ -205,7 +205,7 @@ export class TopicsComponent implements OnInit {
 
   topics: Topic[]=[];
 
-  columns: string[] = ['id','title', 'description', 'categoryId','enabled', 'action']
+  columns: string[] = ['id','title', 'description', 'subjectId','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
