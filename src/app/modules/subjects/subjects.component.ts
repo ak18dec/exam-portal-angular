@@ -224,38 +224,10 @@ export class SubjectsComponent implements OnInit {
       enabled: true
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private subjectService: SubjectService) { }
 
   ngOnInit(): void {
-
-    this.subjects = [
-      {
-        id: 1,
-        title: 'Mathematics',
-        description: 'Dummy Text',
-        // genreId: 3,
-        enabled: true
-      },
-      {
-        id: 2,
-        title: 'History',
-        description: 'Dummy Text',
-        // genreId: 1,
-        enabled: true
-      },
-      {
-        id: 3,
-        title: 'Dance',
-        description: 'Dummy Text',
-        // genreId: 2,
-        enabled: true
-      }
-    ]
-   
-    this.dataSource = new MatTableDataSource(this.subjects);
-
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.getAllSubjects();
   }
 
   applyFilter(event: any){
@@ -270,16 +242,11 @@ export class SubjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      let newSubject = result;
-      newSubject.id = this.subjects.length + 1;
-      this.subjects.push(newSubject);
-      this.newSubjectData = {
-        id: 0,
-        title: '',
-        description: '',
-        enabled: true
-      }
-      this.dataSource._updateChangeSubscription();
+
+      this.createSubject(result);
+      // let newSubject = result;
+      // newSubject.id = this.subjects.length + 1;
+      // this.subjects.push(newSubject);
     });
   }
 
@@ -290,4 +257,50 @@ export class SubjectsComponent implements OnInit {
 
     this.dataSource._updateChangeSubscription();
   }
+
+  getAllSubjects() {
+    this.subjectService.getSubjects().subscribe(
+      (res: any) => {
+        this.subjects = res;
+        this.dataSource = new MatTableDataSource(this.subjects);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      (error) => {
+        // this._snackBar.open('Error while fetching subjects list','',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      } 
+    )
+  }
+
+  createSubject(data: Subject){
+    this.subjectService.addSubject(data).subscribe(
+      (data)=>{
+        this.subjects.push(data);
+        this.newSubjectData = {
+          id: 0,
+          title: '',
+          description: '',
+          enabled: true
+        }
+        this.dataSource._updateChangeSubscription();
+        
+        // this._snackBar.open(`${this.newSubjectData.title} is added successfully to list`,'',{
+        //   duration: 3000
+        // });
+
+        // this.freshForm();
+      },
+      (error)=>{
+        // this._snackBar.open(error,'',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    )
+  }
+
+  
 }
