@@ -16,6 +16,13 @@ mat-form-field {
     display: block;
 }
 
+mat-form-field {
+    p {
+      font-size: smaller;
+      line-height: 0.2;
+    }
+  }
+
 mat-card-subtitle {
     a {
         text-decoration: none;

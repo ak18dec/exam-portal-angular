@@ -35,24 +35,29 @@
     </mat-card>
 </div> -->
 
+
 <mat-card>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" >
-        <mat-card-title>Welcome Back</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" >
+        
+      <mat-card-title>
+          Welcome Back <app-back [path]="'/'" style="float: left;"></app-back>
+        </mat-card-title>
         <mat-card-subtitle>Continue by logging into your account</mat-card-subtitle>
         <object class="login-logo" type="image/svg+xml" data="assets/login/login-2.svg"></object>
         <!-- <mat-error *ngIf="loginInvalid">
           The username and password were not recognized
         </mat-error> -->
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="Email" formControlName="username" required>
+          <p>Email</p>
+          <input matInput formControlName="username" required>
           <!-- <mat-error>
             Please provide a valid email address
           </mat-error> -->
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
+          <p>Password</p>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -60,7 +65,11 @@
         <mat-card-subtitle color="primary"><a routerLink="/resetPassword">Forgot Password?</a></mat-card-subtitle>
         <br>
         <br>
-        <button mat-raised-button color="primary" style="width: 100%;">Login</button>
+        <span style="display: flex; flex-direction: column;">
+          <button mat-raised-button color="primary" style="width: 100%;">Login</button>
+          <br>
+          <button mat-stroked-button color="primary" style="width: 100%;" routerLink="/admin/">Guest Login</button>
+        </span>
       </form>
       <br>
       <p>Don't have an account? <a routerLink="/signup">Create</a></p>

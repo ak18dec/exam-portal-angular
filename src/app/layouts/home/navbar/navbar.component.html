@@ -1,18 +1,18 @@
-<mat-toolbar color="primary" class="logo-font">
+<!-- <mat-toolbar color="primary">
     <a
       routerLink="/"
       mat-icon-button class="example-icon" 
       aria-label="Example icon-button with menu icon">
      <mat-icon class="portal-logo-align">menu_book</mat-icon>
     </a>
-   <span class="mt5" style="font-weight: bold;">Exam Portal</span>
+   <h2>Exam Portal</h2>
    <span class="example-spacer"></span>
    <a
     *ngIf="!userLoggedIn"
     [routerLink]="'/login'"
     mat-icon-button class="example-icon favorite-icon" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font" style="font-weight: bold;">Login</span>
+    <span  style="font-weight: bold;">Login</span>
   </a>
   
    <a
@@ -20,21 +20,51 @@
     [routerLink]="'/signup'"
     mat-icon-button class="example-icon favorite-icon mr20 ml20" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font" style="font-weight: bold;">Register</span>
+    <span  style="font-weight: bold;">Register</span>
   </a>
   
   <a
    *ngIf="userLoggedIn" (click)="logout()"
     mat-icon-button class="example-icon favorite-icon mr20 ml20" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font" style="font-weight: bold;">Logout</span>
+    <span  style="font-weight: bold;">Logout</span>
   </a>
   
   <a
    *ngIf="userLoggedIn"
     mat-icon-button class="example-icon favorite-icon mr20 ml20" 
     aria-label="Example icon-button with heart icon">
-    <span class="logo-font" style="font-weight: bold;">{{ currentUser.username }} </span>
+    <span  style="font-weight: bold;">{{ currentUser.username }} </span>
   </a>
    
-  </mat-toolbar>
+  </mat-toolbar> -->
+
+  <mat-toolbar color="primary" style="background: none; color: #000;">
+    <mat-toolbar-row>
+        <button mat-icon-button routerLink="/">
+          <mat-icon>menu_book</mat-icon>
+        </button>
+        <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="40px">
+                <li>
+                    <button mat-icon-button routerLink="/login">
+                      <mat-label>Login</mat-label>
+                    </button>
+                </li>
+                <li>
+                  <button mat-icon-button routerLink="/signup">
+                    <mat-label>Register</mat-label>
+                  </button>
+                </li>
+                <li>
+                  <button mat-icon-button routerLink="/about">
+                    <mat-label>About</mat-label>
+                  </button>
+                </li>
+            </ul>
+        </div>
+
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -54,36 +54,42 @@
   <mat-card>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" >
-        <mat-card-title>Welcome</mat-card-title>
+        <mat-card-title>Welcome <app-back [path]="'/'" style="float: left;"></app-back></mat-card-title>
         <mat-card-subtitle>Get started by creating your account</mat-card-subtitle>
         <object class="login-logo" type="image/svg+xml" data="assets/signup/signup-1.svg"></object>
         
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Username" formControlName="username" required>
+        <mat-form-field>
+          <p>Username</p>
+          <input matInput formControlName="username" required>
         </mat-form-field>
 
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Email" formControlName="username" required>
+        <mat-form-field>
+          <p>Email</p>
+          <input matInput formControlName="username" required>
         </mat-form-field>
 
-        <mat-form-field class="full-width-input">
-          <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter password">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <!-- <p>Password</p> -->
+        <mat-form-field>
+          <p>Password</p>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
 
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="First Name" formControlName="username" required>
+        <mat-form-field class="first-name">
+          <p>First Name</p>
+          <input matInput formControlName="username" required>
+        </mat-form-field>
+        
+        <mat-form-field class="last-name">
+          <p>Last Name</p>
+          <input matInput formControlName="username">
         </mat-form-field>
 
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Last Name" formControlName="username">
-        </mat-form-field>
-
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Phone" formControlName="username">
+        <mat-form-field>
+          <p>Phone</p>
+          <input matInput formControlName="username">
         </mat-form-field>
 
 

@@ -41,6 +41,11 @@ mat-card {
 
 mat-form-field {
   display: block;
+  padding: 0;
+  p {
+    font-size: smaller;
+    line-height: 0.2;
+  }
 }
 
 mat-card-subtitle {
