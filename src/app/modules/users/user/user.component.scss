@@ -1,13 +1,21 @@
 mat-icon {
     padding: 20px;
-    margin-right: 10px;
+    margin-right: 15px;
+    vertical-align: -5vh;
 }
 
-mat-form-field{
-    margin-right: 20px;
+.mat-radio-group {
+    vertical-align: -3.8vh;
 }
-
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 16px;
 }
 
+mat-form-field {
+    margin-right: 20px;
+    padding: 0;
+    p {
+      font-size: smaller;
+      line-height: 0.2;
+    }
+}

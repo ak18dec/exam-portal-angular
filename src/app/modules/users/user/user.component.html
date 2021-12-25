@@ -11,29 +11,27 @@
 
                 <mat-icon matSuffix>person</mat-icon>
                 <mat-form-field appearance="standard">
-                    <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Enter first name">
+                    <p>First Name</p>
+                    <input matInput>
                 </mat-form-field>
 
                 <mat-form-field appearance="standard">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Enter last name">
+                    <p>Last Name</p>
+                    <input matInput>
                 </mat-form-field>
-
-
 
                 <br>
 
                 <mat-icon matSuffix>alternate_email</mat-icon>
                 <mat-form-field appearance="standard">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Enter email">
+                    <p>Email</p>
+                    <input matInput>
                 </mat-form-field>
 
                 <mat-form-field appearance="standard">
-                    <mat-label>Password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter password">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <p>Password</p>
+                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 0.8; vertical-align: -4vh; margin-right:5px">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
@@ -42,39 +40,42 @@
 
                 <mat-icon matSuffix>manage_accounts</mat-icon>
                 <mat-form-field appearance="standard">
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="Enter username">
+                    <p>Username</p>
+                    <input matInput>
                 </mat-form-field>
 
                 <br>
-
+                
                 <mat-icon matSuffix>call</mat-icon>
                 <mat-form-field appearance="standard">
-                    <mat-label>Phone</mat-label>
-                    <input matInput placeholder="Enter phone no">
+                    <p>Phone</p>
+                    <input matInput>
                 </mat-form-field>
 
                 <br>
 
-                <span>
+                <span class="role">
                     <mat-icon matSuffix>security</mat-icon>
-                    <mat-radio-group aria-label="Select an option">
+                    <mat-radio-group color="primary">
                         <mat-radio-button value="1">Admin</mat-radio-button>
-                        <mat-radio-button value="2">Basic</mat-radio-button>
+                        <mat-radio-button value="2" [checked]="true">Basic</mat-radio-button>
                     </mat-radio-group>
                 </span>
 
                 <br>
-                <mat-icon matSuffix>tag_faces</mat-icon>
-                <mat-radio-group aria-label="Select Status">
-                    <mat-radio-button value="1">Active</mat-radio-button>
-                    <mat-radio-button value="2">Inactive</mat-radio-button>
-                </mat-radio-group>
+                <span class="status">
+                    <mat-icon matSuffix>tag_faces</mat-icon>
+                    <mat-radio-group aria-label="Select Status" color="primary">
+                        <mat-radio-button value="1" [checked]="true">Active</mat-radio-button>
+                        <mat-radio-button value="2">Inactive</mat-radio-button>
+                    </mat-radio-group>
+                </span>
 
+                <br>
                 <br>
 
                 <mat-card-actions align="start"
-                    style="display: flex; flex-direction: column;width: 25%;margin-left: 3%;">
+                    style="display: flex; flex-direction: column; width: 25%; margin-left: 5.5%;">
                     <button mat-flat-button color="primary">Create</button>
                     <br>
                     <button mat-stroked-button style="margin: 0;">Cancel</button>
