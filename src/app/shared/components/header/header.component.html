@@ -3,7 +3,8 @@
         <button mat-icon-button (click)="toggleSideBar()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>APP LOGO</span>
+        <!-- <span>APP LOGO</span> -->
+        <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
@@ -22,7 +23,7 @@
                         <mat-icon>person_outline</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item routerLink="/">
                             <mat-icon>logout</mat-icon>
                             Logout
                         </button>

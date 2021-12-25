@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BackComponent implements OnInit {
 
   @Input() path = '';
+  @Input() label = '';
 
   constructor() { }
 
