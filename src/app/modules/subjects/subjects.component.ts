@@ -282,4 +282,12 @@ export class SubjectsComponent implements OnInit {
       this.dataSource._updateChangeSubscription();
     });
   }
+
+  deleteSubject(data: any){
+    let idxToDelete = this.subjects.findIndex(s=>s.id === data.id);
+
+    this.subjects.splice(idxToDelete, 1);
+
+    this.dataSource._updateChangeSubscription();
+  }
 }
