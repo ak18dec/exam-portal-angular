@@ -1,9 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
-
+:root {
+    --scrollbar-thumb-background-color: #A6A6A6;
+    --scrollbar-track-background-color: #EDEDED
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    overflow: visible;
+}
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 100px;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-background-color);
+}
+::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-background-color);
+}
 
 // .logo-font {
 //     font-family: 'Montserrat', sans-serif !important;
