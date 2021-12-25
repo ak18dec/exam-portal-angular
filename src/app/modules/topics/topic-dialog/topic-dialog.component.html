@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>New Topic</h1>
+<mat-dialog-content>
+    <mat-form-field>
+        <p>Title</p>
+        <input matInput [(ngModel)]="data.animal">
+    </mat-form-field>
+
+    <mat-form-field>
+        <p>Description</p>
+        <input matInput [(ngModel)]="data.animal">
+    </mat-form-field>
+
+    <mat-form-field>
+        <p>Subject</p>
+        <mat-select>
+          <mat-option *ngFor="let subject of subjects" [value]="subject.id">
+            {{subject.title}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br>
+    <div class="radio-container">
+        <p>Enabled</p>
+        <mat-radio-group aria-label="Select Status">
+            <mat-radio-button value="1">Active</mat-radio-button>
+            <mat-radio-button value="2">Inactive</mat-radio-button>
+        </mat-radio-group>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" [mat-dialog-close]="data.animal" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

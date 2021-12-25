@@ -24,6 +24,7 @@ import { HomeModule } from './layouts/home/home.module';
     ComingSoonComponent,
     UserDashboardComponent,
     
+    
   ],
   imports: [
     BrowserModule,

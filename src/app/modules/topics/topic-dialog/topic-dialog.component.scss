@@ -1,0 +1,14 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+mat-dialog-content {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4vh;
+}
+
+mat-dialog-actions{
+    justify-content: space-between;
+}
