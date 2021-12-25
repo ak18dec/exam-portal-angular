@@ -24,6 +24,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -51,6 +52,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     FlexLayoutModule,
     MatSortModule,
     MatDialogModule,
+    MatCheckboxModule
   ],
   exports: [
     MatCardModule,
@@ -75,7 +77,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSidenavModule,
     FlexLayoutModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ]
 })
 export class UtilsModule { }

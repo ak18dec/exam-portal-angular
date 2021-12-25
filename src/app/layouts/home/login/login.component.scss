@@ -1,4 +1,35 @@
-::ng-deep .mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: none;
-    border: 1.2px solid #E1E5EA;
+// ::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+//     box-shadow: none;
+//     border: 1.2px solid #E1E5EA;
+// }
+
+mat-card {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 20px;
+    // left: 40%;
+    // top: 10%;
+    text-align: center;
+  }
+  
+mat-form-field {
+    display: block;
+}
+
+mat-card-subtitle {
+    a {
+        text-decoration: none;
+        float: right;
+        font-size: smaller;
+        color: #3F51B5
+    }
+}
+
+p a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #3F51B5
+}
+.login-logo {
+    height: 250px;
 }

@@ -1,43 +1,68 @@
-<div class="bootstrap-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <mat-card>
-                    <div class="container text-center">
-                        <object class="reg-logo" type="image/svg+xml" data="assets/logo_blue.svg"></object>
-                    </div>
-
-                    <h2 class="text-center logo-font" style="font-size: 14px;">Login to continue</h2>
-                    
-                    <form #logForm="ngForm" autocomplete="off">
-                        
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>User Name</mat-label>
-                            <input autofocus required
-                                [(ngModel)]="loginData.username"
-                                name="username" 
-                                matInput placeholder="Enter here">
-                        </mat-form-field>
-
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Password</mat-label>
-                            <input required
-                                [(ngModel)]="loginData.password"
-                                name="password" 
-                                type="password" 
-                                matInput placeholder="Enter here">
-                        </mat-form-field>
-                    
-                        <div class="container btn-spacd text-center">
-                            <button mat-flat-button color="primary" type="submit" style="min-width: 84.08px;" (click)="login(logForm)">Login</button>
-                            <span class="col-md-2"></span>
-                            <button type="reset" mat-stroked-button style="min-width: 84.08px;" (click)="logForm.reset()">Reset</button>
-                        </div>
-                    </form>
-                    <a routerLink="/">Back</a>
-                    
-                </mat-card>
-            </div>
+<!-- <div class="col-md-6 offset-md-3">
+    <mat-card>
+        <div class="container text-center">
+            <object class="reg-logo" type="image/svg+xml" data="assets/login/login.svg"></object>
         </div>
-    </div>
-</div>
+
+        <h2 class="text-center logo-font" style="font-size: 14px;">Login to continue</h2>
+        
+        <form #logForm="ngForm" autocomplete="off">
+            
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>User Name</mat-label>
+                <input autofocus required
+                    [(ngModel)]="loginData.username"
+                    name="username" 
+                    matInput placeholder="Enter here">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input required
+                    [(ngModel)]="loginData.password"
+                    name="password" 
+                    type="password" 
+                    matInput placeholder="Enter here">
+            </mat-form-field>
+        
+            <div class="container btn-spacd text-center">
+                <button mat-flat-button color="primary" type="submit" style="min-width: 84.08px;" (click)="login(logForm)">Login</button>
+                <span class="col-md-2"></span>
+                <button type="reset" mat-stroked-button style="min-width: 84.08px;" (click)="logForm.reset()">Reset</button>
+            </div>
+        </form>
+        <a routerLink="/">Back</a>
+    </mat-card>
+</div> -->
+
+<mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" >
+        <mat-card-title>Welcome Back</mat-card-title>
+        <mat-card-subtitle>Continue by logging into your account</mat-card-subtitle>
+        <object class="login-logo" type="image/svg+xml" data="assets/login/login-2.svg"></object>
+        <!-- <mat-error *ngIf="loginInvalid">
+          The username and password were not recognized
+        </mat-error> -->
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Email" formControlName="username" required>
+          <!-- <mat-error>
+            Please provide a valid email address
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-card-subtitle color="primary"><a routerLink="/resetPassword">Forgot Password?</a></mat-card-subtitle>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" style="width: 100%;">Login</button>
+      </form>
+      <br>
+      <p>Don't have an account? <a routerLink="/signup">Create</a></p>
+    </mat-card-content>
+  </mat-card>
