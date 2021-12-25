@@ -249,9 +249,26 @@ export class SubjectsComponent implements OnInit {
   deleteSubject(data: any){
     let idxToDelete = this.subjects.findIndex(s=>s.id === data.id);
 
-    this.subjects.splice(idxToDelete, 1);
+    this.subjectService.deleteSubject(data.id).subscribe(
+      (res)=>{
+        if(res){
+          let idxToDelete = this.subjects.findIndex(s => s.id === data.id);
+          this.subjects.splice(idxToDelete, 1);
+          this.dataSource._updateChangeSubscription();
 
-    this.dataSource._updateChangeSubscription();
+          // this._snackBar.open(`Subject removed successfully`,'',{
+          //   duration: 3000
+          // });
+          // this.freshForm();
+        }
+      },
+      (error)=>{
+        // this._snackBar.open(error,'',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    );
   }
 
   getAllSubjects() {

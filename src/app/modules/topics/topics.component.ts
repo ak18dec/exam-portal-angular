@@ -243,11 +243,25 @@ export class TopicsComponent implements OnInit {
   }
 
   deleteTopic(data: any){
-    let idxToDelete = this.topics.findIndex(t=>t.id === data.id);
+    this.topicService.deleteTopic(data.id).subscribe(
+      (res)=>{
+        if(res){
+          let idxToDelete = this.topics.findIndex(t => t.id === data.id);
+          this.topics.splice(idxToDelete, 1);
+          this.dataSource._updateChangeSubscription();
 
-    this.topics.splice(idxToDelete, 1);
-
-    this.dataSource._updateChangeSubscription();
+          // this._snackBar.open(`Topic removed successfully`,'',{
+          //   duration: 3000
+          // });
+          // this.freshForm();
+        }
+      },
+      (error)=>{
+        // this._snackBar.open(error,'',{
+        //   duration: 3000
+        // });
+      }
+    );
   }
 
   getAllTopics() {
