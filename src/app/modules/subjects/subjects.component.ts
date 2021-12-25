@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject } from 'src/app/models/subject';
-import { GenreService } from 'src/app/services/genre.service';
-import { SubjectService } from 'src/app/services/subject.service';
 
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+
+import { Subject } from 'src/app/models/subject';
+import { SubjectService } from 'src/app/services/subject.service';
 import { SubjectDialogComponent } from './subject-dialog/subject-dialog.component';
 
 
@@ -217,6 +217,13 @@ export class SubjectsComponent implements OnInit {
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
+  newSubjectData: Subject = {
+      id: 0,
+      title: '',
+      description: '',
+      enabled: true
+  }
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -259,12 +266,20 @@ export class SubjectsComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(SubjectDialogComponent, {
       width: '300px',
-      data: { name: this.name, animal: this.animal }
+      data: Object.assign({},this.newSubjectData)
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      let newSubject = result;
+      newSubject.id = this.subjects.length + 1;
+      this.subjects.push(newSubject);
+      this.newSubjectData = {
+        id: 0,
+        title: '',
+        description: '',
+        enabled: true
+      }
+      this.dataSource._updateChangeSubscription();
     });
   }
 }
