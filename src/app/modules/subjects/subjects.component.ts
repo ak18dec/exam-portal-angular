@@ -242,11 +242,7 @@ export class SubjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
       this.createSubject(result);
-      // let newSubject = result;
-      // newSubject.id = this.subjects.length + 1;
-      // this.subjects.push(newSubject);
     });
   }
 

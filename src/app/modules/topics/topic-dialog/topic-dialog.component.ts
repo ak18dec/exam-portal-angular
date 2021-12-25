@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'src/app/models/subject';
+import { Topic } from 'src/app/models/topic';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-topic-dialog',
@@ -10,31 +13,31 @@ import { Subject } from 'src/app/models/subject';
 export class TopicDialogComponent implements OnInit {
 
   subjects: Subject[] = [];
+  newTopic: Topic;
 
   constructor(public dialogRef: MatDialogRef<TopicDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private subjectService: SubjectService) { }
 
   ngOnInit(): void {
-    this.subjects = [
-      {
-        id: 1,
-        title: 'Maths',
-        description:'sgdgd',
-        enabled: true
-      },
-      {
-        id: 2,
-        title: 'Arts',
-        description:'sgdgd',
-        enabled: true
-      },
-      {
-        id: 3,
-        title: 'Science',
-        description:'sgdgd',
-        enabled: true
+    this.newTopic = this.data;
+    this.getSubjects();
+  }
+
+  addNewTopic(form: NgForm){
+    this.newTopic.title = form.value.title;
+    this.newTopic.description = form.value.description;
+    this.newTopic.subjectId = form.value.subjectId;
+    this.newTopic.enabled = form.value.enabled === "true" ? true : false;
+
+    this.dialogRef.close(this.newTopic);
+  }
+
+  getSubjects(){
+    this.subjectService.getSubjects().subscribe(
+      (res: any) => {
+        this.subjects = res;
       }
-    ]
+    )
   }
 
 }

@@ -212,41 +212,18 @@ export class TopicsComponent implements OnInit {
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
-  animal: string;
-  name: string;
+  newTopicData: Topic = {
+    id: 0,
+    title: '',
+    description: '',
+    subjectId: 0,
+    enabled: true
+  }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private topicService: TopicService) { }
 
   ngOnInit(): void {
-
-    this.topics = [
-      // {
-      //   id: 1,
-      //   title: 'Mathematics',
-      //   description: 'Dummy Text',
-      //   genreId: 3,
-      //   enabled: true
-      // },
-      // {
-      //   id: 2,
-      //   title: 'History',
-      //   description: 'Dummy Text',
-      //   genreId: 1,
-      //   enabled: true
-      // },
-      // {
-      //   id: 3,
-      //   title: 'Dance',
-      //   description: 'Dummy Text',
-      //   genreId: 2,
-      //   enabled: true
-      // }
-    ]
-   
-    this.dataSource = new MatTableDataSource(this.topics);
-
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.getAllTopics();
   }
 
   applyFilter(event: any){
@@ -257,13 +234,64 @@ export class TopicsComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(TopicDialogComponent, {
       width: '300px',
-      data: { name: this.name, animal: this.animal }
+      data: Object.assign({},this.newTopicData)
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      this.createTopic(result);
     });
+  }
+
+  deleteTopic(data: any){
+    let idxToDelete = this.topics.findIndex(t=>t.id === data.id);
+
+    this.topics.splice(idxToDelete, 1);
+
+    this.dataSource._updateChangeSubscription();
+  }
+
+  getAllTopics() {
+    this.topicService.getTopics().subscribe(
+      (res: any) => {
+        this.topics = res;
+        this.dataSource = new MatTableDataSource(this.topics);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      (error) => {
+        // this._snackBar.open('Error while fetching topics list','',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      } 
+    )
+  }
+
+  createTopic(data: Topic){
+    this.topicService.addTopic(data).subscribe(
+      (data)=>{
+        this.topics.push(data);
+        this.newTopicData = {
+          id: 0,
+          title: '',
+          description: '',
+          subjectId: 0,
+          enabled: true
+        }
+        this.dataSource._updateChangeSubscription();
+        // this._snackBar.open(`${this.newTopicData.title} is added successfully to list`,'',{
+        //   duration: 3000
+        // });
+
+        // this.freshForm();
+      },
+      (error)=>{
+        // this._snackBar.open(error,'',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    )
   }
 
 }
