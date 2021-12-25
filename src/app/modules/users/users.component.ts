@@ -35,36 +35,6 @@ export class UsersComponent implements OnInit {
         console.log(error)
       }
       )
-    // this.users = [
-    //   {
-    //     username: 'ankii123',
-    //     firstName: 'Ankit',
-    //     lastName: 'Kumar',
-    //     email: 'ankit@demo.com',
-    //     password: '12345678',
-    //     phone:'9876543210'
-    //   },
-    //   {
-    //     username: 'ankit345',
-    //     firstName: 'Rajat',
-    //     lastName: 'Sharma',
-    //     email: 'rajat@demo.com',
-    //     password: 'password',
-    //     phone:'1234567890'
-    //   },
-    //   {
-    //     username: 'moh123',
-    //     firstName: 'Mohit',
-    //     lastName: 'Pawar',
-    //     email: 'mohit@demo.com',
-    //     password: '134pasdwd',
-    //     phone:'4567891230'
-    //   }
-    // ]
-    this.dataSource = new MatTableDataSource(this.users);
-
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: any){
