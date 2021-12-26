@@ -58,6 +58,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'users/:id',
+        component: UserComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'genres',
         component: GenresComponent
       },

@@ -57,9 +57,11 @@ export class UsersComponent implements OnInit {
         }
       },
       (error) => {
-
+        console.log(error)
       }
     )
   }
+
+  
 
 }

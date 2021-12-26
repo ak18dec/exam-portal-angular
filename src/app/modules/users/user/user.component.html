@@ -3,9 +3,9 @@
     
     <mat-card>
         <app-back [path]="'/admin/users'" [label]="'Back to list'"></app-back>
-        <mat-card-title>Add New User</mat-card-title>
+        <mat-card-title>{{ addUser ? 'Add New User' : 'Edit User Details'}}</mat-card-title>
 
-        <form [formGroup]="newUserForm" (ngSubmit)="createUser(newUserForm)" autocomplete="off">
+        <form [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm)" autocomplete="off" *ngIf="addUser || dataLoaded">
         <mat-card-content>
                 <mat-icon matSuffix>person</mat-icon>
                 <mat-form-field appearance="standard">
@@ -74,7 +74,7 @@
 
                 <mat-card-actions align="start"
                     style="display: flex; flex-direction: column; width: 25%; margin-left: 5.5%;">
-                    <button mat-flat-button color="primary" type="submit">Create</button>
+                    <button mat-flat-button color="primary" type="submit">{{ addUser ? 'Create' : 'Update'}}</button>
                     <br>
                     <button mat-stroked-button style="margin: 0;">Cancel</button>
                 </mat-card-actions>
