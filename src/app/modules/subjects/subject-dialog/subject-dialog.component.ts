@@ -22,9 +22,11 @@ export class SubjectDialogComponent implements OnInit {
   addNewSubject(form: NgForm){
     this.newSubject.title = form.value.title;
     this.newSubject.description = form.value.description;
-    this.newSubject.enabled = form.value.enabled === "true" ? true : false;
+    this.newSubject.enabled = form.value.enabled === true ? true : false;
 
     this.dialogRef.close(this.newSubject);
   }
+
+  onSubjectStatusSelect() { }
 
 }

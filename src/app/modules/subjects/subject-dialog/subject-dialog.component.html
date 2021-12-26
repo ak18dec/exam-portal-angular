@@ -14,9 +14,9 @@
     <br>
     <div class="radio-container">
       <p>Enabled</p>
-      <mat-radio-group name="enabled" [(ngModel)]="data.enabled">
-        <mat-radio-button value="true">Active</mat-radio-button>
-        <mat-radio-button value="false">Inactive</mat-radio-button>
+      <mat-radio-group name="enabled" [(ngModel)]="data.enabled" (change)="onSubjectStatusSelect()" color="primary">
+        <mat-radio-button [value]="true">Active</mat-radio-button>
+        <mat-radio-button [value]="false">Inactive</mat-radio-button>
       </mat-radio-group>
     </div>
   </mat-dialog-content>

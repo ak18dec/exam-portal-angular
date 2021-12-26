@@ -1,19 +1,19 @@
-<h1 mat-dialog-title>New Topic</h1>
+<h1 mat-dialog-title>{{ data.id === -1 ? 'New Topic' : 'Update Topic' }}</h1>
 <form (ngSubmit)="addNewTopic(newTopicForm)" #newTopicForm="ngForm">
     <mat-dialog-content>
         <mat-form-field>
             <p>Title</p>
-            <input matInput name="title" ngModel>
+            <input matInput name="title" [(ngModel)]="data.title">
         </mat-form-field>
 
         <mat-form-field>
             <p>Description</p>
-            <input matInput name="description" ngModel>
+            <input matInput name="description" [(ngModel)]="data.description">
         </mat-form-field>
 
         <mat-form-field>
             <p>Subject</p>
-            <mat-select name="subjectId" ngModel>
+            <mat-select name="subjectId" [(ngModel)]="data.subjectId" (selectionChange)="onSubjectSelect()">
                 <mat-option *ngFor="let subject of subjects" [value]="subject.id">
                     {{subject.title}}
                 </mat-option>
@@ -23,15 +23,15 @@
         <br>
         <div class="radio-container">
             <p>Enabled</p>
-            <mat-radio-group name="enabled" ngModel>
-                <mat-radio-button value="true">Active</mat-radio-button>
-                <mat-radio-button value="false">Inactive</mat-radio-button>
+            <mat-radio-group name="enabled" [(ngModel)]="data.enabled" (change)="onTopicStatusSelect()">
+                <mat-radio-button [value]="true">Active</mat-radio-button>
+                <mat-radio-button [value]="false">Inactive</mat-radio-button>
             </mat-radio-group>
         </div>
     </mat-dialog-content>
 
     <mat-dialog-actions>
         <button mat-stroked-button mat-dialog-close>Cancel</button>
-        <button mat-flat-button color="primary" type="submit">Add</button>
+        <button mat-flat-button color="primary" type="submit">{{ data.id === -1 ? 'Add' : 'Update' }}</button>
     </mat-dialog-actions>
 </form>

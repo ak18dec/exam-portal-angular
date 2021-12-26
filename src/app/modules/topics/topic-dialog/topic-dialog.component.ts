@@ -14,6 +14,7 @@ export class TopicDialogComponent implements OnInit {
 
   subjects: Subject[] = [];
   newTopic: Topic;
+  selectedSubject = -1;
 
   constructor(public dialogRef: MatDialogRef<TopicDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private subjectService: SubjectService) { }
@@ -27,7 +28,7 @@ export class TopicDialogComponent implements OnInit {
     this.newTopic.title = form.value.title;
     this.newTopic.description = form.value.description;
     this.newTopic.subjectId = form.value.subjectId;
-    this.newTopic.enabled = form.value.enabled === "true" ? true : false;
+    this.newTopic.enabled = form.value.enabled === true ? true : false;
 
     this.dialogRef.close(this.newTopic);
   }
@@ -39,5 +40,9 @@ export class TopicDialogComponent implements OnInit {
       }
     )
   }
+
+  onSubjectSelect () { }
+
+  onTopicStatusSelect() { }
 
 }

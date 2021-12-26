@@ -213,10 +213,10 @@ export class TopicsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
   newTopicData: Topic = {
-    id: 0,
+    id: -1,
     title: '',
     description: '',
-    subjectId: 0,
+    subjectId: -1,
     enabled: true
   }
 
@@ -260,6 +260,7 @@ export class TopicsComponent implements OnInit {
         // this._snackBar.open(error,'',{
         //   duration: 3000
         // });
+        console.log(error)
       }
     );
   }
@@ -286,10 +287,10 @@ export class TopicsComponent implements OnInit {
       (data)=>{
         this.topics.push(data);
         this.newTopicData = {
-          id: 0,
+          id: -1,
           title: '',
           description: '',
-          subjectId: 0,
+          subjectId: -1,
           enabled: true
         }
         this.dataSource._updateChangeSubscription();
@@ -307,5 +308,65 @@ export class TopicsComponent implements OnInit {
       }
     )
   }
+
+  openEditDialog(editableRow:any) {
+
+    let dialogRef = this.dialog.open(TopicDialogComponent, {
+      width: '300px',
+      data: Object.assign({},editableRow)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if(result && result !== ""){
+        const sameData = this.validateTopic(editableRow, result) && (editableRow.enabled === result.enabled);
+        if(!sameData){
+          this.updateTopic(result);
+        }
+      }
+    });
+  }
+
+  validateTopic(topic1: Topic, topic2: Topic): boolean {
+    let sameTitle = false;
+    let sameDescription = false;
+    if(topic1 && topic1){
+      if(topic1.title !== '' && topic2.title !== '' && topic1.title === topic2.title){
+        sameTitle = true;
+      }
+      if(topic1.description !== '' && topic2.description !== '' && topic1.description === topic2.description){
+        sameDescription = true;
+      }
+    }
+    return sameTitle && sameDescription;
+  }
+
+  updateTopic(data: Topic) {
+    this.topicService.updateTopic(data, data.id).subscribe(
+      (res) => {
+        if (res) {
+          let idxToUpdate = this.topics.findIndex(t => t.id === data.id);
+          this.topics[idxToUpdate].title = data.title;
+          this.topics[idxToUpdate].description = data.description;
+          this.topics[idxToUpdate].subjectId = data.subjectId;
+          this.topics[idxToUpdate].enabled = data.enabled;
+
+          // this._snackBar.open('Topic updated successfully', '', {
+          //   duration: 3000
+          // });
+
+          // this.freshForm();
+          this.dataSource._updateChangeSubscription();
+        }
+      },
+      (error) => {
+        // this._snackBar.open(error, '', {
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    );
+  }
+
 
 }
