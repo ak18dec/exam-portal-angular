@@ -218,7 +218,7 @@ export class SubjectsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
   newSubjectData: Subject = {
-      id: 0,
+      id: -1,
       title: '',
       description: '',
       enabled: true
@@ -242,8 +242,29 @@ export class SubjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.createSubject(result);
+      if(result && result !== ""){
+        const sameData = this.validateSubject(this.newSubjectData, result);
+        if(!sameData){
+          this.createSubject(result);
+        }
+
+      }
     });
+  }
+
+  validateSubject(sub1: Subject, sub2: Subject): boolean {
+    let sameTitle = false;
+    let sameDescription = false;
+    if(sub1 && sub2){
+      if(sub1.title !== '' && sub2.title !== '' && sub1.title === sub2.title){
+        sameTitle = true;
+      }
+      if(sub1.description !== '' && sub2.description !== '' && sub1.description === sub2.description){
+        sameDescription = true;
+      }
+    }
+
+    return sameTitle && sameDescription;
   }
 
   deleteSubject(data: any){
@@ -291,7 +312,7 @@ export class SubjectsComponent implements OnInit {
       (data)=>{
         this.subjects.push(data);
         this.newSubjectData = {
-          id: 0,
+          id: -1,
           title: '',
           description: '',
           enabled: true
@@ -303,6 +324,52 @@ export class SubjectsComponent implements OnInit {
         // });
 
         // this.freshForm();
+      },
+      (error)=>{
+        // this._snackBar.open(error,'',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    )
+  }
+
+
+  openEditDialog(editableRow:any) {
+
+    let dialogRef = this.dialog.open(SubjectDialogComponent, {
+      width: '300px',
+      data: Object.assign({},editableRow)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if(result && result !== ""){
+        const sameData = this.validateSubject(editableRow, result) && (editableRow.enabled === result.enabled);
+        if(!sameData){
+          this.updateSubject(result);
+        }
+      }
+    });
+    
+  }
+
+  updateSubject(data: Subject){
+    this.subjectService.updateSubject(data, data.id).subscribe(
+      (res)=>{
+        if(res) {
+          let idxToUpdate = this.subjects.findIndex(g=>g.id === data.id);
+          this.subjects[idxToUpdate].title = data.title;
+          this.subjects[idxToUpdate].description = data.description;
+          this.subjects[idxToUpdate].enabled = data.enabled;
+          
+          // this._snackBar.open('Subject updated successfully','',{
+          //   duration: 3000
+          // });
+  
+          // this.freshForm();
+          this.dataSource._updateChangeSubscription();
+        }
       },
       (error)=>{
         // this._snackBar.open(error,'',{
