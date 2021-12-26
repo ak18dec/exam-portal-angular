@@ -253,50 +253,44 @@ export class QuestionsComponent implements OnInit {
   
   dataSource: MatTableDataSource<any>;
 
-  topics: Topic[]=[];
+  questions: Question[]=[];
 
-  columns: string[] = ['id','title', 'description', 'categoryId','enabled', 'action']
+  columns: string[] = ['id','title', 'description', 'proficiencyId','topicId','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
-  constructor() { }
+  
+
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
+    this.getAllQuestions();
+  }
 
-    this.topics = [
-      // {
-      //   id: 1,
-      //   title: 'Mathematics',
-      //   description: 'Dummy Text',
-      //   genreId: 3,
-      //   enabled: true
-      // },
-      // {
-      //   id: 2,
-      //   title: 'History',
-      //   description: 'Dummy Text',
-      //   genreId: 1,
-      //   enabled: true
-      // },
-      // {
-      //   id: 3,
-      //   title: 'Dance',
-      //   description: 'Dummy Text',
-      //   genreId: 2,
-      //   enabled: true
-      // }
-    ]
-   
-    this.dataSource = new MatTableDataSource(this.topics);
 
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  getAllQuestions() {
+    this.questionService.getQuestions().subscribe(
+      (res: any) => {
+        this.questions = res;
+        this.dataSource = new MatTableDataSource(this.questions);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      (error) => {
+        // this._snackBar.open('Error while fetching questions list','',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      } 
+    )
   }
 
   applyFilter(event: any){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  
 
 }

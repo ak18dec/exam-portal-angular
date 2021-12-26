@@ -54,12 +54,14 @@ export class ProfileComponent implements OnInit {
 
   updateProfile(updatedForm: FormGroup) {
     let updatedUser: User = {
+      id: 0,
       username : updatedForm.get('username')?.value,
       password : updatedForm.get('password')?.value,
       firstName : updatedForm.get('firstName')?.value,
       lastName : updatedForm.get('lastName')?.value,
       email : updatedForm.get('email')?.value,
       phone : updatedForm.get('phone')?.value,
+      
     }
 
     this.userService.updateUser(updatedUser, this.profile.id).subscribe(

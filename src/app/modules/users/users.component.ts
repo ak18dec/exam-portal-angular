@@ -42,8 +42,24 @@ export class UsersComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openAddUserForm() {
-    
+  deleteUser(data: any){
+    this.userService.deleteUser(data.id).subscribe(
+      (res: any) => {
+        if(res){
+          let idxToDelete = this.users.findIndex(u => u.id === data.id);
+          this.users.splice(idxToDelete, 1);
+          this.dataSource._updateChangeSubscription();
+
+          // this._snackBar.open(`User removed successfully`,'',{
+          //   duration: 3000
+          // });
+          // this.freshForm();
+        }
+      },
+      (error) => {
+
+      }
+    )
   }
 
 }

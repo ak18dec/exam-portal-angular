@@ -52,6 +52,8 @@ export class UserService {
   
   
   //DELETE APIs
-
+  deleteUser(userId: number){
+    return this.http.delete(`${baseUrl}/users/${userId}`);
+  }
   
 }

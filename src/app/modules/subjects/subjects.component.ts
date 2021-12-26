@@ -247,8 +247,6 @@ export class SubjectsComponent implements OnInit {
   }
 
   deleteSubject(data: any){
-    let idxToDelete = this.subjects.findIndex(s=>s.id === data.id);
-
     this.subjectService.deleteSubject(data.id).subscribe(
       (res)=>{
         if(res){
