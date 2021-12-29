@@ -42,11 +42,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent
+        component: ComingSoonComponent
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ComingSoonComponent
       },
       {
         path: 'users',
