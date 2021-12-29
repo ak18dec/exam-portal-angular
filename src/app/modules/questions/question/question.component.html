@@ -70,11 +70,10 @@
             <br>
             
             <div class="form-buttons">
-                <button mat-flat-button color="primary" type="submit">Add</button>
+                <button mat-flat-button color="primary" type="submit">{{ addQuestion ? 'Add' : 'Update'}}</button>
                 <!-- <br> -->
                 <button mat-stroked-button>Cancel</button>
             </div>
         </mat-card-content>
-        <p [innerHTML]="question.content"></p>
     </form>
 </mat-card>

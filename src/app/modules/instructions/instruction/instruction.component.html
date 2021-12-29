@@ -1,16 +1,25 @@
 <mat-card>
     <app-back [path]="'/admin/instructions'"></app-back>
     
-    <mat-card-title>Add Instructions</mat-card-title>
+    <mat-card-title>{{ addInstruction ? 'Add New Instruction' : 'Edit Instruction Details' }}</mat-card-title>
     <mat-divider></mat-divider>
     <br>
     <mat-card-content>
         <form>
-            <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+            <ckeditor 
+                [editor]="Editor"
+                [config]="{ placeholder:'Enter instructions content here...'}"
+                [(ngModel)]="instruction.content"
+                name="instructionContent">
+            </ckeditor>
+
+            <br>
+
+            <div class="form-buttons">
+                <button mat-flat-button color="primary" type="submit">{{ addInstruction ? 'Add' : 'Update'}}</button>
+                <button mat-stroked-button>Cancel</button>
+            </div>
 
         </form>
-        <br>
-        <button mat-flat-button color="primary">Add</button>
-        <button mat-stroked-button >Cancel</button>
     </mat-card-content>
 </mat-card>
