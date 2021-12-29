@@ -2,8 +2,7 @@ import { QuestionChoice } from "./questionchoice";
 
 export interface Question {
     id: number;
-    title: string;
-    description: string;
+    content: string;
     proficiencyId: number;
     enabled: boolean;
     topicId: number;

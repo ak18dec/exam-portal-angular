@@ -255,7 +255,7 @@ export class QuestionsComponent implements OnInit {
 
   questions: Question[]=[];
 
-  columns: string[] = ['id','title', 'description', 'proficiencyId','topicId','enabled', 'action']
+  columns: string[] = ['id', 'content', 'proficiencyId','topicId','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
@@ -289,6 +289,26 @@ export class QuestionsComponent implements OnInit {
   applyFilter(event: any){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  deleteQuestion(data: any){
+    this.questionService.deleteQuestion(data.id).subscribe(
+      (res: any) => {
+        if(res){
+          let idxToDelete = this.questions.findIndex(u => u.id === data.id);
+          this.questions.splice(idxToDelete, 1);
+          this.dataSource._updateChangeSubscription();
+
+          // this._snackBar.open(`User removed successfully`,'',{
+          //   duration: 3000
+          // });
+          // this.freshForm();
+        }
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   

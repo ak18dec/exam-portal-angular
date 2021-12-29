@@ -238,7 +238,12 @@ export class TopicsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.createTopic(result);
+      if(result && result !== ""){
+        const sameData = this.validateTopic(this.newTopicData, result);
+        if(!sameData){
+          this.createTopic(result);
+        }
+      }
     });
   }
 

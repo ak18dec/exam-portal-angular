@@ -19,3 +19,21 @@ mat-form-field {
       line-height: 0.2;
     }
 }
+
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -0.5em;
+    margin-left: -0.5em;
+  
+    button {
+      margin-bottom: 0.5em;
+      margin-left: 0.5em;
+    }
+  }
+  
+@media (min-width: 32rem) {
+    .form-buttons {
+        flex-direction: row;
+    }
+}

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { isNumber } from 'highcharts';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 

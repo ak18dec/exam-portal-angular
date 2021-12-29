@@ -91,6 +91,10 @@ const routes: Routes = [
         component: QuestionComponent
       },
       {
+        path: 'questions/:id',
+        component: QuestionComponent
+      },
+      {
         path: 'instructions',
         component: InstructionsComponent
       },

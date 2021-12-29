@@ -1,0 +1,61 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.options-group {
+    display: flex;
+    flex-direction: column;
+    // margin: 15px 0;
+    // border: 1 px solid red;
+    // justify-content: space-around;
+}
+
+.options {
+    display: inline-flex;
+    flex-direction: row;
+}
+  
+.example-radio-button {
+    margin: 5px;
+    
+}
+
+.mat-button-toggle-group {
+    height: 32px;
+    align-items: center;
+}
+.mat-button-toggle {
+    background-color: white;
+    color: black;
+}
+
+.mat-button-toggle-checked {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    button{
+        flex: 1;
+    }
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -0.5em;
+    margin-left: -0.5em;
+  
+    button {
+      margin-bottom: 0.5em;
+      margin-left: 0.5em;
+    }
+  }
+  
+@media (min-width: 32rem) {
+    .form-buttons {
+        flex-direction: row;
+    }
+}

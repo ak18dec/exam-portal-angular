@@ -1,15 +1,80 @@
 <mat-card>
     <app-back [path]="'/admin/questions'"></app-back>
-    
-    <mat-card-title>Add New Question</mat-card-title>
+
+    <mat-card-title>{{ addQuestion ? 'Add New Question' : 'Edit Question Details' }}</mat-card-title>
     <mat-divider></mat-divider>
     <br>
-    <mat-card-content>
-        <form>
-            <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
-        </form>
-        <br>
-        <button mat-flat-button color="primary" type="submit">Add</button>
-        <button mat-stroked-button >Cancel</button>
-    </mat-card-content>
+    <form>
+        <mat-card-content>
+            <!-- <p>Enter Question Content</p> -->
+            <!-- <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field> -->
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="question.proficiencyId">
+                <mat-button-toggle *ngFor="let proficiency of proficiencyList"
+                    [value]="proficiency.id"
+                    (click)="question.proficiencyId = proficiency.id">{{ proficiency.level }}
+                </mat-button-toggle>
+                <!-- <mat-button-toggle value="italic">Medium</mat-button-toggle>
+                <mat-button-toggle value="underline">Hard</mat-button-toggle> -->
+            </mat-button-toggle-group>
+            <br />
+            <br >
+            <ckeditor 
+                [editor]="Editor"
+                [config]="{ placeholder:'Enter question content here...'}"
+                [(ngModel)]="question.content"
+                name="questionContent">
+            </ckeditor>
+            <br>
+
+            <p>Enter Options</p>
+            <!-- <mat-radio-group class="example-radio-group" color="primary">
+                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                    {{season}}
+                </mat-radio-button>
+            </mat-radio-group> -->
+            <div class="options-group">
+                <div class="options">
+                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-form-field>
+                        <input matInput placeholder="Enter Option 1">
+                    </mat-form-field>
+                </div>
+            
+                <div class="options">
+                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-form-field>
+                        <input matInput placeholder="Enter Option 2">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="options-group">
+                <div class="options">
+                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-form-field>
+                        <input matInput placeholder="Enter Option 3">
+                    </mat-form-field>
+                </div>
+            
+                <div class="options">
+                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-form-field>
+                        <input matInput placeholder="Enter Option 4">
+                    </mat-form-field>
+                </div>
+            </div>
+            
+           
+            <br>
+            
+            <div class="form-buttons">
+                <button mat-flat-button color="primary" type="submit">Add</button>
+                <!-- <br> -->
+                <button mat-stroked-button>Cancel</button>
+            </div>
+        </mat-card-content>
+        <p [innerHTML]="question.content"></p>
+    </form>
 </mat-card>
