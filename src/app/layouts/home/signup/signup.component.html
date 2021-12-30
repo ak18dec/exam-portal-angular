@@ -60,18 +60,18 @@
         
         <mat-form-field>
           <p>Username</p>
-          <input matInput formControlName="username" required>
+          <input matInput formControlName="username">
         </mat-form-field>
 
         <mat-form-field>
           <p>Email</p>
-          <input matInput formControlName="username" required>
+          <input matInput formControlName="email">
         </mat-form-field>
 
         <!-- <p>Password</p> -->
         <mat-form-field>
           <p>Password</p>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
           <button mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 1.2;vertical-align: -2vh;margin-right: 3px;">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -79,17 +79,17 @@
 
         <mat-form-field class="first-name">
           <p>First Name</p>
-          <input matInput formControlName="username" required>
+          <input matInput formControlName="firstName">
         </mat-form-field>
         
         <mat-form-field class="last-name">
           <p>Last Name</p>
-          <input matInput formControlName="username">
+          <input matInput formControlName="lastName">
         </mat-form-field>
 
         <mat-form-field>
           <p>Phone</p>
-          <input matInput formControlName="username">
+          <input matInput formControlName="phone">
         </mat-form-field>
 
 
@@ -104,7 +104,7 @@
         </section>
         <br>
         <br>
-        <button mat-raised-button color="primary" style="width: 100%;">Create Account</button>
+        <button mat-raised-button color="primary" style="width: 100%;" type="submit">Create Account</button>
       </form>
       <br>
       <p>Already have an account? <a routerLink="/login">Login</a></p>

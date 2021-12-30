@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
 
   // constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private userService: UserService) { }
 
-  // user: User;
+  user: User;
 
   // ngOnInit() {
   //   this.createForm();
@@ -197,25 +197,38 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      username: ['', Validators.email],
-      password: ['', Validators.required]
-    });
+    this.createForm();
   }
 
   onSubmit() {
-    this.loginInvalid = false;
-    this.formSubmitAttempt = false;
-    if (this.form.valid) {
-      try {
-        const username = this.form.get('username')?.value;
-        const password = this.form.get('password')?.value;
-        // await this.authService.login(username, password);
-      } catch (err) {
-        this.loginInvalid = true;
+    this.user = this.form.value;
+    this.userService.registerUser(this.user).subscribe(
+      (data) => {
+        Swal.fire('Success !!!', 'User is registered successfully', 'success')
+        this.reset();
+      },
+      (error) => {
+        console.log(error);
+        // this._snackBar.open(JSON.stringify(error), '', {
+        //   duration: 3000
+        // })
       }
-    } else {
-      this.formSubmitAttempt = true;
-    }
+    )
+  }
+
+
+  createForm() {
+    this.form = this.fb.group({
+      username: ['', [Validators.required, Validators.maxLength(10)]],
+      password: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.maxLength(25)]],
+      lastName: ['', [Validators.maxLength(25)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['']
+    });
+  }
+
+  reset() {
+    this.form.reset();
   }
 }
