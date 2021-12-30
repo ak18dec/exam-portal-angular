@@ -104,30 +104,61 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    // private authService: AuthService
-  ) {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
+    private loginService: LoginService,
+  ) { }
 
+  ngOnInit() {
     this.form = this.fb.group({
-      username: ['', Validators.email],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    // if (await this.authService.checkAuthenticated()) {
-    //   await this.router.navigate([this.returnUrl]);
-    // }
-  }
-
-  async onSubmit(): Promise<void> {
+  onSubmit() {
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.form.valid) {
       try {
         const username = this.form.get('username')?.value;
         const password = this.form.get('password')?.value;
-        // await this.authService.login(username, password);
+
+        const loginData = {
+          username: username,
+          password: password
+        }
+
+        // request to server to generate token
+        this.loginService.generateToken(loginData).subscribe(
+          (data: any) => {
+            this.loginService.storeToken(data.token);
+
+            //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
+            if(this.loginService.getUserRole() === 'ADMIN'){
+
+              //admin dashboard
+              this.router.navigate(['admin']);
+              this.loginService.loginStatusSubject.next(true);
+
+            }else if (this.loginService.getUserRole() === 'BASIC'){
+              
+              //basic user dashboard
+              this.router.navigate(['user-dashboard']);
+              this.loginService.loginStatusSubject.next(true);
+            
+            }else{
+              this.loginService.logout();
+            }
+
+          },
+
+          (error) => {
+            console.log(`error data ${error}`);
+            // this._snackBar.open('Invalid Credentials !!!', '', {
+            //   duration: 3000
+            // }
+          }
+        );
+
       } catch (err) {
         this.loginInvalid = true;
       }
