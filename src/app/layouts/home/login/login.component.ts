@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -131,26 +132,36 @@ export class LoginComponent implements OnInit {
         this.loginService.generateToken(loginData).subscribe(
           (data: any) => {
             this.loginService.storeToken(data.token);
+            this.userService.getUserByUsername(loginData.username).subscribe(
+              (user: any) => {
+                this.loginService.storeUser(user);
+                console.log(user);
+                //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
+                if (this.loginService.getUserRole() === 'ADMIN') {
 
-            //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
-            if(this.loginService.getUserRole() === 'ADMIN'){
+                  //admin dashboard
+                  this.router.navigate(['admin']);
+                  this.loginService.loginStatusSubject.next(true);
 
-              //admin dashboard
-              this.router.navigate(['admin']);
-              this.loginService.loginStatusSubject.next(true);
+                } else if (this.loginService.getUserRole() === 'BASIC') {
 
-            }else if (this.loginService.getUserRole() === 'BASIC'){
-              
-              //basic user dashboard
-              this.router.navigate(['user-dashboard']);
-              this.loginService.loginStatusSubject.next(true);
-            
-            }else{
-              this.loginService.logout();
-            }
+                  //basic user dashboard
+                  this.router.navigate(['user-dashboard']);
+                  this.loginService.loginStatusSubject.next(true);
 
+                } else {
+                  this.loginService.logout();
+                }
+
+              },
+              (error) => {
+                // this._snackBar.open('Error while fetching current user !!!', '', {
+                //   duration: 3000
+                // })
+              }
+
+            );
           },
-
           (error) => {
             console.log(`error data ${error}`);
             // this._snackBar.open('Invalid Credentials !!!', '', {
@@ -160,10 +171,11 @@ export class LoginComponent implements OnInit {
         );
 
       } catch (err) {
-        this.loginInvalid = true;
+        // this.loginInvalid = true;
+        console.log(err)
       }
     } else {
-      this.formSubmitAttempt = true;
+      // this.formSubmitAttempt = true;
     }
   }
 

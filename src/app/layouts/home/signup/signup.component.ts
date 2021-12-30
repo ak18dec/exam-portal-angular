@@ -193,23 +193,17 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    // private authService: AuthService
-  ) {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
+    private userService: UserService
+  ) { }
 
+  ngOnInit() {
     this.form = this.fb.group({
       username: ['', Validators.email],
       password: ['', Validators.required]
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    // if (await this.authService.checkAuthenticated()) {
-    //   await this.router.navigate([this.returnUrl]);
-    // }
-  }
-
-  async onSubmit(): Promise<void> {
+  onSubmit() {
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.form.valid) {

@@ -42,7 +42,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ComingSoonComponent
+        component: DashboardComponent
       },
       {
         path: 'profile',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, retry, Subject } from 'rxjs';
 import { User } from '../models/user';
 import baseUrl from './helper';
 
@@ -76,7 +76,6 @@ export class LoginService {
 
   public logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     return true;
   }
 
