@@ -4,7 +4,7 @@
     <mat-card-title>{{ addQuestion ? 'Add New Question' : 'Edit Question Details' }}</mat-card-title>
     <mat-divider></mat-divider>
     <br>
-    <form>
+    <form (ngSubmit)="onFormSubmit(newQuestionForm)" #newQuestionForm="ngForm">
         <mat-card-content>
             <!-- <p>Enter Question Content</p> -->
             <!-- <mat-form-field appearance="outline">
@@ -15,8 +15,6 @@
                     [value]="proficiency.id"
                     (click)="question.proficiencyId = proficiency.id">{{ proficiency.level }}
                 </mat-button-toggle>
-                <!-- <mat-button-toggle value="italic">Medium</mat-button-toggle>
-                <mat-button-toggle value="underline">Hard</mat-button-toggle> -->
             </mat-button-toggle-group>
             <br />
             <br >
@@ -36,37 +34,47 @@
             </mat-radio-group> -->
             <div class="options-group">
                 <div class="options">
-                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-radio-button class="example-radio-button" color="primary" [value]="true" [checked]="choices[0].correct" (click)="selectCorrectOption(0)"></mat-radio-button>
                     <mat-form-field>
-                        <input matInput placeholder="Enter Option 1">
+                        <input matInput placeholder="Enter Option 1" [(ngModel)]="choices[0].description" name="option1">
                     </mat-form-field>
                 </div>
             
                 <div class="options">
-                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-radio-button class="example-radio-button" color="primary" [value]="true" [checked]="choices[1].correct" (click)="selectCorrectOption(1)"></mat-radio-button>
                     <mat-form-field>
-                        <input matInput placeholder="Enter Option 2">
+                        <input matInput placeholder="Enter Option 2" [(ngModel)]="choices[1].description" name="option2">
                     </mat-form-field>
                 </div>
             </div>
 
             <div class="options-group">
                 <div class="options">
-                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-radio-button class="example-radio-button" color="primary" [value]="true" [checked]="choices[2].correct" (click)="selectCorrectOption(2)"></mat-radio-button>
                     <mat-form-field>
-                        <input matInput placeholder="Enter Option 3">
+                        <input matInput placeholder="Enter Option 3" [(ngModel)]="choices[2].description" name="option3">
                     </mat-form-field>
                 </div>
             
                 <div class="options">
-                    <mat-radio-button class="example-radio-button" color="primary"></mat-radio-button>
+                    <mat-radio-button class="example-radio-button" color="primary" [value]="true" [checked]="choices[3].correct" (click)="selectCorrectOption(3)"></mat-radio-button>
                     <mat-form-field>
-                        <input matInput placeholder="Enter Option 4">
+                        <input matInput placeholder="Enter Option 4" [(ngModel)]="choices[3].description" name="option4">
                     </mat-form-field>
                 </div>
             </div>
+
+            <mat-form-field>
+                <p>Topic</p>
+                <mat-select name="topicId" [(ngModel)]="question.topicId" (selectionChange)="onTopicSelect()">
+                    <mat-option *ngFor="let topic of topics" [value]="topic.id">
+                        {{topic.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             
            
+            <br>
             <br>
             
             <div class="form-buttons">

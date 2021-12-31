@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Proficiency } from 'src/app/models/proficiency';
 import { Question } from 'src/app/models/question';
 import { QuestionChoice } from 'src/app/models/questionchoice';
@@ -259,7 +259,11 @@ export class QuestionsComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
-
+  // @ViewChild(MatPaginator, {static: true}) set matPaginator(paginator: MatPaginator){
+  //   if(this.dataSource){
+  //     this.dataSource.paginator = paginator;
+  //   }
+  // }
   
 
   constructor(private questionService: QuestionService) { }

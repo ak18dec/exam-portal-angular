@@ -8,6 +8,7 @@ import { Topic } from 'src/app/models/topic';
 import { QuestionService } from 'src/app/services/question.service';
 import { TopicService } from 'src/app/services/topic.service';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-question',
@@ -31,13 +32,13 @@ export class QuestionComponent implements OnInit {
   }
 
   proficiencyList: Proficiency[] = [];
-  topicsList: Topic[] = [];
+  topics: Topic[] = [];
 
-  questionChoices: QuestionChoice[] = [
-    {id: 0, description: '', enabled: true, correct: false, questionId: 0},
-    {id: 0, description: '', enabled: true, correct: false, questionId: 0},
-    {id: 0, description: '', enabled: true, correct: false, questionId: 0},
-    {id: 0, description: '', enabled: true, correct: false, questionId: 0}
+  choices: QuestionChoice[] = [
+    {id: -1, description: '', enabled: true, correct: false, questionId: -1},
+    {id: -1, description: '', enabled: true, correct: false, questionId: -1},
+    {id: -1, description: '', enabled: true, correct: false, questionId: -1},
+    {id: -1, description: '', enabled: true, correct: false, questionId: -1}
   ];
 
   editableQuestion: Question;
@@ -46,26 +47,17 @@ export class QuestionComponent implements OnInit {
 
   selectedQuestionId: number = -1;
 
-  constructor(private questionService: QuestionService, private topicService: TopicService, private route : ActivatedRoute, private router: Router) { }
+  constructor(
+    private questionService: QuestionService, 
+    private topicService: TopicService, 
+    private route : ActivatedRoute, 
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.getProficiencies();
-    // this.topicsList.length = 0;
-    // this.topicService.getTopics().subscribe(
-    //   (data: any) => {
-    //     data.forEach((d: Topic) => {
-    //       if(d.enabled){
-    //         this.topicsList.push(Object.assign({}, d));
-    //       }
-    //     });
-    //   },
-    //   (error)=>{
-    //     // this._snackBar.open('Error while fetching topics list','',{
-    //     //   duration: 3000
-    //     // });
-    //     console.log(error);
-    //   }
-    // );
+    this.topics = [];
+    this.getTopics();
     if(this.router.url.includes('/new')){
       this.addQuestion = true;
     }else{
@@ -73,7 +65,7 @@ export class QuestionComponent implements OnInit {
         const id = Number(params.get('id'));
         if(id){
           this.selectedQuestionId = id;
-          // this.getUserByUserId(id);
+          this.getQuestionById(id);
         }
       })
     }
@@ -85,33 +77,137 @@ export class QuestionComponent implements OnInit {
     ]
   }
 
-  
+  getTopics() {
+    this.topicService.getTopics().subscribe(
+      (data: any) => {
+        data.forEach((d: Topic) => {
+          if(d.enabled){
+            this.topics.push(Object.assign({}, d));
+          }
+        });
+        console.log(this.topics);
+      },
+      (error)=>{
+        // this._snackBar.open('Error while fetching topics list','',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    );
+  }
 
+  
+  resetForm(){
+    this.question = {
+      id: -1,
+      content: '',
+      topicId: -1,
+      enabled: true,
+      proficiencyId: 1,
+      questionChoices:[]
+    }
+  
+    this.choices = [
+      {id: -1, description: '', enabled: true, correct: false, questionId: -1},
+      {id: -1, description: '', enabled: true, correct: false, questionId: -1},
+      {id: -1, description: '', enabled: true, correct: false, questionId: -1},
+      {id: -1, description: '', enabled: true, correct: false, questionId: -1}
+    ];
+  }
 
   createQuestion(){
-    this.question.questionChoices = this.questionChoices.filter(ch => ch.description);
-    this.question.proficiencyId = 2;
+    this.question.questionChoices = this.choices;
     this.questionService.addQuestion(this.question).subscribe(
       (data)=>{
-        // this.questions.push(data);
         // this._snackBar.open(`${this.newQuestionData.title} is added successfully to list`,'',{
         //   duration: 3000
         // });
-
-        // this.freshForm();
+        this.resetForm();
+        
       },
       (error)=>{
         // this._snackBar.open(JSON.stringify(error),'',{
         //   duration: 3000
         // });
+        console.log(error)
       }
     )
   }
 
   getTopicName(topicId: number) {
-    return this.topicsList.find(t => t.id === topicId)?.title;
+    return this.topics.find(t => t.id === topicId)?.title;
   }
 
+  selectCorrectOption(optionId: number){
+    this.choices.forEach(ch => ch.correct = false);
+    this.choices[optionId].correct = true;
+  }
+
+  onTopicSelect(){ }
+
+  getQuestionById(quesId: number){
+    this.questionService.getQuestionById(quesId).subscribe(
+      (res: any) => {
+        if(this.selectedQuestionId === res.id){
+          this.editableQuestion = res;
+          this.initForm(this.editableQuestion);
+          this.dataLoaded = true;
+        }
+      },
+      (error) => {
+        console.log(error)
+      }
+    );
+  }
+
+  initForm(ques: Question) {
+    this.question = {
+      id: ques.id,
+      content: ques.content,
+      topicId: ques.topicId,
+      enabled: ques.enabled,
+      proficiencyId: ques.proficiencyId,
+      questionChoices: Object.assign([], ques.questionChoices)
+    }
+    this.choices = Object.assign([], ques.questionChoices)
+  }
+
+  onFormSubmit(form: NgForm){
+    if(this.addQuestion){
+      this.createQuestion();
+    }else{
+      this.updateQuestion(this.question, this.choices);
+    }
+  }
+
+  updateQuestion(updatedData: Question, updatedChoices: QuestionChoice[]){
+    const editableQuesId = this.editableQuestion.id;
+    if(this.selectedQuestionId === editableQuesId){
+      const updatedQues: Question = {
+        id: editableQuesId,
+        content: updatedData.content,
+        enabled: updatedData.enabled,
+        proficiencyId: updatedData.proficiencyId,
+        topicId: updatedData.topicId,
+        questionChoices: updatedChoices
+      }
   
+      this.questionService.updateQuestion(this.editableQuestion, this.selectedQuestionId).subscribe(
+        (res: any)=> {
+          console.log(`Question Details Updated Successfully for Ques ID ${editableQuesId} and Selected Ques ID ${this.selectedQuestionId}`)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }else{
+      console.log('Ques ID mismatched')
+      console.log(this.selectedQuestionId)
+      console.log(updatedData)
+    }
+    
+  }
+
+
 
 }
