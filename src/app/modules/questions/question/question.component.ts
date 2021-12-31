@@ -191,8 +191,8 @@ export class QuestionComponent implements OnInit {
         topicId: updatedData.topicId,
         questionChoices: updatedChoices
       }
-  
-      this.questionService.updateQuestion(this.editableQuestion, this.selectedQuestionId).subscribe(
+
+      this.questionService.updateQuestion(updatedQues, this.selectedQuestionId).subscribe(
         (res: any)=> {
           console.log(`Question Details Updated Successfully for Ques ID ${editableQuesId} and Selected Ques ID ${this.selectedQuestionId}`)
         },
