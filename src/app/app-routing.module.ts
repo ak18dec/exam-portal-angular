@@ -101,6 +101,10 @@ const routes: Routes = [
       {
         path: 'instructions/new',
         component: InstructionComponent
+      },
+      {
+        path: 'instructions/:id',
+        component: InstructionComponent
       }
     ]
   },

@@ -10,7 +10,7 @@
             <!-- <mat-form-field appearance="outline">
                 <input matInput>
             </mat-form-field> -->
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="question.proficiencyId">
+            <mat-button-toggle-group name="proficiency" aria-label="Proficiency Level" [value]="question.proficiencyId">
                 <mat-button-toggle *ngFor="let proficiency of proficiencyList"
                     [value]="proficiency.id"
                     (click)="question.proficiencyId = proficiency.id">{{ proficiency.level }}
@@ -80,7 +80,7 @@
             <div class="form-buttons">
                 <button mat-flat-button color="primary" type="submit">{{ addQuestion ? 'Add' : 'Update'}}</button>
                 <!-- <br> -->
-                <button mat-stroked-button>Cancel</button>
+                <button mat-stroked-button (click)="resetForm()">Cancel</button>
             </div>
         </mat-card-content>
     </form>

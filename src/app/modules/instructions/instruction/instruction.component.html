@@ -5,13 +5,23 @@
     <mat-divider></mat-divider>
     <br>
     <mat-card-content>
-        <form>
+        <form (ngSubmit)="onFormSubmit()" #newInstructionForm="ngForm">
             <ckeditor 
                 [editor]="Editor"
                 [config]="{ placeholder:'Enter instructions content here...'}"
                 [(ngModel)]="instruction.content"
                 name="instructionContent">
             </ckeditor>
+
+            <br>
+
+            <div>
+                <p>Enabled</p>
+                <mat-radio-group name="enabled" [(ngModel)]="instruction.enabled" (change)="onStatusSelect()" color="primary">
+                    <mat-radio-button [value]="true">Active</mat-radio-button>
+                    <mat-radio-button [value]="false">Inactive</mat-radio-button>
+                </mat-radio-group>
+            </div>
 
             <br>
 
