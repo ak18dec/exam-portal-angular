@@ -63,7 +63,7 @@
         <mat-card-title>{{ addQuiz ? 'Add New Quiz' : 'Edit Quiz Details'}}</mat-card-title>
         <mat-divider></mat-divider>
         <br>
-<mat-stepper [linear]="isLinear" #stepper>
+<mat-stepper [linear]="isLinear" #stepper [disableRipple]="true">
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Add Quiz Details</ng-template>
@@ -93,21 +93,22 @@
             </mat-form-field>
 
             <mat-form-field appearance="standard">
-                <p>Max Time</p>
+                <p>Max Time (in minutes)</p>
                 <input matInput formControlName="maxTime">
             </mat-form-field>
             <div>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext (click)="getAllQuestions()">Next</button>
             </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Add Questions">
         <br>
+        
         <form [formGroup]="secondFormGroup">
             <p>{{shoes.selectedOptions.selected.length}} Question Added</p>
-            <mat-selection-list #shoes>
-                <mat-list-option *ngFor="let shoe of typesOfShoes">
-                    {{shoe}}
+            <mat-selection-list #shoes color="primary" [disableRipple]="true">
+                <mat-list-option *ngFor="let ques of questions" checkboxPosition="before">
+                    <span [innerHTML]="ques.content"></span>
                 </mat-list-option>
             </mat-selection-list>
         
@@ -127,8 +128,9 @@
         Publish
       </mat-slide-toggle>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button (click)="stepper.reset()" type="button">Reset</button>
+            <button mat-button color="primary" type="submit" (click)="submitQuiz()">Submit</button>
         </div>
     </mat-step>
 </mat-stepper>

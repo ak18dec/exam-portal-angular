@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Question } from 'src/app/models/question';
 import { Quiz } from 'src/app/models/quiz';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-quiz-form',
@@ -30,19 +32,31 @@ export class QuizFormComponent implements OnInit {
     published: false,
     instructionEnabled: false,
     instructionIds: [],
-    maxMarks: -1,
-    maxTime: -1
+    maxMarks: 0,
+    maxTime: 0
   }
   proficiencyList: { id: number; level: string; }[];
 
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
-  constructor(private fb: FormBuilder, private route : ActivatedRoute, private router: Router) { }
+  questions: Question[]=[];
+
+  selectedQuestionIds: number[] = [];
+
+  panelOpenState = false;
+
+  constructor(
+    private fb: FormBuilder, 
+    private route : ActivatedRoute, 
+    private router: Router,
+    private questionService: QuestionService
+    ) { }
 
   ngOnInit() {
     this.getProficiencies();
     if(this.router.url.includes('/new')){
       this.addQuiz = true;
+      this.newQuiz.proficiencyId = this.proficiencyList[0].id;
       this.initForm(this.newQuiz);
     }else{
       this.route.paramMap.subscribe(params => {
@@ -59,21 +73,10 @@ export class QuizFormComponent implements OnInit {
     this.proficiencyList = [
       {id: 1, level: 'Easy'},{id: 2, level: 'Medium'},{id: 3, level: 'Hard'}
     ]
+    
   }
 
   initForm(quiz: Quiz) {
-    // this.quizForm = this.fb.group({
-    //   title: [quiz.title],
-    //   description: [quiz.description], 
-    //   questions: [quiz.questionIds],
-    //   proficiency: [quiz.proficiencyId],
-    //   published: [quiz.published],
-    //   instructionEnabled: [quiz.instructionEnabled],
-    //   instructions: [quiz.instructionIds],
-    //   maxMarks: [quiz.maxMarks],
-    //   maxTime: [quiz.maxTime]
-    // })
-
     this.firstFormGroup = this.fb.group({
       title: [quiz.title],
       description: [quiz.description], 
@@ -103,9 +106,23 @@ export class QuizFormComponent implements OnInit {
     // )
   }
 
-  onFormSubmit(form: FormGroup){
-    let formData = form.value;
-    
+  getAllQuestions() {
+    this.questionService.getQuestions().subscribe(
+      (res: any) => {
+        this.questions = res;
+      },
+      (error) => {
+        // this._snackBar.open('Error while fetching questions list','',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      } 
+    )
+  }
+
+  submitQuiz() {
+    console.log("clicked")
+    console.log(this.firstFormGroup.value)
   }
 
 }
