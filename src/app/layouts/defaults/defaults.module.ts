@@ -20,6 +20,7 @@ import { QuestionComponent } from 'src/app/modules/questions/question/question.c
 import { InstructionComponent } from 'src/app/modules/instructions/instruction/instruction.component';
 import { SubjectDialogComponent } from 'src/app/modules/subjects/subject-dialog/subject-dialog.component';
 import { TopicDialogComponent } from 'src/app/modules/topics/topic-dialog/topic-dialog.component';
+import { QuizFormComponent } from 'src/app/modules/quiz/quiz-form/quiz-form.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { TopicDialogComponent } from 'src/app/modules/topics/topic-dialog/topic-
     InstructionComponent,
     SubjectDialogComponent,
     TopicDialogComponent,
+    QuizFormComponent
   ],
   imports: [
     CommonModule,

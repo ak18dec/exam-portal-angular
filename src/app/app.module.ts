@@ -14,6 +14,7 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { DefaultsModule } from './layouts/defaults/defaults.module';
 import { UtilsModule } from './utils/utils.module';
 import { HomeModule } from './layouts/home/home.module';
+import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
 
 
 @NgModule({
@@ -23,8 +24,6 @@ import { HomeModule } from './layouts/home/home.module';
     WelcomeComponent,
     ComingSoonComponent,
     UserDashboardComponent,
-    
-    
   ],
   imports: [
     BrowserModule,

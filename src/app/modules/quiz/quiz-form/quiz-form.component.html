@@ -1,0 +1,136 @@
+<!-- 
+<div class="new-user-form-container">
+    
+    <mat-card>
+        <app-back [path]="'/admin/quizes'" [label]="'Back to list'"></app-back>
+        <mat-card-title>{{ addQuiz ? 'Add New Quiz' : 'Edit Quiz Details'}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <br>
+
+        <form [formGroup]="quizForm" (ngSubmit)="onFormSubmit(quizForm)" autocomplete="off" *ngIf="addQuiz || dataLoaded">
+        <mat-card-content>
+
+                <mat-button-toggle-group formControlName="proficiency" aria-label="Proficiency Level">
+                    <mat-button-toggle *ngFor="let proficiency of proficiencyList"
+                        [value]="proficiency.id">{{ proficiency.level }}
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+
+                <mat-form-field appearance="standard">
+                    <p>Title</p>
+                    <input matInput formControlName="title">
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
+                    <p>Description</p>
+                    <textarea 
+                        matInput 
+                        formControlName="description"
+                        rows="3">
+                    </textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
+                    <p>Max Marks</p>
+                    <input matInput formControlName="maxMarks">
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
+                    <p>Max Time</p>
+                    <input matInput formControlName="maxTime">
+                </mat-form-field>
+
+                <br>
+                <br>
+
+                <div class="form-buttons">
+                    <button mat-flat-button color="primary" type="submit">{{ addQuiz ? 'Create' : 'Update'}}</button>
+                    <button mat-stroked-button >Cancel</button>
+                </div>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</div>
+
+   -->
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<div class="new-user-form-container">
+    
+    <mat-card>
+        <app-back [path]="'/admin/quizes'" [label]="'Back to list'"></app-back>
+        <mat-card-title>{{ addQuiz ? 'Add New Quiz' : 'Edit Quiz Details'}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <br>
+<mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Add Quiz Details</ng-template>
+            <br>
+            <mat-button-toggle-group formControlName="proficiency" aria-label="Proficiency Level">
+                <mat-button-toggle *ngFor="let proficiency of proficiencyList"
+                    [value]="proficiency.id">{{ proficiency.level }}
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+            <mat-form-field appearance="standard">
+                <p>Title</p>
+                <input matInput formControlName="title">
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <p>Description</p>
+                <textarea 
+                    matInput 
+                    formControlName="description"
+                    rows="3">
+                </textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <p>Max Marks</p>
+                <input matInput formControlName="maxMarks">
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <p>Max Time</p>
+                <input matInput formControlName="maxTime">
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Add Questions">
+        <br>
+        <form [formGroup]="secondFormGroup">
+            <p>{{shoes.selectedOptions.selected.length}} Question Added</p>
+            <mat-selection-list #shoes>
+                <mat-list-option *ngFor="let shoe of typesOfShoes">
+                    {{shoe}}
+                </mat-list-option>
+            </mat-selection-list>
+        
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <br>
+        <p>You are now done. Do you want to publish the quiz now?</p>
+        <mat-slide-toggle
+          class="example-margin"
+          color="primary">
+        Publish
+      </mat-slide-toggle>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-stepper>
+</mat-card>
+</div>

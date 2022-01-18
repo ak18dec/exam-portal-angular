@@ -18,6 +18,8 @@ import { UserComponent } from './modules/users/user/user.component';
 import { QuestionComponent } from './modules/questions/question/question.component';
 import { InstructionsComponent } from './modules/instructions/instructions.component';
 import { InstructionComponent } from './modules/instructions/instruction/instruction.component';
+import { QuizComponent } from './modules/quiz/quiz.component';
+import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
 
 const routes: Routes = [
   {
@@ -80,7 +82,17 @@ const routes: Routes = [
       },
       {
         path: 'quizes',
-        component: ComingSoonComponent
+        component: QuizComponent
+      },
+      {
+        path: 'quizes/new',
+        component: QuizFormComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'quizes/:id',
+        component: QuizFormComponent,
+        pathMatch: 'full'
       },
       {
         path: 'questions',

@@ -1,0 +1,69 @@
+// mat-icon {
+//     padding: 20px;
+//     margin-right: 15px;
+//     vertical-align: -5vh;
+// }
+
+// .mat-radio-group {
+//     vertical-align: -3.8vh;
+// }
+// .mat-radio-button ~ .mat-radio-button {
+//     margin-left: 16px;
+// }
+
+.mat-button-toggle-group {
+    height: 32px;
+    align-items: center;
+}
+.mat-button-toggle {
+    background-color: white;
+    color: black;
+}
+
+.mat-button-toggle-checked {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+mat-form-field {
+    margin-right: 20px;
+    padding: 0;
+    p {
+      font-size: smaller;
+      line-height: 0.2;
+    }
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -0.5em;
+    margin-left: -0.5em;
+  
+    button {
+      margin-bottom: 0.5em;
+      margin-left: 0.5em;
+    }
+  }
+  
+@media (min-width: 32rem) {
+    .form-buttons {
+        flex-direction: row;
+    }
+}
+
+.mat-stepper-horizontal {
+    margin-top: 8px;
+}
+  
+.mat-form-field {
+    margin-top: 16px;
+}
+
+.example-margin {
+    margin: 10px;
+}
+  
