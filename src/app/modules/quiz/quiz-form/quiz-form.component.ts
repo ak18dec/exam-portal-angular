@@ -51,6 +51,8 @@ export class QuizFormComponent implements OnInit {
   selectedQuestions: number[] = [];
   enableInstruction: boolean = false;
 
+  quizPublished: boolean = false;
+
   constructor(
     private fb: FormBuilder, 
     private route : ActivatedRoute, 
@@ -136,9 +138,7 @@ export class QuizFormComponent implements OnInit {
   }
 
   submitQuiz() {
-    console.log(this.firstFormGroup.value)
-    console.log(this.secondFormGroup.value)
-    console.log(this.thirdFormGroup.value)
+    this.createQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
   }
 
   instructionToggle(event: MatSlideToggleChange) {
@@ -178,6 +178,43 @@ export class QuizFormComponent implements OnInit {
     if(!this.loadQuestions){
       this.getAllQuestions();
     }
+  }
+
+  createQuiz(form1Data: any, form2Data: any, form3Data: any){
+    this.newQuiz = {
+      id: -1,
+      title: form1Data.title,
+      description: form1Data.description, 
+      maxMarks: form1Data.maxMarks,
+      maxTime: form1Data.maxTime,
+      proficiencyId: form1Data.proficiency,
+      questionIds: form2Data.questions,
+      instructionEnabled: form3Data.instructionEnabled,
+      instructionIds: form3Data.instructions,
+      published: this.quizPublished,
+    }
+
+    console.log('On Submit of New Quiz: ')
+    console.log(this.newQuiz)
+  }
+
+  formReset() {
+    this.quizPublished = false;
+    this.loadQuestions = false;
+    this.newQuiz = {
+      id: -1,
+      title: '',
+      description: '', 
+      questionIds: [],
+      proficiencyId: -1,
+      published: false,
+      instructionEnabled: false,
+      instructionIds: [],
+      maxMarks: 0,
+      maxTime: 0
+    }
+    this.newQuiz.proficiencyId = this.proficiencyList[0].id;
+    this.initForm(this.newQuiz);
   }
 
 }

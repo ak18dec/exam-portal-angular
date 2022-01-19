@@ -47,8 +47,8 @@
                     </mat-slide-toggle>
                     <!-- <p>{{shoes.selectedOptions.selected.length}} Question Added</p> -->
                     <mat-selection-list *ngIf="loadQuestions" 
-                        color="primary" [disableRipple]="true">
-                        <mat-list-option *ngFor="let ques of questions" checkboxPosition="before">
+                        color="primary" [disableRipple]="true" formControlName="questions" >
+                        <mat-list-option *ngFor="let ques of questions" checkboxPosition="before" [value]="ques.id">
                             <span [innerHTML]="ques.content"></span>
                         </mat-list-option>
                     </mat-selection-list>
@@ -85,12 +85,12 @@
                 <ng-template matStepLabel>Done</ng-template>
                 <br>
                 <p>You are now done. Do you want to publish the quiz now?</p>
-                <mat-slide-toggle class="example-margin" color="primary">
+                <mat-slide-toggle class="example-margin" color="primary" [(ngModel)]="quizPublished">
                     Publish
                 </mat-slide-toggle>
                 <div>
                     <button mat-button matStepperPrevious type="button">Back</button>
-                    <button mat-button (click)="stepper.reset()" type="button">Reset</button>
+                    <button mat-button (click)="stepper.reset(); formReset();" type="button">Reset</button>
                     <button mat-button color="primary" type="submit" (click)="submitQuiz()">Submit</button>
                 </div>
             </mat-step>
