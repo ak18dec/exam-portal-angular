@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatSelectionListChange } from '@angular/material/list/selection-list';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Instruction } from 'src/app/models/instruction';
 import { Question } from 'src/app/models/question';
 import { Quiz } from 'src/app/models/quiz';
+import { InstructionService } from 'src/app/services/instruction.service';
 import { QuestionService } from 'src/app/services/question.service';
+import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
   selector: 'app-quiz-form',
@@ -15,6 +20,7 @@ export class QuizFormComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   quizForm: FormGroup;
   editableQuiz: Quiz;
@@ -37,19 +43,21 @@ export class QuizFormComponent implements OnInit {
   }
   proficiencyList: { id: number; level: string; }[];
 
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
-
   questions: Question[]=[];
+  loadQuestions: boolean = false;
+  instructions: Instruction[]=[];
+  instructionsLoaded: boolean = false;
 
-  selectedQuestionIds: number[] = [];
-
-  panelOpenState = false;
+  selectedQuestions: number[] = [];
+  enableInstruction: boolean = false;
 
   constructor(
     private fb: FormBuilder, 
     private route : ActivatedRoute, 
     private router: Router,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private quizService: QuizService,
+    private instructionService: InstructionService
     ) { }
 
   ngOnInit() {
@@ -63,10 +71,14 @@ export class QuizFormComponent implements OnInit {
         const id = Number(params.get('id'));
         if(id){
           this.selectedQuizId = id;
-          // this.getUserByUserId(id);
+          this.getQuizByQuizId(id);
         }
       })
     }
+  }
+
+  get thirdFromGroup() {
+    return this.thirdFormGroup.controls;
   }
 
   getProficiencies(){
@@ -85,31 +97,62 @@ export class QuizFormComponent implements OnInit {
       maxTime: [quiz.maxTime]
     });
     this.secondFormGroup = this.fb.group({
-      secondCtrl: [''],
+      questions: [quiz.questionIds]
+    });
+    this.thirdFormGroup = this.fb.group({
+      instructionEnabled: [quiz.instructionEnabled],
+      instructions: [quiz.instructionIds]
     });
   }
 
   getQuizByQuizId(quizId: number){
-    // this.userService.getUserDetailsById(userId).subscribe(
-    //   (res: any) => {
-    //     if(this.selectedUserId === res.id){
-    //       this.editableUser = res;
-    //       this.editableUser.role = 'basic';
-    //       this.editableUser.status = true;
-    //       this.initForm(this.editableUser);
-    //       this.dataLoaded = true;
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log(error)
-    //   }
-    // )
+    this.quizService.getQuizById(quizId).subscribe(
+      (res: any) => {
+        if(this.selectedQuizId === res.id){
+          this.editableQuiz = res;
+          this.initForm(this.editableQuiz);
+          this.dataLoaded = true;
+        }
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   getAllQuestions() {
     this.questionService.getQuestions().subscribe(
       (res: any) => {
         this.questions = res;
+        this.loadQuestions = true;
+      },
+      (error) => {
+        // this._snackBar.open('Error while fetching questions list','',{
+        //   duration: 3000
+        // });
+        console.log(error);
+      }
+    )
+  }
+
+  submitQuiz() {
+    console.log(this.firstFormGroup.value)
+    console.log(this.secondFormGroup.value)
+    console.log(this.thirdFormGroup.value)
+  }
+
+  instructionToggle(event: MatSlideToggleChange) {
+    this.enableInstruction = event.checked;
+    if(this.enableInstruction && this.instructions.length < 1){ 
+      this.getAllInstructions();
+    }
+  }
+
+  getAllInstructions() {
+    this.instructionService.getInstructions().subscribe(
+      (res: any) => {
+        this.instructions = res;
+        this.instructionsLoaded = true;
       },
       (error) => {
         // this._snackBar.open('Error while fetching questions list','',{
@@ -120,9 +163,21 @@ export class QuizFormComponent implements OnInit {
     )
   }
 
-  submitQuiz() {
-    console.log("clicked")
-    console.log(this.firstFormGroup.value)
+  onInstructionSelection(){
+    // console.log(this.thirdFormGroup.value.instructions);
+  }
+
+  questionToggle() {
+    this.loadQuestions = !this.loadQuestions;
+    if(this.loadQuestions && this.questions.length < 1){
+      this.getAllQuestions();
+    }
+  }
+
+  moveToQuestionsPage() {
+    if(!this.loadQuestions){
+      this.getAllQuestions();
+    }
   }
 
 }
