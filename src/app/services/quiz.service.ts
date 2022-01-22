@@ -63,7 +63,7 @@ export class QuizService {
     //UPDATE APIs
   
     public updateQuiz(editQuiz: Quiz, id: number) {
-      let url = `${baseUrl}/questions/${id}`;
+      let url = `${baseUrl}/quiz/${id}`;
       return this.http.put<boolean>(url, editQuiz);
     }
   

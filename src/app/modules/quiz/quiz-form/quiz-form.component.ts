@@ -45,6 +45,7 @@ export class QuizFormComponent implements OnInit {
 
   questions: Question[]=[];
   loadQuestions: boolean = false;
+
   instructions: Instruction[]=[];
   instructionsLoaded: boolean = false;
 
@@ -68,6 +69,7 @@ export class QuizFormComponent implements OnInit {
       this.addQuiz = true;
       this.newQuiz.proficiencyId = this.proficiencyList[0].id;
       this.initForm(this.newQuiz);
+      this.dataLoaded = true;
     }else{
       this.route.paramMap.subscribe(params => {
         const id = Number(params.get('id'));
@@ -115,6 +117,10 @@ export class QuizFormComponent implements OnInit {
           this.editableQuiz = res;
           this.initForm(this.editableQuiz);
           this.dataLoaded = true;
+          if(this.editableQuiz.instructionEnabled){
+            this.instructionsLoaded = true;
+            this.getAllInstructions();
+          }
         }
       },
       (error) => {
@@ -139,11 +145,21 @@ export class QuizFormComponent implements OnInit {
   }
 
   submitQuiz() {
-    this.createQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
+    if(this.addQuiz) {
+      this.createQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
+    }else{
+      console.log('Edit Quiz Called')
+      console.log(this.firstFormGroup.value)
+      console.log(this.secondFormGroup.value)
+      console.log(this.thirdFormGroup.value)
+      console.log(this.quizPublished)
+      this.updateQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
+    }
   }
 
   instructionToggle(event: MatSlideToggleChange) {
     this.enableInstruction = event.checked;
+    this.instructionsLoaded = !this.instructionsLoaded;
     if(this.enableInstruction && this.instructions.length < 1){ 
       this.getAllInstructions();
     }
@@ -231,6 +247,42 @@ export class QuizFormComponent implements OnInit {
     if(!this.instructionsLoaded){
       this.getAllInstructions();
     }
+  }
+
+  updateQuiz(form1Data: any, form2Data: any, form3Data: any){
+    const editableQuizId = this.editableQuiz.id;
+    if(this.selectedQuizId === editableQuizId){
+      this.editableQuiz = {
+        id: editableQuizId,
+        title: form1Data.title,
+        description: form1Data.description, 
+        maxMarks: form1Data.maxMarks,
+        maxTime: form1Data.maxTime,
+        proficiencyId: form1Data.proficiency,
+        questionIds: form2Data.questions,
+        instructionEnabled: form3Data.instructionEnabled,
+        instructionIds: form3Data.instructions,
+        published: this.quizPublished,
+      }
+
+      console.log('Before hitting update quiz')
+      console.log(this.editableQuiz)
+      this.quizService.updateQuiz(this.newQuiz, this.selectedQuizId).subscribe(
+        (res: any)=> {
+          console.log(`Quiz Details Updated Successfully for Quiz ID ${editableQuizId} and Selected Quiz ID ${this.selectedQuizId}`)
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
+    }else{
+      console.log('Quiz ID mismatched')
+      console.log(this.selectedQuizId)
+      console.log(form1Data)
+      console.log(form2Data)
+      console.log(form3Data)
+    }
+
   }
 
 }

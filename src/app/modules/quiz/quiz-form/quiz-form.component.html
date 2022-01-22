@@ -6,12 +6,12 @@
         <br>
         <mat-stepper [linear]="isLinear" #stepper [disableRipple]="true">
             <mat-step [stepControl]="firstFormGroup">
-                <form [formGroup]="firstFormGroup">
-                    <ng-template matStepLabel>Add Quiz Details</ng-template>
+                <form [formGroup]="firstFormGroup" *ngIf="dataLoaded">
+                    <ng-template matStepLabel>{{ addQuiz ? 'Add Quiz Details' : 'Edit Quiz Details'}}</ng-template>
                     <br>
                     <mat-button-toggle-group formControlName="proficiency" aria-label="Proficiency Level">
-                        <mat-button-toggle *ngFor="let proficiency of proficiencyList" [value]="proficiency.id">{{
-                            proficiency.level }}
+                        <mat-button-toggle *ngFor="let proficiency of proficiencyList" [value]="proficiency.id">
+                            {{ proficiency.level }}
                         </mat-button-toggle>
                     </mat-button-toggle-group>
                     <mat-form-field appearance="standard">
@@ -39,13 +39,12 @@
                     </div>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup" label="Add Questions">
+            <mat-step [stepControl]="secondFormGroup" [label]="addQuiz ? 'Add Questions' : 'Edit Questions'" *ngIf="dataLoaded">
                 <br>
                 <form [formGroup]="secondFormGroup">
                     <mat-slide-toggle class="example-margin" color="primary" (change)="questionToggle()" [checked]="loadQuestions">
                         Load Questions
                     </mat-slide-toggle>
-                    <!-- <p>{{shoes.selectedOptions.selected.length}} Question Added</p> -->
                     <mat-selection-list *ngIf="loadQuestions" 
                         color="primary" [disableRipple]="true" formControlName="questions" >
                         <mat-list-option *ngFor="let ques of questions" checkboxPosition="before" [value]="ques.id">
@@ -59,7 +58,7 @@
                     </div>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="thirdFormGroup" label="Add Instructions">
+            <mat-step [stepControl]="thirdFormGroup" [label]="addQuiz ? 'Add Instructions' : 'Edit Instructions'" *ngIf="dataLoaded">
                 <br>
                 <form [formGroup]="thirdFormGroup">
                     <p>Do you want to add instructions to this quiz ?</p>
@@ -67,7 +66,7 @@
                         Add Instructions
                     </mat-slide-toggle>
 
-                    <mat-selection-list *ngIf="thirdFormGroup.value.instructionEnabled == true && instructionsLoaded" 
+                    <mat-selection-list *ngIf="instructionsLoaded" 
                         color="primary" [disableRipple]="true" formControlName="instructions" (selectionChange)="onInstructionSelection()">
                         <mat-list-option *ngFor="let instruction of instructions" checkboxPosition="before" [value]="instruction.id">
                             <span [innerHTML]="instruction.content"></span>
