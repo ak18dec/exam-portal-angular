@@ -1,9 +1,19 @@
 <mat-nav-list>
     <div class="profile-card">
-        <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="ankit kumar">
+        <mat-progress-bar *ngIf="success" mode="determinate" [value]="timer"></mat-progress-bar>
+        <br>
+        <img [src]="profilePicUrl" alt="profile_pic">
+        <input
+            style="display: none;" 
+            type="file"
+            (change)="onFileSelected($event)"
+            #fileInput>
+        <button type="button" mat-icon-button color="primary" (click)="fileInput.click()">
+            <mat-icon>add_a_photo</mat-icon>
+        </button>
         <div class="header">
-            <h2>Ankit Kumar</h2>
-            <h4>ankit@example.com</h4>
+            <h2>{{ fullName }}</h2>
+            <h4>{{ email }}</h4>
         </div>
     </div>
 
@@ -14,15 +24,13 @@
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/">Dashboard</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/profile">Profile</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/users">Users</a>
-    <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/genres">Genres</a> -->
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/subjects">Subjects</a>
-    <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/categories">Categories</a> -->
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/topics">Topics</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/questions">Questions</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/quizes">Quizes</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/instructions">Instructions</a>
     
-    <mat-divider></mat-divider>
+    <!-- <mat-divider></mat-divider> -->
     
-    another menu
+    <!-- another menu -->
 </mat-nav-list>
