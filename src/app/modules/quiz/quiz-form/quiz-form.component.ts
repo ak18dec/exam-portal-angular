@@ -105,6 +105,7 @@ export class QuizFormComponent implements OnInit {
       instructionEnabled: [quiz.instructionEnabled],
       instructions: [quiz.instructionIds]
     });
+    this.quizPublished = quiz.published;
   }
 
   getQuizByQuizId(quizId: number){
@@ -196,6 +197,15 @@ export class QuizFormComponent implements OnInit {
 
     console.log('On Submit of New Quiz: ')
     console.log(this.newQuiz)
+
+    this.quizService.addQuiz(this.newQuiz).subscribe(
+      (res: any)  => {
+        this.formReset();
+      },
+      (error) =>{
+        console.log(error)
+      }
+    );
   }
 
   formReset() {
@@ -215,6 +225,12 @@ export class QuizFormComponent implements OnInit {
     }
     this.newQuiz.proficiencyId = this.proficiencyList[0].id;
     this.initForm(this.newQuiz);
+  }
+
+  moveToInstructionsPage() {
+    if(!this.instructionsLoaded){
+      this.getAllInstructions();
+    }
   }
 
 }
