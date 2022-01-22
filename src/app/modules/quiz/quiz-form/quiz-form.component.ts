@@ -267,7 +267,7 @@ export class QuizFormComponent implements OnInit {
 
       console.log('Before hitting update quiz')
       console.log(this.editableQuiz)
-      this.quizService.updateQuiz(this.newQuiz, this.selectedQuizId).subscribe(
+      this.quizService.updateQuiz(this.editableQuiz, this.selectedQuizId).subscribe(
         (res: any)=> {
           console.log(`Quiz Details Updated Successfully for Quiz ID ${editableQuizId} and Selected Quiz ID ${this.selectedQuizId}`)
         },
