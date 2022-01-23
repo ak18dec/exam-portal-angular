@@ -109,6 +109,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -146,7 +148,7 @@ export class LoginComponent implements OnInit {
                 } else if (this.loginService.getUserRole() === 'BASIC') {
 
                   //basic user dashboard
-                  this.router.navigate(['user-dashboard']);
+                  this.router.navigate(['user']);
                   this.loginService.loginStatusSubject.next(true);
 
                 } else {
