@@ -26,4 +26,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  account() {
+    console.log('my account clicked')
+    this.router.navigate(['/admin/profile'])
+  }
+
 }

@@ -23,6 +23,10 @@
                         <mat-icon>person_outline</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="account()">
+                            <mat-icon>manage_accounts</mat-icon>
+                            My Account
+                        </button>
                         <button mat-menu-item (click)="logout()">
                             <mat-icon>logout</mat-icon>
                             Logout
