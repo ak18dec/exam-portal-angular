@@ -5,13 +5,21 @@ import { UserDashboardComponent } from 'src/app/modules/user-dashboard/user-dash
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TimerComponent } from 'src/app/modules/timer/timer.component';
+import { UserQuestionComponent } from 'src/app/modules/user-question/user-question.component';
+import { QuestionTrackerComponent } from 'src/app/modules/question-tracker/question-tracker.component';
+import { UserQuizComponent } from 'src/app/modules/user-quiz/user-quiz.component';
 
 
 
 @NgModule({
   declarations: [
     UserHomeComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    TimerComponent,
+    UserQuestionComponent,
+    QuestionTrackerComponent,
+    UserQuizComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,29 @@
+.outline {
+    border: thin solid #E1E5EA;
+    box-sizing: border-box;
+}
+
+.mat-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mat-card-content {
+    flex-grow: 1;
+}
+
+.ques-nav-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+// .host {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%;
+// }
+

@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-subtitle>Question {{ currentQuesNumber }} of {{ totalQuestions }}</mat-card-subtitle>
+    <mat-card-content>
+        <div class="content">
+            hello
+        </div>
+        <mat-divider></mat-divider>
+        <div class="choices">
+            choice
+        </div>
+    </mat-card-content>
+    <mat-card-footer class="ques-nav-section">
+        <button mat-button color="primary" [disabled]="firstQuestion">Previous</button>
+        <button mat-button color="primary">{{ lastQuestion ? 'Submit' : 'Next'}}</button>
+      </mat-card-footer>
+</mat-card>
+
+
+<!-- if want to remove elevation of mat card use the below class-->
+<!-- class="mat-elevation-z0 outline" -->

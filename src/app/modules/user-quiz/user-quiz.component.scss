@@ -1,0 +1,11 @@
+.main {
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz {
+    flex-grow: 0.99;
+    height: 100%;
+}  

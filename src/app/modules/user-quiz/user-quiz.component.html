@@ -1,0 +1,16 @@
+<div class="main">
+    <div class="quiz">
+        <app-user-question></app-user-question>
+    </div>
+
+    <div class="sidepanel">
+        <div class="timer">
+            <app-timer (timeOver)="onTimeOver($event)"></app-timer>
+        </div>
+        <br>
+        <div class="tracker">
+            <app-question-tracker></app-question-tracker>
+        </div>
+    </div>
+    
+</div>  
