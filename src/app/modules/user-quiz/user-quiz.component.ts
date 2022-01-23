@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Question } from 'src/app/models/question';
+import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
   selector: 'app-user-quiz',
@@ -7,13 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserQuizComponent implements OnInit {
 
+  quizQuestions: Question[] = [];
   
-
+  @Input() quizId: number = -1;
   
-
-  constructor() { }
+  constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
+    // this.getQuestionsByQuizId(this.quizId);
   }
 
   onTimeOver(event: boolean) {
@@ -25,12 +28,13 @@ export class UserQuizComponent implements OnInit {
     console.log('Quiz Submitted')
   }
 
-  nextQues(){
-
-  }
-
-  previousQues() {
-
+  getQuestionsByQuizId(id: number) {
+    this.quizService.getQuestionsByQuizId(id).subscribe({
+      next: (resp: any) => {
+        this.quizQuestions = resp;
+      },
+      error: (e)=> console.log(e)
+    })
   }
 
 

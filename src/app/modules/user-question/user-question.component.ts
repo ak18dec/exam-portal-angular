@@ -14,14 +14,41 @@ export class UserQuestionComponent implements OnInit {
 
   attemptedQuestions: number[] = [];
 
-  totalQuestions: number = 10;
-  currentQuesNumber: number = 1;
-  lastQuestion: boolean = true
+  totalQuestions: number = 0;
+  currentQuesNumber: number = 0;
+  lastQuestion: boolean = false
   firstQuestion: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.totalQuestions = this.questions.length;
+    this.currentQuesNumber = 0;
+    this.firstQuestion = true;
+    if(this.totalQuestions === 1) {
+      this.lastQuestion = true;
+    }
+    this.populateQuestion(0);
+  }
+
+  nextQues(){
+    this.firstQuestion = false;
+    this.populateQuestion(this.currentQuesNumber++);
+    if(this.currentQuesNumber === (this.totalQuestions - 1)) {
+      this.lastQuestion = true;
+    }
+  }
+
+  previousQues() {
+    this.lastQuestion = false;
+    this.populateQuestion(this.currentQuesNumber--);
+    if(this.currentQuesNumber === 0){
+      this.firstQuestion = true;
+    }
+  }
+
+  populateQuestion(quesIndex: number) {
+    this.currentQuestion = Object.assign({}, this.questions[quesIndex]);
   }
 
 }

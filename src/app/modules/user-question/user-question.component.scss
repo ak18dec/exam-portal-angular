@@ -21,9 +21,22 @@
     padding: 10px;
 }
 
-// .host {
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-// }
+.choices {
+    padding: 10px;
+}
 
+.choice-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+  
+.choice-radio-button {
+    margin: 5px;
+}
+
+// @media (min-width: 32rem) {
+//     .choice-radio-group {
+//         flex-direction: column;
+//     }
+// }

@@ -27,6 +27,13 @@ export class QuizService {
       console.log(response);
       return response;
     }
+
+    public getQuestionsByQuizId(id: number) {
+      let url = `${baseUrl}/quiz/${id}`;
+      let response =  this.http.get(url);
+      console.log(response);
+      return response;
+    }
   
     //CREATE APIs
   
