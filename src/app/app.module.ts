@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +32,7 @@ import { UserHomeModule } from './layouts/user-home/user-home.module';
     HomeModule,
     UserHomeModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -43,6 +43,7 @@ const routes: Routes = [
     path: 'admin',
     component: DefaultsComponent,
     canActivate: [AdminGuard],
+    data: { title: 'Admin'},
     children: [
       {
         path: '',
