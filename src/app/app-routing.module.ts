@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
-import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { LoginComponent } from './layouts/home/login/login.component';
 import { SignupComponent } from './layouts/home/signup/signup.component';
 import { CategoriesComponent } from './modules/categories/categories.component';
@@ -11,7 +10,6 @@ import { SubjectsComponent } from './modules/subjects/subjects.component';
 import { TopicsComponent } from './modules/topics/topics.component';
 import { DefaultsComponent } from './layouts/defaults/defaults.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { ProfileComponent } from './modules/profile/profile.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
 import { UserComponent } from './modules/users/user/user.component';
@@ -22,6 +20,8 @@ import { QuizComponent } from './modules/quiz/quiz.component';
 import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
+import { UserHomeModule } from './layouts/user-home/user-home.module';
+import { UserHomeComponent } from './layouts/user-home/user-home.component';
 
 const routes: Routes = [
   {
@@ -124,9 +124,19 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserDashboardComponent,
-    pathMatch: 'full',
-    canActivate: [UserGuard]
+    component: UserHomeComponent,
+    // pathMatch: 'full',
+    canActivate: [UserGuard],
+    children: [
+      {
+        path: '',
+        component: ComingSoonComponent
+      },
+      {
+        path: 'profile',
+        component: ComingSoonComponent
+      }
+    ]
   }
 ];
 

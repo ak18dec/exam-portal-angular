@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
+  @Input() showToggleOption: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) { }
 
@@ -28,7 +29,14 @@ export class HeaderComponent implements OnInit {
 
   account() {
     console.log('my account clicked')
-    this.router.navigate(['/admin/profile'])
+    if(this.loginService.getUserRole() === 'ADMIN'){
+      this.router.navigate(['/admin/profile'])
+    }else if(this.loginService.getUserRole() === 'BASIC'){
+      this.router.navigate(['/user/profile'])
+    }else {
+      this.loginService.logout();
+      this.router.navigate(['login']);
+    }
   }
 
 }
