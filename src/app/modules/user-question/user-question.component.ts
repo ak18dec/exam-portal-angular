@@ -12,12 +12,17 @@ export class UserQuestionComponent implements OnInit {
 
   currentQuestion: Question;
 
-  attemptedQuestions: number[] = [];
+  attemptedQuestions: Question[] = [];
 
   totalQuestions: number = 0;
   currentQuesNumber: number = 0;
   lastQuestion: boolean = false
   firstQuestion: boolean = true;
+
+  currentSelectedOptionId: number = -1;
+
+  activeQuestion: Question;
+
 
   constructor() { }
 
@@ -49,6 +54,10 @@ export class UserQuestionComponent implements OnInit {
 
   populateQuestion(quesIndex: number) {
     this.currentQuestion = Object.assign({}, this.questions[quesIndex]);
+  }
+
+  onOptionSelect() {
+    //this.attemptedQuestions.push(this.questions[this.currentQuesNumber]);
   }
 
 }

@@ -6,14 +6,23 @@
         </div>
         <mat-divider></mat-divider>
         <div class="choices">
-            <mat-radio-group aria-label="Select an option" class="choice-radio-group" color="primary">
+            <mat-radio-group aria-label="Select an option" class="choice-radio-group" color="primary"
+                [(ngModel)]="currentSelectedOptionId" (change)="onOptionSelect()">
                 <div class="group-1">
-                    <mat-radio-button value="1" class="choice-radio-button ">Option 1</mat-radio-button>
-                    <mat-radio-button value="2" class="choice-radio-button">Option 2</mat-radio-button>
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[0].id">
+                        {{ currentQuestion.questionChoices[0].description }}
+                    </mat-radio-button>
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[1].id">
+                        {{ currentQuestion.questionChoices[1].description }}
+                    </mat-radio-button>
                 </div>
                 <div class="group-2">
-                    <mat-radio-button value="3" class="choice-radio-button">Option 3</mat-radio-button>
-                    <mat-radio-button value="4" class="choice-radio-button">Option 4</mat-radio-button>
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[2].id">
+                        {{ currentQuestion.questionChoices[2].description }}
+                    </mat-radio-button>
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[3].id">
+                        {{ currentQuestion.questionChoices[3].description }}
+                    </mat-radio-button>
                 </div>
             </mat-radio-group>
         </div>
@@ -21,7 +30,7 @@
     <mat-card-footer class="ques-nav-section">
         <button mat-button color="primary" [disabled]="firstQuestion">Previous</button>
         <button mat-button color="primary">{{ lastQuestion ? 'Submit' : 'Next'}}</button>
-      </mat-card-footer>
+    </mat-card-footer>
 </mat-card>
 
 

@@ -29,7 +29,7 @@ export class QuizService {
     }
 
     public getQuestionsByQuizId(id: number) {
-      let url = `${baseUrl}/quiz/${id}`;
+      let url = `${baseUrl}/quiz/${id}/questions`;
       let response =  this.http.get(url);
       console.log(response);
       return response;
