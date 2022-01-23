@@ -20,6 +20,8 @@ import { InstructionsComponent } from './modules/instructions/instructions.compo
 import { InstructionComponent } from './modules/instructions/instruction/instruction.component';
 import { QuizComponent } from './modules/quiz/quiz.component';
 import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
+import { AdminGuard } from './guards/admin.guard';
+import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
   {
@@ -40,11 +42,11 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DefaultsComponent,
-    //canActivate: [AdminGuard],
+    canActivate: [AdminGuard],
     children: [
       {
         path: '',
-        component: DashboardComponent
+        component: ComingSoonComponent
       },
       {
         path: 'profile',
@@ -121,10 +123,10 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'user-dashboard',
+    path: 'user',
     component: UserDashboardComponent,
     pathMatch: 'full',
-    //canActivate: [UserGuard]
+    canActivate: [UserGuard]
   }
 ];
 

@@ -33,7 +33,7 @@ export class LoginService {
   public getUserRole() {
     //let usr = this.getUser();
     // return usr.authorities[0].authority;
-    return 'ADMIN';
+    return 'BASIC';
   }
 
   public isLoggedIn() {
