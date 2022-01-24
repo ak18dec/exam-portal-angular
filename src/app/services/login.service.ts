@@ -11,6 +11,7 @@ import baseUrl from './helper';
 export class LoginService {
 
   public loginStatusSubject = new Subject<boolean>();
+  public userRole: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +34,7 @@ export class LoginService {
   public getUserRole() {
     //let usr = this.getUser();
     // return usr.authorities[0].authority;
-    return 'BASIC';
+    return this.userRole;
   }
 
   public isLoggedIn() {
@@ -51,6 +52,7 @@ export class LoginService {
   }
 
   public storeUser(user: any){
+    this.userRole = user.authorities[0].authority;
     let user_lite = {
       userId: user.id,
       username: user.username,

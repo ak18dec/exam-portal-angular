@@ -29,9 +29,9 @@ export class HeaderComponent implements OnInit {
 
   account() {
     console.log('my account clicked')
-    if(this.loginService.getUserRole() === 'ADMIN'){
+    if(this.loginService.getUserRole() === 'ROLE_ADMIN'){
       this.router.navigate(['/admin/profile'])
-    }else if(this.loginService.getUserRole() === 'BASIC'){
+    }else if(this.loginService.getUserRole() === 'ROLE_NORMAL'){
       this.router.navigate(['/user/profile'])
     }else {
       this.loginService.logout();

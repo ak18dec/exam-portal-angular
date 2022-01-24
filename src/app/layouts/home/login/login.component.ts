@@ -139,13 +139,13 @@ export class LoginComponent implements OnInit {
                 this.loginService.storeUser(user);
                 console.log(user);
                 //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
-                if (this.loginService.getUserRole() === 'ADMIN') {
+                if (this.loginService.getUserRole() === 'ROLE_ADMIN') {
 
                   //admin dashboard
                   this.router.navigate(['admin']);
                   this.loginService.loginStatusSubject.next(true);
 
-                } else if (this.loginService.getUserRole() === 'BASIC') {
+                } else if (this.loginService.getUserRole() === 'ROLE_NORMAL') {
 
                   //basic user dashboard
                   this.router.navigate(['user']);
