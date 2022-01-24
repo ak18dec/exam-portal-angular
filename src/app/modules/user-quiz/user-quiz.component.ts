@@ -12,11 +12,12 @@ export class UserQuizComponent implements OnInit {
   quizQuestions: Question[] = [];
   
   @Input() quizId: number = -1;
+  dataLoaded: boolean = false;
   
   constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
-    // this.getQuestionsByQuizId(this.quizId);
+    this.getQuestionsByQuizId(this.quizId);
   }
 
   onTimeOver(event: boolean) {
@@ -32,6 +33,7 @@ export class UserQuizComponent implements OnInit {
     this.quizService.getQuestionsByQuizId(id).subscribe({
       next: (resp: any) => {
         this.quizQuestions = resp;
+        this.dataLoaded = true;
       },
       error: (e)=> console.log(e)
     })

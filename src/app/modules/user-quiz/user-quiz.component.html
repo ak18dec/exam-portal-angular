@@ -1,6 +1,6 @@
-<div class="main">
+<div class="main" *ngIf=dataLoaded>
     <div class="quiz">
-        <app-user-question [questions]="quizQuestions"></app-user-question>
+        <app-user-question [questions]="quizQuestions" (quizSubmit)="submit()"></app-user-question>
     </div>
 
     <div class="sidepanel">

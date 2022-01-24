@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-subtitle>Question {{ currentQuesNumber }} of {{ totalQuestions }}</mat-card-subtitle>
+    <mat-card-subtitle>Question {{ currentQuesNumber + 1 }} of {{ totalQuestions }}</mat-card-subtitle>
     <mat-card-content>
         <div class="content">
             <span [innerHTML]="currentQuestion.content"></span>
@@ -7,20 +7,24 @@
         <mat-divider></mat-divider>
         <div class="choices">
             <mat-radio-group aria-label="Select an option" class="choice-radio-group" color="primary"
-                [(ngModel)]="currentSelectedOptionId" (change)="onOptionSelect()">
+                [(ngModel)]="currentSelectedOptionId" (change)="onOptionSelect()" >
                 <div class="group-1">
-                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[0].id">
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[0].id" 
+                        [checked]="currentQuestion.questionChoices[0].id === currentSelectedOptionId">
                         {{ currentQuestion.questionChoices[0].description }}
                     </mat-radio-button>
-                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[1].id">
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[1].id"
+                        [checked]="currentQuestion.questionChoices[1].id === currentSelectedOptionId">
                         {{ currentQuestion.questionChoices[1].description }}
                     </mat-radio-button>
                 </div>
                 <div class="group-2">
-                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[2].id">
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[2].id"
+                        [checked]="currentQuestion.questionChoices[2].id === currentSelectedOptionId">
                         {{ currentQuestion.questionChoices[2].description }}
                     </mat-radio-button>
-                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[3].id">
+                    <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[3].id"
+                        [checked]="currentQuestion.questionChoices[3].id === currentSelectedOptionId">
                         {{ currentQuestion.questionChoices[3].description }}
                     </mat-radio-button>
                 </div>
@@ -28,8 +32,8 @@
         </div>
     </mat-card-content>
     <mat-card-footer class="ques-nav-section">
-        <button mat-button color="primary" [disabled]="firstQuestion">Previous</button>
-        <button mat-button color="primary">{{ lastQuestion ? 'Submit' : 'Next'}}</button>
+        <button mat-button color="primary" [disabled]="firstQuestion || submitted" (click)="previousQues()">Previous</button>
+        <button mat-button color="primary" (click)="lastQuestion ? onSubmit() : nextQues()" [disabled]="submitted">{{ lastQuestion ? 'Submit' : 'Next'}}</button>
     </mat-card-footer>
 </mat-card>
 
