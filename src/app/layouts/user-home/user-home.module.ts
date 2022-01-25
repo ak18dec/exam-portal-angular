@@ -10,6 +10,9 @@ import { UserQuestionComponent } from 'src/app/modules/user-question/user-questi
 import { QuestionTrackerComponent } from 'src/app/modules/question-tracker/question-tracker.component';
 import { UserQuizComponent } from 'src/app/modules/user-quiz/user-quiz.component';
 import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-question/quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
+import { UserAnalyticsComponent } from 'src/app/modules/user-analytics/user-analytics.component';
+import { UserQuizListComponent } from 'src/app/modules/user-quiz-list/user-quiz-list.component';
+import { UserReportsComponent } from 'src/app/modules/user-reports/user-reports.component';
 
 
 
@@ -21,7 +24,10 @@ import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-question/
     UserQuestionComponent,
     QuestionTrackerComponent,
     UserQuizComponent,
-    QuizSubmitConfirmDialogComponent
+    QuizSubmitConfirmDialogComponent,
+    UserAnalyticsComponent,
+    UserReportsComponent,
+    UserQuizListComponent,
   ],
   imports: [
     CommonModule,
