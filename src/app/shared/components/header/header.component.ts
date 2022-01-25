@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
   @Input() showToggleOption: boolean = false;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(public loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {}
 

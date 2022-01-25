@@ -6,7 +6,7 @@
         <!-- <span>APP LOGO</span> -->
         <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-start">
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL'">
             <ul fxLayout="row" fxLayoutGap="20px" class="user-menu">
                 <li>
                     <button mat-button [routerLink]="['/user/quizzes']" routerLinkActive="active">
