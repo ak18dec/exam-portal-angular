@@ -22,6 +22,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
 import { UserHomeModule } from './layouts/user-home/user-home.module';
 import { UserHomeComponent } from './layouts/user-home/user-home.component';
+import { UserQuizComponent } from './modules/user-quiz/user-quiz.component';
 
 const routes: Routes = [
   {
@@ -136,6 +137,23 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ComingSoonComponent
+      },
+      {
+        path: 'analytics',
+        component: ComingSoonComponent
+      },
+      {
+        path: 'reports',
+        component: ComingSoonComponent
+      },
+      {
+        path: 'quizzes',
+        component: ComingSoonComponent
+      },
+      {
+        path: 'quiz/:id',
+        pathMatch: 'full',
+        component: UserQuizComponent
       }
     ]
   }

@@ -18,6 +18,7 @@ export class UserQuizComponent implements OnInit {
   constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
+    this.quizId = 3;
     this.getQuestionsByQuizId(this.quizId);
   }
 

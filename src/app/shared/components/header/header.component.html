@@ -6,6 +6,26 @@
         <!-- <span>APP LOGO</span> -->
         <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-start">
+            <ul fxLayout="row" fxLayoutGap="20px" class="user-menu">
+                <li>
+                    <button mat-button [routerLink]="['/user/quizzes']" routerLinkActive="active">
+                        Quizzes
+                    </button>
+                </li>
+                <li>
+                    <button mat-button [routerLink]="['/user/analytics']" routerLinkActive="active">
+                        Analytics
+                    </button>
+                </li>
+                <li>
+                    <button mat-button [routerLink]="['/user/reports']" routerLinkActive="active">
+                        Reports
+                    </button>
+                </li>
+            </ul>
+        </div>
+
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
