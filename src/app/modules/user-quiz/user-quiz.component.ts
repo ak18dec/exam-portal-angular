@@ -13,21 +13,14 @@ export class UserQuizComponent implements OnInit {
   
   @Input() quizId: number = -1;
   dataLoaded: boolean = false;
-  
+
+
   constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
     this.getQuestionsByQuizId(this.quizId);
   }
 
-  onTimeOver(event: boolean) {
-    console.log(event);
-    this.submit();
-  }
-
-  submit() {
-    console.log('Quiz Submitted')
-  }
 
   getQuestionsByQuizId(id: number) {
     this.quizService.getQuestionsByQuizId(id).subscribe({

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
   selector: 'app-timer',
@@ -9,7 +10,7 @@ export class TimerComponent implements OnInit {
 
   @Input() message: string = 'Time Remaining';
 
-  @Input() timer: number = 10;
+  @Input() timer: number = 5;
 
   @Input() userclass: string = '';
 
@@ -17,10 +18,10 @@ export class TimerComponent implements OnInit {
 
   @Output() timeOver = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private timerService: TimerService) { }
 
   ngOnInit(): void {
-    // this.startTimer();
+    //this.startTimer();
   }
 
   formattedTime() {
@@ -43,7 +44,7 @@ export class TimerComponent implements OnInit {
   startTimer() {
     let t = window.setInterval(() => {
       if(this.timer <= 0){
-        this.timeOver.emit(true);
+        this.timerService.broadcastTimeUpEvent();
         clearInterval(t)
       }else{
         this.timer--;

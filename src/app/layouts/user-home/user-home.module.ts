@@ -9,6 +9,7 @@ import { TimerComponent } from 'src/app/modules/timer/timer.component';
 import { UserQuestionComponent } from 'src/app/modules/user-question/user-question.component';
 import { QuestionTrackerComponent } from 'src/app/modules/question-tracker/question-tracker.component';
 import { UserQuizComponent } from 'src/app/modules/user-quiz/user-quiz.component';
+import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-question/quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 
 
 
@@ -19,7 +20,8 @@ import { UserQuizComponent } from 'src/app/modules/user-quiz/user-quiz.component
     TimerComponent,
     UserQuestionComponent,
     QuestionTrackerComponent,
-    UserQuizComponent
+    UserQuizComponent,
+    QuizSubmitConfirmDialogComponent
   ],
   imports: [
     CommonModule,

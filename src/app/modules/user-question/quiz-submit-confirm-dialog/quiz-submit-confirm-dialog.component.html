@@ -1,0 +1,11 @@
+<!-- <h1 mat-dialog-title>Submit Quiz</h1> -->
+<div class="dialog-icon">
+    <mat-icon>pending_actions</mat-icon>
+</div>
+<div mat-dialog-content class="confirmation-message">
+    <h4>Are you sure, you want to submit the quiz?</h4>
+</div>
+<mat-dialog-actions class="dialog-buttons">
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" type="submit" [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+</mat-dialog-actions>

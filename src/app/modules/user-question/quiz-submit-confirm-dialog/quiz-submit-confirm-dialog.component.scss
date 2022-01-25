@@ -1,0 +1,15 @@
+.dialog-icon {
+    text-align: center;
+}
+
+.confirmation-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dialog-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}

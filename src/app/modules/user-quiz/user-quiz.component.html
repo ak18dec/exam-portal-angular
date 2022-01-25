@@ -1,11 +1,11 @@
 <div class="main" *ngIf=dataLoaded>
     <div class="quiz">
-        <app-user-question [questions]="quizQuestions" (quizSubmit)="submit()"></app-user-question>
+        <app-user-question [questions]="quizQuestions"></app-user-question>
     </div>
 
     <div class="sidepanel">
         <div class="timer">
-            <app-timer (timeOver)="onTimeOver($event)"></app-timer>
+            <app-timer></app-timer>
         </div>
         <br>
         <div class="tracker">

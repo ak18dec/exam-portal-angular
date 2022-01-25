@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/models/question';
+import { MatDialog } from '@angular/material/dialog';
+import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
+import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
   selector: 'app-user-question',
@@ -9,7 +12,6 @@ import { Question } from 'src/app/models/question';
 export class UserQuestionComponent implements OnInit {
 
   @Input() questions: Question[] = [];
-  @Output() quizSubmit = new EventEmitter<boolean>();
   submitted: boolean = false;
 
   currentQuestion: Question;
@@ -27,7 +29,7 @@ export class UserQuestionComponent implements OnInit {
   activeQuestion: Question;
 
 
-  constructor() { }
+  constructor(public dialog: MatDialog, private timerService: TimerService) { }
 
   ngOnInit(): void {
     this.totalQuestions = this.questions.length;
@@ -37,6 +39,9 @@ export class UserQuestionComponent implements OnInit {
       this.lastQuestion = true;
     }
     this.populateQuestion(0);
+    this.timerService.receiveTimeUpEvent().subscribe(resp=>{
+      this.onTimeComplete();
+    })
   }
 
   nextQues(){
@@ -72,10 +77,9 @@ export class UserQuestionComponent implements OnInit {
     console.log(this.questionAnswered)
   }
 
-  onSubmit() {
+  onSubmitConfirmDialog() {
     console.log('submit clicked')
-    this.submitted = true;
-    this.quizSubmit.emit(true);
+    this.openConfirmDialog();
   }
 
   saveMarkedQuestion() {
@@ -90,6 +94,32 @@ export class UserQuestionComponent implements OnInit {
         this.currentSelectedOptionId = -1;
       }
     }
+  }
+
+  submitQuiz() {
+    console.log('User Submit the Quiz')
+    this.submitted = true;
+
+  }
+
+  openConfirmDialog(): void {
+
+    let dialogRef = this.dialog.open(QuizSubmitConfirmDialogComponent, {
+      width: '330px',
+      height: '190px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.submitQuiz();
+      }
+    });
+  }
+
+  onTimeComplete() {
+    console.log('Time Completed')
+    console.log('Quiz Auto Submit')
+    this.submitQuiz();
   }
 
 }
