@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import baseUrl from './helper';
 import { Question } from '../models/question';
 import { Quiz } from '../models/quiz';
-import { unzip } from 'zlib';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
+
+  private quizzes : Quiz[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -83,5 +84,14 @@ export class QuizService {
     public deleteQuiz(id: number) {
       let url = `${baseUrl}/quiz/${id}`;
       return this.http.delete<boolean>(url);
+    }
+
+    //CACHE QUIZ LIST DATA FOR USER
+    storeQuizesInCache(data: Quiz[]) {
+      this.quizzes = Object.assign([], data);
+    }
+  
+    getQuizesFromCache(){
+      return this.quizzes;
     }
 }

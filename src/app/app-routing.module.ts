@@ -23,6 +23,7 @@ import { UserGuard } from './guards/user.guard';
 import { UserHomeModule } from './layouts/user-home/user-home.module';
 import { UserHomeComponent } from './layouts/user-home/user-home.component';
 import { UserQuizComponent } from './modules/user-quiz/user-quiz.component';
+import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.component';
 
 const routes: Routes = [
   {
@@ -148,7 +149,7 @@ const routes: Routes = [
       },
       {
         path: 'quizzes',
-        component: ComingSoonComponent
+        component: UserQuizListComponent
       },
       {
         path: 'quiz/:id',
