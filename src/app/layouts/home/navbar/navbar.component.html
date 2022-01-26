@@ -1,77 +1,26 @@
-<!-- <mat-toolbar color="primary">
-    <a
-      routerLink="/"
-      mat-icon-button class="example-icon" 
-      aria-label="Example icon-button with menu icon">
-     <mat-icon class="portal-logo-align">menu_book</mat-icon>
-    </a>
-   <h2>Exam Portal</h2>
-   <span class="example-spacer"></span>
-   <a
-    *ngIf="!userLoggedIn"
-    [routerLink]="'/login'"
-    mat-icon-button class="example-icon favorite-icon" 
-    aria-label="Example icon-button with heart icon">
-    <span  style="font-weight: bold;">Login</span>
-  </a>
-  
-   <a
-   *ngIf="!userLoggedIn"
-    [routerLink]="'/signup'"
-    mat-icon-button class="example-icon favorite-icon mr20 ml20" 
-    aria-label="Example icon-button with heart icon">
-    <span  style="font-weight: bold;">Register</span>
-  </a>
-  
-  <a
-   *ngIf="userLoggedIn" (click)="logout()"
-    mat-icon-button class="example-icon favorite-icon mr20 ml20" 
-    aria-label="Example icon-button with heart icon">
-    <span  style="font-weight: bold;">Logout</span>
-  </a>
-  
-  <a
-   *ngIf="userLoggedIn"
-    mat-icon-button class="example-icon favorite-icon mr20 ml20" 
-    aria-label="Example icon-button with heart icon">
-    <span  style="font-weight: bold;">{{ currentUser.username }} </span>
-  </a>
-   
-  </mat-toolbar> -->
+<mat-toolbar color="primary" style="background: none; color: #000;">
+  <mat-toolbar-row>
+    <object style="cursor: pointer; width: 300px;margin-top: 5px;" type="image/svg+xml"
+      data="assets/logo-2.svg"></object>
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="40px">
+        <li>
+          <button mat-icon-button routerLink="/login">
+            <mat-label>Login</mat-label>
+          </button>
+        </li>
+        <li>
+          <button mat-icon-button routerLink="/signup">
+            <mat-label>Register</mat-label>
+          </button>
+        </li>
+        <li>
+          <button mat-icon-button routerLink="/about">
+            <mat-label>About</mat-label>
+          </button>
+        </li>
+      </ul>
+    </div>
 
-  <mat-toolbar color="primary" style="background: none; color: #000;">
-    <mat-toolbar-row>
-        <!-- <button mat-icon-button routerLink="/">
-          <mat-icon>menu_book</mat-icon>
-        </button> -->
-        <!-- <button mat-icon-button routerLink="/">
-          <object style="cursor: pointer;" type="image/svg+xml" data="assets/portal-logo.svg"></object>
-        </button> -->
-        <div style="cursor: pointer; display: flex;justify-content: space-evenly;">
-          <object style="cursor: pointer; width: 30px; height: 30px;" type="image/svg+xml" data="assets/portal-logo.svg"></object>
-          <span style="margin-left: 5px; margin-right: 5px;"></span>
-          <h2 routerLink="/" style="margin-top: 3px;">Exam Portal</h2>
-        </div>
-
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-            <ul fxLayout="row" fxLayoutGap="40px">
-                <li>
-                    <button mat-icon-button routerLink="/login">
-                      <mat-label>Login</mat-label>
-                    </button>
-                </li>
-                <li>
-                  <button mat-icon-button routerLink="/signup">
-                    <mat-label>Register</mat-label>
-                  </button>
-                </li>
-                <li>
-                  <button mat-icon-button routerLink="/about">
-                    <mat-label>About</mat-label>
-                  </button>
-                </li>
-            </ul>
-        </div>
-
-    </mat-toolbar-row>
+  </mat-toolbar-row>
 </mat-toolbar>
