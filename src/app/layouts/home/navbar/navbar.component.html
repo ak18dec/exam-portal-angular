@@ -41,10 +41,17 @@
 
   <mat-toolbar color="primary" style="background: none; color: #000;">
     <mat-toolbar-row>
-        <button mat-icon-button routerLink="/">
+        <!-- <button mat-icon-button routerLink="/">
           <mat-icon>menu_book</mat-icon>
-        </button>
-        <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
+        </button> -->
+        <!-- <button mat-icon-button routerLink="/">
+          <object style="cursor: pointer;" type="image/svg+xml" data="assets/portal-logo.svg"></object>
+        </button> -->
+        <div style="cursor: pointer; display: flex;justify-content: space-evenly;">
+          <object style="cursor: pointer; width: 30px; height: 30px;" type="image/svg+xml" data="assets/portal-logo.svg"></object>
+          <span style="margin-left: 5px; margin-right: 5px;"></span>
+          <h2 routerLink="/" style="margin-top: 3px;">Exam Portal</h2>
+        </div>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="40px">
