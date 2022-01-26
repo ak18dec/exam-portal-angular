@@ -8,4 +8,13 @@
 .quiz {
     flex-grow: 0.99;
     height: 100%;
-}  
+}
+
+.sidepanel {
+    display: flex;
+    flex-direction: column;
+}
+
+.tracker {
+    flex-grow: 1;
+}
