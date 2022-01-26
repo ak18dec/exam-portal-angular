@@ -1,5 +1,4 @@
-<!-- <h1>Quizes</h1> -->
-<div>
+<div style="margin-top: 15px">
     <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput placeholder="Ex. English Quiz" (keyup)="applyFilter($event)">
@@ -32,6 +31,15 @@
         <ng-container matColumnDef="topic">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Topic</th>
             <td mat-cell *matCellDef="let row">{{ row.published ? 'Yes' : 'No' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="difficulty">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Difficulty</th>
+            <td mat-cell *matCellDef="let row" 
+                [ngClass]="{'difficulty-level-easy':row.proficiencyId === 1, 
+                            'difficulty-level-medium': row.proficiencyId === 2, 
+                            'difficulty-level-hard':row.proficiencyId === 3}">
+            {{ row.proficiencyId === 1 ? 'Easy' : (row.proficiencyId === 2 ? 'Medium' : 'Hard') }}</td>
         </ng-container>
 
         <ng-container matColumnDef="previousAttempts">

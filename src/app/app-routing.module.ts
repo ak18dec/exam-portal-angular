@@ -24,6 +24,8 @@ import { UserHomeModule } from './layouts/user-home/user-home.module';
 import { UserHomeComponent } from './layouts/user-home/user-home.component';
 import { UserQuizComponent } from './modules/user-quiz/user-quiz.component';
 import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.component';
+import { UserReportsComponent } from './modules/user-reports/user-reports.component';
+import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 
 const routes: Routes = [
   {
@@ -141,11 +143,11 @@ const routes: Routes = [
       },
       {
         path: 'analytics',
-        component: ComingSoonComponent
+        component: UserAnalyticsComponent
       },
       {
         path: 'reports',
-        component: ComingSoonComponent
+        component: UserReportsComponent
       },
       {
         path: 'quizzes',

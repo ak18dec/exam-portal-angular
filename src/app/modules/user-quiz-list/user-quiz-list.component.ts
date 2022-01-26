@@ -15,7 +15,7 @@ export class UserQuizListComponent implements OnInit {
 
   quizes: Quiz[]=[];
 
-  columns: string[] = ['id', 'title', 'description', 'subject', 'topic', 'previousAttempts', 'action'];
+  columns: string[] = ['id', 'title', 'description', 'subject', 'topic', 'difficulty', 'previousAttempts', 'action'];
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
