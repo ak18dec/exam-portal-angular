@@ -35,7 +35,7 @@
                         <input matInput formControlName="maxTime">
                     </mat-form-field>
                     <div>
-                        <button mat-button matStepperNext (click)="moveToQuestionsPage()">Next</button>
+                        <button mat-button matStepperNext (click)="moveToQuestionsPage()" type="button">Next</button>
                     </div>
                 </form>
             </mat-step>
@@ -53,8 +53,8 @@
                     </mat-selection-list>
 
                     <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext (click)="moveToInstructionsPage()">Next</button>
+                        <button mat-button matStepperPrevious type="button">Back</button>
+                        <button mat-button matStepperNext (click)="moveToInstructionsPage()" type="button">Next</button>
                     </div>
                 </form>
             </mat-step>
@@ -75,8 +75,8 @@
                     
                     
                     <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <button mat-button matStepperPrevious type="button">Back</button>
+                        <button mat-button matStepperNext type="button">Next</button>
                     </div>
                 </form>
             </mat-step>

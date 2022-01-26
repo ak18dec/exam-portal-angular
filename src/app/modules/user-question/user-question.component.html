@@ -32,8 +32,8 @@
         </div>
     </mat-card-content>
     <mat-card-footer class="ques-nav-section">
-        <button mat-button color="primary" [disabled]="firstQuestion || submitted" (click)="previousQues()">Previous</button>
-        <button mat-button color="primary" (click)="lastQuestion ? onSubmitConfirmDialog() : nextQues()" [disabled]="submitted">{{ lastQuestion ? 'Submit' : 'Next'}}</button>
+        <button type="button" mat-button color="primary" [disabled]="firstQuestion || submitted" (click)="previousQues()">Previous</button>
+        <button type="button" mat-button color="primary" (click)="lastQuestion ? onSubmitConfirmDialog() : nextQues()" [disabled]="submitted">{{ lastQuestion ? 'Submit' : 'Next'}}</button>
     </mat-card-footer>
 </mat-card>
 

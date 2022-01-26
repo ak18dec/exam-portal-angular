@@ -29,7 +29,7 @@
                 <mat-form-field appearance="standard">
                     <p>Password</p>
                     <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 0.8; vertical-align: -4vh; margin-right:5px">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 0.8; vertical-align: -4vh; margin-right:5px">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
@@ -74,7 +74,7 @@
 
                 <div class="form-buttons">
                     <button mat-flat-button color="primary" type="submit">{{ addUser ? 'Create' : 'Update'}}</button>
-                    <button mat-stroked-button >Cancel</button>
+                    <button mat-stroked-button type="button">Cancel</button>
                 </div>
             </mat-card-content>
         </form>

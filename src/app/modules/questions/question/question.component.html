@@ -6,10 +6,6 @@
     <br>
     <form (ngSubmit)="onFormSubmit(newQuestionForm)" #newQuestionForm="ngForm">
         <mat-card-content>
-            <!-- <p>Enter Question Content</p> -->
-            <!-- <mat-form-field appearance="outline">
-                <input matInput>
-            </mat-form-field> -->
             <mat-button-toggle-group name="proficiency" aria-label="Proficiency Level" [value]="question.proficiencyId">
                 <mat-button-toggle *ngFor="let proficiency of proficiencyList"
                     [value]="proficiency.id"
@@ -27,11 +23,6 @@
             <br>
 
             <p>Enter Options</p>
-            <!-- <mat-radio-group class="example-radio-group" color="primary">
-                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-                    {{season}}
-                </mat-radio-button>
-            </mat-radio-group> -->
             <div class="options-group">
                 <div class="options">
                     <mat-radio-button class="example-radio-button" color="primary" [value]="true" [checked]="choices[0].correct" (click)="selectCorrectOption(0)"></mat-radio-button>
@@ -80,7 +71,7 @@
             <div class="form-buttons">
                 <button mat-flat-button color="primary" type="submit">{{ addQuestion ? 'Add' : 'Update'}}</button>
                 <!-- <br> -->
-                <button mat-stroked-button (click)="resetForm()">Cancel</button>
+                <button mat-stroked-button (click)="resetForm()" type="button" >Cancel</button>
             </div>
         </mat-card-content>
     </form>
