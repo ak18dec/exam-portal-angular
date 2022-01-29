@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -17,20 +19,33 @@ export class ProfileComponent implements OnInit {
 
   emailPattern = "[A-Za-z0-9.'_%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
 
-  constructor(private userService: UserService, private fb: FormBuilder, private loginService: LoginService) { }
+  fullName: string = '';
+  email: string = '';
+  profilePicUrl: string= '';
 
-  ngOnInit() {
-    const currentUser = this.loginService.getUser();
-    this.userService.getUserByUsername(currentUser.username).subscribe(
-      (data) => {
-        this.profile = data;
-        this.createForm(this.profile);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-  }
+  selectedFile:File;
+  timer: number = 0;
+  success: boolean = false;
+
+  constructor(
+    private userService: UserService, 
+    private fb: FormBuilder, 
+    private loginService: LoginService,
+    private fileService: FileService
+    ) { }
+
+  // ngOnInit() {
+    // const currentUser = this.loginService.getUser();
+    // this.userService.getUserByUsername(currentUser.username).subscribe(
+    //   (data) => {
+    //     this.profile = data;
+    //     this.createForm(this.profile);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // )
+  // }
 
   createForm(oldData: any) {
     this.profileForm = this.fb.group({
@@ -72,5 +87,50 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+
+
+
+  ngOnInit(): void {
+    const user = this.loginService.getUser();
+    this.fullName = `${user.firstName} ${user.lastName}`;
+    this.email = user.email;
+    this.profilePicUrl = 'https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black-thumbnail.png';
+  }
+
+  uploadProfilePic() {
+    const fd = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name)
+    this.fileService.uploadImage(fd).subscribe(event => {
+      if(event.type === HttpEventType.UploadProgress){
+        // @ts-ignore: Object is possibly 'null'.
+        const progress = Math.round((event.loaded/event.total)*100);
+        console.log(`Upload Progress: ${progress} %`)
+      }else if(event.type === HttpEventType.Response){
+        console.log(event);
+      }
+    })
+  }
+
+  onFileSelected(event: any) {
+    console.log(event);
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile)
+    this.success = true;
+    this.startTimer();
+  }
+
+  startTimer() {
+    let t = window.setInterval(() => {
+      if(this.timer == 100){
+        this.success = false;
+        // this.profilePicUrl = 'https://cdn4.vectorstock.com/i/1000x1000/06/18/male-avatar-profile-picture-vector-10210618.jpg';
+        this.profilePicUrl = 'https://static.toiimg.com/thumb/resizemode-4,msid-76729536,width-1200,height-900/76729536.jpg';
+        clearInterval(t)
+      }else{
+        this.timer++;
+      }
+    }, 30)
   }
 }

@@ -26,6 +26,7 @@ import { UserQuizComponent } from './modules/user-quiz/user-quiz.component';
 import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.component';
 import { UserReportsComponent } from './modules/user-reports/user-reports.component';
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -55,7 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ComingSoonComponent
+        component: ProfileComponent
       },
       {
         path: 'users',

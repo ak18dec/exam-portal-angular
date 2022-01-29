@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
 <div class="bootstrap-wrapper">
     <div class="container">
       <div class="row mt50" *ngIf="profile">
@@ -53,6 +53,64 @@
               </form>
             </div>
       </div>
+    </div>
+  </div>
+</mat-card> -->
+<mat-card>
+  <mat-card-subtitle style="padding-left: 10px;">My Account Details</mat-card-subtitle>
+  <mat-divider></mat-divider>
+  <div class="container">
+    <div class="profile-card">
+      <!-- <mat-progress-bar *ngIf="success" mode="determinate" [value]="timer"></mat-progress-bar> -->
+      <br>
+      <img [src]="profilePicUrl" alt="profile_pic">
+      <input
+          style="display: none;" 
+          type="file"
+          (change)="onFileSelected($event)"
+          #fileInput>
+      <button type="button" mat-icon-button color="primary" (click)="fileInput.click()">
+          <mat-icon>add_a_photo</mat-icon>
+      </button>
+  </div> 
+    <div class="details">
+      <div class="name">
+        <mat-form-field>
+          <p>First Name</p>
+          <input matInput name="firstname">
+        </mat-form-field>
+        <span style="width: 30px; flex-grow: 1;"></span>
+        <mat-form-field>
+          <p>Last Name</p>
+          <input matInput name="lastname">
+        </mat-form-field>
+      </div>
+      <div class="username-password">
+        <mat-form-field>
+          <p>Username</p>
+          <input matInput name="username">
+        </mat-form-field>
+        <span style="width: 30px; flex-grow: 1;"></span>
+        <mat-form-field>
+          <p>Password</p>
+          <input matInput name="password">
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <p>Email</p>
+        <input matInput name="email">
+      </mat-form-field>
+      <mat-form-field>
+        <p>Phone</p>
+        <input matInput name="phone">
+      </mat-form-field>
+      <mat-form-field>
+        <p>Role</p>
+        <input matInput name="role" disabled=true value="ADMIN">
+      </mat-form-field>
+      <br>
+      <br>
+      <button mat-flat-button color="primary" style="width: 120px;">Save</button>
     </div>
   </div>
 </mat-card>
