@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
     lastName: '',
     email: '',
     phone: '',
-    role: 'basic',
+    role: 'ROLE_NORMAL',
     status: true
   };
 
@@ -69,7 +69,7 @@ export class UserComponent implements OnInit {
       (res: any) => {
         if(this.selectedUserId === res.id){
           this.editableUser = res;
-          this.editableUser.role = 'basic';
+          this.editableUser.role = res.userRoles[0]?.roleName;
           this.editableUser.status = true;
           this.initForm(this.editableUser);
           this.dataLoaded = true;

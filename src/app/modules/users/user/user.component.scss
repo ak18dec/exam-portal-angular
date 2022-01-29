@@ -1,22 +1,69 @@
-mat-icon {
-    padding: 20px;
-    margin-right: 15px;
-    vertical-align: -5vh;
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
 }
 
-.mat-radio-group {
-    vertical-align: -3.8vh;
+.mat-card {
+    width: 100%;
 }
+  
+.mat-card-content {
+    height: 100%;
+    width: 100%;
+}
+  
+.details {
+    margin-top: 30px;
+}
+  
+.name, .username-password {
+    display: flex;
+    flex-direction: column;
+}
+  
+mat-form-field {
+    width: 100%;
+    p {
+        font-size: smaller;
+        line-height: 0.2;
+        color: #0000008a;
+    }
+}
+  
+.profile-card {
+    text-align: center;
+    padding: 5px 20px 5px 20px;
+    width: 350px;
+    margin-top:40px;
+    img {
+        margin-top: 20px;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1.5px solid #3f51b5;
+    }
+}
+  
+.mat-progress-bar {
+    border-radius: 2px;
+}
+
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 16px;
 }
 
-mat-form-field {
-    margin-right: 20px;
-    padding: 0;
+.mat-radio-button {
+    width: 120px;
+}
+
+.radio-span {
     p {
-      font-size: smaller;
-      line-height: 0.2;
+        font-size: smaller;
+        line-height: 0.2;
+        color: #0000008a;
     }
 }
 
@@ -25,6 +72,7 @@ mat-form-field {
     flex-direction: column;
     margin-bottom: -0.5em;
     margin-left: -0.5em;
+    padding-bottom: 20px;
   
     button {
       margin-bottom: 0.5em;
@@ -33,7 +81,13 @@ mat-form-field {
   }
   
 @media (min-width: 32rem) {
+    .name, .username-password {
+        flex-direction: row;
+    }
     .form-buttons {
         flex-direction: row;
+        button {
+            flex-basis: 100%;
+        }
     }
 }

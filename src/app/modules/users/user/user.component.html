@@ -1,5 +1,4 @@
-
-<div class="new-user-form-container">
+<!-- <div class="new-user-form-container">
     
     <mat-card>
         <app-back [path]="'/admin/users'" [label]="'Back to list'"></app-back>
@@ -7,7 +6,6 @@
 
         <form [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm)" autocomplete="off" *ngIf="addUser || dataLoaded">
         <mat-card-content>
-                <mat-icon matSuffix>person</mat-icon>
                 <mat-form-field appearance="standard">
                     <p>First Name</p>
                     <input matInput formControlName="firstName">
@@ -20,7 +18,6 @@
 
                 <br>
 
-                <mat-icon matSuffix>alternate_email</mat-icon>
                 <mat-form-field appearance="standard">
                     <p>Email</p>
                     <input matInput formControlName="email">
@@ -36,7 +33,6 @@
 
                 <br>
 
-                <mat-icon matSuffix>manage_accounts</mat-icon>
                 <mat-form-field appearance="standard">
                     <p>Username</p>
                     <input matInput formControlName="username">
@@ -44,7 +40,6 @@
 
                 <br>
                 
-                <mat-icon matSuffix>call</mat-icon>
                 <mat-form-field appearance="standard">
                     <p>Phone</p>
                     <input matInput formControlName="phone">
@@ -53,7 +48,6 @@
                 <br>
 
                 <span class="role">
-                    <mat-icon matSuffix>security</mat-icon>
                     <mat-radio-group color="primary" formControlName="role">
                         <mat-radio-button [value]="'admin'">Admin</mat-radio-button>
                         <mat-radio-button [value]="'basic'">Basic</mat-radio-button>
@@ -62,7 +56,6 @@
 
                 <br>
                 <span class="status">
-                    <mat-icon matSuffix>tag_faces</mat-icon>
                     <mat-radio-group aria-label="Select Status" color="primary" formControlName="status">
                         <mat-radio-button [value]="true">Active</mat-radio-button>
                         <mat-radio-button [value]="false">Inactive</mat-radio-button>
@@ -79,6 +72,88 @@
             </mat-card-content>
         </form>
     </mat-card>
-</div>
+</div> -->
 
-  
+<mat-card>
+    <!-- <mat-card-subtitle style="padding-left: 10px;">My Account Details</mat-card-subtitle>
+    <mat-divider></mat-divider> -->
+    <app-back [path]="'/admin/users'" [label]="'Back to list'"></app-back>
+    <mat-card-title>{{ addUser ? 'Add New User' : 'Edit User Details'}}</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+    <div class="container">
+        <!-- <div class="profile-card">
+        <mat-progress-bar *ngIf="success" mode="determinate" [value]="timer"></mat-progress-bar>
+        <br>
+        <img [src]="profilePicUrl" alt="profile_pic">
+        <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput>
+        <button type="button" mat-icon-button color="primary" (click)="fileInput.click()">
+          <mat-icon>add_a_photo</mat-icon>
+        </button>
+      </div> -->
+        <div class="details">
+            <form [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm)" autocomplete="off"
+                *ngIf="addUser || dataLoaded" aria-autocomplete="none">
+                <div class="name">
+                    <mat-form-field>
+                        <p>First Name</p>
+                        <input matInput formControlName="firstName">
+                    </mat-form-field>
+                    <span style="width: 30px; flex-grow: 1;"></span>
+                    <mat-form-field>
+                        <p>Last Name</p>
+                        <input matInput formControlName="lastName">
+                    </mat-form-field>
+                </div>
+                <div class="username-password">
+                    <mat-form-field>
+                        <p>Username</p>
+                        <input matInput formControlName="username">
+                    </mat-form-field>
+                    <span style="width: 30px; flex-grow: 1;"></span>
+                    <mat-form-field>
+                        <p>Password</p>
+                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                            style="zoom: 0.8; vertical-align: -4vh; margin-right:5px">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <mat-form-field>
+                    <p>Email</p>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+                <mat-form-field>
+                    <p>Phone</p>
+                    <input matInput formControlName="phone">
+                </mat-form-field>
+                <br>
+                <br>
+                <span class="radio-span">
+                    <p>Role</p>
+                    <mat-radio-group color="primary" formControlName="role" class="radio-group">
+                        <mat-radio-button [value]="'ROLE_ADMIN'">Admin</mat-radio-button>
+                        <mat-radio-button [value]="'ROLE_NORMAL'">User</mat-radio-button>
+                    </mat-radio-group>
+                </span>
+                <br>
+                <br>
+                <span class="radio-span">
+                    <p>Status</p>
+                    <mat-radio-group aria-label="Select Status" color="primary" formControlName="status" class="radio-group">
+                        <mat-radio-button [value]="true">Active</mat-radio-button>
+                        <mat-radio-button [value]="false">Inactive</mat-radio-button>
+                    </mat-radio-group>
+                </span>
+                <br>
+                <br>
+                <div class="form-buttons">
+                    <button mat-flat-button color="primary" type="submit">{{ addUser ? 'Create' : 'Update'}}</button>
+                    <button mat-stroked-button type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</mat-card-content>
+</mat-card>
