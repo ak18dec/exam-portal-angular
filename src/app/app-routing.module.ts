@@ -140,7 +140,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ComingSoonComponent
+        component: ProfileComponent
       },
       {
         path: 'analytics',

@@ -13,6 +13,8 @@ import { HttpEventType } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
 
+  hide = true;
+
   profile: any;
 
   profileForm: FormGroup;
@@ -26,6 +28,7 @@ export class ProfileComponent implements OnInit {
   selectedFile:File;
   timer: number = 0;
   success: boolean = false;
+  role: string = '';
 
   constructor(
     private userService: UserService, 
@@ -35,16 +38,16 @@ export class ProfileComponent implements OnInit {
     ) { }
 
   // ngOnInit() {
-    // const currentUser = this.loginService.getUser();
-    // this.userService.getUserByUsername(currentUser.username).subscribe(
-    //   (data) => {
-    //     this.profile = data;
-    //     this.createForm(this.profile);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // )
+  //   const currentUser = this.loginService.getUser();
+  //   this.userService.getUserByUsername(currentUser.username).subscribe(
+  //     (data) => {
+  //       this.profile = data;
+  //       this.createForm(this.profile);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   )
   // }
 
   createForm(oldData: any) {
@@ -54,7 +57,9 @@ export class ProfileComponent implements OnInit {
       firstName: [oldData.firstName, [Validators.required, Validators.maxLength(25)]],
       lastName: [oldData.lastName, [Validators.maxLength(25)]],
       email: [oldData.email, [Validators.required, Validators.pattern(this.emailPattern)]],
-      phone: [oldData.phone]
+      phone: [oldData.phone],
+      role: [{value: this.role, disabled: true}],
+      profilePic: [this.profilePicUrl]
     });
   }
 
@@ -65,6 +70,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('lastName')?.setValue(this.profile.lastName);
     this.profileForm.get('email')?.setValue(this.profile.email);
     this.profileForm.get('phone')?.setValue(this.profile.phone);
+    this.profileForm.get('role')?.setValue(this.role)
   }
 
   updateProfile(updatedForm: FormGroup) {
@@ -93,10 +99,23 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const user = this.loginService.getUser();
-    this.fullName = `${user.firstName} ${user.lastName}`;
-    this.email = user.email;
+    const currentUser = this.loginService.getUser();
+    this.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
+    this.email = currentUser.email;
     this.profilePicUrl = 'https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black-thumbnail.png';
+    this.userService.getUserByUsername(currentUser.username).subscribe(
+      (data) => {
+        this.profile = data;
+        if(this.profile.userRoles[0].roleName){
+          this.role = this.profile.userRoles[0].roleName === 'ROLE_ADMIN' ? 'ADMIN' : 'USER';
+        }
+        this.createForm(this.profile);
+        console.log(this.profile)
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   uploadProfilePic() {
