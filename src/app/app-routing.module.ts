@@ -27,6 +27,7 @@ import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.c
 import { UserReportsComponent } from './modules/user-reports/user-reports.component';
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { UserQuizInstructionsComponent } from './modules/user-quiz-instructions/user-quiz-instructions.component';
 
 const routes: Routes = [
   {
@@ -155,10 +156,16 @@ const routes: Routes = [
         component: UserQuizListComponent
       },
       {
-        path: 'quiz/:id',
+        path: 'quiz/:id/start',
         pathMatch: 'full',
         component: UserQuizComponent
+      },
+      {
+        path: 'quiz/:id/instructions',
+        pathMatch: 'full',
+        component: UserQuizInstructionsComponent
       }
+
     ]
   }
 ];
