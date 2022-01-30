@@ -5,6 +5,18 @@
 .homepage-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 98%;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+
+}
+button{
+    margin: 6px 10px;
+    line-height: 42px;
 }
 
 .banner {
@@ -13,7 +25,10 @@
 .welcome-logo {
     width: 100%;
     height: 100%;
-    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (min-width: 32rem) {
