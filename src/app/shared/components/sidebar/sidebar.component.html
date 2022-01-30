@@ -1,35 +1,27 @@
 <mat-nav-list>
-    <!-- <div class="profile-card">
-        <mat-progress-bar *ngIf="success" mode="determinate" [value]="timer"></mat-progress-bar>
-        <br>
-        <img [src]="profilePicUrl" alt="profile_pic">
-        <input
-            style="display: none;" 
-            type="file"
-            (change)="onFileSelected($event)"
-            #fileInput>
-        <button type="button" mat-icon-button color="primary" (click)="fileInput.click()">
-            <mat-icon>add_a_photo</mat-icon>
-        </button>
-        <div class="header">
-            <h2>{{ fullName }}</h2>
-            <h4>{{ email }}</h4>
-        </div>
-    </div> -->
+    <span *ngIf="loginService.getUserRole() === 'ROLE_ADMIN'">
+        <h2 matSubheader>Pages</h2>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/">Dashboard</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/users">Users</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/subjects">Subjects</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/topics">Topics</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/questions">Questions</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/quizes">Quizes</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/instructions">Instructions</a>
+    </span>
 
-    <!-- <mat-divider></mat-divider> -->
+    <span *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
+        <h2 matSubheader>Pages</h2>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/quizzes">Quizzes</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/analytics">Analytics</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/reports">Reports</a>
+    </span>
 
-    <h2 matSubheader>Pages</h2>
-
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/">Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/users">Users</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/subjects">Subjects</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/topics">Topics</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/questions">Questions</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/quizes">Quizes</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/instructions">Instructions</a>
+    <span *ngIf="isMobileDevice">
+        <mat-divider></mat-divider>
     
-    <!-- <mat-divider></mat-divider> -->
-    
-    <!-- another menu -->
+        <h2 matSubheader>Menus</h2>
+        <a mat-list-item routerLinkActive="list-item-active" (click)="account()">My Account</a>
+        <a mat-list-item routerLinkActive="list-item-active" (click)="logout()">Logout</a>
+    </span>
 </mat-nav-list>

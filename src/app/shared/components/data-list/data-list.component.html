@@ -1,0 +1,7 @@
+<ng-container *ngIf="(isHandset$ | async) ? true : false">
+    <app-ep-list [data]="data"></app-ep-list>
+</ng-container>
+
+<ng-container *ngIf="(isHandset$ | async) ? false : true">
+    <app-ep-table></app-ep-table>
+</ng-container>

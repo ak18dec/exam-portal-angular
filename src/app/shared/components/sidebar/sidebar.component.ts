@@ -1,5 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -18,7 +19,13 @@ export class SidebarComponent implements OnInit {
   timer: number = 0;
   success: boolean = false;
 
-  constructor(private loginService: LoginService, private fileService: FileService) { }
+  @Input() isMobileDevice: boolean = false;
+
+  constructor(
+    public loginService: LoginService, 
+    private fileService: FileService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     const user = this.loginService.getUser();
@@ -60,6 +67,25 @@ export class SidebarComponent implements OnInit {
         this.timer++;
       }
     }, 30)
+  }
+
+  public logout(){
+    console.log('logout clicked');
+    this.loginService.logout();
+    this.loginService.loginStatusSubject.next(true);
+    this.router.navigate(['/']);
+  }
+
+  account() {
+    console.log('my account clicked')
+    if(this.loginService.getUserRole() === 'ROLE_ADMIN'){
+      this.router.navigate(['/admin/profile'])
+    }else if(this.loginService.getUserRole() === 'ROLE_NORMAL'){
+      this.router.navigate(['/user/profile'])
+    }else {
+      this.loginService.logout();
+      this.router.navigate(['login']);
+    }
   }
 
 }

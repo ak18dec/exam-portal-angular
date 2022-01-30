@@ -11,13 +11,16 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
   @Input() showToggleOption: boolean = false;
+  @Input() isMobileDevice: boolean = false;
 
   constructor(public loginService: LoginService, private router: Router) { }
 
+  toggleOpen: boolean = false;
   ngOnInit(): void {}
 
   toggleSideBar() {
     this.toggleSideBarForMe.emit()
+    this.toggleOpen = !this.toggleOpen;
   }
 
   public logout(){

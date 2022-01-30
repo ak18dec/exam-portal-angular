@@ -1,7 +1,21 @@
-<app-header [showToggleOption]="false"></app-header>
+<app-header [showToggleOption]="false" [isMobileDevice]="(isHandset$ | async) ? true : false"
+    (toggleSideBarForMe)="sideBarToggler($event)"></app-header>
 
-<div class="container">
-    <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="(isHandset$ | async) ? true : false">
+    <mat-drawer-container class="container">
+        <mat-drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="sideBarOpen" position="end">
+            <app-sidebar [isMobileDevice]="(isHandset$ | async) ? true : false"></app-sidebar>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</ng-container>
+
+<ng-container *ngIf="(isHandset$ | async) ? false : true">
+    <div class="container" style="padding: 10px;">
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>
 
 <app-footer></app-footer>

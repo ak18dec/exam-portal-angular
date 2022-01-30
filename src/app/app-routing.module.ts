@@ -28,6 +28,7 @@ import { UserReportsComponent } from './modules/user-reports/user-reports.compon
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { UserQuizInstructionsComponent } from './modules/user-quiz-instructions/user-quiz-instructions.component';
+import { DataListComponent } from './shared/components/data-list/data-list.component';
 
 const routes: Routes = [
   {
@@ -153,7 +154,8 @@ const routes: Routes = [
       },
       {
         path: 'quizzes',
-        component: UserQuizListComponent
+        // component: UserQuizListComponent
+        component: DataListComponent
       },
       {
         path: 'quiz/:id/start',

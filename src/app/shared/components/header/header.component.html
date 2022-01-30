@@ -6,7 +6,11 @@
         <!-- <span>APP LOGO</span> -->
         <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL'">
+        <button mat-icon-button (click)="toggleSideBar()" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
+            <mat-icon>{{ toggleOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && !isMobileDevice">
             <ul fxLayout="row" fxLayoutGap="20px" class="user-menu">
                 <li>
                     <button mat-button [routerLink]="['/user/quizzes']" routerLinkActive="active">
@@ -26,7 +30,7 @@
             </ul>
         </div>
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" *ngIf="!isMobileDevice">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
                     <button mat-icon-button>
