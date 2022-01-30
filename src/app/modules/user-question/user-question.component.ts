@@ -3,6 +3,7 @@ import { Question } from 'src/app/models/question';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 import { TimerService } from 'src/app/services/timer.service';
+import { TrackerService } from 'src/app/services/tracker.service';
 
 @Component({
   selector: 'app-user-question',
@@ -29,7 +30,7 @@ export class UserQuestionComponent implements OnInit {
   activeQuestion: Question;
 
 
-  constructor(public dialog: MatDialog, private timerService: TimerService) { }
+  constructor(public dialog: MatDialog, private timerService: TimerService, private trackerService: TrackerService) { }
 
   ngOnInit(): void {
     this.totalQuestions = this.questions.length;
@@ -39,8 +40,14 @@ export class UserQuestionComponent implements OnInit {
       this.lastQuestion = true;
     }
     this.populateQuestion(0);
-    this.timerService.receiveTimeUpEvent().subscribe(resp=>{
+    this.timerService.receiveTimeUpEvent().subscribe(resp => {
       this.onTimeComplete();
+    })
+
+    this.trackerService.receiveFinishTestEvent().subscribe(resp => {
+      if(resp){
+        this.onSubmitConfirmDialog();
+      }
     })
   }
 

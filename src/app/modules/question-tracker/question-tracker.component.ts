@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TrackerService } from 'src/app/services/tracker.service';
 
 @Component({
   selector: 'app-question-tracker',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionTrackerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private trackerService: TrackerService) { }
 
   ngOnInit(): void {
+  }
+
+  finishTest() {
+    console.log('finish test clicked')
+    this.trackerService.broadcastFinishTestEvent();
   }
 
 }
