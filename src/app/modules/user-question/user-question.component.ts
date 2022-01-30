@@ -93,14 +93,19 @@ export class UserQuestionComponent implements OnInit {
     if(this.questionAnswered.length < 1){
       this.currentSelectedOptionId = -1;
     }else {
-      const currQuesId = this.questions[this.currentQuesNumber].id;
-      const ques = this.questionAnswered.find(q => q.quesId === currQuesId);
+      const ques = this.findMarkedQues();
       if(ques){
         this.currentSelectedOptionId = ques.ansMarked;
       }else {
         this.currentSelectedOptionId = -1;
       }
     }
+  }
+
+  findMarkedQues() {
+    const currQuesId = this.questions[this.currentQuesNumber].id;
+    const ques = this.questionAnswered.find(q => q.quesId === currQuesId);
+    return ques;
   }
 
   submitQuiz() {
@@ -127,6 +132,12 @@ export class UserQuestionComponent implements OnInit {
     console.log('Time Completed')
     console.log('Quiz Auto Submit')
     this.submitQuiz();
+  }
+
+  unmarkCurrentQuestion() {
+    const quesToUnmark = this.findMarkedQues();
+    this.questionAnswered = [...this.questionAnswered.filter(q => q.quesId != quesToUnmark.quesId)];
+    this.currentSelectedOptionId = -1;
   }
 
 }
