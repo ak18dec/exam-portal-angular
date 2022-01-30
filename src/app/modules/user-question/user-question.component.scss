@@ -54,6 +54,12 @@
     flex-basis: 100%;
 }
 
+.unmark-btn {
+    float: right; 
+    cursor: pointer; 
+    color: #3f51b5;
+}
+
 // @media (min-width: 32rem) {
 //     .choice-radio-group {
 //         flex-direction: column;

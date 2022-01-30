@@ -1,7 +1,8 @@
 <mat-card>
     <mat-card-subtitle>
         Question {{ currentQuesNumber + 1 }} of {{ totalQuestions }}
-    <button mat-button style="float: right;" color="primary" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</button>
+    <!-- <button mat-button style="float: right;" color="primary" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</button> -->
+    <div class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</div>
     </mat-card-subtitle>
     <mat-card-content>
         <div class="content" style="margin-top: 20px;">
