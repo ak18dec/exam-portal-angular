@@ -34,7 +34,6 @@ export class DataListComponent implements OnInit {
     if(this.data.length < 1) {
       this.quizService.getQuizes().subscribe(
         (res: any) =>{
-          res[0].proficiencyId = 2;
           this.data = res;
           console.log(res)
           this.quizService.storeQuizesInCache(this.data);

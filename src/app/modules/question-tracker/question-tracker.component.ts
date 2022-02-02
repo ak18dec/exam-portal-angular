@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimerService } from 'src/app/services/timer.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 
 @Component({
@@ -8,9 +9,18 @@ import { TrackerService } from 'src/app/services/tracker.service';
 })
 export class QuestionTrackerComponent implements OnInit {
 
-  constructor(private trackerService: TrackerService) { }
+  timeUp: boolean = false;
+
+  constructor(
+    private trackerService: TrackerService,
+    private timerService: TimerService) { }
 
   ngOnInit(): void {
+    this.timerService.receiveTimeUpEvent().subscribe(resp => {
+      if(resp){
+        this.timeUp = true;
+      }
+    })
   }
 
   finishTest() {

@@ -1,16 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/models/question';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 import { TimerService } from 'src/app/services/timer.service';
 import { TrackerService } from 'src/app/services/tracker.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-question',
   templateUrl: './user-question.component.html',
   styleUrls: ['./user-question.component.scss']
 })
-export class UserQuestionComponent implements OnInit {
+export class UserQuestionComponent implements OnInit, OnDestroy {
 
   @Input() questions: Question[] = [];
   submitted: boolean = false;
@@ -29,6 +30,9 @@ export class UserQuestionComponent implements OnInit {
 
   activeQuestion: Question;
 
+  timerSubscription: Subscription;
+  trackerSubscription: Subscription;
+
 
   constructor(public dialog: MatDialog, private timerService: TimerService, private trackerService: TrackerService) { }
 
@@ -40,11 +44,11 @@ export class UserQuestionComponent implements OnInit {
       this.lastQuestion = true;
     }
     this.populateQuestion(0);
-    this.timerService.receiveTimeUpEvent().subscribe(resp => {
+    this.timerSubscription = this.timerService.receiveTimeUpEvent().subscribe(resp => {
       this.onTimeComplete();
     })
 
-    this.trackerService.receiveFinishTestEvent().subscribe(resp => {
+    this.trackerSubscription = this.trackerService.receiveFinishTestEvent().subscribe(resp => {
       if(resp){
         this.onSubmitConfirmDialog();
       }
@@ -138,6 +142,11 @@ export class UserQuestionComponent implements OnInit {
     const quesToUnmark = this.findMarkedQues();
     this.questionAnswered = [...this.questionAnswered.filter(q => q.quesId != quesToUnmark.quesId)];
     this.currentSelectedOptionId = -1;
+  }
+
+  ngOnDestroy(): void {
+      this.timerSubscription.unsubscribe();
+      this.trackerSubscription.unsubscribe();
   }
 
 }

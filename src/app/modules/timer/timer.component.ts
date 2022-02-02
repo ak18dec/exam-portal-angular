@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
@@ -10,7 +10,7 @@ export class TimerComponent implements OnInit {
 
   @Input() message: string = 'Time Remaining';
 
-  @Input() timer: number = 5;
+  @Input() timer: number = 0;
 
   @Input() userclass: string = '';
 
@@ -21,7 +21,8 @@ export class TimerComponent implements OnInit {
   constructor(private timerService: TimerService) { }
 
   ngOnInit(): void {
-    //this.startTimer();
+    this.timer = 5;
+    this.startTimer();
   }
 
   formattedTime() {
@@ -52,4 +53,7 @@ export class TimerComponent implements OnInit {
     }, 1000)
   }
 
+  stopTimer() {
+
+  }
 }

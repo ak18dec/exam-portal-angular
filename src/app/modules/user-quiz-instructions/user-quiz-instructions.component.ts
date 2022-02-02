@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
   selector: 'app-user-quiz-instructions',
@@ -7,11 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UserQuizInstructionsComponent implements OnInit {
 
-  @Input() quizId: number = 3;
+  quizId: number = -1;
 
-  constructor() { }
+  constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
-
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+      this.quizId = id;
+    })
+  }  
 }

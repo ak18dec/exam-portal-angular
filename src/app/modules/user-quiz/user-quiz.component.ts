@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Question } from 'src/app/models/question';
 import { QuizService } from 'src/app/services/quiz.service';
 
@@ -14,14 +15,24 @@ export class UserQuizComponent implements OnInit {
   @Input() quizId: number = -1;
   dataLoaded: boolean = false;
 
+  quizTime: number = -1;
 
-  constructor(private quizService: QuizService) { }
+  constructor(
+    private quizService: QuizService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.quizId = 3;
-    this.getQuestionsByQuizId(this.quizId);
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+      if(id){
+        this.quizId = id;
+        this.getQuestionsByQuizId(this.quizId);
+        this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
+        console.log(`ye h qiuz time ${this.quizTime}`)
+      }
+    })
+    
   }
-
 
   getQuestionsByQuizId(id: number) {
     this.quizService.getQuestionsByQuizId(id).subscribe({

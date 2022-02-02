@@ -94,4 +94,12 @@ export class QuizService {
     getQuizesFromCache(){
       return this.quizzes;
     }
+
+    getSelectedQuizTime(quizId: number) {
+      const selectedQuiz = this.quizzes.find(quiz => quiz.id === quizId)
+      if(selectedQuiz) {
+        return selectedQuiz.maxTime;
+      }
+      return -1;
+    }
 }

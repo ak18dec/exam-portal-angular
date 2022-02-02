@@ -3,5 +3,5 @@
 </ng-container>
 
 <ng-container *ngIf="(isHandset$ | async) ? false : true">
-    <app-ep-table></app-ep-table>
+    <app-ep-table [data]="data"></app-ep-table>
 </ng-container>
