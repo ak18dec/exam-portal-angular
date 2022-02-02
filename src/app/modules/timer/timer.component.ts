@@ -21,7 +21,7 @@ export class TimerComponent implements OnInit {
   constructor(private timerService: TimerService) { }
 
   ngOnInit(): void {
-    this.timer = 5;
+    this.timer = this.timer * 60;
     this.startTimer();
   }
 
