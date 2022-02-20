@@ -11,7 +11,7 @@ import baseUrl from './helper';
 export class LoginService {
 
   public loginStatusSubject = new Subject<boolean>();
-  public userRole: string = '';
+  public userRole: string = 'ROLE_NORMAL';
 
   constructor(private http: HttpClient) { }
 

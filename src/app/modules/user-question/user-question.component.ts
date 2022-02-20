@@ -5,6 +5,10 @@ import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/q
 import { TimerService } from 'src/app/services/timer.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { Subscription } from 'rxjs';
+import { UserAttemptedQuiz } from 'src/app/models/user-attempted-quiz';
+import { AttemptedQuiz } from 'src/app/models/attempted-quiz';
+import { AttemptedQuizQuestion } from 'src/app/models/attempted-quiz-question';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-user-question',
@@ -14,6 +18,7 @@ import { Subscription } from 'rxjs';
 export class UserQuestionComponent implements OnInit, OnDestroy {
 
   @Input() questions: Question[] = [];
+  @Input() quizMetaData: any;
   submitted: boolean = false;
 
   currentQuestion: Question;
@@ -34,7 +39,12 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   trackerSubscription: Subscription;
 
 
-  constructor(public dialog: MatDialog, private timerService: TimerService, private trackerService: TrackerService) { }
+  constructor(
+    public dialog: MatDialog, 
+    private timerService: TimerService, 
+    private trackerService: TrackerService,
+    private loginService: LoginService
+    ) { }
 
   ngOnInit(): void {
     this.totalQuestions = this.questions.length;
@@ -80,10 +90,13 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   }
 
   onOptionSelect() {
-    //this.attemptedQuestions.push(this.questions[this.currentQuesNumber]);
+    let currQues = this.questions[this.currentQuesNumber];
+    let usrAns = currQues.questionChoices.find(ch => ch.id === this.currentQuesNumber)?.description
     this.questionAnswered.push({
-      quesId: this.questions[this.currentQuesNumber].id,
-      ansMarked: this.currentSelectedOptionId
+      quesId: currQues.id,
+      quesContent: currQues.content,
+      ansMarked: this.currentSelectedOptionId,
+      ans: usrAns
     })
     console.log(this.questionAnswered)
   }
@@ -112,9 +125,47 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     return ques;
   }
 
-  submitQuiz() {
+  submitQuiz(timeLeft: number) {
     console.log('User Submit the Quiz')
     this.submitted = true;
+    console.log(this.questionAnswered)
+
+    // Prepare Data
+
+    let submittedQuestions: AttemptedQuizQuestion[] = [];
+
+    this.questionAnswered.forEach(ques => {
+      submittedQuestions.push({
+        id: ques.quesId,
+        question: ques.quesContent,
+        optionSelected: ques.ans
+      })
+    })
+
+    let attemptedQuiz: AttemptedQuiz = {
+      id: -1,
+      title: this.quizMetaData.title,
+      description: this.quizMetaData.description,
+      questions: submittedQuestions
+    }
+
+    let userData = this.loginService.getUser();
+
+    let payload: UserAttemptedQuiz = {
+      id: -1,
+      userId : userData.userId,
+      userFullName: `${userData.firstName} ${userData.lastName}`,
+      username: userData.username,
+      attemptedOn: new Date(),
+      proficiencyId: this.quizMetaData.proficiencyId,
+      maxMarks: this.quizMetaData.maxMarks,
+      maxTime: this.quizMetaData.maxTime,
+      userTime: this.quizMetaData.maxTime - timeLeft,
+      score: -1,
+      quiz: attemptedQuiz
+    }
+
+    console.log(payload);
 
   }
 
@@ -127,7 +178,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.submitQuiz();
+        this.submitQuiz(0);
       }
     });
   }
@@ -135,7 +186,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   onTimeComplete() {
     console.log('Time Completed')
     console.log('Quiz Auto Submit')
-    this.submitQuiz();
+    this.submitQuiz(0);
   }
 
   unmarkCurrentQuestion() {
