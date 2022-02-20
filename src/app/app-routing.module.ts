@@ -138,7 +138,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ComingSoonComponent
+        pathMatch: 'full',
+        redirectTo: 'quizzes'
       },
       {
         path: 'profile',
@@ -154,7 +155,6 @@ const routes: Routes = [
       },
       {
         path: 'quizzes',
-        // component: UserQuizListComponent
         component: DataListComponent
       },
       {

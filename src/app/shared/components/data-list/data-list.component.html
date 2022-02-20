@@ -1,7 +1,7 @@
 <ng-container *ngIf="(isHandset$ | async) ? true : false">
-    <app-ep-list [data]="data"></app-ep-list>
+    <app-ep-list [data]="data" *ngIf="dataLoaded"></app-ep-list>
 </ng-container>
 
 <ng-container *ngIf="(isHandset$ | async) ? false : true">
-    <app-ep-table [data]="data"></app-ep-table>
+    <app-ep-table [data]="data" *ngIf="dataLoaded"></app-ep-table>
 </ng-container>

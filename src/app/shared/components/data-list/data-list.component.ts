@@ -12,6 +12,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 export class DataListComponent implements OnInit {
 
   data: any[] = [];
+  dataLoaded: boolean = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -37,6 +38,7 @@ export class DataListComponent implements OnInit {
           this.data = res;
           console.log(res)
           this.quizService.storeQuizesInCache(this.data);
+          this.dataLoaded = true;
         },
         (error) => {
           console.log(error)
