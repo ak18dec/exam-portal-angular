@@ -17,6 +17,8 @@ export class UserQuizComponent implements OnInit {
 
   quizTime: number = -1;
 
+  quizMetaData: any;
+
   constructor(
     private quizService: QuizService,
     private route: ActivatedRoute) { }
@@ -29,9 +31,9 @@ export class UserQuizComponent implements OnInit {
         this.getQuestionsByQuizId(this.quizId);
         this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
         console.log(`ye h qiuz time ${this.quizTime}`)
+        this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
       }
     })
-    
   }
 
   getQuestionsByQuizId(id: number) {

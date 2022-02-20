@@ -102,4 +102,20 @@ export class QuizService {
       }
       return -1;
     }
+
+    getQuizMetaData(quizId: number) {
+      const selectedQuiz = this.quizzes.find(quiz => quiz.id === quizId)
+      if(selectedQuiz){
+        let metadata = {
+          id: quizId,
+          title: selectedQuiz.title,
+          description: selectedQuiz.description,
+          proficiencyId: selectedQuiz.proficiencyId,
+          maxMarks: selectedQuiz.maxMarks,
+          maxTime: selectedQuiz.maxTime
+        }
+        return metadata
+      }
+      return null;
+    }
 }

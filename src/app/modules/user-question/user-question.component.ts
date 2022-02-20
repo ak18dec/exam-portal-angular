@@ -9,6 +9,7 @@ import { UserAttemptedQuiz } from 'src/app/models/user-attempted-quiz';
 import { AttemptedQuiz } from 'src/app/models/attempted-quiz';
 import { AttemptedQuizQuestion } from 'src/app/models/attempted-quiz-question';
 import { LoginService } from 'src/app/services/login.service';
+import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
   selector: 'app-user-question',
@@ -35,15 +36,19 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
   activeQuestion: Question;
 
+  userQuizTimeTaken: number = -1;
+
   timerSubscription: Subscription;
   trackerSubscription: Subscription;
+  quizSubmitTimeSubscription: Subscription;
 
 
   constructor(
     public dialog: MatDialog, 
     private timerService: TimerService, 
     private trackerService: TrackerService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private usrQuizService: UserquizService
     ) { }
 
   ngOnInit(): void {
@@ -61,6 +66,14 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     this.trackerSubscription = this.trackerService.receiveFinishTestEvent().subscribe(resp => {
       if(resp){
         this.onSubmitConfirmDialog();
+      }
+    })
+
+    this.quizSubmitTimeSubscription = this.timerService.receiveQuizSubmitTimeEvent().subscribe(resp => {
+      if(resp) {
+        this.userQuizTimeTaken = resp;
+        console.log(this.userQuizTimeTaken)
+        this.quizSubmitTimeSubscription.unsubscribe();
       }
     })
   }
@@ -91,14 +104,13 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
   onOptionSelect() {
     let currQues = this.questions[this.currentQuesNumber];
-    let usrAns = currQues.questionChoices.find(ch => ch.id === this.currentQuesNumber)?.description
+    let usrAns = currQues.questionChoices.find(ch => ch.id === this.currentSelectedOptionId)?.description
     this.questionAnswered.push({
       quesId: currQues.id,
       quesContent: currQues.content,
       ansMarked: this.currentSelectedOptionId,
       ans: usrAns
     })
-    console.log(this.questionAnswered)
   }
 
   onSubmitConfirmDialog() {
@@ -128,10 +140,8 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   submitQuiz(timeLeft: number) {
     console.log('User Submit the Quiz')
     this.submitted = true;
-    console.log(this.questionAnswered)
 
     // Prepare Data
-
     let submittedQuestions: AttemptedQuizQuestion[] = [];
 
     this.questionAnswered.forEach(ques => {
@@ -160,7 +170,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
       proficiencyId: this.quizMetaData.proficiencyId,
       maxMarks: this.quizMetaData.maxMarks,
       maxTime: this.quizMetaData.maxTime,
-      userTime: this.quizMetaData.maxTime - timeLeft,
+      userTime: this.userQuizTimeTaken,
       score: -1,
       quiz: attemptedQuiz
     }
@@ -178,14 +188,15 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
+        console.log('Broadcasting Submit Event')
+        this.usrQuizService.broadcastQuizSubmitEvent();
         this.submitQuiz(0);
       }
     });
   }
 
   onTimeComplete() {
-    console.log('Time Completed')
-    console.log('Quiz Auto Submit')
+    console.log('Time Completed.Quiz Auto Submit: ')
     this.submitQuiz(0);
   }
 
@@ -198,6 +209,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
       this.timerSubscription.unsubscribe();
       this.trackerSubscription.unsubscribe();
+      this.quizSubmitTimeSubscription.unsubscribe();
   }
 
 }

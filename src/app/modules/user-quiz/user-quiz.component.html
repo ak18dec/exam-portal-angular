@@ -1,11 +1,11 @@
 <div class="main" *ngIf="dataLoaded">
     <div class="quiz">
-        <app-user-question [questions]="quizQuestions"></app-user-question>
+        <app-user-question [questions]="quizQuestions" [quizMetaData]="quizMetaData"></app-user-question>
     </div>
 
     <div class="sidepanel">
         <div class="timer">
-            <app-timer [timer]="quizTime"></app-timer>
+            <app-timer [totalTime]="quizTime"></app-timer>
         </div>
         <br>
         <div class="tracker">

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TimerService } from 'src/app/services/timer.service';
+import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
   selector: 'app-timer',
@@ -10,19 +12,22 @@ export class TimerComponent implements OnInit {
 
   @Input() message: string = 'Time Remaining';
 
-  @Input() timer: number = 0;
+  @Input() totalTime: number = 0;
 
-  @Input() userclass: string = '';
+  stopTimer: boolean = false;
 
-  stop: boolean = true;
+  quizSubmitSubscription: Subscription;
 
-  @Output() timeOver = new EventEmitter<boolean>();
+  timer: number = 0;
 
-  constructor(private timerService: TimerService) { }
+  constructor(private timerService: TimerService, private usrQuizService: UserquizService) { }
 
   ngOnInit(): void {
-    this.timer = this.timer * 60;
+    this.timer = this.totalTime * 60;
     this.startTimer();
+    this.quizSubmitSubscription = this.usrQuizService.receiveQuizSubmitEvent().subscribe(resp => {
+      this.stopTimer = true;
+    })
   }
 
   formattedTime() {
@@ -47,13 +52,16 @@ export class TimerComponent implements OnInit {
       if(this.timer <= 0){
         this.timerService.broadcastTimeUpEvent();
         clearInterval(t)
-      }else{
+      } else if(!this.stopTimer) {
         this.timer--;
+      } else{
+        console.log('Broadcasting User Time')
+        let userTime = (this.totalTime * 60) - this.timer;
+        console.log(userTime)
+        this.timerService.broadcastQuizSubmitTimeEvent(userTime);
+        this.quizSubmitSubscription.unsubscribe();
+        clearInterval(t)
       }
     }, 1000)
-  }
-
-  stopTimer() {
-
   }
 }

@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 export class TimerService {
 
   private timerSubject = new Subject<boolean>();
+  private quizSubmitTimeSubject = new Subject<number>();
 
   constructor() { }
 
@@ -16,5 +17,13 @@ export class TimerService {
 
   receiveTimeUpEvent() {
     return this.timerSubject.asObservable();
+  }
+
+  broadcastQuizSubmitTimeEvent(usertime: number) {
+    this.quizSubmitTimeSubject.next(usertime);
+  }
+
+  receiveQuizSubmitTimeEvent() {
+    return this.quizSubmitTimeSubject.asObservable();
   }
 }
