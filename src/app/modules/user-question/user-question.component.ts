@@ -153,7 +153,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     })
 
     let attemptedQuiz: AttemptedQuiz = {
-      id: -1,
+      id: this.quizMetaData.id,
       title: this.quizMetaData.title,
       description: this.quizMetaData.description,
       questions: submittedQuestions
@@ -176,6 +176,12 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     }
 
     console.log(payload);
+
+
+    this.usrQuizService.submitQuiz(payload).subscribe(resp =>{
+      console.log('Post Submission of Quiz:')
+      console.log(resp);
+    });
 
   }
 
