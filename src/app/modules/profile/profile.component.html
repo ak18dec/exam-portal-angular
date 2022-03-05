@@ -2,7 +2,7 @@
   <mat-card-subtitle style="padding-left: 10px;">My Account Details</mat-card-subtitle>
   <mat-divider></mat-divider>
   <div class="container">
-    <div class="profile-card">
+    <!-- <div class="profile-card">
       <mat-progress-bar *ngIf="success" mode="determinate" [value]="timer"></mat-progress-bar>
       <br>
       <img [src]="profilePicUrl" alt="profile_pic">
@@ -10,7 +10,7 @@
       <button type="button" mat-icon-button color="primary" (click)="fileInput.click()">
         <mat-icon>add_a_photo</mat-icon>
       </button>
-    </div>
+    </div> -->
     <div class="details" *ngIf="profile">
       <form [formGroup]="profileForm" (ngSubmit)="updateProfile(profileForm)" autocomplete="off"
         aria-autocomplete="none">

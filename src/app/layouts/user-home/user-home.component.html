@@ -1,9 +1,9 @@
 <app-header [showToggleOption]="false" [isMobileDevice]="(isHandset$ | async) ? true : false"
-    (toggleSideBarForMe)="sideBarToggler($event)"></app-header>
+    (toggleSideBarForMe)="sideBarToggler($event)" class="mat-elevation-z6 app-navbar"></app-header>
 
 <ng-container *ngIf="(isHandset$ | async) ? true : false">
     <mat-drawer-container class="container">
-        <mat-drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="sideBarOpen" position="end">
+        <mat-drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="sideBarOpen" position="start">
             <app-sidebar [isMobileDevice]="(isHandset$ | async) ? true : false"></app-sidebar>
         </mat-drawer>
         <mat-drawer-content>
