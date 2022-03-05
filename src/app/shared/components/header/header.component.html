@@ -3,7 +3,6 @@
         <button mat-icon-button (click)="toggleSideBar()" *ngIf="showToggleOption">
             <mat-icon>menu</mat-icon>
         </button>
-        <!-- <span>APP LOGO</span> -->
         <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
         <button mat-icon-button (click)="toggleSideBar()" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
@@ -20,11 +19,6 @@
                 <li>
                     <button mat-button [routerLink]="['/user/analytics']" routerLinkActive="active">
                         Analytics
-                    </button>
-                </li>
-                <li>
-                    <button mat-button [routerLink]="['/user/reports']" routerLinkActive="active">
-                        Reports
                     </button>
                 </li>
             </ul>

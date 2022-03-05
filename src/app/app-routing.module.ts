@@ -7,7 +7,6 @@ import { QuestionsComponent } from './modules/questions/questions.component';
 import { SubjectsComponent } from './modules/subjects/subjects.component';
 import { TopicsComponent } from './modules/topics/topics.component';
 import { DefaultsComponent } from './layouts/defaults/defaults.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
 import { UserComponent } from './modules/users/user/user.component';
@@ -18,14 +17,12 @@ import { QuizComponent } from './modules/quiz/quiz.component';
 import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
-import { UserHomeModule } from './layouts/user-home/user-home.module';
 import { UserHomeComponent } from './layouts/user-home/user-home.component';
 import { UserQuizComponent } from './modules/user-quiz/user-quiz.component';
 import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.component';
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { UserQuizInstructionsComponent } from './modules/user-quiz-instructions/user-quiz-instructions.component';
-import { DataListComponent } from './shared/components/data-list/data-list.component';
 
 const routes: Routes = [
   {
@@ -139,7 +136,7 @@ const routes: Routes = [
       },
       {
         path: 'quizzes',
-        component: DataListComponent
+        component: UserQuizListComponent
       },
       {
         path: 'quiz/:id/start',

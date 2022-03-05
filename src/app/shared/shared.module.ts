@@ -6,9 +6,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UtilsModule } from '../utils/utils.module';
 import { RouterModule } from '@angular/router';
 import { BackComponent } from './components/back/back.component';
-import { DataListComponent } from './components/data-list/data-list.component';
-import { EpTableComponent } from './components/data-list/ep-table/ep-table.component';
-import { EpListComponent } from './components/data-list/ep-list/ep-list.component';
 
 
 
@@ -17,10 +14,7 @@ import { EpListComponent } from './components/data-list/ep-list/ep-list.componen
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    BackComponent,
-    DataListComponent,
-    EpTableComponent,
-    EpListComponent
+    BackComponent
   ],
   imports: [
     CommonModule,
