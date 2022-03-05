@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultsComponent } from './defaults.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
-import { CategoriesComponent } from 'src/app/modules/categories/categories.component';
-import { GenresComponent } from 'src/app/modules/genres/genres.component';
 import { InstructionsComponent } from 'src/app/modules/instructions/instructions.component';
 import { QuestionsComponent } from 'src/app/modules/questions/questions.component';
 import { QuizComponent } from 'src/app/modules/quiz/quiz.component';
@@ -27,13 +25,11 @@ import { QuizFormComponent } from 'src/app/modules/quiz/quiz-form/quiz-form.comp
   declarations: [
     DefaultsComponent,
     DashboardComponent,
-    CategoriesComponent,
     InstructionsComponent,
     QuestionsComponent,
     TopicsComponent,
     QuizComponent,
     SubjectsComponent,
-    GenresComponent,
     ProfileComponent,
     UsersComponent,
     UserComponent,

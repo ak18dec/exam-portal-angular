@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
 import { LoginComponent } from './layouts/home/login/login.component';
 import { SignupComponent } from './layouts/home/signup/signup.component';
-import { CategoriesComponent } from './modules/categories/categories.component';
-import { GenresComponent } from './modules/genres/genres.component';
 import { QuestionsComponent } from './modules/questions/questions.component';
 import { SubjectsComponent } from './modules/subjects/subjects.component';
 import { TopicsComponent } from './modules/topics/topics.component';
@@ -24,7 +22,6 @@ import { UserHomeModule } from './layouts/user-home/user-home.module';
 import { UserHomeComponent } from './layouts/user-home/user-home.component';
 import { UserQuizComponent } from './modules/user-quiz/user-quiz.component';
 import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.component';
-import { UserReportsComponent } from './modules/user-reports/user-reports.component';
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { UserQuizInstructionsComponent } from './modules/user-quiz-instructions/user-quiz-instructions.component';
@@ -75,16 +72,8 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'genres',
-        component: GenresComponent
-      },
-      {
         path: 'subjects',
         component: SubjectsComponent
-      },
-      {
-        path: 'categories',
-        component: CategoriesComponent
       },
       {
         path: 'topics',
@@ -133,7 +122,6 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserHomeComponent,
-    // pathMatch: 'full',
     canActivate: [UserGuard],
     children: [
       {
@@ -148,10 +136,6 @@ const routes: Routes = [
       {
         path: 'analytics',
         component: UserAnalyticsComponent
-      },
-      {
-        path: 'reports',
-        component: UserReportsComponent
       },
       {
         path: 'quizzes',

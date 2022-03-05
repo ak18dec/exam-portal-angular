@@ -12,7 +12,6 @@ import { UserQuizComponent } from 'src/app/modules/user-quiz/user-quiz.component
 import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-question/quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 import { UserAnalyticsComponent } from 'src/app/modules/user-analytics/user-analytics.component';
 import { UserQuizListComponent } from 'src/app/modules/user-quiz-list/user-quiz-list.component';
-import { UserReportsComponent } from 'src/app/modules/user-reports/user-reports.component';
 import { UserQuizInstructionsComponent } from 'src/app/modules/user-quiz-instructions/user-quiz-instructions.component';
 
 
@@ -27,7 +26,6 @@ import { UserQuizInstructionsComponent } from 'src/app/modules/user-quiz-instruc
     UserQuizComponent,
     QuizSubmitConfirmDialogComponent,
     UserAnalyticsComponent,
-    UserReportsComponent,
     UserQuizListComponent,
     UserQuizInstructionsComponent
   ],
