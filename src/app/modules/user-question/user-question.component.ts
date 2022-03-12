@@ -138,9 +138,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   }
 
   submitQuiz(timeLeft: number) {
-    console.log('User Submit the Quiz')
     this.submitted = true;
-
     // Prepare Data
     let submittedQuestions: AttemptedQuizQuestion[] = [];
 
@@ -175,12 +173,9 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
       quiz: attemptedQuiz
     }
 
-    console.log(payload);
-
-
     this.usrQuizService.submitQuiz(payload).subscribe(resp =>{
-      console.log('Post Submission of Quiz:')
       console.log(resp);
+      this.usrQuizService.broadcastScoreGeneratedEvent(resp);
     });
 
   }

@@ -1,0 +1,10 @@
+<div>
+    <h1>User Score: </h1>
+</div>
+<div *ngIf="data">
+    <p>Score:{{ data.score }}</p>
+    <p>Correct Questions: {{ data.correctQuestions }}</p>
+    <p>Incorrect Questions: {{ data.incorrectQuestions }}</p>
+    <p>Total Attempted Questions: {{ data.totalAttemptedQuestions }}</p>
+    <p>Total Questions: {{ data.totalQuestions }}</p>
+</div>

@@ -12,6 +12,8 @@ export class UserquizService {
 
   private quizSubmitSubject = new Subject<boolean>();
 
+  private quizScoreGeneratedSubject = new Subject<any>();
+
   constructor(private http: HttpClient) { }
 
   //CREATE APIs
@@ -26,5 +28,13 @@ export class UserquizService {
 
   receiveQuizSubmitEvent() {
     return this.quizSubmitSubject.asObservable();
+  }
+
+  broadcastScoreGeneratedEvent(score: any) {
+    this.quizScoreGeneratedSubject.next(score);
+  }
+
+  receiveScoreGeneratedEvent() {
+    return this.quizScoreGeneratedSubject.asObservable();
   }
 }

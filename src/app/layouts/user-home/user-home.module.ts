@@ -13,6 +13,7 @@ import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-question/
 import { UserAnalyticsComponent } from 'src/app/modules/user-analytics/user-analytics.component';
 import { UserQuizListComponent } from 'src/app/modules/user-quiz-list/user-quiz-list.component';
 import { UserQuizInstructionsComponent } from 'src/app/modules/user-quiz-instructions/user-quiz-instructions.component';
+import { QuizScoreComponent } from 'src/app/modules/quiz-score/quiz-score.component';
 
 
 
@@ -27,7 +28,8 @@ import { UserQuizInstructionsComponent } from 'src/app/modules/user-quiz-instruc
     QuizSubmitConfirmDialogComponent,
     UserAnalyticsComponent,
     UserQuizListComponent,
-    UserQuizInstructionsComponent
+    UserQuizInstructionsComponent,
+    QuizScoreComponent
   ],
   imports: [
     CommonModule,
