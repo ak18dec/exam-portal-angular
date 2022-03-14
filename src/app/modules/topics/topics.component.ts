@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Topic } from 'src/app/models/topic';
-import { CategoryService } from 'src/app/services/category.service';
 import { TopicService } from 'src/app/services/topic.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
