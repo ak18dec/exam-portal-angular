@@ -1,23 +1,19 @@
-<div class="main">
-    <ng-container *ngIf="dataLoaded && !scoreGenerated">
-        <div class="quiz">
-            <app-user-question [questions]="quizQuestions" [quizMetaData]="quizMetaData"></app-user-question>
+<div class="main" *ngIf="dataLoaded && !scoreGenerated">
+    <div class="quiz">
+        <app-user-question [questions]="quizQuestions" [quizMetaData]="quizMetaData"></app-user-question>
+    </div>
+
+    <div class="sidepanel">
+        <div class="timer">
+            <app-timer [totalTime]="quizTime"></app-timer>
         </div>
-    
-        <div class="sidepanel">
-            <div class="timer">
-                <app-timer [totalTime]="quizTime"></app-timer>
-            </div>
-            <br>
-            <div class="tracker">
-                <app-question-tracker></app-question-tracker>
-            </div>
+        <br>
+        <div class="tracker">
+            <app-question-tracker></app-question-tracker>
         </div>
-    </ng-container>
-    
-    <ng-container *ngIf="scoreGenerated">
-        <app-quiz-score [data]="scoreDetails"></app-quiz-score>
-    </ng-container>
-    
-    
-</div>  
+    </div>
+</div>
+
+<div *ngIf="scoreGenerated" class="score-main">
+    <app-quiz-score [data]="scoreDetails"></app-quiz-score>
+</div>
