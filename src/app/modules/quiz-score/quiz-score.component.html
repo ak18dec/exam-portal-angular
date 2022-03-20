@@ -1,5 +1,5 @@
-<div class="main-div">
-    <mat-card class="example-card" *ngIf="data">
+<div class="main-div" *ngIf="data">
+    <mat-card class="example-card">
         <img style="display: block;margin: 0 auto;margin-bottom: 10px;" [src]="scoreIcon" />
         <mat-card-content>
             <p>Score: <strong>{{ data.score }}</strong></p>
