@@ -1,6 +1,6 @@
 <div class="main-div">
     <mat-card class="example-card" *ngIf="data">
-        <img style="display: block;margin: 0 auto;" [src]="scoreIcon" />
+        <img style="display: block;margin: 0 auto;margin-bottom: 10px;" [src]="scoreIcon" />
         <mat-card-content>
             <p>Score: <strong>{{ data.score }}</strong></p>
             <p>Correct Questions: <strong>{{ data.correctQuestions }}</strong></p>
@@ -9,4 +9,8 @@
             <p>Total Questions: <strong>{{ data.totalQuestions }}</strong></p>
         </mat-card-content>
     </mat-card>
+    <div class="btn-links">
+        <button mat-stroked-button color="primary" [routerLink]="['/certificate/', data.certificateId]">Certificate</button>
+        <button mat-stroked-button color="primary" routerLink="/user/quizzes">Back to Quizzes</button>
+    </div>
 </div>

@@ -19,6 +19,13 @@ export class QuizScoreComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { 
+    this.data = {
+      correctQuestions: 1,
+      incorrectQuestions: 0,
+      score: 20,
+      totalAttemptedQuestions: 1,
+      totalQuestions: 1
+    }
     if(this.data){
       if(this.data.score === 0){
         this.scoreIcon = this.failicon;

@@ -14,6 +14,7 @@ import { UserAnalyticsComponent } from 'src/app/modules/user-analytics/user-anal
 import { UserQuizListComponent } from 'src/app/modules/user-quiz-list/user-quiz-list.component';
 import { UserQuizInstructionsComponent } from 'src/app/modules/user-quiz-instructions/user-quiz-instructions.component';
 import { QuizScoreComponent } from 'src/app/modules/quiz-score/quiz-score.component';
+import { QuizCertificateComponent } from 'src/app/modules/quiz-certificate/quiz-certificate.component';
 
 
 
@@ -29,7 +30,8 @@ import { QuizScoreComponent } from 'src/app/modules/quiz-score/quiz-score.compon
     UserAnalyticsComponent,
     UserQuizListComponent,
     UserQuizInstructionsComponent,
-    QuizScoreComponent
+    QuizScoreComponent,
+    QuizCertificateComponent,
   ],
   imports: [
     CommonModule,
