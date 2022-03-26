@@ -1,15 +1,13 @@
 <app-navbar *ngIf="(isHandset$ | async) ? false : true"></app-navbar>
 
 <div class="homepage-container" *ngIf="(isHandset$ | async) ? false : true">
-    <object class="welcome-logo" type="image/svg+xml" data="assets/homewall.svg">
-    </object>
+    <object class="welcome-logo" type="image/svg+xml" data="assets/homewall.svg"></object>
 </div>
 
 <div class="homepage-container" *ngIf="(isHandset$ | async) ? true : false">
-        <object class="welcome-logo" type="image/svg+xml" data="assets/mobile/welcome-logo-3.svg">
-        </object>
+    <object class="welcome-logo" type="image/svg+xml" data="assets/mobile/welcome-logo.svg"></object>
     <div class="btns">
-        <button mat-flat-button color="primary" routerLink="/login">Login</button>
+        <button mat-raised-button color="primary" routerLink="/login">Login</button>
         <button mat-stroked-button color="primary" routerLink="/signup">Register</button>
     </div>
 </div>
