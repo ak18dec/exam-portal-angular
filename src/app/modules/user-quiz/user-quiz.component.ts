@@ -26,6 +26,12 @@ export class UserQuizComponent implements OnInit {
 
   scoreSubscription: Subscription;
 
+  message: string = 'Time Remaining';
+
+  timer: number = 0;
+
+  stopTimer: boolean = false;
+
   constructor(
     private quizService: QuizService,
     private route: ActivatedRoute,
@@ -39,6 +45,9 @@ export class UserQuizComponent implements OnInit {
         this.getQuestionsByQuizId(this.quizId);
         this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
         this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
+        this.timer = this.quizTime * 60;
+        this.stopTimer = false;
+        this.startTimer();
       }
     })
 
@@ -62,7 +71,26 @@ export class UserQuizComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.scoreSubscription.unsubscribe();
-}
+  }
+
+  startTimer() {
+    let t = window.setInterval(() => {
+      if(this.timer <= 0){
+        clearInterval(t)
+      } else if(!this.stopTimer) {
+        this.timer--;
+      } else{
+        let userTime = (this.quizTime * 60) - this.timer;
+        clearInterval(t)
+      }
+    }, 1000)
+  }
+
+  formattedTime() {
+    const min = Math.floor(this.timer/60)
+    const sec = this.timer - min*60;
+    return `${min}:${sec}`;
+  }
 
 
 }

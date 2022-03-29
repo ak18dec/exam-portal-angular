@@ -1,16 +1,9 @@
 <div class="main" *ngIf="dataLoaded && !scoreGenerated">
+    <div class="timer">
+        <p>Time: {{ formattedTime() }} / {{ quizTime }}:00</p>
+    </div>
     <div class="quiz">
         <app-user-question [questions]="quizQuestions" [quizMetaData]="quizMetaData"></app-user-question>
-    </div>
-
-    <div class="sidepanel">
-        <div class="timer">
-            <app-timer [totalTime]="quizTime"></app-timer>
-        </div>
-        <br>
-        <div class="tracker">
-            <app-question-tracker></app-question-tracker>
-        </div>
     </div>
 </div>
 

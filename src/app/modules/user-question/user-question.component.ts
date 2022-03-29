@@ -114,7 +114,6 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   }
 
   onSubmitConfirmDialog() {
-    console.log('submit clicked')
     this.openConfirmDialog();
   }
 
@@ -189,7 +188,6 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log('Broadcasting Submit Event')
         this.usrQuizService.broadcastQuizSubmitEvent();
         this.submitQuiz(0);
       }

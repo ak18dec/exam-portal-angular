@@ -1,14 +1,12 @@
 <mat-card>
-    <mat-card-subtitle>
-        Question {{ currentQuesNumber + 1 }} of {{ totalQuestions }}
-    <!-- <button mat-button style="float: right;" color="primary" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</button> -->
-    <div class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</div>
-    </mat-card-subtitle>
     <mat-card-content>
-        <div class="content" style="margin-top: 20px;">
+        <div class="content">
+            <div style="margin-bottom: 10px;">
+                Q {{ currentQuesNumber + 1 }}. <span class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</span>
+            </div>
             <span [innerHTML]="currentQuestion.content"></span>
+
         </div>
-        <mat-divider></mat-divider>
         <div class="choices">
             <mat-radio-group aria-label="Select an option" class="choice-radio-group" color="primary"
                 [(ngModel)]="currentSelectedOptionId" (change)="onOptionSelect()" >
@@ -40,7 +38,3 @@
         <button type="button" mat-button color="primary" [disabled]="lastQuestion || submitted" (click)="nextQues()">Next</button>
     </mat-card-footer>
 </mat-card>
-
-
-<!-- if want to remove elevation of mat card use the below class-->
-<!-- class="mat-elevation-z0 outline" -->

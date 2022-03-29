@@ -2,14 +2,22 @@
     padding: 10px;
     height: 93%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-top: 50px;
     padding-top: 20px;
 }
 
+.timer {
+    max-width: 200px;
+    text-align: center;
+    padding: none;
+    margin: auto;
+    font-size: small;
+}
+
 .quiz {
     flex-grow: 0.99;
-    height: 100%;
 }
 
 .sidepanel {

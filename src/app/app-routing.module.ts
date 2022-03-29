@@ -152,11 +152,6 @@ const routes: Routes = [
       }
 
     ]
-  },
-  {
-    path: 'certificate/:id',
-    component: QuizCertificateComponent,
-    pathMatch: 'full'
   }
 ];
 
