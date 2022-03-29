@@ -5,7 +5,9 @@ import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpEventType } from '@angular/common/http';
-
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -30,11 +32,19 @@ export class ProfileComponent implements OnInit {
   success: boolean = false;
   role: string = '';
 
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
+
   constructor(
     private userService: UserService, 
     private fb: FormBuilder, 
     private loginService: LoginService,
-    private fileService: FileService
+    private fileService: FileService,
+    private breakpointObserver: BreakpointObserver
     ) { }
 
   // ngOnInit() {

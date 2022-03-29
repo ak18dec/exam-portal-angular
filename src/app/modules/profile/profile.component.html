@@ -1,7 +1,7 @@
-<mat-card>
+<mat-card [ngClass]="{'user-portal-banner-align': role === 'USER'}">
   <mat-card-subtitle style="padding-left: 10px;">My Account Details</mat-card-subtitle>
   <mat-divider></mat-divider>
-  <div class="container">
+  <div class="container" >
     <!-- <div class="profile-card">
       <mat-progress-bar *ngIf="success" mode="determinate" [value]="timer"></mat-progress-bar>
       <br>
@@ -19,19 +19,23 @@
             <p>First Name</p>
             <input matInput formControlName="firstName">
           </mat-form-field>
-          <span style="width: 30px; flex-grow: 1;"></span>
-          <mat-form-field>
+          <span style="width: 10px; flex-grow: 0.5;" *ngIf="(isHandset$ | async) ? false : true"></span>
+          <mat-form-field *ngIf="(isHandset$ | async) ? false : true">
             <p>Last Name</p>
             <input matInput formControlName="lastName">
           </mat-form-field>
         </div>
+        <mat-form-field *ngIf="(isHandset$ | async) ? true : false"> 
+          <p>Last Name</p>
+          <input matInput formControlName="lastName">
+        </mat-form-field>
         <div class="username-password">
           <mat-form-field>
             <p>Username</p>
             <input matInput formControlName="username">
           </mat-form-field>
-          <span style="width: 30px; flex-grow: 1;"></span>
-          <mat-form-field>
+          <span style="width: 30px; flex-grow: 1;" *ngIf="(isHandset$ | async) ? false : true"></span>
+          <mat-form-field *ngIf="(isHandset$ | async) ? false : true">
             <p>Password</p>
             <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 0.8; vertical-align: -4vh; margin-right:5px">
@@ -39,6 +43,13 @@
             </button>
           </mat-form-field>
         </div>
+        <mat-form-field *ngIf="(isHandset$ | async) ? true : false">
+          <p>Password</p>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 1.2;vertical-align: -3vh;margin-right: 3px;">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
         <mat-form-field>
           <p>Email</p>
           <input matInput formControlName="email">
@@ -47,7 +58,7 @@
           <p>Phone</p>
           <input matInput formControlName="phone">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field *ngIf="role === 'ADMIN'">
           <p>Role</p>
           <input matInput formControlName="role">
         </mat-form-field>
