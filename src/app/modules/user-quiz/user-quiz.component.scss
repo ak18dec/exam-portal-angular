@@ -8,6 +8,12 @@
     padding-top: 20px;
 }
 
+.actions {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+
 .timer {
     max-width: 200px;
     text-align: center;

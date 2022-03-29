@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Question } from 'src/app/models/question';
 import { QuizService } from 'src/app/services/quiz.service';
+import { TrackerService } from 'src/app/services/tracker.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
@@ -26,8 +27,6 @@ export class UserQuizComponent implements OnInit {
 
   scoreSubscription: Subscription;
 
-  message: string = 'Time Remaining';
-
   timer: number = 0;
 
   stopTimer: boolean = false;
@@ -35,7 +34,8 @@ export class UserQuizComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private route: ActivatedRoute,
-    private usrQuizService: UserquizService) { }
+    private usrQuizService: UserquizService,
+    private trackerService: TrackerService,) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -76,6 +76,7 @@ export class UserQuizComponent implements OnInit {
   startTimer() {
     let t = window.setInterval(() => {
       if(this.timer <= 0){
+        this.stopTimer = true;
         clearInterval(t)
       } else if(!this.stopTimer) {
         this.timer--;
@@ -89,8 +90,15 @@ export class UserQuizComponent implements OnInit {
   formattedTime() {
     const min = Math.floor(this.timer/60)
     const sec = this.timer - min*60;
-    return `${min}:${sec}`;
+    let time = `${min}:${sec} / ${this.quizTime} :00`;
+    if(min <= 0 && sec <= 0){
+      time = 'Times Up';
+    }
+    return time;
   }
 
+  finishQuiz() {
+    this.trackerService.broadcastFinishTestEvent();
+  }
 
 }

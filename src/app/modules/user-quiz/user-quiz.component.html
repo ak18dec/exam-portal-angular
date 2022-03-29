@@ -1,6 +1,7 @@
 <div class="main" *ngIf="dataLoaded && !scoreGenerated">
-    <div class="timer">
-        <p>Time: {{ formattedTime() }} / {{ quizTime }}:00</p>
+    <div class="actions">
+        <p class="timer">Time: {{ formattedTime() }}</p>
+        <button type="button" mat-raised-button color="primary" (click)="finishQuiz()" [disabled]="stopTimer">Finish Quiz</button>
     </div>
     <div class="quiz">
         <app-user-question [questions]="quizQuestions" [quizMetaData]="quizMetaData"></app-user-question>

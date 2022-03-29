@@ -38,3 +38,6 @@
         <button type="button" mat-button color="primary" [disabled]="lastQuestion || submitted" (click)="nextQues()">Next</button>
     </mat-card-footer>
 </mat-card>
+<mat-card *ngIf="false">
+    <button type="button" mat-raised-button color="primary" (click)="openConfirmDialog()">End Test</button>
+</mat-card>
