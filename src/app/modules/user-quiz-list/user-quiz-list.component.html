@@ -19,7 +19,7 @@
       </mat-chip-list>
       
         <mat-divider></mat-divider>
-        <p style="font-size: smaller;padding-top: 10px;">20 Questions &bull; 30 mins
+        <p style="font-size: smaller;padding-top: 10px;">{{ item.questionIds.length }} Questions &bull; {{ item.maxTime }} mins
           <span style="float: right; color: #3f51b5; cursor: pointer;" (click)="startQuiz(item.id)">Start Quiz</span>
         </p>
       </mat-card>
