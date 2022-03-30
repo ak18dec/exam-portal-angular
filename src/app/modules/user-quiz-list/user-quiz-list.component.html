@@ -4,7 +4,7 @@
       <mat-icon matPrefix style="color: #00000061;">search</mat-icon>
       <input matInput autocomplete="off" style="margin-bottom: 5px;padding-left: 5px;" [formControl]="search">
     </mat-form-field>
-    <div *ngFor="let item of data">
+    <div *ngFor="let item of filteredList$ | async as filteredList">
       <mat-card style="margin-bottom: 8px;border-radius: 0;padding-bottom: 8px;">
         <h4 style="margin-bottom: 4px;">{{ item.title }}</h4>
         <p style="color: #0000008a;font-size: smaller;">{{ item.description }}</p>

@@ -1,13 +1,7 @@
-// import { Component, OnInit, ViewChild } from '@angular/core';
-// import { MatPaginator } from '@angular/material/paginator';
-// import { MatTableDataSource } from '@angular/material/table';
-// import { MatSort } from '@angular/material/sort';
-// import { Quiz } from 'src/app/models/quiz';
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { debounceTime, switchMap, startWith } from "rxjs/operators";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 @Component({
@@ -27,7 +21,7 @@ export class UserQuizListComponent implements OnInit {
     this.getAllQuizes();
   }
 
-  $search = this.search.valueChanges.pipe(
+  filteredList$ = this.search.valueChanges.pipe(
     startWith(null),
     debounceTime(200),
     switchMap((res: string) => {
@@ -52,6 +46,7 @@ export class UserQuizListComponent implements OnInit {
           console.log(res)
           this.quizService.storeQuizesInCache(this.data);
           this.dataLoaded = true;
+          this.filteredList$ = of(this.data);
         },
         (error) => {
           console.log(error)
