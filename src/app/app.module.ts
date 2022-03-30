@@ -12,12 +12,14 @@ import { DefaultsModule } from './layouts/defaults/defaults.module';
 import { UtilsModule } from './utils/utils.module';
 import { HomeModule } from './layouts/home/home.module';
 import { UserHomeModule } from './layouts/user-home/user-home.module';
+import { MaterialElevationDirective } from './directives/material-elevation.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ComingSoonComponent,
+    MaterialElevationDirective,
   ],
   imports: [
     BrowserModule,

@@ -23,8 +23,6 @@ import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.c
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { UserQuizInstructionsComponent } from './modules/user-quiz-instructions/user-quiz-instructions.component';
-import { QuizScoreComponent } from './modules/quiz-score/quiz-score.component';
-import { QuizCertificateComponent } from './modules/quiz-certificate/quiz-certificate.component';
 
 const routes: Routes = [
   {
