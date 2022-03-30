@@ -46,7 +46,7 @@ export class UserQuizListComponent implements OnInit {
           console.log(res)
           this.quizService.storeQuizesInCache(this.data);
           this.dataLoaded = true;
-          this.filteredList$ = of(this.data);
+          this.search.setValue('');
         },
         (error) => {
           console.log(error)
