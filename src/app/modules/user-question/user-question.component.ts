@@ -10,6 +10,7 @@ import { AttemptedQuiz } from 'src/app/models/attempted-quiz';
 import { AttemptedQuizQuestion } from 'src/app/models/attempted-quiz-question';
 import { LoginService } from 'src/app/services/login.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-user-question',
@@ -48,7 +49,8 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     private timerService: TimerService, 
     private trackerService: TrackerService,
     private loginService: LoginService,
-    private usrQuizService: UserquizService
+    private usrQuizService: UserquizService,
+    private locationStrategy: LocationStrategy
     ) { }
 
   ngOnInit(): void {
@@ -217,5 +219,14 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
       this.trackerSubscription.unsubscribe();
       this.quizSubmitTimeSubscription.unsubscribe();
   }
+
+  // will call on ngOnInit
+  preventBackButton() {
+    history.pushState(null, '', location.href);
+    this.locationStrategy.onPopState(()=>{
+      history.pushState(null,'', location.href);
+    });
+  }
+
 
 }
