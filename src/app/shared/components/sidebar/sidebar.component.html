@@ -12,15 +12,15 @@
 
     <span *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
         <h2 matSubheader>Pages</h2>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/quizzes">Quizzes</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/analytics">Analytics</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/quizzes" (click)="closeSideBar()">Quizzes</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/user/analytics" (click)="closeSideBar()">Analytics</a>
     </span>
 
     <span *ngIf="isMobileDevice">
         <mat-divider></mat-divider>
     
         <h2 matSubheader>Menus</h2>
-        <a mat-list-item routerLinkActive="list-item-active" (click)="account()">My Account</a>
-        <a mat-list-item routerLinkActive="list-item-active" (click)="logout()">Logout</a>
+        <a mat-list-item routerLinkActive="list-item-active" (click)="closeSideBar(); account();">My Account</a>
+        <a mat-list-item routerLinkActive="list-item-active" (click)="closeSideBar(); logout();">Logout</a>
     </span>
 </mat-nav-list>

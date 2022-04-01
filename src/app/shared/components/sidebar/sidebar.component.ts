@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +25,8 @@ export class SidebarComponent implements OnInit {
   constructor(
     public loginService: LoginService, 
     private fileService: FileService,
-    private router: Router
+    private router: Router,
+    private navService: NavService
     ) { }
 
   ngOnInit(): void {
@@ -86,6 +88,10 @@ export class SidebarComponent implements OnInit {
       this.loginService.logout();
       this.router.navigate(['login']);
     }
+  }
+
+  closeSideBar() {
+    this.navService.close();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-header',
@@ -13,25 +14,25 @@ export class HeaderComponent implements OnInit {
   @Input() showToggleOption: boolean = false;
   @Input() isMobileDevice: boolean = false;
 
-  constructor(public loginService: LoginService, private router: Router) { }
+  constructor(
+    public loginService: LoginService, 
+    private router: Router,
+    public navService: NavService
+    ) { }
 
-  toggleOpen: boolean = false;
   ngOnInit(): void {}
 
   toggleSideBar() {
-    this.toggleSideBarForMe.emit()
-    this.toggleOpen = !this.toggleOpen;
+    this.navService.toggleOpenIcon = !this.navService.toggleOpenIcon;
   }
 
   public logout(){
-    // console.log('logout clicked');
     this.loginService.logout();
     this.loginService.loginStatusSubject.next(true);
     this.router.navigate(['/']);
   }
 
   account() {
-    // console.log('my account clicked')
     if(this.loginService.getUserRole() === 'ROLE_ADMIN'){
       this.router.navigate(['/admin/profile'])
     }else if(this.loginService.getUserRole() === 'ROLE_NORMAL'){

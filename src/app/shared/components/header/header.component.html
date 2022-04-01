@@ -6,7 +6,7 @@
         <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
         <button mat-icon-button (click)="toggleSideBar()" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
-            <mat-icon>{{ toggleOpen ? 'close' : 'menu' }}</mat-icon>
+            <mat-icon>{{ navService.toggleOpenIcon ? 'close' : 'menu' }}</mat-icon>
         </button>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && !isMobileDevice">
