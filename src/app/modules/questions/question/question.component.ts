@@ -85,7 +85,7 @@ export class QuestionComponent implements OnInit {
             this.topics.push(Object.assign({}, d));
           }
         });
-        console.log(this.topics);
+        // console.log(this.topics);
       },
       (error)=>{
         // this._snackBar.open('Error while fetching topics list','',{
@@ -194,7 +194,7 @@ export class QuestionComponent implements OnInit {
 
       this.questionService.updateQuestion(updatedQues, this.selectedQuestionId).subscribe(
         (res: any)=> {
-          console.log(`Question Details Updated Successfully for Ques ID ${editableQuesId} and Selected Ques ID ${this.selectedQuestionId}`)
+          // console.log(`Question Details Updated Successfully for Ques ID ${editableQuesId} and Selected Ques ID ${this.selectedQuestionId}`)
         },
         (error) => {
           console.log(error)

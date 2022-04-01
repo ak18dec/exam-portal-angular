@@ -31,7 +31,7 @@ export class UserHomeComponent implements OnInit {
 
   sideBarToggler(event: any){
     this.sideBarOpen = !this.sideBarOpen;
-    console.log(this.sideBarOpen)
+    // console.log(this.sideBarOpen)
   }
 
 }

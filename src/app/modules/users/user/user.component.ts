@@ -130,7 +130,7 @@ export class UserComponent implements OnInit {
   
       this.userService.updateUser(this.editableUser, this.selectedUserId).subscribe(
         (res: any)=> {
-          console.log(`User Details Updated Successfully for User ID ${editableUserId} and Selected User ID ${this.selectedUserId}`)
+          // console.log(`User Details Updated Successfully for User ID ${editableUserId} and Selected User ID ${this.selectedUserId}`)
         },
         (error) => {
           console.log(error)

@@ -24,7 +24,7 @@ export class QuestionTrackerComponent implements OnInit {
   }
 
   finishTest() {
-    console.log('finish test clicked')
+    // console.log('finish test clicked')
     this.trackerService.broadcastFinishTestEvent();
   }
 

@@ -72,7 +72,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     this.quizSubmitTimeSubscription = this.timerService.receiveQuizSubmitTimeEvent().subscribe(resp => {
       if(resp) {
         this.userQuizTimeTaken = resp;
-        console.log(this.userQuizTimeTaken)
+        // console.log(this.userQuizTimeTaken)
         this.quizSubmitTimeSubscription.unsubscribe();
       }
     })
@@ -180,7 +180,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     }
 
     this.usrQuizService.submitQuiz(payload).subscribe(resp =>{
-      console.log(resp);
+      // console.log(resp);
       this.usrQuizService.broadcastScoreGeneratedEvent(resp);
     });
 
@@ -202,7 +202,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   }
 
   onTimeComplete() {
-    console.log('Time Completed.Quiz Auto Submit: ')
+    // console.log('Time Completed.Quiz Auto Submit: ')
     this.submitQuiz(0);
   }
 

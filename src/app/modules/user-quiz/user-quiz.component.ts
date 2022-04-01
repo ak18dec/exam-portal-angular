@@ -32,6 +32,10 @@ export class UserQuizComponent implements OnInit {
   stopTimer: boolean = false;
   loadInstructions: boolean = true;
 
+  eachQuestionWeightage: number = 0;
+
+  totalTime: string;
+
   constructor(
     private quizService: QuizService,
     private route: ActivatedRoute,
@@ -58,16 +62,20 @@ export class UserQuizComponent implements OnInit {
   prepareQuiz(id: number) {
     this.getQuestionsByQuizId(this.quizId);
     this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
+    if(this.quizTime) {
+      this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
+    }
     this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
     this.timer = this.quizTime * 60;
     this.stopTimer = false;
-    this.startTimer();
+    
   }
 
   getQuestionsByQuizId(id: number) {
     this.quizService.getQuestionsByQuizId(id).subscribe({
       next: (resp: any) => {
         this.quizQuestions = resp;
+        this.eachQuestionWeightage = (this.quizMetaData.maxMarks)/(this.quizQuestions.length);
         this.dataLoaded = true;
       },
       error: (e)=> console.log(e)
@@ -95,7 +103,27 @@ export class UserQuizComponent implements OnInit {
   formattedTime() {
     const min = Math.floor(this.timer/60)
     const sec = this.timer - min*60;
-    let time = `${min}:${sec} / ${this.quizTime}:00`;
+    let time = '';
+    let minStr = '';
+    let secStr = '';
+    if(min > 0 && min < 10){
+      minStr = `0${min}`;
+    }else if(min === 0){
+      minStr = `00`;
+    }else {
+      minStr = `${min}`;
+    }
+
+    if(sec > 0 && sec < 10){
+      secStr = `0${sec}`;
+    }else if(sec === 0){
+      secStr = `00`;
+    }else {
+      secStr = `${sec}`;
+    }
+    
+    time = `${minStr}:${secStr} / ${this.totalTime}`;
+
     if(min <= 0 && sec <= 0){
       time = 'Times Up';
     }
@@ -108,6 +136,7 @@ export class UserQuizComponent implements OnInit {
 
   startQuiz() {
     this.loadInstructions = false;
+    this.startTimer();
   }
 
 }

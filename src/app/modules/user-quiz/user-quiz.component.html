@@ -9,15 +9,25 @@
               <mat-divider></mat-divider>
               <br>
               <mat-card-content>
+                <h3>Important Instructions</h3>
                 <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </li>
-                    <li>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Epsum factorial non deposit quid pro quo hic escorol. </li>
-                    <li>Souvlaki ignitus carborundum e pluribus unum. </li>
-                    <li>Defacto lingo est igpay atinlay. Marquee selectus non provisio incongruous feline nolo contendre. </li>
-                    <li>Quote meon an estimate et non interruptus stadium. </li>
-                    <li>Sic tempus fugit esperanto hiccup estrogen. Glorious baklava ex librus hup hey ad infinitum. </li>
-                    <li>Epsum factorial non deposit quid pro quo hic escorol. </li>
-                  </ul>
+                    <li>This quiz is only for practice purpose.</li>
+                    <li>You can attempt the quiz any number of times.</li>
+                    <li>You have to submit quiz within <strong>{{ quizTime }} minutes.</strong></li>
+                    <li>There are <strong>{{ quizQuestions.length }} questions</strong> in this quiz.</li>
+                    <li>Each question carries <strong>{{ eachQuestionWeightage }} marks.</strong></li>
+                    <li>All questions are of Single Choice MCQ Type.</li>
+                </ul>
+                <br>
+                <h3>Attempting Quiz</h3>
+                <ul>
+                    <li>Click <strong>Start Quiz</strong> button to start the quiz</li>
+                    <li>Timer will start the moment you click on <strong>Start Quiz</strong> button</li>
+                    <li>You cannot resume the quiz, if interrupted due to any reason</li>
+                    <li>Click on <strong>Finish Quiz</strong> button to submit the quiz</li>
+                    <li>Quiz will be auto submit if time expires.</li>
+                    <li>Score will be generated after submission of quiz.</li>
+                </ul>
                   <button class="start-quiz" mat-flat-button color="primary" (click)="startQuiz()">Start Quiz</button>
               </mat-card-content>
         </mat-card>

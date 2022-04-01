@@ -97,7 +97,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(updatedUser, this.profile.id).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
       },
       (error) => {
         console.log(error);
@@ -120,7 +120,7 @@ export class ProfileComponent implements OnInit {
           this.role = this.profile.userRoles[0].roleName === 'ROLE_ADMIN' ? 'ADMIN' : 'USER';
         }
         this.createForm(this.profile);
-        console.log(this.profile)
+        // console.log(this.profile)
       },
       (error) => {
         console.log(error);
@@ -135,17 +135,17 @@ export class ProfileComponent implements OnInit {
       if(event.type === HttpEventType.UploadProgress){
         // @ts-ignore: Object is possibly 'null'.
         const progress = Math.round((event.loaded/event.total)*100);
-        console.log(`Upload Progress: ${progress} %`)
+        // console.log(`Upload Progress: ${progress} %`)
       }else if(event.type === HttpEventType.Response){
-        console.log(event);
+        // console.log(event);
       }
     })
   }
 
   onFileSelected(event: any) {
-    console.log(event);
+    // console.log(event);
     this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile)
+    // console.log(this.selectedFile)
     this.success = true;
     this.startTimer();
   }

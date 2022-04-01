@@ -55,9 +55,9 @@ export class TimerComponent implements OnInit {
       } else if(!this.stopTimer) {
         this.timer--;
       } else{
-        console.log('Broadcasting User Time')
+        // console.log('Broadcasting User Time')
         let userTime = (this.totalTime * 60) - this.timer;
-        console.log(userTime)
+        // console.log(userTime)
         this.timerService.broadcastQuizSubmitTimeEvent(userTime);
         this.quizSubmitSubscription.unsubscribe();
         clearInterval(t)

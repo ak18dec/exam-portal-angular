@@ -113,7 +113,7 @@ export class InstructionComponent implements OnInit {
 
       this.instructionService.updateInstruction(updatedIns, this.selectedInstructionId).subscribe(
         (res: any)=> {
-          console.log(`Instruction Details Updated Successfully for Ins ID ${editableInsId} and Selected Ins ID ${this.selectedInstructionId}`)
+          // console.log(`Instruction Details Updated Successfully for Ins ID ${editableInsId} and Selected Ins ID ${this.selectedInstructionId}`)
         },
         (error) => {
           console.log(error)

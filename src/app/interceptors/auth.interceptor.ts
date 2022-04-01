@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
         
         const token = this.loginService.getToken();
 
-        console.log(`token fetched from local storage is ${token}`)
+        // console.log(`token fetched from local storage is ${token}`)
         
         let authReq = req;
 

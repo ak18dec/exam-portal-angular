@@ -35,7 +35,7 @@ export class QuizComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.quizes);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        console.log(this.quizes)
+        // console.log(this.quizes)
       },
       (error) => {
         console.log(error)

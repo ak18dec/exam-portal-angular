@@ -24,14 +24,14 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout(){
-    console.log('logout clicked');
+    // console.log('logout clicked');
     this.loginService.logout();
     this.loginService.loginStatusSubject.next(true);
     this.router.navigate(['/']);
   }
 
   account() {
-    console.log('my account clicked')
+    // console.log('my account clicked')
     if(this.loginService.getUserRole() === 'ROLE_ADMIN'){
       this.router.navigate(['/admin/profile'])
     }else if(this.loginService.getUserRole() === 'ROLE_NORMAL'){

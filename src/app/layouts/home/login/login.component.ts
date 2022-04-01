@@ -136,7 +136,7 @@ export class LoginComponent implements OnInit {
             this.userService.getUserByUsername(loginData.username).subscribe(
               (user: any) => {
                 this.loginService.storeUser(user);
-                console.log(user);
+                // console.log(user);
                 //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
                 if (this.loginService.getUserRole() === 'ROLE_ADMIN') {
 

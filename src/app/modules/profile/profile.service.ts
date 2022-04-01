@@ -30,7 +30,7 @@ export class ProfileService {
 
     let url = `${this.APP_URL}/users/${userId}`;
     let response =  this.http.get(url, requestOptions);
-    console.log(response);
+    // console.log(response);
     return response;
   }
 }

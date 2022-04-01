@@ -43,7 +43,7 @@ export class UserQuizListComponent implements OnInit {
       this.quizService.getQuizes().subscribe(
         (res: any) =>{
           this.data = res;
-          console.log(res)
+          // console.log(res)
           this.quizService.storeQuizesInCache(this.data);
           this.dataLoaded = true;
           this.search.setValue('');

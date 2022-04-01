@@ -41,17 +41,17 @@ export class SidebarComponent implements OnInit {
       if(event.type === HttpEventType.UploadProgress){
         // @ts-ignore: Object is possibly 'null'.
         const progress = Math.round((event.loaded/event.total)*100);
-        console.log(`Upload Progress: ${progress} %`)
+        // console.log(`Upload Progress: ${progress} %`)
       }else if(event.type === HttpEventType.Response){
-        console.log(event);
+        // console.log(event);
       }
     })
   }
 
   onFileSelected(event: any) {
-    console.log(event);
+    // console.log(event);
     this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile)
+    // console.log(this.selectedFile)
     this.success = true;
     this.startTimer();
   }
@@ -70,14 +70,14 @@ export class SidebarComponent implements OnInit {
   }
 
   public logout(){
-    console.log('logout clicked');
+    // console.log('logout clicked');
     this.loginService.logout();
     this.loginService.loginStatusSubject.next(true);
     this.router.navigate(['/']);
   }
 
   account() {
-    console.log('my account clicked')
+    // console.log('my account clicked')
     if(this.loginService.getUserRole() === 'ROLE_ADMIN'){
       this.router.navigate(['/admin/profile'])
     }else if(this.loginService.getUserRole() === 'ROLE_NORMAL'){

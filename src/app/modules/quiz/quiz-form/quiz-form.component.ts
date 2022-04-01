@@ -148,11 +148,11 @@ export class QuizFormComponent implements OnInit {
     if(this.addQuiz) {
       this.createQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
     }else{
-      console.log('Edit Quiz Called')
-      console.log(this.firstFormGroup.value)
-      console.log(this.secondFormGroup.value)
-      console.log(this.thirdFormGroup.value)
-      console.log(this.quizPublished)
+      // console.log('Edit Quiz Called')
+      // console.log(this.firstFormGroup.value)
+      // console.log(this.secondFormGroup.value)
+      // console.log(this.thirdFormGroup.value)
+      // console.log(this.quizPublished)
       this.updateQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
     }
   }
@@ -211,8 +211,8 @@ export class QuizFormComponent implements OnInit {
       published: this.quizPublished,
     }
 
-    console.log('On Submit of New Quiz: ')
-    console.log(this.newQuiz)
+    // console.log('On Submit of New Quiz: ')
+    // console.log(this.newQuiz)
 
     this.quizService.addQuiz(this.newQuiz).subscribe(
       (res: any)  => {
@@ -265,11 +265,11 @@ export class QuizFormComponent implements OnInit {
         published: this.quizPublished,
       }
 
-      console.log('Before hitting update quiz')
-      console.log(this.editableQuiz)
+      // console.log('Before hitting update quiz')
+      // console.log(this.editableQuiz)
       this.quizService.updateQuiz(this.editableQuiz, this.selectedQuizId).subscribe(
         (res: any)=> {
-          console.log(`Quiz Details Updated Successfully for Quiz ID ${editableQuizId} and Selected Quiz ID ${this.selectedQuizId}`)
+          // console.log(`Quiz Details Updated Successfully for Quiz ID ${editableQuizId} and Selected Quiz ID ${this.selectedQuizId}`)
         },
         (error) => {
           console.log(error)

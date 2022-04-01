@@ -14,14 +14,14 @@ export class UserService {
   getUserDetailsById(userId: number) {
     let url = `${baseUrl}/users/${userId}`;
     let response =  this.http.get(url);
-    console.log(response);
+    // console.log(response);
     return response;
   }
 
   getUserByUsername(username: string) {
     let url = `${baseUrl}/users?username=${username}`;
     let response =  this.http.get(url);
-    console.log(response);
+    // console.log(response);
     return response;
   }
 
@@ -45,7 +45,7 @@ export class UserService {
   updateUser(newUser: User, userId: number) {
     let url = `${baseUrl}/users/${userId}`;
     let response =  this.http.put(url, newUser);
-    console.log(response);
+    // console.log(response);
     return response;
   }
   

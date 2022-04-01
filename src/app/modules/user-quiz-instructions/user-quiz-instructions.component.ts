@@ -15,7 +15,7 @@ export class UserQuizInstructionsComponent implements OnInit {
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('Quiz id in instructions page: '+this.quizId);
+    // console.log('Quiz id in instructions page: '+this.quizId);
   }
 
   startQuiz() {
