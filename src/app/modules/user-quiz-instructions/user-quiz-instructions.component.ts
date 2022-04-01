@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 
@@ -9,14 +9,18 @@ import { QuizService } from 'src/app/services/quiz.service';
 })
 export class UserQuizInstructionsComponent implements OnInit {
 
-  quizId: number = -1;
+  @Input() quizId: number = -1;
+  @Output() quizStartEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      this.quizId = id;
-    })
-  }  
+    console.log('Quiz id in instructions page: '+this.quizId);
+  }
+
+  startQuiz() {
+    this.quizStartEvent.emit();
+  }
+  
+  
 }

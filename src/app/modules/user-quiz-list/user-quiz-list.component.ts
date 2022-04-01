@@ -34,7 +34,7 @@ export class UserQuizListComponent implements OnInit {
   );
 
   startQuiz(quizId: number) {
-    this.router.navigate([`/user/quiz/${quizId}/instructions`]);
+    this.router.navigate([`/user/quiz/${quizId}`]);
   }
 
   getAllQuizes(){

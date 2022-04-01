@@ -30,6 +30,7 @@ export class UserQuizComponent implements OnInit {
   timer: number = 0;
 
   stopTimer: boolean = false;
+  loadInstructions: boolean = true;
 
   constructor(
     private quizService: QuizService,
@@ -42,12 +43,7 @@ export class UserQuizComponent implements OnInit {
       const id = Number(params.get('id'));
       if(id){
         this.quizId = id;
-        this.getQuestionsByQuizId(this.quizId);
-        this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
-        this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
-        this.timer = this.quizTime * 60;
-        this.stopTimer = false;
-        this.startTimer();
+        this.prepareQuiz(this.quizId);
       }
     })
 
@@ -57,6 +53,15 @@ export class UserQuizComponent implements OnInit {
         this.scoreDetails = resp;
       }
     })
+  }
+
+  prepareQuiz(id: number) {
+    this.getQuestionsByQuizId(this.quizId);
+    this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
+    this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
+    this.timer = this.quizTime * 60;
+    this.stopTimer = false;
+    this.startTimer();
   }
 
   getQuestionsByQuizId(id: number) {
@@ -99,6 +104,10 @@ export class UserQuizComponent implements OnInit {
 
   finishQuiz() {
     this.trackerService.broadcastFinishTestEvent();
+  }
+
+  startQuiz() {
+    this.loadInstructions = false;
   }
 
 }
