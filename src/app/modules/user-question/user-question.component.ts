@@ -105,12 +105,19 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
   onOptionSelect() {
     let currQues = this.questions[this.currentQuesNumber];
     let usrAns = currQues.questionChoices.find(ch => ch.id === this.currentSelectedOptionId)?.description
-    this.questionAnswered.push({
-      quesId: currQues.id,
-      quesContent: currQues.content,
-      ansMarked: this.currentSelectedOptionId,
-      ans: usrAns
-    })
+    let alreadyAnswered = this.questionAnswered.find(q => q.quesId === currQues.id);
+    if(alreadyAnswered){
+      let index = this.questionAnswered.findIndex(q => q.quesId === alreadyAnswered.quesId);
+      this.questionAnswered[index].ansMarked = this.currentSelectedOptionId;
+      this.questionAnswered[index].ans = usrAns;
+    }else {
+      this.questionAnswered.push({
+        quesId: currQues.id,
+        quesContent: currQues.content,
+        ansMarked: this.currentSelectedOptionId,
+        ans: usrAns
+      })
+    }
   }
 
   onSubmitConfirmDialog() {
