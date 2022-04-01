@@ -142,13 +142,7 @@ const routes: Routes = [
         path: 'quiz/:id',
         pathMatch: 'full',
         component: UserQuizComponent
-      },
-      {
-        path: 'quiz/:id/instructions',
-        pathMatch: 'full',
-        component: UserQuizInstructionsComponent
       }
-
     ]
   }
 ];
