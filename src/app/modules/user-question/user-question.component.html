@@ -2,7 +2,7 @@
     <mat-card-content>
         <div class="content">
             <div style="margin-bottom: 10px;">
-                Q {{ currentQuesNumber + 1 }}. <span class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</span>
+                Q{{ currentQuesNumber + 1 }}. <span class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</span>
             </div>
             <span [innerHTML]="currentQuestion.content"></span>
 
@@ -33,9 +33,9 @@
             </mat-radio-group>
         </div>
     </mat-card-content>
-    <mat-card-footer class="ques-nav-section">
-        <button type="button" mat-button color="primary" [disabled]="firstQuestion || submitted" (click)="previousQues()">Previous</button>
-        <button type="button" mat-button color="primary" [disabled]="lastQuestion || submitted" (click)="nextQues()">Next</button>
+    <mat-card-footer class="ques-nav-section" [ngClass]="{'first-ques': firstQuestion}">
+        <button type="button" mat-button color="primary" [disabled]="firstQuestion || submitted" *ngIf="!firstQuestion" (click)="previousQues()">Previous</button>
+        <button type="button" mat-button color="primary" [disabled]="lastQuestion || submitted" *ngIf="!lastQuestion" (click)="nextQues()">Next</button>
     </mat-card-footer>
 </mat-card>
 <mat-card *ngIf="false">

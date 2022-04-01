@@ -90,7 +90,7 @@ export class UserQuizComponent implements OnInit {
   formattedTime() {
     const min = Math.floor(this.timer/60)
     const sec = this.timer - min*60;
-    let time = `${min}:${sec} / ${this.quizTime} :00`;
+    let time = `${min}:${sec} / ${this.quizTime}:00`;
     if(min <= 0 && sec <= 0){
       time = 'Times Up';
     }
