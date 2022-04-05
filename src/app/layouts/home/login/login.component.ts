@@ -181,7 +181,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginGuestUser() {
-    this.form.get('username')?.setValue('virat1');
+    this.form.get('usernameOrEmail')?.setValue('virat1');
     this.form.get('password')?.setValue('vir2021');
     this.onSubmit();
   }
