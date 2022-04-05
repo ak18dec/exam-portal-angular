@@ -113,7 +113,7 @@ export class ProfileComponent implements OnInit {
     this.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
     this.email = currentUser.email;
     this.profilePicUrl = 'https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black-thumbnail.png';
-    this.userService.getUserByUsername(currentUser.username).subscribe(
+    this.userService.getUserByUsernameOrEmail(currentUser.username).subscribe(
       (data) => {
         this.profile = data;
         if(this.profile.userRoles[0].roleName){

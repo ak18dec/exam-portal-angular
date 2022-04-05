@@ -18,8 +18,20 @@ export class UserService {
     return response;
   }
 
-  getUserByUsername(username: string) {
-    let url = `${baseUrl}/users?username=${username}`;
+  getUserByUsernameOrEmail(usernameOrEmail: string) {
+    let url = '';
+    if(usernameOrEmail.includes('@')){
+      url = `${baseUrl}/users?email=${usernameOrEmail}&username=`;
+    }else {
+      url = `${baseUrl}/users?username=${usernameOrEmail}&email=`;
+    }
+    let response =  this.http.get(url);
+    // console.log(response);
+    return response;
+  }
+
+  getUserByEmail(email: string) {
+    let url = `${baseUrl}/users?email=${email}`;
     let response =  this.http.get(url);
     // console.log(response);
     return response;

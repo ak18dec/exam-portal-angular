@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.form = this.fb.group({
-      username: ['', Validators.required],
+      usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -121,11 +121,11 @@ export class LoginComponent implements OnInit {
     this.formSubmitAttempt = false;
     if (this.form.valid) {
       try {
-        const username = this.form.get('username')?.value;
+        const usernameOrEmail = this.form.get('usernameOrEmail')?.value;
         const password = this.form.get('password')?.value;
 
         const loginData = {
-          username: username,
+          usernameOrEmail: usernameOrEmail,
           password: password
         }
 
@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit {
         this.loginService.generateToken(loginData).subscribe(
           (data: any) => {
             this.loginService.storeToken(data.token);
-            this.userService.getUserByUsername(loginData.username).subscribe(
+            this.userService.getUserByUsernameOrEmail(loginData.usernameOrEmail).subscribe(
               (user: any) => {
                 this.loginService.storeUser(user);
                 // console.log(user);
