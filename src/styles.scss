@@ -31,3 +31,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ::-webkit-scrollbar-track {
     background-color: var(--scrollbar-track-background-color);
 }
+
+.error.mat-snack-bar-container {
+    background: #f0134bb3;
+    color: white;
+    border: 1px solid #DA0037;
+    padding: 13px;
+}
+
+.success.mat-snack-bar-container {
+    background: #83BD75;
+    color: white;
+    border: 1px solid #4E944F;
+    padding: 13px;
+}

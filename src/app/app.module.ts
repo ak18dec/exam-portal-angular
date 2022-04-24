@@ -13,6 +13,7 @@ import { UtilsModule } from './utils/utils.module';
 import { HomeModule } from './layouts/home/home.module';
 import { UserHomeModule } from './layouts/user-home/user-home.module';
 import { MaterialElevationDirective } from './directives/material-elevation.directive';
+import { NotifierComponent } from './modules/notifier/notifier.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
     AppComponent,
     ComingSoonComponent,
     MaterialElevationDirective,
+    NotifierComponent,
   ],
   imports: [
     BrowserModule,

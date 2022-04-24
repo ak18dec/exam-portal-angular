@@ -202,6 +202,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.user = this.form.value;
+    this.user.role = 'ROLE_NORMAL';
     this.userService.registerUser(this.user).subscribe(
       (data) => {
         Swal.fire('Success !!!', 'User is registered successfully', 'success')
