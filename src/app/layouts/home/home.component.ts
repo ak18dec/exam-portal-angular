@@ -2,7 +2,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-
+import { MatDialog } from '@angular/material/dialog';
+import { GuestDialogComponent } from './guest-dialog/guest-dialog.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,9 +18,15 @@ export class HomeComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(): void {
+    this.dialog.open(GuestDialogComponent, {
+      width: '280px'
+    });
   }
 
 
