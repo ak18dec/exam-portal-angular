@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { GuestDialogComponent } from './guest-dialog/guest-dialog.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -17,7 +19,9 @@ import { GuestDialogComponent } from './guest-dialog/guest-dialog.component';
     SignupComponent,
     NavbarComponent,
     HomeComponent,
-    GuestDialogComponent
+    GuestDialogComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

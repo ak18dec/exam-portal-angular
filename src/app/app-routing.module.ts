@@ -23,6 +23,8 @@ import { UserQuizListComponent } from './modules/user-quiz-list/user-quiz-list.c
 import { UserAnalyticsComponent } from './modules/user-analytics/user-analytics.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { UserQuizInstructionsComponent } from './modules/user-quiz-instructions/user-quiz-instructions.component';
+import { ForgotPasswordComponent } from './layouts/home/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './layouts/home/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,16 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'password-reset/:token',
+    component: ResetPasswordComponent,
     pathMatch: 'full'
   },
   {
