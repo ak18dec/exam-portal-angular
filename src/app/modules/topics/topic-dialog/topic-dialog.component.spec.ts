@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopicDialogComponent } from './topic-dialog.component';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 describe('TopicDialogComponent', () => {
   let component: TopicDialogComponent;
@@ -8,7 +10,15 @@ describe('TopicDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TopicDialogComponent ]
+      declarations: [ TopicDialogComponent ],
+      imports: [
+        MatDialogModule,
+        BrowserDynamicTestingModule
+      ],
+      providers: [
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: []}
+      ]
     })
     .compileComponents();
   });
