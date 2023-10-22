@@ -20,8 +20,6 @@ export class QuizFormComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-
   quizForm: FormGroup;
   editableQuiz: Quiz;
   addQuiz: boolean = false;
@@ -34,24 +32,14 @@ export class QuizFormComponent implements OnInit {
     title: '',
     description: '', 
     questionIds: [],
-    proficiencyId: -1,
     published: false,
-    instructionEnabled: false,
-    instructionIds: [],
     maxMarks: 0,
     maxTime: 0
   }
-  proficiencyList: { id: number; level: string; }[];
 
   questions: Question[]=[];
   loadQuestions: boolean = false;
-
-  instructions: Instruction[]=[];
-  instructionsLoaded: boolean = false;
-
   selectedQuestions: number[] = [];
-  enableInstruction: boolean = false;
-
   quizPublished: boolean = false;
 
   constructor(
@@ -59,15 +47,12 @@ export class QuizFormComponent implements OnInit {
     private route : ActivatedRoute, 
     private router: Router,
     private questionService: QuestionService,
-    private quizService: QuizService,
-    private instructionService: InstructionService
+    private quizService: QuizService
     ) { }
 
   ngOnInit() {
-    this.getProficiencies();
     if(this.router.url.includes('/new')){
       this.addQuiz = true;
-      this.newQuiz.proficiencyId = this.proficiencyList[0].id;
       this.initForm(this.newQuiz);
       this.dataLoaded = true;
     }else{
@@ -81,31 +66,15 @@ export class QuizFormComponent implements OnInit {
     }
   }
 
-  get thirdFromGroup() {
-    return this.thirdFormGroup.controls;
-  }
-
-  getProficiencies(){
-    this.proficiencyList = [
-      {id: 1, level: 'Easy'},{id: 2, level: 'Medium'},{id: 3, level: 'Hard'}
-    ]
-    
-  }
-
   initForm(quiz: Quiz) {
     this.firstFormGroup = this.fb.group({
       title: [quiz.title],
       description: [quiz.description], 
-      proficiency: [quiz.proficiencyId],
       maxMarks: [quiz.maxMarks],
       maxTime: [quiz.maxTime]
     });
     this.secondFormGroup = this.fb.group({
       questions: [quiz.questionIds]
-    });
-    this.thirdFormGroup = this.fb.group({
-      instructionEnabled: [quiz.instructionEnabled],
-      instructions: [quiz.instructionIds]
     });
     this.quizPublished = quiz.published;
   }
@@ -117,10 +86,6 @@ export class QuizFormComponent implements OnInit {
           this.editableQuiz = res;
           this.initForm(this.editableQuiz);
           this.dataLoaded = true;
-          if(this.editableQuiz.instructionEnabled){
-            this.instructionsLoaded = true;
-            this.getAllInstructions();
-          }
         }
       },
       (error) => {
@@ -146,42 +111,14 @@ export class QuizFormComponent implements OnInit {
 
   submitQuiz() {
     if(this.addQuiz) {
-      this.createQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
+      this.createQuiz(this.firstFormGroup.value, this.secondFormGroup.value)
     }else{
       // console.log('Edit Quiz Called')
       // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
-      // console.log(this.thirdFormGroup.value)
       // console.log(this.quizPublished)
-      this.updateQuiz(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
+      this.updateQuiz(this.firstFormGroup.value, this.secondFormGroup.value)
     }
-  }
-
-  instructionToggle(event: MatSlideToggleChange) {
-    this.enableInstruction = event.checked;
-    this.instructionsLoaded = !this.instructionsLoaded;
-    if(this.enableInstruction && this.instructions.length < 1){ 
-      this.getAllInstructions();
-    }
-  }
-
-  getAllInstructions() {
-    this.instructionService.getInstructions().subscribe(
-      (res: any) => {
-        this.instructions = res;
-        this.instructionsLoaded = true;
-      },
-      (error) => {
-        // this._snackBar.open('Error while fetching questions list','',{
-        //   duration: 3000
-        // });
-        console.log(error);
-      } 
-    )
-  }
-
-  onInstructionSelection(){
-    // console.log(this.thirdFormGroup.value.instructions);
   }
 
   questionToggle() {
@@ -197,17 +134,14 @@ export class QuizFormComponent implements OnInit {
     }
   }
 
-  createQuiz(form1Data: any, form2Data: any, form3Data: any){
+  createQuiz(form1Data: any, form2Data: any){
     this.newQuiz = {
       id: -1,
       title: form1Data.title,
       description: form1Data.description, 
       maxMarks: form1Data.maxMarks,
       maxTime: form1Data.maxTime,
-      proficiencyId: form1Data.proficiency,
       questionIds: form2Data.questions,
-      instructionEnabled: form3Data.instructionEnabled,
-      instructionIds: form3Data.instructions,
       published: this.quizPublished,
     }
 
@@ -232,24 +166,14 @@ export class QuizFormComponent implements OnInit {
       title: '',
       description: '', 
       questionIds: [],
-      proficiencyId: -1,
       published: false,
-      instructionEnabled: false,
-      instructionIds: [],
       maxMarks: 0,
       maxTime: 0
     }
-    this.newQuiz.proficiencyId = this.proficiencyList[0].id;
     this.initForm(this.newQuiz);
   }
 
-  moveToInstructionsPage() {
-    if(!this.instructionsLoaded){
-      this.getAllInstructions();
-    }
-  }
-
-  updateQuiz(form1Data: any, form2Data: any, form3Data: any){
+  updateQuiz(form1Data: any, form2Data: any){
     const editableQuizId = this.editableQuiz.id;
     if(this.selectedQuizId === editableQuizId){
       this.editableQuiz = {
@@ -258,10 +182,7 @@ export class QuizFormComponent implements OnInit {
         description: form1Data.description, 
         maxMarks: form1Data.maxMarks,
         maxTime: form1Data.maxTime,
-        proficiencyId: form1Data.proficiency,
         questionIds: form2Data.questions,
-        instructionEnabled: form3Data.instructionEnabled,
-        instructionIds: form3Data.instructions,
         published: this.quizPublished,
       }
 
@@ -280,7 +201,6 @@ export class QuizFormComponent implements OnInit {
       console.log(this.selectedQuizId)
       console.log(form1Data)
       console.log(form2Data)
-      console.log(form3Data)
     }
 
   }

@@ -115,7 +115,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
     }else {
       this.questionAnswered.push({
         quesId: currQues.id,
-        quesContent: currQues.content,
+        quesContent: currQues.description,
         ansMarked: this.currentSelectedOptionId,
         ans: usrAns
       })

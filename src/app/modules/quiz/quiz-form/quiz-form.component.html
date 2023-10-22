@@ -9,11 +9,6 @@
                 <form [formGroup]="firstFormGroup" *ngIf="dataLoaded">
                     <ng-template matStepLabel>{{ addQuiz ? 'Add Quiz Details' : 'Edit Quiz Details'}}</ng-template>
                     <br>
-                    <mat-button-toggle-group formControlName="proficiency" aria-label="Proficiency Level">
-                        <mat-button-toggle *ngFor="let proficiency of proficiencyList" [value]="proficiency.id">
-                            {{ proficiency.level }}
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
                     <mat-form-field appearance="standard">
                         <p>Title</p>
                         <input matInput formControlName="title">
@@ -48,32 +43,9 @@
                     <mat-selection-list *ngIf="loadQuestions" 
                         color="primary" [disableRipple]="true" formControlName="questions" >
                         <mat-list-option *ngFor="let ques of questions" checkboxPosition="before" [value]="ques.id">
-                            <span [innerHTML]="ques.content"></span>
+                            <span [innerHTML]="ques.description"></span>
                         </mat-list-option>
                     </mat-selection-list>
-
-                    <div>
-                        <button mat-button matStepperPrevious type="button">Back</button>
-                        <button mat-button matStepperNext (click)="moveToInstructionsPage()" type="button">Next</button>
-                    </div>
-                </form>
-            </mat-step>
-            <mat-step [stepControl]="thirdFormGroup" [label]="addQuiz ? 'Add Instructions' : 'Edit Instructions'" *ngIf="dataLoaded">
-                <br>
-                <form [formGroup]="thirdFormGroup">
-                    <p>Do you want to add instructions to this quiz ?</p>
-                    <mat-slide-toggle class="example-margin" color="primary" formControlName="instructionEnabled" (change)="instructionToggle($event)">
-                        Add Instructions
-                    </mat-slide-toggle>
-
-                    <mat-selection-list *ngIf="instructionsLoaded" 
-                        color="primary" [disableRipple]="true" formControlName="instructions" (selectionChange)="onInstructionSelection()">
-                        <mat-list-option *ngFor="let instruction of instructions" checkboxPosition="before" [value]="instruction.id">
-                            <span [innerHTML]="instruction.content"></span>
-                        </mat-list-option>
-                    </mat-selection-list>
-                    
-                    
                     <div>
                         <button mat-button matStepperPrevious type="button">Back</button>
                         <button mat-button matStepperNext type="button">Next</button>

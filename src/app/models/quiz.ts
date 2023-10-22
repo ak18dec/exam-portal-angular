@@ -3,10 +3,7 @@ export interface Quiz {
     title: string;
     description: string;
     questionIds: number[];
-    proficiencyId: number;
     published: boolean;
-    instructionEnabled: boolean;
-    instructionIds: number[];
     maxMarks: number;
     maxTime: number;
 }

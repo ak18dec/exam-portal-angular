@@ -4,7 +4,7 @@
             <div style="margin-bottom: 10px;">
                 Q{{ currentQuesNumber + 1 }}. <span class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</span>
             </div>
-            <span [innerHTML]="currentQuestion.content"></span>
+            <span [innerHTML]="currentQuestion.description"></span>
 
         </div>
         <div class="choices">

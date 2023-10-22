@@ -44,10 +44,7 @@ export class QuizService {
         title: '',
         description: '',
         questionIds: [],
-        proficiencyId: -1,
         published: false,
-        instructionEnabled: false,
-        instructionIds: [],
         maxMarks: 0,
         maxTime: 0
       }
@@ -55,10 +52,7 @@ export class QuizService {
       quiz.title = newQuiz.title;
       quiz.description = newQuiz.description;
       quiz.questionIds = newQuiz.questionIds;
-      quiz.proficiencyId = newQuiz.proficiencyId;
       quiz.published = newQuiz.published;
-      quiz.instructionEnabled = newQuiz.instructionEnabled;
-      quiz.instructionIds = newQuiz.instructionIds;
       quiz.maxMarks = newQuiz.maxMarks;
       quiz.maxTime = newQuiz.maxTime;
 
@@ -110,7 +104,6 @@ export class QuizService {
           id: quizId,
           title: selectedQuiz.title,
           description: selectedQuiz.description,
-          proficiencyId: selectedQuiz.proficiencyId,
           maxMarks: selectedQuiz.maxMarks,
           maxTime: selectedQuiz.maxTime
         }
