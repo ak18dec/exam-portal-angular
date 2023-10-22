@@ -1,12 +1,8 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatSelectionListChange } from '@angular/material/list/selection-list';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Instruction } from 'src/app/models/instruction';
 import { Question } from 'src/app/models/question';
 import { Quiz } from 'src/app/models/quiz';
-import { InstructionService } from 'src/app/services/instruction.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { QuizService } from 'src/app/services/quiz.service';
 

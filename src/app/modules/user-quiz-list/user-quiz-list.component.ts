@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { debounceTime, switchMap, startWith } from "rxjs/operators";
-import { Observable, of } from "rxjs";
+import { of } from "rxjs";
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 @Component({
@@ -43,7 +43,6 @@ export class UserQuizListComponent implements OnInit {
       this.quizService.getQuizes().subscribe(
         (res: any) =>{
           this.data = res;
-          // console.log(res)
           this.quizService.storeQuizesInCache(this.data);
           this.dataLoaded = true;
           this.search.setValue('');

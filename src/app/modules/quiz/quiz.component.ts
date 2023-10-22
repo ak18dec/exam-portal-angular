@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
 import { Quiz } from 'src/app/models/quiz';
 import { QuizService } from 'src/app/services/quiz.service';
 
@@ -35,7 +34,6 @@ export class QuizComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.quizes);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        // console.log(this.quizes)
       },
       (error) => {
         console.log(error)

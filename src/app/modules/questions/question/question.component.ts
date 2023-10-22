@@ -7,7 +7,6 @@ import { QuestionChoice } from 'src/app/models/questionchoice';
 import { Topic } from 'src/app/models/topic';
 import { QuestionService } from 'src/app/services/question.service';
 import { TopicService } from 'src/app/services/topic.service';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { NgForm } from '@angular/forms';
 
 @Component({

@@ -8,7 +8,7 @@
       <mat-card style="margin-bottom: 8px;border-radius: 0;padding-bottom: 8px;">
         <h4 style="margin-bottom: 4px;">{{ item.title }}</h4>
         <p style="color: #0000008a;font-size: smaller;">{{ item.description }}</p>
-      <mat-chip-list appearance="outline">
+      <!-- <mat-chip-list appearance="outline">
         <mat-chip color="primary" 
           appearance="outline"
           [ngClass]="{'difficulty-level-easy':item.proficiencyId === 1, 
@@ -16,7 +16,7 @@
           'difficulty-level-hard':item.proficiencyId === 3}">
           {{ item.proficiencyId === 1 ? 'Easy' : (item.proficiencyId === 2 ? 'Medium' : 'Hard') }}
         </mat-chip>
-      </mat-chip-list>
+      </mat-chip-list> -->
       
         <mat-divider></mat-divider>
         <p style="font-size: smaller;padding-top: 10px;">{{ item.questionIds.length }} Questions &bull; {{ item.maxTime }} mins

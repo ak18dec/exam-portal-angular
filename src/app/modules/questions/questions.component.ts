@@ -1,10 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Proficiency } from 'src/app/models/proficiency';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Question } from 'src/app/models/question';
-import { QuestionChoice } from 'src/app/models/questionchoice';
-import { Topic } from 'src/app/models/topic';
 import { QuestionService } from 'src/app/services/question.service';
-import { TopicService } from 'src/app/services/topic.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import {MatPaginator} from '@angular/material/paginator';

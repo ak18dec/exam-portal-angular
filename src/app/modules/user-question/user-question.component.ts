@@ -173,7 +173,6 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
       userFullName: `${userData.firstName} ${userData.lastName}`,
       username: userData.username,
       attemptedOn: new Date(),
-      proficiencyId: this.quizMetaData.proficiencyId,
       maxMarks: this.quizMetaData.maxMarks,
       maxTime: this.quizMetaData.maxTime,
       userTime: this.userQuizTimeTaken,

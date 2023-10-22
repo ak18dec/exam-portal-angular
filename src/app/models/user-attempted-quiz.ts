@@ -7,7 +7,6 @@ export interface UserAttemptedQuiz {
     userFullName: string;
     username: string;
     attemptedOn: Date;
-    proficiencyId: number;
     maxMarks: number;
     maxTime: number;
     userTime: number;
