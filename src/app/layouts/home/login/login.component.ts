@@ -103,7 +103,6 @@ export class LoginComponent implements OnInit {
       );
 
     } catch (err) {
-      // this.loginInvalid = true;
       this.notifierService.showNotification('Invalid Credentials', '', 'error', false);
     }
   }

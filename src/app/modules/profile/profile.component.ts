@@ -47,19 +47,6 @@ export class ProfileComponent implements OnInit {
     private breakpointObserver: BreakpointObserver
     ) { }
 
-  // ngOnInit() {
-  //   const currentUser = this.loginService.getUser();
-  //   this.userService.getUserByUsername(currentUser.username).subscribe(
-  //     (data) => {
-  //       this.profile = data;
-  //       this.createForm(this.profile);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
-
   createForm(oldData: any) {
     this.profileForm = this.fb.group({
       username: [oldData.username, [Validators.required, Validators.maxLength(10)]],

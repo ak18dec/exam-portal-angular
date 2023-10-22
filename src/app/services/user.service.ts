@@ -14,7 +14,6 @@ export class UserService {
   getUserDetailsById(userId: number) {
     let url = `${baseUrl}/users/${userId}`;
     let response =  this.http.get(url);
-    // console.log(response);
     return response;
   }
 
@@ -26,14 +25,12 @@ export class UserService {
       url = `${baseUrl}/users?username=${usernameOrEmail}&email=`;
     }
     let response =  this.http.get(url);
-    // console.log(response);
     return response;
   }
 
   getUserByEmail(email: string) {
     let url = `${baseUrl}/users?email=${email}`;
     let response =  this.http.get(url);
-    // console.log(response);
     return response;
   }
 

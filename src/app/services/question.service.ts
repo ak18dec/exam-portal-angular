@@ -21,7 +21,6 @@ export class QuestionService {
   public getQuestionById(id: number) {
     let url = `${baseUrl}/questions/${id}`;
     let response =  this.http.get(url);
-    // console.log(response);
     return response;
   }
 

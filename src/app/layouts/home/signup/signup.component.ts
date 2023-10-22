@@ -58,7 +58,6 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    // this.notifierService.showNotification('All details are correct','','success',false);
     this.userService.registerUser(this.user).subscribe(
       (data) => {
         Swal.fire('Success !!!', 'User is registered successfully', 'success')
