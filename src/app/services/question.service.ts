@@ -30,15 +30,15 @@ export class QuestionService {
   public addQuestion(newQuestion: Question) {
     let question: Question = {
       id: 0,
-      content: '',
-      proficiencyId: 0,
+      description: '',
+      proficiency: '',
       topicId: 0,
       enabled: true,
       questionChoices: []
     }
 
-    question.content = newQuestion.content;
-    question.proficiencyId = newQuestion.proficiencyId;
+    question.description = newQuestion.description;
+    question.proficiency = newQuestion.proficiency;
     question.topicId = newQuestion.topicId;
     question.enabled = newQuestion.enabled;
     question.questionChoices = newQuestion.questionChoices;

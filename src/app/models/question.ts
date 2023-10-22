@@ -2,8 +2,8 @@ import { QuestionChoice } from "./questionchoice";
 
 export interface Question {
     id: number;
-    content: string;
-    proficiencyId: number;
+    description: string;
+    proficiency: string;
     enabled: boolean;
     topicId: number;
     questionChoices: QuestionChoice[];

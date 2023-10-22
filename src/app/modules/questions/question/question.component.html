@@ -6,19 +6,19 @@
     <br>
     <form (ngSubmit)="onFormSubmit(newQuestionForm)" #newQuestionForm="ngForm">
         <mat-card-content>
-            <mat-button-toggle-group name="proficiency" aria-label="Proficiency Level" [value]="question.proficiencyId">
+            <mat-button-toggle-group name="proficiency" aria-label="Proficiency Level" [value]="question.proficiency">
                 <mat-button-toggle *ngFor="let proficiency of proficiencyList"
-                    [value]="proficiency.id"
-                    (click)="question.proficiencyId = proficiency.id">{{ proficiency.level }}
+                    [value]="proficiency.level"
+                    (click)="question.proficiency = proficiency.level">{{ proficiency.level }}
                 </mat-button-toggle>
             </mat-button-toggle-group>
             <br />
             <br >
             <ckeditor 
                 [editor]="Editor"
-                [config]="{ placeholder:'Enter question content here...'}"
-                [(ngModel)]="question.content"
-                name="questionContent">
+                [config]="{ placeholder:'Enter question description here...'}"
+                [(ngModel)]="question.description"
+                name="questionDescription">
             </ckeditor>
             <br>
 
@@ -70,7 +70,6 @@
             
             <div class="form-buttons">
                 <button mat-flat-button color="primary" type="submit">{{ addQuestion ? 'Add' : 'Update'}}</button>
-                <!-- <br> -->
                 <button mat-stroked-button (click)="resetForm()" type="button" >Cancel</button>
             </div>
         </mat-card-content>

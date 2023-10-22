@@ -17,14 +17,14 @@
               </td>
           </ng-container>
   
-          <ng-container matColumnDef="content">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Content</th>
-              <td mat-cell *matCellDef="let row"><span [innerHTML]="row.content"></span></td>
+          <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+              <td mat-cell *matCellDef="let row"><span [innerHTML]="row.description"></span></td>
           </ng-container>
 
-          <ng-container matColumnDef="proficiencyId">
+          <ng-container matColumnDef="proficiency">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Proficiency</th>
-            <td mat-cell *matCellDef="let row">{{ row.proficiencyId }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.proficiency }}</td>
           </ng-container>
 
           <ng-container matColumnDef="topicId">

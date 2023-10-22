@@ -18,16 +18,14 @@ import { NgForm } from '@angular/forms';
 export class QuestionComponent implements OnInit {
 
   public Editor = ClassicEditor;
-  favoriteSeason: string;
-  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
   public data: string = '<p>Enter question content here</p>';
 
   question: Question = {
     id: -1,
-    content: '',
+    description: '',
     topicId: -1,
     enabled: true,
-    proficiencyId: 1,
+    proficiency: '',
     questionChoices:[]
   }
 
@@ -73,7 +71,7 @@ export class QuestionComponent implements OnInit {
 
   getProficiencies(){
     this.proficiencyList = [
-      {id: 1, level: 'Easy'},{id: 2, level: 'Medium'},{id: 3, level: 'Hard'}
+      {level: 'Easy'},{level: 'Medium'},{level: 'Hard'}
     ]
   }
 
@@ -100,10 +98,10 @@ export class QuestionComponent implements OnInit {
   resetForm(){
     this.question = {
       id: -1,
-      content: '',
+      description: '',
       topicId: -1,
       enabled: true,
-      proficiencyId: 1,
+      proficiency: '',
       questionChoices:[]
     }
   
@@ -163,10 +161,10 @@ export class QuestionComponent implements OnInit {
   initForm(ques: Question) {
     this.question = {
       id: ques.id,
-      content: ques.content,
+      description: ques.description,
       topicId: ques.topicId,
       enabled: ques.enabled,
-      proficiencyId: ques.proficiencyId,
+      proficiency: ques.proficiency,
       questionChoices: Object.assign([], ques.questionChoices)
     }
     this.choices = Object.assign([], ques.questionChoices)
@@ -185,9 +183,9 @@ export class QuestionComponent implements OnInit {
     if(this.selectedQuestionId === editableQuesId){
       const updatedQues: Question = {
         id: editableQuesId,
-        content: updatedData.content,
+        description: updatedData.description,
         enabled: updatedData.enabled,
-        proficiencyId: updatedData.proficiencyId,
+        proficiency: updatedData.proficiency,
         topicId: updatedData.topicId,
         questionChoices: updatedChoices
       }
