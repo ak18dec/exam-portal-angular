@@ -24,13 +24,11 @@ export class TopicService {
     let topic: Topic = {
       id: 0,
       title: '',
-      description: '',
       subjectId: 0,
       enabled: true
     }
 
     topic.title = newTopic.title;
-    topic.description = newTopic.description;
     topic.subjectId = newTopic.subjectId;
     topic.enabled = newTopic.enabled;
 

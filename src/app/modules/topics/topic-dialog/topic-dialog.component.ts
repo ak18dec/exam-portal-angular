@@ -26,7 +26,6 @@ export class TopicDialogComponent implements OnInit {
 
   addNewTopic(form: NgForm){
     this.newTopic.title = form.value.title;
-    this.newTopic.description = form.value.description;
     this.newTopic.subjectId = form.value.subjectId;
     this.newTopic.enabled = form.value.enabled === true ? true : false;
 
