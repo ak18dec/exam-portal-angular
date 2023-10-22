@@ -9,8 +9,6 @@ import { Observable, of } from 'rxjs';
 })
 export class SubjectService {
 
-  public genreSelected: number;
-
   constructor(private http: HttpClient) { }
 
   //GET APIs
@@ -25,13 +23,10 @@ export class SubjectService {
     let subj: Subject = {
       id: 0,
       title: '',
-      description: '',
-      // genreId: 0,
       enabled: true
     }
 
     subj.title = newSubject.title;
-    subj.description = newSubject.description;
     subj.enabled = newSubject.enabled;
 
     let url = `${baseUrl}/subjects/`;
