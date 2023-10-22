@@ -11,8 +11,6 @@ import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
 import { UserComponent } from './modules/users/user/user.component';
 import { QuestionComponent } from './modules/questions/question/question.component';
-import { InstructionsComponent } from './modules/instructions/instructions.component';
-import { InstructionComponent } from './modules/instructions/instruction/instruction.component';
 import { QuizComponent } from './modules/quiz/quiz.component';
 import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -113,18 +111,6 @@ const routes: Routes = [
       {
         path: 'questions/:id',
         component: QuestionComponent
-      },
-      {
-        path: 'instructions',
-        component: InstructionsComponent
-      },
-      {
-        path: 'instructions/new',
-        component: InstructionComponent
-      },
-      {
-        path: 'instructions/:id',
-        component: InstructionComponent
       }
     ]
   },

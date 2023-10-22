@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultsComponent } from './defaults.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
-import { InstructionsComponent } from 'src/app/modules/instructions/instructions.component';
 import { QuestionsComponent } from 'src/app/modules/questions/questions.component';
 import { QuizComponent } from 'src/app/modules/quiz/quiz.component';
 import { SubjectsComponent } from 'src/app/modules/subjects/subjects.component';
@@ -15,7 +14,6 @@ import { UsersComponent } from 'src/app/modules/users/users.component';
 import { UserComponent } from 'src/app/modules/users/user/user.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionComponent } from 'src/app/modules/questions/question/question.component';
-import { InstructionComponent } from 'src/app/modules/instructions/instruction/instruction.component';
 import { SubjectDialogComponent } from 'src/app/modules/subjects/subject-dialog/subject-dialog.component';
 import { TopicDialogComponent } from 'src/app/modules/topics/topic-dialog/topic-dialog.component';
 import { QuizFormComponent } from 'src/app/modules/quiz/quiz-form/quiz-form.component';
@@ -25,7 +23,6 @@ import { QuizFormComponent } from 'src/app/modules/quiz/quiz-form/quiz-form.comp
   declarations: [
     DefaultsComponent,
     DashboardComponent,
-    InstructionsComponent,
     QuestionsComponent,
     TopicsComponent,
     QuizComponent,
@@ -34,7 +31,6 @@ import { QuizFormComponent } from 'src/app/modules/quiz/quiz-form/quiz-form.comp
     UsersComponent,
     UserComponent,
     QuestionComponent,
-    InstructionComponent,
     SubjectDialogComponent,
     TopicDialogComponent,
     QuizFormComponent
