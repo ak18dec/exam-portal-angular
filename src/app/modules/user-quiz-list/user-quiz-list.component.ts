@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { debounceTime, switchMap, startWith } from "rxjs/operators";
 import { of } from "rxjs";
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 })
 export class UserQuizListComponent implements OnInit {
 
-  search = new FormControl();
+  search = new UntypedFormControl();
   data: any[] = [];
   dataLoaded: boolean = false;
 

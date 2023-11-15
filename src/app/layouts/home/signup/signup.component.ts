@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
@@ -16,11 +16,11 @@ export class SignupComponent implements OnInit {
   hide = true;
   emailPattern = "[A-Za-z0-9.'_%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
   user: User;
-  form: FormGroup;
+  form: UntypedFormGroup;
   public loginInvalid = false;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private userService: UserService,
     private notifierService: NotifierService
   ) { }

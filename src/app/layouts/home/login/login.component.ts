@@ -3,7 +3,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'src/app/services/notifier.service';
 
@@ -15,13 +15,13 @@ import { NotifierService } from 'src/app/services/notifier.service';
 export class LoginComponent implements OnInit {
 
   hide = true;
-  form: FormGroup;
+  form: UntypedFormGroup;
   public loginInvalid = false;
   private formSubmitAttempt = false;
   private returnUrl: string;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService,

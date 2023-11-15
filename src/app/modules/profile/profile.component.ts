@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
 
   profile: any;
 
-  profileForm: FormGroup;
+  profileForm: UntypedFormGroup;
 
   emailPattern = "[A-Za-z0-9.'_%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
 
@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService, 
-    private fb: FormBuilder, 
+    private fb: UntypedFormBuilder, 
     private loginService: LoginService,
     private fileService: FileService,
     private breakpointObserver: BreakpointObserver
@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('role')?.setValue(this.role)
   }
 
-  updateProfile(updatedForm: FormGroup) {
+  updateProfile(updatedForm: UntypedFormGroup) {
     let updatedUser: User = {
       id: 0,
       username : updatedForm.get('username')?.value,

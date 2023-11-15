@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/models/question';
 import { Quiz } from 'src/app/models/quiz';
@@ -14,9 +14,9 @@ import { QuizService } from 'src/app/services/quiz.service';
 export class QuizFormComponent implements OnInit {
 
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  quizForm: FormGroup;
+  firstFormGroup: UntypedFormGroup;
+  secondFormGroup: UntypedFormGroup;
+  quizForm: UntypedFormGroup;
   editableQuiz: Quiz;
   addQuiz: boolean = false;
   dataLoaded: boolean = false;
@@ -39,7 +39,7 @@ export class QuizFormComponent implements OnInit {
   quizPublished: boolean = false;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: UntypedFormBuilder, 
     private route : ActivatedRoute, 
     private router: Router,
     private questionService: QuestionService,

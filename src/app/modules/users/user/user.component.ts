@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
 
   hide = true;
 
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
 
   newUser: User = {
     id: -1,
@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
 
   selectedUserId: number = -1;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private route : ActivatedRoute, private router: Router) { }
+  constructor(private fb: UntypedFormBuilder, private userService: UserService, private route : ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     
@@ -81,7 +81,7 @@ export class UserComponent implements OnInit {
     )
   }
 
-  onFormSubmit(form: FormGroup){
+  onFormSubmit(form: UntypedFormGroup){
     let formData = form.value;
     if(this.addUser){
       this.createUser(formData);
