@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { UserService } from 'src/app/services/user.service';
 
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Question } from 'src/app/models/question';
 import { QuestionService } from 'src/app/services/question.service';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
 import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
