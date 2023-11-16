@@ -9,23 +9,23 @@
                 <form [formGroup]="firstFormGroup" *ngIf="dataLoaded">
                     <ng-template matStepLabel>{{ addQuiz ? 'Add Quiz Details' : 'Edit Quiz Details'}}</ng-template>
                     <br>
-                    <mat-form-field appearance="standard">
+                    <mat-form-field appearance="outline">
                         <p>Title</p>
                         <input matInput formControlName="title">
                     </mat-form-field>
 
-                    <mat-form-field appearance="standard">
+                    <mat-form-field appearance="outline">
                         <p>Description</p>
                         <textarea matInput formControlName="description" rows="3">
                 </textarea>
                     </mat-form-field>
 
-                    <mat-form-field appearance="standard">
+                    <mat-form-field appearance="outline">
                         <p>Max Marks</p>
                         <input matInput formControlName="maxMarks">
                     </mat-form-field>
 
-                    <mat-form-field appearance="standard">
+                    <mat-form-field appearance="outline">
                         <p>Max Time (in minutes)</p>
                         <input matInput formControlName="maxTime">
                     </mat-form-field>
