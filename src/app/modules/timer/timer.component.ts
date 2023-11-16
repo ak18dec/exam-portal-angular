@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TimerService } from 'src/app/services/timer.service';
 import { UserquizService } from 'src/app/services/userquiz.service';

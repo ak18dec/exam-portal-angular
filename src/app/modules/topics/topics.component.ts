@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Topic } from 'src/app/models/topic';
 import { TopicService } from 'src/app/services/topic.service';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
-import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
-import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { TopicDialogComponent } from './topic-dialog/topic-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-topics',

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/models/question';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 import { TimerService } from 'src/app/services/timer.service';
 import { TrackerService } from 'src/app/services/tracker.service';
@@ -11,6 +10,7 @@ import { AttemptedQuizQuestion } from 'src/app/models/attempted-quiz-question';
 import { LoginService } from 'src/app/services/login.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
 import { LocationStrategy } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-question',

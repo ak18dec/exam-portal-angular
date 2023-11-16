@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
   selector: 'app-quiz-score',
