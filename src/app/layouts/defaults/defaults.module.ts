@@ -12,7 +12,6 @@ import { ProfileComponent } from 'src/app/modules/profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { UsersComponent } from 'src/app/modules/users/users.component';
 import { UserComponent } from 'src/app/modules/users/user/user.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionComponent } from 'src/app/modules/questions/question/question.component';
 import { SubjectDialogComponent } from 'src/app/modules/subjects/subject-dialog/subject-dialog.component';
 import { TopicDialogComponent } from 'src/app/modules/topics/topic-dialog/topic-dialog.component';
@@ -39,8 +38,7 @@ import { QuizFormComponent } from 'src/app/modules/quiz/quiz-form/quiz-form.comp
     CommonModule,
     UtilsModule,
     SharedModule,
-    RouterModule,
-    CKEditorModule
+    RouterModule
   ]
 })
 export class DefaultsModule { }

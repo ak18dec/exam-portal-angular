@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Proficiency } from 'src/app/models/proficiency';
 import { Question } from 'src/app/models/question';
@@ -17,7 +16,7 @@ import { NgForm } from '@angular/forms';
 })
 export class QuestionComponent implements OnInit {
 
-  public Editor = ClassicEditor;
+  // public Editor = ClassicEditor;
   public data: string = '<p>Enter question content here</p>';
 
   question: Question = {
