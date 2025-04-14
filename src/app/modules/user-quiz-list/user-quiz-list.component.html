@@ -1,26 +1,16 @@
 <mat-list style="margin-top: 50px;padding-top: 20px;">
     <div mat-subheader>Available Quizzes ({{ (filteredList$ | async)?.length }})</div><!-- ({{($search | async)?.length}})-->
     <mat-form-field style="width: 95%; margin-left: 10px;" *ngIf="true">
-      <mat-icon matPrefix style="color: #00000061;">search</mat-icon>
+      <mat-icon matPrefix>search</mat-icon>
       <input matInput autocomplete="off" style="margin-bottom: 5px;padding-left: 5px;" [formControl]="search">
     </mat-form-field>
     <div *ngFor="let item of filteredList$ | async">
       <mat-card style="margin-bottom: 8px;border-radius: 0;padding-bottom: 8px;">
         <h4 style="margin-bottom: 4px;">{{ item.title }}</h4>
-        <p style="color: #0000008a;font-size: smaller;">{{ item.description }}</p>
-      <!-- <mat-chip-list appearance="outline">
-        <mat-chip color="primary" 
-          appearance="outline"
-          [ngClass]="{'difficulty-level-easy':item.proficiencyId === 1, 
-          'difficulty-level-medium': item.proficiencyId === 2, 
-          'difficulty-level-hard':item.proficiencyId === 3}">
-          {{ item.proficiencyId === 1 ? 'Easy' : (item.proficiencyId === 2 ? 'Medium' : 'Hard') }}
-        </mat-chip>
-      </mat-chip-list> -->
-      
+        <p style="font-size: smaller;">{{ item.description }}</p>
         <mat-divider></mat-divider>
         <p style="font-size: smaller;padding-top: 10px;">{{ item.questionIds.length }} Questions &bull; {{ item.maxTime }} mins
-          <span style="float: right; color: #3f51b5; cursor: pointer;" (click)="startQuiz(item.id)">Start Quiz</span>
+          <span style="float: right; cursor: pointer;" (click)="startQuiz(item.id)">Start Quiz</span>
         </p>
       </mat-card>
     </div>

@@ -67,50 +67,46 @@ export class LoginComponent implements OnInit {
       }
 
       // request to server to generate token
-      this.loginService.generateToken(loginData).subscribe(
-        (data: any) => {
-          this.loginService.storeToken(data.token);
-          this.userService.getUserByUsernameOrEmail(loginData.usernameOrEmail).subscribe(
-            (user: any) => {
-              this.loginService.storeUser(user);
-              //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
-              if (this.loginService.getUserRole() === 'ROLE_ADMIN') {
+      // this.loginService.generateToken(loginData).subscribe(
+      //   (data: any) => {
+      //     this.loginService.storeToken(data.token);
+      //     this.userService.getUserByUsernameOrEmail(loginData.usernameOrEmail).subscribe(
+      //       (user: any) => {
+      //         this.loginService.storeUser(user);
+      //         //redirect .... ADMIN: admin-dashboard redirect ....NORMAL: user-dashboard
+      //         if (this.loginService.getUserRole() === 'ROLE_ADMIN') {
 
-                //admin dashboard
-                this.router.navigate(['admin']);
-                this.loginService.loginStatusSubject.next(true);
+      //           //admin dashboard
+      //           this.router.navigate(['admin']);
+      //           this.loginService.loginStatusSubject.next(true);
 
-              } else if (this.loginService.getUserRole() === 'ROLE_NORMAL') {
+      //         } else if (this.loginService.getUserRole() === 'ROLE_NORMAL') {
 
-                //basic user dashboard
-                this.router.navigate(['user']);
-                this.loginService.loginStatusSubject.next(true);
+      //           //basic user dashboard
+      //           this.router.navigate(['user']);
+      //           this.loginService.loginStatusSubject.next(true);
 
-              } else {
-                this.loginService.logout();
-              }
+      //         } else {
+      //           this.loginService.logout();
+      //         }
 
-            },
-            (error) => {
-              this.notifierService.showNotification('Error while fetching current user', '', 'error', false);
-            }
+      //       },
+      //       (error) => {
+      //         this.notifierService.showNotification('Error while fetching current user', '', 'error', false);
+      //       }
 
-          );
-        },
-        (error) => {
-          this.notifierService.showNotification('Invalid Credentials', '', 'error', false);
-        }
-      );
+      //     );
+      //   },
+      //   (error) => {
+      //     this.notifierService.showNotification('Invalid Credentials', '', 'error', false);
+      //   }
+      // );
 
+      this.router.navigate(['admin']);
+      this.loginService.loginStatusSubject.next(true);
     } catch (err) {
       this.notifierService.showNotification('Invalid Credentials', '', 'error', false);
     }
-  }
-
-  loginGuestUser() {
-    this.form.get('usernameOrEmail')?.setValue('basic@examportal.com');
-    this.form.get('password')?.setValue('basic');
-    this.onSubmit();
   }
 
 }

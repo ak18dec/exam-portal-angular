@@ -1,8 +1,17 @@
-.example-spacer {
-    flex: 1 1 auto;
-    justify-content: space-evenly;
+mat-toolbar-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-ul li {
-    list-style: none;
+.nav-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-tabs > button {
+    font-size: 14px;
+    font-weight: 300;
+    min-width: 120px;
 }
