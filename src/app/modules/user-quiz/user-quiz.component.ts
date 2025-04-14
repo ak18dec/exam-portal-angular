@@ -7,9 +7,10 @@ import { TrackerService } from 'src/app/services/tracker.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
-  selector: 'app-user-quiz',
-  templateUrl: './user-quiz.component.html',
-  styleUrls: ['./user-quiz.component.scss']
+    selector: 'app-user-quiz',
+    templateUrl: './user-quiz.component.html',
+    styleUrls: ['./user-quiz.component.scss'],
+    standalone: false
 })
 export class UserQuizComponent implements OnInit {
 

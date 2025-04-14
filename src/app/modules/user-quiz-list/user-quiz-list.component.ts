@@ -5,9 +5,10 @@ import { of } from "rxjs";
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 @Component({
-  selector: 'app-user-quiz-list',
-  templateUrl: './user-quiz-list.component.html',
-  styleUrls: ['./user-quiz-list.component.scss']
+    selector: 'app-user-quiz-list',
+    templateUrl: './user-quiz-list.component.html',
+    styleUrls: ['./user-quiz-list.component.scss'],
+    standalone: false
 })
 export class UserQuizListComponent implements OnInit {
 

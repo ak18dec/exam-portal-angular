@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-guest-dialog',
-  templateUrl: './guest-dialog.component.html',
-  styleUrls: ['./guest-dialog.component.scss']
+    selector: 'app-guest-dialog',
+    templateUrl: './guest-dialog.component.html',
+    styleUrls: ['./guest-dialog.component.scss'],
+    standalone: false
 })
 export class GuestDialogComponent implements OnInit {
 

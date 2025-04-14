@@ -10,9 +10,10 @@ import { TopicService } from 'src/app/services/topic.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+    selector: 'app-question',
+    templateUrl: './question.component.html',
+    styleUrls: ['./question.component.scss'],
+    standalone: false
 })
 export class QuestionComponent implements OnInit {
 

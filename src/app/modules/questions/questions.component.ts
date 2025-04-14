@@ -7,9 +7,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-questions',
-  templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.scss']
+    selector: 'app-questions',
+    templateUrl: './questions.component.html',
+    styleUrls: ['./questions.component.scss'],
+    standalone: false
 })
 export class QuestionsComponent implements OnInit {
 

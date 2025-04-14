@@ -13,9 +13,10 @@ import { LocationStrategy } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-user-question',
-  templateUrl: './user-question.component.html',
-  styleUrls: ['./user-question.component.scss']
+    selector: 'app-user-question',
+    templateUrl: './user-question.component.html',
+    styleUrls: ['./user-question.component.scss'],
+    standalone: false
 })
 export class UserQuestionComponent implements OnInit, OnDestroy {
 

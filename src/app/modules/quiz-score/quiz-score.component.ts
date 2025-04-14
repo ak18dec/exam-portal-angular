@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-quiz-score',
-  templateUrl: './quiz-score.component.html',
-  styleUrls: ['./quiz-score.component.scss']
+    selector: 'app-quiz-score',
+    templateUrl: './quiz-score.component.html',
+    styleUrls: ['./quiz-score.component.scss'],
+    standalone: false
 })
 export class QuizScoreComponent implements OnInit {
 

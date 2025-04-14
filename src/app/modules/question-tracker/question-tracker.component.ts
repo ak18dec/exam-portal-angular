@@ -3,9 +3,10 @@ import { TimerService } from 'src/app/services/timer.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 
 @Component({
-  selector: 'app-question-tracker',
-  templateUrl: './question-tracker.component.html',
-  styleUrls: ['./question-tracker.component.scss']
+    selector: 'app-question-tracker',
+    templateUrl: './question-tracker.component.html',
+    styleUrls: ['./question-tracker.component.scss'],
+    standalone: false
 })
 export class QuestionTrackerComponent implements OnInit {
 

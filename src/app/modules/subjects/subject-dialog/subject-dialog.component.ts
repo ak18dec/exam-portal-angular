@@ -4,9 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'src/app/models/subject';
 
 @Component({
-  selector: 'app-subject-dialog',
-  templateUrl: './subject-dialog.component.html',
-  styleUrls: ['./subject-dialog.component.scss']
+    selector: 'app-subject-dialog',
+    templateUrl: './subject-dialog.component.html',
+    styleUrls: ['./subject-dialog.component.scss'],
+    standalone: false
 })
 export class SubjectDialogComponent implements OnInit {
 

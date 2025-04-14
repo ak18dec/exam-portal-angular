@@ -9,9 +9,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-topics',
-  templateUrl: './topics.component.html',
-  styleUrls: ['./topics.component.scss']
+    selector: 'app-topics',
+    templateUrl: './topics.component.html',
+    styleUrls: ['./topics.component.scss'],
+    standalone: false
 })
 export class TopicsComponent implements OnInit {
 

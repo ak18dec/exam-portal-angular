@@ -6,9 +6,10 @@ import { Topic } from 'src/app/models/topic';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
-  selector: 'app-topic-dialog',
-  templateUrl: './topic-dialog.component.html',
-  styleUrls: ['./topic-dialog.component.scss']
+    selector: 'app-topic-dialog',
+    templateUrl: './topic-dialog.component.html',
+    styleUrls: ['./topic-dialog.component.scss'],
+    standalone: false
 })
 export class TopicDialogComponent implements OnInit {
 
