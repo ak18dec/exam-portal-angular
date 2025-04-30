@@ -2,7 +2,7 @@
   "name": "exam-portal-angular",
   "version": "1.0.1",
   "engines": {
-    "node": "22.14.0",
+    "node": "22.15.0",
     "npm": "10.9.2"
   },
   "scripts": {
