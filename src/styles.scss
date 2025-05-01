@@ -1,9 +1,16 @@
 @use '@angular/material' as mat;
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 html {
     @include mat.theme((
         color: mat.$azure-palette,
         typography: Roboto,
         density: -2
+    ));
+
+    @include mat.card-overrides((
+        elevated-container-color: white,
     ));
 }
