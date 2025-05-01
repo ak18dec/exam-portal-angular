@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 mat-toolbar-row {
     display: flex;
     flex-direction: row;
@@ -10,8 +11,16 @@ mat-toolbar-row {
     justify-content: space-between;
 }
 
-.nav-tabs > button {
+.nav-tabs > a {
     font-size: 14px;
-    font-weight: 300;
-    min-width: 120px;
+    font-weight: 400;
+    min-width: 100px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        font-weight: 500;
+        font-size: 15px;
+        color: var(--mat-sys-on-primary-container);
+    }
 }

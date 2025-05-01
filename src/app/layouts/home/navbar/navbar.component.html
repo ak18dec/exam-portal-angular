@@ -3,12 +3,8 @@
     <object style="cursor: pointer; width: 300px;margin-top: 5px;" type="image/svg+xml"
       data="assets/logo-2.svg"></object>
     <div class="nav-tabs">
-      <button mat-icon-button routerLink="/login" [disableRipple]="true">
-        Login
-      </button>
-      <button mat-icon-button routerLink="/signup" [disableRipple]="true">
-        Register
-      </button>
+      <a [routerLink]="['/login']">Login</a>
+      <a [routerLink]="['/signup']">Register</a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
