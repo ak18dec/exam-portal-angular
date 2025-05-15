@@ -32,7 +32,6 @@ mat-card {
       text-decoration: none;
       float: right;
       font-size: small;
-      // color: var(--mat-sys-on-primary-container);
   }
 }
 
@@ -41,6 +40,8 @@ mat-form-field {
     @include mat.form-field-overrides ((
       outlined-caret-color: var(--mat-sys-primary),
       outlined-label-text-size: 14px,
+      outlined-outline-color: #c4c6d0,
+      outlined-hover-outline-color: var(--mat-sys-primary),
     ));
 }
 
