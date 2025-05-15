@@ -43,3 +43,20 @@ export const authInterceptorProviders = [
         multi: true
     }
 ]
+
+/** Notes:
+ * When you set-> multi: true
+ * You're telling Angular:
+    “I want to add this interceptor to a list of interceptors associated with the HTTP_INTERCEPTORS token, 
+    not replace any existing ones.”
+
+    When you omit multi: true
+    Then Angular will replace any previous interceptors with just this one. That means only one interceptor 
+    will be active — the last one registered.
+
+    Since you often need multiple interceptors (e.g., for auth, logging, error handling), 
+    you must use multi: true so Angular can keep all of them in a chain.
+
+
+    
+ */

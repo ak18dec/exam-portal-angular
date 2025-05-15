@@ -32,7 +32,7 @@ mat-card {
       text-decoration: none;
       float: right;
       font-size: small;
-      color: var(--mat-sys-on-primary-container);
+      // color: var(--mat-sys-on-primary-container);
   }
 }
 
@@ -55,7 +55,7 @@ mat-form-field {
 p a {
     text-decoration: none;
     font-weight: bold;
-    color: var(--mat-sys-on-primary-container);
+    // color: var(--mat-sys-on-primary-container);
 }
 .login-logo {
     height: 250px;

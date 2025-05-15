@@ -14,3 +14,8 @@ html {
         elevated-container-color: white,
     ));
 }
+:root {
+    --mdc-filled-button-container-height: 40px;
+    --mdc-protected-button-container-height: 40px;
+    --mdc-outlined-button-container-height: 40px;
+}
