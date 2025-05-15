@@ -39,9 +39,8 @@ mat-card {
 mat-form-field {
     display: block;
     @include mat.form-field-overrides ((
-      filled-container-color: none,
-      filled-hover-active-indicator-color: none,
-      filled-focus-active-indicator-color: none
+      outlined-caret-color: var(--mat-sys-primary),
+      outlined-label-text-size: 14px,
     ));
 }
 
@@ -55,7 +54,6 @@ mat-form-field {
 p a {
     text-decoration: none;
     font-weight: bold;
-    // color: var(--mat-sys-on-primary-container);
 }
 .login-logo {
     height: 250px;

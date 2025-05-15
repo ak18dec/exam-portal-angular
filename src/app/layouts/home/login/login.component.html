@@ -8,14 +8,14 @@
         </mat-card-title>
         <mat-card-subtitle>Continue by logging into your account</mat-card-subtitle>
         <object class="login-logo" type="image/svg+xml" data="assets/login/login-2.svg"></object>
-        <mat-form-field class="full-width-input">
+        <mat-form-field class="full-width-input" appearance="outline">
           <mat-label>Username or Email</mat-label>
           <input matInput formControlName="usernameOrEmail">
         </mat-form-field>
-        <mat-form-field class="full-width-input">
-          <p>Password</p>
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-label>Password</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 1.2;vertical-align: -3vh;margin-right: 3px;">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" style="zoom: 0.85;vertical-align: -3vh;margin-right: 16px;">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
@@ -30,7 +30,7 @@
         </span>
       </form>
       <br>
-      <p>Don't have an account? <a mat-button routerLink="/signup">Create</a></p>
+      <p style="margin: 0;font-size: 14px;">Don't have an account? <a mat-button routerLink="/signup">Create</a></p>
     </mat-card-content>
   </mat-card>
   </div>
