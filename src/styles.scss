@@ -19,6 +19,10 @@ html {
         unselected-hover-state-layer-color: var(--mat-sys-primary),
         label-text-color: var(--mat-sys-primary),
     ));
+
+    @include mat.radio-overrides((
+        unselected-hover-icon-color: var(--mat-sys-primary),
+    ));
 }
 :root {
     --mdc-filled-button-container-height: 40px;
