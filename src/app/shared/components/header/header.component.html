@@ -1,16 +1,19 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <button mat-icon-button (click)="toggleSideBar()" *ngIf="showToggleOption">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
+        <div class="section-left">
+            <button mat-icon-button (click)="toggleSideBar()" *ngIf="showToggleOption">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <h2 routerLink="/" style="cursor: pointer;">Exam Portal</h2>
 
-        <button mat-icon-button (click)="toggleSideBar()" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
-            <mat-icon>{{ navService.toggleOpenIcon ? 'close' : 'menu' }}</mat-icon>
-        </button>
+            <button mat-icon-button (click)="toggleSideBar()" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">
+                <mat-icon>{{ navService.toggleOpenIcon ? 'close' : 'menu' }}</mat-icon>
+            </button>
+        </div>
+        
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-start" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && !isMobileDevice">
-            <ul fxLayout="row" fxLayoutGap="20px" class="user-menu">
+        <div *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && !isMobileDevice" class="section-center">
+            <ul class="user-menu">
                 <li>
                     <button mat-button [routerLink]="['/user/quizzes']" routerLinkActive="active">
                         Quizzes
@@ -24,8 +27,8 @@
             </ul>
         </div>
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end" *ngIf="!isMobileDevice">
-            <ul fxLayout="row" fxLayoutGap="20px">
+        <div *ngIf="!isMobileDevice" class="section-right">
+            <ul class="context-menu">
                 <li>
                     <button mat-icon-button>
                         <mat-icon>settings</mat-icon>
