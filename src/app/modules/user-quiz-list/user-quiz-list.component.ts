@@ -19,7 +19,7 @@ export class UserQuizListComponent implements OnInit {
   constructor(private router: Router, private quizService: QuizService) { }
 
   ngOnInit(): void {
-    this.getAllQuizes();
+    // this.getAllQuizes();
   }
 
   filteredList$ = this.search.valueChanges.pipe(
