@@ -1,5 +1,5 @@
-<mat-list style="margin-top: 50px;padding-top: 20px;">
-    <div mat-subheader>Available Quizzes ({{ (filteredList$ | async)?.length }})</div><!-- ({{($search | async)?.length}})-->
+<!-- <mat-list style="margin-top: 50px;padding-top: 20px;">
+    <div mat-subheader>Available Quizzes ({{ (filteredList$ | async)?.length }})</div>
     <mat-form-field style="width: 95%; margin-left: 10px;" *ngIf="true">
       <mat-icon matPrefix>search</mat-icon>
       <input matInput autocomplete="off" style="margin-bottom: 5px;padding-left: 5px;" [formControl]="search">
@@ -14,4 +14,47 @@
         </p>
       </mat-card>
     </div>
-  </mat-list>
+  </mat-list> -->
+  <mat-card class="mat-elevation-z0 outline" appearance="outlined">
+    <mat-card-title>Create Quiz</mat-card-title>
+    <mat-divider></mat-divider>
+    <div class="container">
+      <mat-card-content>
+      <form>
+        <mat-form-field appearance="outline">
+          <mat-label>Number of Questions</mat-label>
+          <input matInput formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Category</mat-label>
+          <mat-select>
+            @for (category of categories; track category) {
+            <mat-option [value]="category.label">{{category.label}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Difficulty</mat-label>
+          <select matNativeControl required>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Type</mat-label>
+          <select matNativeControl required>
+            <option value="any">Any Type</option>
+            <option value="multiple">Multiple Choice</option>
+            <option value="boolean">True / False</option>
+          </select>
+        </mat-form-field>
+        <div class="form-buttons">
+          <button mat-flat-button color="primary" type="submit">Generate Quiz</button>
+          <button mat-stroked-button type="button">Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+    </div>
+    
+  </mat-card>
