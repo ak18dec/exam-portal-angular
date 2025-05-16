@@ -3,9 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Proficiency } from 'src/app/models/proficiency';
 import { Question } from 'src/app/models/question';
 import { QuestionChoice } from 'src/app/models/questionchoice';
-import { Topic } from 'src/app/models/topic';
 import { QuestionService } from 'src/app/services/question.service';
-import { TopicService } from 'src/app/services/topic.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -22,14 +20,12 @@ export class QuestionComponent implements OnInit {
   question: Question = {
     id: -1,
     description: '',
-    topicId: -1,
     enabled: true,
     proficiency: '',
     questionChoices:[]
   }
 
   proficiencyList: Proficiency[] = [];
-  topics: Topic[] = [];
 
   choices: QuestionChoice[] = [
     {id: -1, description: '', enabled: true, correct: false, questionId: -1},
@@ -46,15 +42,12 @@ export class QuestionComponent implements OnInit {
 
   constructor(
     private questionService: QuestionService, 
-    private topicService: TopicService, 
     private route : ActivatedRoute, 
     private router: Router
     ) { }
 
   ngOnInit() {
     this.getProficiencies();
-    this.topics = [];
-    this.getTopics();
     if(this.router.url.includes('/new')){
       this.addQuestion = true;
     }else{
@@ -74,31 +67,10 @@ export class QuestionComponent implements OnInit {
     ]
   }
 
-  getTopics() {
-    this.topicService.getTopics().subscribe(
-      (data: any) => {
-        data.forEach((d: Topic) => {
-          if(d.enabled){
-            this.topics.push(Object.assign({}, d));
-          }
-        });
-        // console.log(this.topics);
-      },
-      (error)=>{
-        // this._snackBar.open('Error while fetching topics list','',{
-        //   duration: 3000
-        // });
-        console.log(error);
-      }
-    );
-  }
-
-  
   resetForm(){
     this.question = {
       id: -1,
       description: '',
-      topicId: -1,
       enabled: true,
       proficiency: '',
       questionChoices:[]
@@ -131,16 +103,10 @@ export class QuestionComponent implements OnInit {
     )
   }
 
-  getTopicName(topicId: number) {
-    return this.topics.find(t => t.id === topicId)?.title;
-  }
-
   selectCorrectOption(optionId: number){
     this.choices.forEach(ch => ch.correct = false);
     this.choices[optionId].correct = true;
   }
-
-  onTopicSelect(){ }
 
   getQuestionById(quesId: number){
     this.questionService.getQuestionById(quesId).subscribe(
@@ -161,7 +127,6 @@ export class QuestionComponent implements OnInit {
     this.question = {
       id: ques.id,
       description: ques.description,
-      topicId: ques.topicId,
       enabled: ques.enabled,
       proficiency: ques.proficiency,
       questionChoices: Object.assign([], ques.questionChoices)
@@ -185,7 +150,6 @@ export class QuestionComponent implements OnInit {
         description: updatedData.description,
         enabled: updatedData.enabled,
         proficiency: updatedData.proficiency,
-        topicId: updatedData.topicId,
         questionChoices: updatedChoices
       }
 
@@ -204,7 +168,4 @@ export class QuestionComponent implements OnInit {
     }
     
   }
-
-
-
 }

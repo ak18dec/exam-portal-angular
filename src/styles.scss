@@ -23,6 +23,14 @@ html {
     @include mat.radio-overrides((
         unselected-hover-icon-color: var(--mat-sys-primary),
     ));
+
+    @include mat.paginator-overrides((
+        enabled-icon-color: var(--mat-sys-primary),
+    ));
+
+    @include mat.sidenav-overrides((
+        container-background-color: white,
+    ));
 }
 :root {
     --mdc-filled-button-container-height: 40px;

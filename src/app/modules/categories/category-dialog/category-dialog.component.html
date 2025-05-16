@@ -1,14 +1,13 @@
 <h1 mat-dialog-title>{{ data.id === -1 ? 'New Subject' : 'Update Subject'}}</h1>
-<form (ngSubmit)="addNewSubject(newSubjectForm)" #newSubjectForm="ngForm">
+<form (ngSubmit)="addNewCategory(newCategoryForm)" #newCategoryForm="ngForm">
   <mat-dialog-content>
-    <mat-form-field>
-      <p>Title</p>
-      <input matInput name="title" [(ngModel)]="data.title">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput name="title" [(ngModel)]="data.label">
     </mat-form-field>
-    <br>
     <div class="radio-container">
       <p>Enabled</p>
-      <mat-radio-group name="enabled" [(ngModel)]="data.enabled" (change)="onSubjectStatusSelect()" color="primary">
+      <mat-radio-group name="enabled" [(ngModel)]="data.enabled" (change)="onCategoryStatusSelect()" color="primary">
         <mat-radio-button [value]="true">Active</mat-radio-button>
         <mat-radio-button [value]="false">Inactive</mat-radio-button>
       </mat-radio-group>

@@ -4,8 +4,7 @@ import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
 import { LoginComponent } from './layouts/home/login/login.component';
 import { SignupComponent } from './layouts/home/signup/signup.component';
 import { QuestionsComponent } from './modules/questions/questions.component';
-import { SubjectsComponent } from './modules/subjects/subjects.component';
-import { TopicsComponent } from './modules/topics/topics.component';
+import { CategoryComponent } from './modules/categories/categories.component';
 import { DefaultsComponent } from './layouts/defaults/defaults.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
@@ -78,12 +77,8 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'subjects',
-        component: SubjectsComponent
-      },
-      {
-        path: 'topics',
-        component: TopicsComponent
+        path: 'categories',
+        component: CategoryComponent
       },
       {
         path: 'quizes',

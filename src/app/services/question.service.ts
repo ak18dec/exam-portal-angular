@@ -31,14 +31,12 @@ export class QuestionService {
       id: 0,
       description: '',
       proficiency: '',
-      topicId: 0,
       enabled: true,
       questionChoices: []
     }
 
     question.description = newQuestion.description;
     question.proficiency = newQuestion.proficiency;
-    question.topicId = newQuestion.topicId;
     question.enabled = newQuestion.enabled;
     question.questionChoices = newQuestion.questionChoices;
 

@@ -18,7 +18,7 @@ export class QuestionsComponent implements OnInit {
 
   questions: Question[]=[];
 
-  columns: string[] = ['id', 'description', 'proficiency','topicId','enabled', 'action']
+  columns: string[] = ['id', 'description', 'proficiency','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
@@ -34,6 +34,7 @@ export class QuestionsComponent implements OnInit {
     this.questionService.getQuestions().subscribe(
       (res: any) => {
         this.questions = res;
+        this.questions = [];  
         this.dataSource = new MatTableDataSource(this.questions);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -71,7 +72,4 @@ export class QuestionsComponent implements OnInit {
       }
     )
   }
-
-  
-
 }

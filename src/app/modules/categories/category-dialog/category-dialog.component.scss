@@ -2,6 +2,15 @@
     margin-left: 16px;
 }
 
+.radio-container {
+    mat-radio-group {
+        display: flex;
+        mat-radio-button {
+            min-width: 50%;
+        }
+    }
+}
+
 mat-dialog-content {
     overflow: hidden;
     display: flex;
@@ -11,4 +20,7 @@ mat-dialog-content {
 
 mat-dialog-actions{
     justify-content: space-between;
+    button {
+        min-width: 120px;
+    }
 }

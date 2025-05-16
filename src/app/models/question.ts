@@ -5,6 +5,5 @@ export interface Question {
     description: string;
     proficiency: string;
     enabled: boolean;
-    topicId: number;
     questionChoices: QuestionChoice[];
 }
