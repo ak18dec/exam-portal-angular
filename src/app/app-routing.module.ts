@@ -111,7 +111,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserHomeComponent,
-    canActivate: [UserGuard],
+    // canActivate: [UserGuard],
     children: [
       {
         path: '',

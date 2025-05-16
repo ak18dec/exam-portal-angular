@@ -27,6 +27,19 @@ mat-toolbar-row {
     }
 }
 
+.mat-icon{
+    color: var(--mat-sys-primary);
+}
+
+.center-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-icon mat-icon {
+  margin: 0; /* Removes default margin on the icon */
+}
 
 ul li {
     list-style: none;

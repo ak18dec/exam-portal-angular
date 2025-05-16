@@ -30,18 +30,8 @@
         <div *ngIf="!isMobileDevice" class="section-right">
             <ul class="context-menu">
                 <li>
-                    <button mat-icon-button>
-                        <mat-icon>settings</mat-icon>
-                    </button>
-                </li>
-                <li>
-                    <button mat-icon-button>
-                        <mat-icon>help_outline</mat-icon>
-                    </button>
-                </li>
-                <li>
-                    <button mat-button [matMenuTriggerFor]="menu">
-                        <mat-icon>person_outline</mat-icon>
+                    <button mat-button [matMenuTriggerFor]="menu" class="center-icon">
+                        <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item (click)="account()">
