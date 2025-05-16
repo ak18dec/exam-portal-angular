@@ -109,4 +109,10 @@ export class QuizService {
       }
       return null;
     }
+
+  generateQuiz(form: any): Observable<any> {
+    const params = `amount=${form.noOfQues}&category=${form.categoryId}&difficulty=${form.difficulty}`
+    let url = `https://thingproxy.freeboard.io/fetch/https://opentdb.com/api.php?${params}`
+    return this.http.get<any>(url);
+  } 
 }

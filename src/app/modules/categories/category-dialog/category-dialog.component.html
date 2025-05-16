@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ data.id === -1 ? 'New Subject' : 'Update Subject'}}</h1>
+<h1 mat-dialog-title>{{ data.id === '-1' ? 'New Subject' : 'Update Subject'}}</h1>
 <form (ngSubmit)="addNewCategory(newCategoryForm)" #newCategoryForm="ngForm">
   <mat-dialog-content>
     <mat-form-field appearance="outline">
@@ -15,6 +15,6 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-stroked-button mat-dialog-close>Cancel</button>
-    <button mat-flat-button color="primary" type="submit">{{ data.id === -1 ? 'Add' : 'Update' }}</button>
+    <button mat-flat-button color="primary" type="submit">{{ data.id === '-1' ? 'Add' : 'Update' }}</button>
   </mat-dialog-actions>
 </form>

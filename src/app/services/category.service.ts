@@ -44,7 +44,7 @@ export class CategoryService {
 
   //DELETE APIs
   public deleteCategory(id: number): void {
-    this.categories.set(this.categories().filter(c => c.id !== id));
+    // this.categories.set(this.categories().filter(c => c.id !== id));
   }
 
 }

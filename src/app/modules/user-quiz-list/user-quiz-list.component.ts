@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 @Component({
     selector: 'app-user-quiz-list',
     templateUrl: './user-quiz-list.component.html',
@@ -15,7 +16,14 @@ import { Category } from 'src/app/models/category';
 export class UserQuizListComponent implements OnInit {
 
   categoryService = inject(CategoryService)
+  quizService = inject(QuizService)
   categories: Category[] = []
+  quizForm = new FormGroup({
+    noOfQues: new FormControl(),
+    categoryId: new FormControl(0),
+    difficulty: new FormControl(),
+    type: new FormControl()
+  })
 
   // search = new UntypedFormControl();
   // data: any[] = [];
@@ -60,5 +68,17 @@ export class UserQuizListComponent implements OnInit {
   //       )
   //   }
   // }
+
+  generateQuiz() {
+    // console.log(this.quizForm.value)
+    this.quizService.generateQuiz(this.quizForm.value).subscribe(
+      (res: any) => {
+        console.log(res)
+      },
+      (error) => {
+        console.error(error)
+      }
+    )
+  }
 
 }

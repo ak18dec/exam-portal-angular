@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
   newCategoryData: Category = {
-      id: -1,
+      id: '',
       label: '',
       enabled: true
   }

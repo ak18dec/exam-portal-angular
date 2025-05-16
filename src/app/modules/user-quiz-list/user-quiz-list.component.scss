@@ -76,3 +76,23 @@ mat-form-field {
     ));
 }
 
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    // margin-bottom: -0.5em;
+    margin-left: -0.5em;
+    padding-bottom: 20px;
+  
+    button {
+      margin-bottom: 0.5em;
+      margin-left: 0.5em;
+      width: 100%;
+    }
+
+    @media (min-width: 32rem) {
+      flex-direction: row;
+        button {
+            flex-basis: 100%;
+        }
+    }
+}
