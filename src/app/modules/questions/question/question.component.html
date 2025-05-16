@@ -4,7 +4,7 @@
     <mat-card-title>{{ addQuestion ? 'Add New Question' : 'Edit Question Details' }}</mat-card-title>
     <mat-divider></mat-divider>
     <br>
-    <form (ngSubmit)="onFormSubmit(newQuestionForm)" #newQuestionForm="ngForm">
+    <!-- <form (ngSubmit)="onFormSubmit(newQuestionForm)" #newQuestionForm="ngForm">
         <mat-card-content>
             <mat-button-toggle-group name="proficiency" aria-label="Proficiency Level" [value]="question.proficiency">
                 <mat-button-toggle *ngFor="let proficiency of proficiencyList"
@@ -14,12 +14,12 @@
             </mat-button-toggle-group>
             <br />
             <br >
-            <!-- <ckeditor 
+            <ckeditor 
                 [editor]="Editor"
                 [config]="{ placeholder:'Enter question description here...'}"
                 [(ngModel)]="question.description"
                 name="questionDescription">
-            </ckeditor> -->
+            </ckeditor>
             <br>
 
             <p>Enter Options</p>
@@ -62,5 +62,5 @@
                 <button mat-stroked-button (click)="resetForm()" type="button" >Cancel</button>
             </div>
         </mat-card-content>
-    </form>
+    </form> -->
 </mat-card>

@@ -107,20 +107,19 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
   onOptionSelect() {
     let currQues = this.questions[this.currentQuesNumber];
-    let usrAns = currQues.questionChoices.find(ch => ch.id === this.currentSelectedOptionId)?.description
-    let alreadyAnswered = this.questionAnswered.find(q => q.quesId === currQues.id);
-    if(alreadyAnswered){
-      let index = this.questionAnswered.findIndex(q => q.quesId === alreadyAnswered.quesId);
-      this.questionAnswered[index].ansMarked = this.currentSelectedOptionId;
-      this.questionAnswered[index].ans = usrAns;
-    }else {
-      this.questionAnswered.push({
-        quesId: currQues.id,
-        quesContent: currQues.description,
-        ansMarked: this.currentSelectedOptionId,
-        ans: usrAns
-      })
-    }
+    // let usrAns = currQues.questionChoices.find(ch => ch.id === this.currentSelectedOptionId)?.description
+    // let alreadyAnswered = this.questionAnswered.find(q => q.quesId === currQues.id);
+    // if(alreadyAnswered){
+    //   let index = this.questionAnswered.findIndex(q => q.quesId === alreadyAnswered.quesId);
+    //   this.questionAnswered[index].ansMarked = this.currentSelectedOptionId;
+    //   this.questionAnswered[index].ans = '';
+    // }else {
+    //   this.questionAnswered.push({
+    //     // quesContent: currQues.description,
+    //     // ansMarked: this.currentSelectedOptionId,
+    //     // ans: usrAns
+    //   })
+    // }
   }
 
   onSubmitConfirmDialog() {
@@ -132,18 +131,18 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
       this.currentSelectedOptionId = -1;
     }else {
       const ques = this.findMarkedQues();
-      if(ques){
-        this.currentSelectedOptionId = ques.ansMarked;
-      }else {
-        this.currentSelectedOptionId = -1;
-      }
+      // if(ques){
+      //   this.currentSelectedOptionId = ques.ansMarked;
+      // }else {
+      //   this.currentSelectedOptionId = -1;
+      // }
     }
   }
 
   findMarkedQues() {
-    const currQuesId = this.questions[this.currentQuesNumber].id;
-    const ques = this.questionAnswered.find(q => q.quesId === currQuesId);
-    return ques;
+    // const currQuesId = this.questions[this.currentQuesNumber].id;
+    // const ques = this.questionAnswered.find(q => q.quesId === currQuesId);
+    // return ques;
   }
 
   submitQuiz(timeLeft: number) {
@@ -210,7 +209,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
   unmarkCurrentQuestion() {
     const quesToUnmark = this.findMarkedQues();
-    this.questionAnswered = [...this.questionAnswered.filter(q => q.quesId != quesToUnmark.quesId)];
+    // this.questionAnswered = [...this.questionAnswered.filter(q => q.quesId != quesToUnmark.quesId)];
     this.currentSelectedOptionId = -1;
   }
 

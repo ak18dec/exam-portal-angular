@@ -1,9 +1,8 @@
-import { QuestionChoice } from "./questionchoice";
-
 export interface Question {
-    id: number;
-    description: string;
-    proficiency: string;
-    enabled: boolean;
-    questionChoices: QuestionChoice[];
+  type: string;
+  difficulty: string;
+  category: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
 }

@@ -18,7 +18,7 @@ export class QuestionsComponent implements OnInit {
 
   questions: Question[]=[];
 
-  columns: string[] = ['id', 'description', 'proficiency','enabled', 'action']
+  columns: string[] = ['id', 'question', 'difficulty','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
@@ -54,22 +54,22 @@ export class QuestionsComponent implements OnInit {
   }
 
   deleteQuestion(data: any){
-    this.questionService.deleteQuestion(data.id).subscribe(
-      (res: any) => {
-        if(res){
-          let idxToDelete = this.questions.findIndex(u => u.id === data.id);
-          this.questions.splice(idxToDelete, 1);
-          this.dataSource._updateChangeSubscription();
+    // this.questionService.deleteQuestion(data.id).subscribe(
+    //   (res: any) => {
+    //     if(res){
+    //       let idxToDelete = this.questions.findIndex(u => u.id === data.id);
+    //       this.questions.splice(idxToDelete, 1);
+    //       this.dataSource._updateChangeSubscription();
 
-          // this._snackBar.open(`User removed successfully`,'',{
-          //   duration: 3000
-          // });
-          // this.freshForm();
-        }
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
+    //       // this._snackBar.open(`User removed successfully`,'',{
+    //       //   duration: 3000
+    //       // });
+    //       // this.freshForm();
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log(error)
+    //   }
+    // )
   }
 }
