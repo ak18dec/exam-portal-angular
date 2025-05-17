@@ -69,11 +69,25 @@ export class UserQuizListComponent implements OnInit {
   //   }
   // }
 
+  validateParams(): boolean {
+    const form: any = this.quizForm.value;
+    for (let key in form) {
+      if (form[key] === null ||
+        form[key] === undefined ||
+        form[key] === '' ||
+        (typeof form[key] === 'string' && form[key].trim() === '')
+      ) {
+        return false; // One or more properties are empty
+      }
+    }
+    return true; // All properties have values
+  }
   generateQuiz() {
     // console.log(this.quizForm.value)
     this.quizService.generateQuiz(this.quizForm.value).subscribe(
       (res: any) => {
         console.log(res)
+        this.quizForm.reset();
       },
       (error) => {
         console.error(error)

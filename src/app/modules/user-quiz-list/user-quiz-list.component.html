@@ -35,7 +35,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Select Difficulty</mat-label>
-          <select matNativeControl required formControlName="difficulty">
+          <select matNativeControl formControlName="difficulty">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
@@ -43,14 +43,14 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Select Type</mat-label>
-          <select matNativeControl required formControlName="type">
+          <select matNativeControl formControlName="type">
             <option value="any">Any Type</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True / False</option>
           </select>
         </mat-form-field>
         <div class="form-buttons">
-          <button mat-flat-button color="primary" type="submit">Generate Quiz</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="!validateParams()">Generate Quiz</button>
           <button mat-stroked-button type="button">Cancel</button>
         </div>
       </form>
