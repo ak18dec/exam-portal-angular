@@ -1,15 +1,41 @@
-.mat-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+// .mat-card {
+//     height: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+// }
+
+// .mat-card-content {
+//     flex-grow: 1;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+// }
+@use '@angular/material' as mat;
+
+mat-card {
+    margin: auto;
+    padding: 30px;
+    // margin-top: 60px;
+    @include mat.card-overrides((
+        outlined-container-color: white,
+        title-text-line-height: 20px,
+    ));
 }
 
-.mat-card-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+mat-card-content {
+    margin-top: 30px;
+    max-width: 450px;
+}
+
+.mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.mat-mdc-card-title {
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 500
 }
 
 .content {

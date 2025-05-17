@@ -19,7 +19,7 @@ export class UserQuizComponent implements OnInit {
   @Input() quizId: number = -1;
   dataLoaded: boolean = false;
 
-  quizTime: number = -1;
+  quizTime: number = 10;
 
   quizMetaData: any;
 
@@ -36,6 +36,9 @@ export class UserQuizComponent implements OnInit {
   eachQuestionWeightage: number = 0;
 
   totalTime: string;
+
+  minutes: string = '00';
+  seconds: string = '00';
 
   constructor(
     private quizService: QuizService,
@@ -61,14 +64,15 @@ export class UserQuizComponent implements OnInit {
   }
 
   prepareQuiz(id: number) {
-    this.getQuestionsByQuizId(this.quizId);
-    this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
+    // this.getQuestionsByQuizId(this.quizId);
+    // this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
     if(this.quizTime) {
       this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
     }
-    this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
+    // this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
     this.timer = this.quizTime * 60;
     this.stopTimer = false;
+    this.startQuiz();
     
   }
 
@@ -125,9 +129,13 @@ export class UserQuizComponent implements OnInit {
     
     time = `${minStr}:${secStr} / ${this.totalTime}`;
 
-    if(min <= 0 && sec <= 0){
-      time = 'Times Up';
-    }
+    this.minutes = minStr;
+    this.seconds = secStr;
+
+    // if(min <= 0 && sec <= 0){
+    //   time = 'Times Up';
+    // }
+    
     return time;
   }
 
@@ -138,6 +146,7 @@ export class UserQuizComponent implements OnInit {
   startQuiz() {
     this.loadInstructions = false;
     this.startTimer();
+    this.formattedTime();
   }
 
 }

@@ -1,43 +1,9 @@
-<div class="main" *ngIf="loadInstructions">
-    <div class="content">
-        <mat-card>
-            <app-back [path]="'/user/quizzes'" [label]="'Back to list'"></app-back>
-            <mat-card-header>
-                <mat-card-title>Read the instructions carefully</mat-card-title>
-                <mat-card-subtitle>One more step to start quiz</mat-card-subtitle>
-              </mat-card-header>
-              <mat-divider></mat-divider>
-              <br>
-              <mat-card-content>
-                <h3>Important Instructions</h3>
-                <ul>
-                    <li>This quiz is only for practice purpose.</li>
-                    <li>You can attempt the quiz any number of times.</li>
-                    <li>You have to submit quiz within <strong>{{ quizTime }} minutes.</strong></li>
-                    <li>There are <strong>{{ quizQuestions.length }} questions</strong> in this quiz.</li>
-                    <li>Each question carries <strong>{{ eachQuestionWeightage }} marks.</strong></li>
-                    <li>All questions are of Single Choice MCQ Type.</li>
-                </ul>
-                <br>
-                <h3>Attempting Quiz</h3>
-                <ul>
-                    <li>Click <strong>Start Quiz</strong> button to start the quiz</li>
-                    <li>Timer will start the moment you click on <strong>Start Quiz</strong> button</li>
-                    <li>You cannot resume the quiz, if interrupted due to any reason</li>
-                    <li>Click on <strong>Finish Quiz</strong> button to submit the quiz</li>
-                    <li>Quiz will be auto submit if time expires.</li>
-                    <li>Score will be generated after submission of quiz.</li>
-                </ul>
-                  <button class="start-quiz" mat-flat-button color="primary" (click)="startQuiz()">Start Quiz</button>
-              </mat-card-content>
-        </mat-card>
-    </div>
-</div>  
-
-<div class="main" *ngIf="!loadInstructions && dataLoaded && !scoreGenerated">
+<!-- <div class="main">
     <div class="actions">
         <p class="timer">Time: {{ formattedTime() }}</p>
-        <button type="button" mat-raised-button color="primary" (click)="finishQuiz()" [disabled]="stopTimer">Finish Quiz</button>
+        <span></span>
+        <button type="button" mat-flat-button color="primary" (click)="finishQuiz()" [disabled]="stopTimer">Finish
+            Quiz</button>
     </div>
     <div class="quiz">
         <app-user-question [questions]="quizQuestions" [quizMetaData]="quizMetaData"></app-user-question>
@@ -46,4 +12,22 @@
 
 <div *ngIf="scoreGenerated" class="score-main">
     <app-quiz-score [data]="scoreDetails"></app-quiz-score>
+</div> -->
+
+
+
+<div class="timer-main">
+    <div class="container">
+        <div class="timer">
+            <div class="time">
+                <span>{{ minutes }}</span>
+            </div>
+            <div class="separator">
+                <span>:</span>
+            </div>
+            <div class="time">
+                <span>{{ seconds }}</span>
+            </div>
+        </div>
+    </div>
 </div>
