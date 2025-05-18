@@ -18,7 +18,19 @@
     <div class="question">
         <div class="question-main">
             <div class="desc">
-                <p>{{ quizQues.question }}</p>
+                <a mat-button class="ques-nav" 
+                    (click)="navigateQues('prev')" 
+                    [disabled]="displayedQuesIndex===0">
+                    <!-- <mat-icon>arrow_back</mat-icon> -->
+                     Back
+                </a>
+                <div class="ques-text"><p>{{ quizQues.question }}</p></div>
+                <a mat-button class="ques-nav" 
+                    (click)="navigateQues('next')"
+                    >
+                    <!-- <mat-icon>arrow_forward</mat-icon> -->
+                    {{ displayedQuesIndex !== totalQuestionLength ? 'Next' : 'Submit' }}
+                </a>
             </div>
             <div class="choices">
                 @for (choice of allChoices; track $index) {

@@ -54,6 +54,8 @@ export class UserQuizComponent implements OnInit {
 
   allChoices: any = [];
   selectedChoiceIndex: number = -1;
+  displayedQuesIndex = 0;
+  totalQuestionLength = 1;
 
   constructor(
     private quizService: QuizService,
@@ -177,5 +179,18 @@ export class UserQuizComponent implements OnInit {
   }
   return array;
 }
+
+  navigateQues(direction: 'prev' | 'next') {
+    let index = 0;
+    if(direction === 'next') {
+      this.fetchQuestion(index+1);
+    }else {
+      this.fetchQuestion(index-1);
+    }
+  }
+
+  fetchQuestion(index: number) {
+
+  }
 
 }
