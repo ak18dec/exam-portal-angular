@@ -39,6 +39,21 @@ export class UserQuizComponent implements OnInit {
 
   minutes: string = '00';
   seconds: string = '00';
+  quizQues: any = {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "Macintosh has named six of its operating systems after big cats. What big cat did Macintosh name their 2007 release after? ",
+    "correct_answer": "Leopard",
+    "incorrect_answers": [
+      "Tiger",
+      "Panther",
+      "Puma"
+    ]
+  }
+
+  allChoices: any = [];
+  selectedChoiceIndex: number = -1;
 
   constructor(
     private quizService: QuizService,
@@ -53,6 +68,7 @@ export class UserQuizComponent implements OnInit {
         this.quizId = id;
         this.prepareQuiz(this.quizId);
       }
+      this.randomizeChoices();
     })
 
     this.scoreSubscription = this.usrQuizService.receiveScoreGeneratedEvent().subscribe(resp => {
@@ -148,5 +164,18 @@ export class UserQuizComponent implements OnInit {
     this.startTimer();
     this.formattedTime();
   }
+
+  randomizeChoices() {
+    this.allChoices = [...this.quizQues.incorrect_answers, this.quizQues.correct_answer];
+    this.shuffleArray(this.allChoices);
+  }
+
+  shuffleArray(array: any) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    [array[i], array[j]] = [array[j], array[i]]; // swap elements
+  }
+  return array;
+}
 
 }

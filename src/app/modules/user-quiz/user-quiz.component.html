@@ -17,8 +17,21 @@
 <div class="main">
     <div class="question">
         <div class="question-main">
-            <div class="desc"></div>
-            <div class="choices"></div>
+            <div class="desc">
+                <p>{{ quizQues.question }}</p>
+            </div>
+            <div class="choices">
+                @for (choice of allChoices; track $index) {
+                    <span class="choice" 
+                        [class.selected]="$index === selectedChoiceIndex"
+                        (click)="selectedChoiceIndex=$index">
+                        <span class="choice-text">{{ choice }}</span>
+                        <mat-icon class="check-icon" *ngIf="$index === selectedChoiceIndex">
+                            check_circle_outline
+                        </mat-icon>
+                    </span>
+                }
+            </div>
         </div>
         
     </div>
