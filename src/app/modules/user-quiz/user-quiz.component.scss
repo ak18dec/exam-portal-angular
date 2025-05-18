@@ -84,9 +84,7 @@
 
                     &:not(.selected):hover {
                         box-shadow: 5px;
-                        // background-color: var(--mat-sys-primary-container);
-                        background-color: #005dbbac;
-                        color: white;
+                        background-color: var(--mat-sys-primary-fixed-dim);
                     }
 
                     &.selected {
