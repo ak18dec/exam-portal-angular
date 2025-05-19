@@ -7,29 +7,37 @@ import { QuizService } from 'src/app/services/quiz.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Question } from 'src/app/models/question';
+import { QuestionService } from 'src/app/services/question.service';
 @Component({
-    selector: 'app-user-quiz-list',
-    templateUrl: './user-quiz-list.component.html',
-    styleUrls: ['./user-quiz-list.component.scss'],
-    standalone: false
+  selector: 'app-user-quiz-list',
+  templateUrl: './user-quiz-list.component.html',
+  styleUrls: ['./user-quiz-list.component.scss'],
+  standalone: false,
 })
 export class UserQuizListComponent implements OnInit {
+  categoryService = inject(CategoryService);
+  quizService = inject(QuizService);
+  questionService = inject(QuestionService);
+  private router = inject(Router);
 
-  categoryService = inject(CategoryService)
-  quizService = inject(QuizService)
-  categories: Category[] = []
+  categories: Category[] = [];
   quizForm = new FormGroup({
     noOfQues: new FormControl(),
     categoryId: new FormControl(0),
     difficulty: new FormControl(),
-    type: new FormControl()
-  })
+    type: new FormControl(),
+  });
+
+  questions: Question[] = [];
 
   // search = new UntypedFormControl();
   // data: any[] = [];
   // dataLoaded: boolean = false;
 
-  // constructor(private router: Router, private quizService: QuizService) { }
+  // constructor(private router: Router) {
+  //   console.log(this.router.config)
+  //  }
 
   ngOnInit(): void {
     // this.getAllQuizes();
@@ -72,7 +80,8 @@ export class UserQuizListComponent implements OnInit {
   validateParams(): boolean {
     const form: any = this.quizForm.value;
     for (let key in form) {
-      if (form[key] === null ||
+      if (
+        form[key] === null ||
         form[key] === undefined ||
         form[key] === '' ||
         (typeof form[key] === 'string' && form[key].trim() === '')
@@ -83,16 +92,18 @@ export class UserQuizListComponent implements OnInit {
     return true; // All properties have values
   }
   generateQuiz() {
-    // console.log(this.quizForm.value)
-    this.quizService.generateQuiz(this.quizForm.value).subscribe(
-      (res: any) => {
-        console.log(res)
+    this.quizService.generateQuiz(this.quizForm.value).subscribe({
+      next: (res: any) => {
+        if (res && res.results) {
+          this.questions = res.results;
+          this.questionService.questions.set([...this.questions])
+          this.router.navigate(['/user/quiz']);
+        }
         this.quizForm.reset();
       },
-      (error) => {
-        console.error(error)
-      }
-    )
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
-
 }

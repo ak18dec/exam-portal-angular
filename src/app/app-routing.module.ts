@@ -131,7 +131,7 @@ const routes: Routes = [
         component: UserQuizListComponent
       },
       {
-        path: 'quiz/:id',
+        path: 'quiz',
         pathMatch: 'full',
         component: UserQuizComponent
       }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import baseUrl from './helper';
@@ -8,6 +8,8 @@ import { Question } from '../models/question';
   providedIn: 'root'
 })
 export class QuestionService {
+
+  questions = signal<Question[]>([]);
 
   constructor(private http: HttpClient) { }
 

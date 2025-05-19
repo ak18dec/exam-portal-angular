@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Question } from 'src/app/models/question';
+import { QuestionService } from 'src/app/services/question.service';
 import { QuizService } from 'src/app/services/quiz.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
@@ -13,6 +14,8 @@ import { UserquizService } from 'src/app/services/userquiz.service';
     standalone: false
 })
 export class UserQuizComponent implements OnInit {
+
+  questionService = inject(QuestionService)
 
   quizQuestions: Question[] = [];
   
@@ -64,21 +67,23 @@ export class UserQuizComponent implements OnInit {
     private trackerService: TrackerService,) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      if(id){
-        this.quizId = id;
-        this.prepareQuiz(this.quizId);
-      }
-      this.randomizeChoices();
-    })
+    // this.route.paramMap.subscribe(params => {
+    //   const id = Number(params.get('id'));
+    //   if(id){
+    //     this.quizId = id;
+    //     this.prepareQuiz(this.quizId);
+    //   }
+      
+    // })
 
-    this.scoreSubscription = this.usrQuizService.receiveScoreGeneratedEvent().subscribe(resp => {
-      if(resp){
-        this.scoreGenerated = true;
-        this.scoreDetails = resp;
-      }
-    })
+    // this.scoreSubscription = this.usrQuizService.receiveScoreGeneratedEvent().subscribe(resp => {
+    //   if(resp){
+    //     this.scoreGenerated = true;
+    //     this.scoreDetails = resp;
+    //   }
+    // })
+    console.log(this.questionService.questions());
+    this.randomizeChoices();
   }
 
   prepareQuiz(id: number) {

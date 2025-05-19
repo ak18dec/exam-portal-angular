@@ -15,11 +15,11 @@
       </mat-card>
     </div>
   </mat-list> -->
-  <mat-card class="mat-elevation-z0 outline" appearance="outlined">
-    <mat-card-title>Create Quiz</mat-card-title>
-    <mat-divider></mat-divider>
-    <div class="container">
-      <mat-card-content>
+<mat-card class="mat-elevation-z0 outline" appearance="outlined">
+  <mat-card-title>Create Quiz</mat-card-title>
+  <mat-divider></mat-divider>
+  <div class="container">
+    <mat-card-content>
       <form [formGroup]="quizForm" (ngSubmit)="generateQuiz()">
         <mat-form-field appearance="outline">
           <mat-label>Number of Questions</mat-label>
@@ -55,6 +55,5 @@
         </div>
       </form>
     </mat-card-content>
-    </div>
-    
-  </mat-card>
+  </div>
+</mat-card>
