@@ -21,15 +21,13 @@
                 <a mat-button class="ques-nav" 
                     (click)="navigateQues('prev')" 
                     [disabled]="displayedQuesIndex===0">
-                    <!-- <mat-icon>arrow_back</mat-icon> -->
                      Back
                 </a>
                 <div class="ques-text"><p>{{ quizQues.question }}</p></div>
                 <a mat-button class="ques-nav" 
                     (click)="navigateQues('next')"
                     >
-                    <!-- <mat-icon>arrow_forward</mat-icon> -->
-                    {{ displayedQuesIndex !== totalQuestionLength ? 'Next' : 'Submit' }}
+                    {{ displayedQuesIndex !== totalQuestionLength-1 ? 'Next' : 'Submit' }}
                 </a>
             </div>
             <div class="choices">
@@ -52,22 +50,19 @@
             <div class="container">
                 <div class="timer">
                     <div class="time">
-                        <span>{{ minutes }}</span>
+                        <span>{{ minutes() }}</span>
                     </div>
                     <div class="separator">
                         <span>:</span>
                     </div>
                     <div class="time">
-                        <span>{{ seconds }}</span>
+                        <span>{{ seconds() }}</span>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- <div class="timer-1"></div> -->
         <div class="tracker-main">
             <div class="tr-container">
-
             </div>
         </div>
     </div>

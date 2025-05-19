@@ -1,4 +1,4 @@
-import { Component, inject, Inject, Input, OnInit } from '@angular/core';
+import { Component, computed, inject, Inject, Input, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Question } from 'src/app/models/question';
@@ -19,46 +19,28 @@ export class UserQuizComponent implements OnInit {
 
   quizQuestions: Question[] = [];
   
-  @Input() quizId: number = -1;
-  dataLoaded: boolean = false;
-
   quizTime: number = 10;
-
-  quizMetaData: any;
 
   scoreGenerated: boolean = false;
   scoreDetails: any;
 
   scoreSubscription: Subscription;
 
-  timer: number = 0;
-
   stopTimer: boolean = false;
-  loadInstructions: boolean = true;
 
-  eachQuestionWeightage: number = 0;
+  totalTime = 300; // in seconds (e.g., 5 minutes)
+  timeLeft = signal(this.totalTime); //signal for current time
+  private timerId: any;
 
-  totalTime: string;
-
-  minutes: string = '00';
-  seconds: string = '00';
-  quizQues: any = {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "Macintosh has named six of its operating systems after big cats. What big cat did Macintosh name their 2007 release after? ",
-    "correct_answer": "Leopard",
-    "incorrect_answers": [
-      "Tiger",
-      "Panther",
-      "Puma"
-    ]
-  }
+  // Separate computed signals
+  minutes = computed(() => this.pad(Math.floor(this.timeLeft() / 60)));
+  seconds = computed(() => this.pad(this.timeLeft() % 60));
+  quizQues: Question;
 
   allChoices: any = [];
   selectedChoiceIndex: number = -1;
   displayedQuesIndex = 0;
-  totalQuestionLength = 1;
+  totalQuestionLength = 0;
 
   constructor(
     private quizService: QuizService,
@@ -82,94 +64,51 @@ export class UserQuizComponent implements OnInit {
     //     this.scoreDetails = resp;
     //   }
     // })
-    console.log(this.questionService.questions());
-    this.randomizeChoices();
+    this.quizQuestions = this.questionService.questions();
+    this.totalQuestionLength = this.quizQuestions.length;
+    if(this.quizQuestions && this.totalQuestionLength > 0) {
+      this.prepareQuiz();
+    }
   }
 
-  prepareQuiz(id: number) {
-    // this.getQuestionsByQuizId(this.quizId);
-    // this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
-    if(this.quizTime) {
-      this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
-    }
-    // this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
-    this.timer = this.quizTime * 60;
-    this.stopTimer = false;
+  prepareQuiz() {
+    // if(this.quizTime) {
+    //   this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
+    // }
+    // this.timer = this.quizTime * 60;
+    // this.stopTimer = false;
     this.startQuiz();
     
   }
 
-  getQuestionsByQuizId(id: number) {
-    this.quizService.getQuestionsByQuizId(id).subscribe({
-      next: (resp: any) => {
-        this.quizQuestions = resp;
-        this.eachQuestionWeightage = (this.quizMetaData.maxMarks)/(this.quizQuestions.length);
-        this.dataLoaded = true;
-      },
-      error: (e)=> console.log(e)
-    })
-  }
 
-  ngOnDestroy(): void {
-    this.scoreSubscription.unsubscribe();
-  }
 
-  startTimer() {
-    let t = window.setInterval(() => {
-      if(this.timer <= 0){
-        this.stopTimer = true;
-        clearInterval(t)
-      } else if(!this.stopTimer) {
-        this.timer--;
-      } else{
-        let userTime = (this.quizTime * 60) - this.timer;
-        clearInterval(t)
+  startTimer(): void {
+    console.log('Timer Started')
+    this.timerId = setInterval(() => {
+      if(this.timeLeft() > 0) {
+        this.timeLeft.update(time => time - 1);
+      }else {
+        clearInterval(this.timerId);
+        this.onTimeUp();
       }
-    }, 1000)
+    }, 1000);
   }
 
-  formattedTime() {
-    const min = Math.floor(this.timer/60)
-    const sec = this.timer - min*60;
-    let time = '';
-    let minStr = '';
-    let secStr = '';
-    if(min > 0 && min < 10){
-      minStr = `0${min}`;
-    }else if(min === 0){
-      minStr = `00`;
-    }else {
-      minStr = `${min}`;
-    }
-
-    if(sec > 0 && sec < 10){
-      secStr = `0${sec}`;
-    }else if(sec === 0){
-      secStr = `00`;
-    }else {
-      secStr = `${sec}`;
-    }
-    
-    time = `${minStr}:${secStr} / ${this.totalTime}`;
-
-    this.minutes = minStr;
-    this.seconds = secStr;
-
-    // if(min <= 0 && sec <= 0){
-    //   time = 'Times Up';
-    // }
-    
-    return time;
+  pad(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
   }
 
-  finishQuiz() {
-    this.trackerService.broadcastFinishTestEvent();
+  onTimeUp(): void {
+    console.log('Time is up! Submit the quiz.');
+    // handle auto-submit or timeout UI
   }
+
+
 
   startQuiz() {
-    this.loadInstructions = false;
     this.startTimer();
-    this.formattedTime();
+    this.displayCurrentQuestion(0);
   }
 
   randomizeChoices() {
@@ -186,16 +125,16 @@ export class UserQuizComponent implements OnInit {
 }
 
   navigateQues(direction: 'prev' | 'next') {
-    let index = 0;
     if(direction === 'next') {
-      this.fetchQuestion(index+1);
+      this.displayCurrentQuestion(this.displayedQuesIndex+1);
     }else {
-      this.fetchQuestion(index-1);
+      this.displayCurrentQuestion(this.displayedQuesIndex-1);
     }
   }
 
-  fetchQuestion(index: number) {
-
+  displayCurrentQuestion(index: number) {
+    this.displayedQuesIndex = index;
+    this.quizQues = this.quizQuestions[index];
+    this.randomizeChoices();
   }
-
 }
