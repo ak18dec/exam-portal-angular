@@ -153,8 +153,11 @@ export class UserQuizComponent implements OnInit {
     }else {
       this.userChoices[this.displayedQuesIndex].marking = 'incorrect'
     }
+  }
 
-    console.log(this.userChoices);
+  submitQuiz() {
+    console.log('Submit Clicked')
+    console.log(this.userChoices)
   }
 
 }

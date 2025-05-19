@@ -24,11 +24,15 @@
                      Back
                 </a>
                 <div class="ques-text"><p>{{`Q ${displayedQuesIndex+1}.`}} {{ quizQues.question }}</p></div>
-                <a mat-button class="ques-nav" 
-                    (click)="navigateQues('next')"
-                    >
-                    {{ displayedQuesIndex !== totalQuestionLength-1 ? 'Next' : 'Submit' }}
-                </a>
+                @if (displayedQuesIndex !== totalQuestionLength-1) {
+                    <a mat-button class="ques-nav" (click)="navigateQues('next')">
+                    Next
+                    </a>
+                } @else {
+                    <a mat-button class="ques-nav" (click)="submitQuiz()">
+                    Submit
+                    </a>
+                }
             </div>
             <div class="choices">
                 @for (choice of allChoices; track $index) {
