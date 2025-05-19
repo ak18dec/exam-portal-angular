@@ -38,9 +38,10 @@ export class UserQuizComponent implements OnInit {
   quizQues: Question;
 
   allChoices: any = [];
-  selectedChoiceIndex: number = -1;
   displayedQuesIndex = 0;
   totalQuestionLength = 0;
+
+  userChoices: any[] = [];
 
   constructor(
     private quizService: QuizService,
@@ -77,6 +78,13 @@ export class UserQuizComponent implements OnInit {
     // }
     // this.timer = this.quizTime * 60;
     // this.stopTimer = false;
+    this.quizQuestions.forEach((ques, index) => {
+      this.userChoices.push({
+        qIndex: index,
+        marking: undefined,
+        choiceIndex: undefined
+      })
+    });
     this.startQuiz();
     
   }
@@ -137,4 +145,16 @@ export class UserQuizComponent implements OnInit {
     this.quizQues = this.quizQuestions[index];
     this.randomizeChoices();
   }
+
+  userChoice(choice: string, index: number) {
+    this.userChoices[this.displayedQuesIndex].choiceIndex = index
+    if(this.quizQues.correct_answer === choice) {
+      this.userChoices[this.displayedQuesIndex].marking = 'correct'
+    }else {
+      this.userChoices[this.displayedQuesIndex].marking = 'incorrect'
+    }
+
+    console.log(this.userChoices);
+  }
+
 }

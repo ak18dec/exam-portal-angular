@@ -23,7 +23,7 @@
                     [disabled]="displayedQuesIndex===0">
                      Back
                 </a>
-                <div class="ques-text"><p>{{ quizQues.question }}</p></div>
+                <div class="ques-text"><p>{{`Q ${displayedQuesIndex+1}.`}} {{ quizQues.question }}</p></div>
                 <a mat-button class="ques-nav" 
                     (click)="navigateQues('next')"
                     >
@@ -33,10 +33,10 @@
             <div class="choices">
                 @for (choice of allChoices; track $index) {
                     <span class="choice" 
-                        [class.selected]="$index === selectedChoiceIndex"
-                        (click)="selectedChoiceIndex=$index">
+                        [class.selected]="$index === userChoices[displayedQuesIndex].choiceIndex"
+                        (click)="userChoice(choice, $index)">
                         <span class="choice-text">{{ choice }}</span>
-                        <mat-icon class="check-icon" *ngIf="$index === selectedChoiceIndex">
+                        <mat-icon class="check-icon" *ngIf="$index === userChoices[displayedQuesIndex].choiceIndex">
                             check_circle_outline
                         </mat-icon>
                     </span>
