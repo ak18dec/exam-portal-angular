@@ -7,9 +7,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-questions',
-  templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.scss']
+    selector: 'app-questions',
+    templateUrl: './questions.component.html',
+    styleUrls: ['./questions.component.scss'],
+    standalone: false
 })
 export class QuestionsComponent implements OnInit {
 
@@ -17,7 +18,7 @@ export class QuestionsComponent implements OnInit {
 
   questions: Question[]=[];
 
-  columns: string[] = ['id', 'description', 'proficiency','topicId','enabled', 'action']
+  columns: string[] = ['id', 'question', 'difficulty','enabled', 'action']
 
   @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
@@ -33,6 +34,7 @@ export class QuestionsComponent implements OnInit {
     this.questionService.getQuestions().subscribe(
       (res: any) => {
         this.questions = res;
+        this.questions = [];  
         this.dataSource = new MatTableDataSource(this.questions);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -52,25 +54,22 @@ export class QuestionsComponent implements OnInit {
   }
 
   deleteQuestion(data: any){
-    this.questionService.deleteQuestion(data.id).subscribe(
-      (res: any) => {
-        if(res){
-          let idxToDelete = this.questions.findIndex(u => u.id === data.id);
-          this.questions.splice(idxToDelete, 1);
-          this.dataSource._updateChangeSubscription();
+    // this.questionService.deleteQuestion(data.id).subscribe(
+    //   (res: any) => {
+    //     if(res){
+    //       let idxToDelete = this.questions.findIndex(u => u.id === data.id);
+    //       this.questions.splice(idxToDelete, 1);
+    //       this.dataSource._updateChangeSubscription();
 
-          // this._snackBar.open(`User removed successfully`,'',{
-          //   duration: 3000
-          // });
-          // this.freshForm();
-        }
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
+    //       // this._snackBar.open(`User removed successfully`,'',{
+    //       //   duration: 3000
+    //       // });
+    //       // this.freshForm();
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log(error)
+    //   }
+    // )
   }
-
-  
-
 }

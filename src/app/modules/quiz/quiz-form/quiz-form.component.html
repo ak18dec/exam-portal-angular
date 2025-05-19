@@ -4,7 +4,7 @@
         <mat-card-title>{{ addQuiz ? 'Add New Quiz' : 'Edit Quiz Details'}}</mat-card-title>
         <mat-divider></mat-divider>
         <br>
-        <mat-stepper [linear]="isLinear" #stepper [disableRipple]="true">
+        <!-- <mat-stepper [linear]="isLinear" #stepper [disableRipple]="true">
             <mat-step [stepControl]="firstFormGroup">
                 <form [formGroup]="firstFormGroup" *ngIf="dataLoaded">
                     <ng-template matStepLabel>{{ addQuiz ? 'Add Quiz Details' : 'Edit Quiz Details'}}</ng-template>
@@ -43,7 +43,7 @@
                     <mat-selection-list *ngIf="loadQuestions" 
                         color="primary" [disableRipple]="true" formControlName="questions" >
                         <mat-list-option *ngFor="let ques of questions" checkboxPosition="before" [value]="ques.id">
-                            <span [innerHTML]="ques.description"></span>
+                            <span [innerHTML]="ques.question"></span>
                         </mat-list-option>
                     </mat-selection-list>
                     <div>
@@ -65,6 +65,6 @@
                     <button mat-button color="primary" type="submit" (click)="submitQuiz()">Submit</button>
                 </div>
             </mat-step>
-        </mat-stepper>
+        </mat-stepper> -->
     </mat-card>
 </div>

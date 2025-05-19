@@ -4,9 +4,10 @@ import { TimerService } from 'src/app/services/timer.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
-  selector: 'app-timer',
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.scss']
+    selector: 'app-timer',
+    templateUrl: './timer.component.html',
+    styleUrls: ['./timer.component.scss'],
+    standalone: false
 })
 export class TimerComponent implements OnInit {
 

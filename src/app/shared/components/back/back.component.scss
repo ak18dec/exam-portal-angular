@@ -1,17 +1,17 @@
 .back-btn {
-    font-size: 15px !important;
     .mat-icon{
         font-size: 15px !important;
         width: 20px;
         height: 20px;
-        vertical-align: -2px;
+        color: var(--mat-sys-primary)
     }
     a {
         text-decoration: none; 
-        display: inline;
+        display: flex;
+        align-items: center;
     }
     p {
-        display: inline;
-        height: 20px;
+        height: 22px;
+        color: var(--mat-sys-primary);
     }
 }

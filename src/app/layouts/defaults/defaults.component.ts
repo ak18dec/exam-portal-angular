@@ -5,9 +5,10 @@ import { map, shareReplay } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'app-defaults',
-  templateUrl: './defaults.component.html',
-  styleUrls: ['./defaults.component.scss']
+    selector: 'app-defaults',
+    templateUrl: './defaults.component.html',
+    styleUrls: ['./defaults.component.scss'],
+    standalone: false
 })
 export class DefaultsComponent implements OnInit {
 

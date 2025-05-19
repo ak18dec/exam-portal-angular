@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'src/app/services/notifier.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
 
@@ -101,15 +102,11 @@ export class LoginComponent implements OnInit {
         }
       );
 
+      this.router.navigate(['admin']);
+      this.loginService.loginStatusSubject.next(true);
     } catch (err) {
       this.notifierService.showNotification('Invalid Credentials', '', 'error', false);
     }
-  }
-
-  loginGuestUser() {
-    this.form.get('usernameOrEmail')?.setValue('basic@examportal.com');
-    this.form.get('password')?.setValue('basic');
-    this.onSubmit();
   }
 
 }

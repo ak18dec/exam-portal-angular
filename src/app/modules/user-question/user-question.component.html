@@ -1,14 +1,14 @@
 <mat-card>
-    <mat-card-content>
+    <mat-card-content appearence="outlined">
         <div class="content">
             <div style="margin-bottom: 10px;">
                 Q{{ currentQuesNumber + 1 }}. <span class="unmark-btn" *ngIf="currentSelectedOptionId > -1" (click)="unmarkCurrentQuestion()">Unmark</span>
             </div>
-            <span [innerHTML]="currentQuestion.description"></span>
+            <span [innerHTML]="currentQuestion.question"></span>
 
         </div>
         <div class="choices">
-            <mat-radio-group aria-label="Select an option" class="choice-radio-group" color="primary"
+            <!-- <mat-radio-group aria-label="Select an option" class="choice-radio-group" color="primary"
                 [(ngModel)]="currentSelectedOptionId" (change)="onOptionSelect()" >
                 <div class="group-1">
                     <mat-radio-button class="choice-radio-button" [value]="currentQuestion.questionChoices[0].id" 
@@ -30,7 +30,7 @@
                         {{ currentQuestion.questionChoices[3].description }}
                     </mat-radio-button>
                 </div>
-            </mat-radio-group>
+            </mat-radio-group> -->
         </div>
     </mat-card-content>
     <mat-card-footer class="ques-nav-section" [ngClass]="{'first-ques': firstQuestion}">

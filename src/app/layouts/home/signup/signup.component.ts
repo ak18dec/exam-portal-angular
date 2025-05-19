@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
 import { NotifierService } from 'src/app/services/notifier.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.scss'],
+    standalone: false
 })
 export class SignupComponent implements OnInit {
 
@@ -60,7 +60,7 @@ export class SignupComponent implements OnInit {
 
     this.userService.registerUser(this.user).subscribe(
       (data) => {
-        Swal.fire('Success !!!', 'User is registered successfully', 'success')
+        console.log('Success !!!', 'User is registered successfully', 'success')
         this.reset();
       },
       (error) => {

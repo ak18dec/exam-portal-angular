@@ -1,6 +1,6 @@
 <h1>Users</h1>
-<div>
-    <mat-form-field>
+<div class="filter-section">
+    <mat-form-field appearance="outline">
         <mat-label>Filter</mat-label>
         <input matInput placeholder="Ex. John Doe" (keyup)="applyFilter($event)">
     </mat-form-field>
@@ -49,5 +49,5 @@
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let row; columns: columns;"></tr>
     </table>
-    <mat-paginator [length]="users.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [length]="users.length" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

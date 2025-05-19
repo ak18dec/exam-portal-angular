@@ -1,40 +1,57 @@
-.difficulty-level-easy {
-    color: #00af9b;
-    background-color: #07fd4733;
-    border-color: #00af9b;
+@use '@angular/material' as mat;
+
+mat-card {
+    margin: auto;
+    padding: 30px;
+    margin-top: 60px;
+    @include mat.card-overrides((
+        outlined-container-color: white,
+        title-text-line-height: 20px,
+    ));
 }
 
-.difficulty-level-medium {
-    color: #ffb700;
-    background-color: #ffb70026;
-    border-color: #ffb700;
+mat-card-content {
+    margin-top: 30px;
+    max-width: 450px;
 }
 
-.difficulty-level-hard {
-    color: #ff2d54;
-    background-color: #ff002f3b;
-    border-color: #ff2d54;
+.mat-mdc-card-content {
+  padding: 0 !important;
 }
 
-.mat-chip {
-    border-style: solid !important;
-    border-width: thin !important;
-    font-size: smaller !important;
-    font-weight: normal;
-    margin-bottom: 10px !important;
+.mat-mdc-card-title {
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 500
 }
 
-.mat-chip.mat-standard-chip::after {
-    background: none !important;
-    text-decoration: none !important;
+mat-form-field {
+    display: block;
+    @include mat.form-field-overrides ((
+      outlined-caret-color: var(--mat-sys-primary),
+      outlined-label-text-size: 14px,
+      outlined-outline-color: #c4c6d0,
+      outlined-hover-outline-color: var(--mat-sys-primary),
+    ));
 }
 
-.mat-standard-chip {
-    padding: 7px 7px !important;
-    min-height: 20px !important;
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    // margin-bottom: -0.5em;
+    margin-left: -0.5em;
+    padding-bottom: 20px;
+  
+    button {
+      margin-bottom: 0.5em;
+      margin-left: 0.5em;
+      width: 100%;
+    }
 
-}
-
-mat-form-field input {
-    font-weight: lighter;
+    @media (min-width: 32rem) {
+      flex-direction: row;
+        button {
+            flex-basis: 100%;
+        }
+    }
 }

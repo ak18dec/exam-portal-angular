@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import baseUrl from './helper';
@@ -8,6 +8,8 @@ import { Question } from '../models/question';
   providedIn: 'root'
 })
 export class QuestionService {
+
+  questions = signal<Question[]>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -27,42 +29,40 @@ export class QuestionService {
   //CREATE APIs
 
   public addQuestion(newQuestion: Question) {
-    let question: Question = {
-      id: 0,
-      description: '',
-      proficiency: '',
-      topicId: 0,
-      enabled: true,
-      questionChoices: []
-    }
+    // let question: Question = {
+    //   id: 0,
+    //   description: '',
+    //   proficiency: '',
+    //   enabled: true,
+    //   questionChoices: []
+    // }
 
-    question.description = newQuestion.description;
-    question.proficiency = newQuestion.proficiency;
-    question.topicId = newQuestion.topicId;
-    question.enabled = newQuestion.enabled;
-    question.questionChoices = newQuestion.questionChoices;
+    // question.description = newQuestion.description;
+    // question.proficiency = newQuestion.proficiency;
+    // question.enabled = newQuestion.enabled;
+    // question.questionChoices = newQuestion.questionChoices;
 
-    let url = `${baseUrl}/questions/`;
+    // let url = `${baseUrl}/questions/`;
 
-    return this.http.post<Question>(url, question);
+    // return this.http.post<Question>(url, question);
 
   }
 
   //UPDATE APIs
 
   public updateQuestion(editQues: Question, id: number) {
-    let url = `${baseUrl}/questions/${id}`;
-    return this.http.put<boolean>(url, editQues);
+    // let url = `${baseUrl}/questions/${id}`;
+    // return this.http.put<boolean>(url, editQues);
   }
 
   public toggleQuestionState(toggledQues: Question, id: number) {
-    return this.updateQuestion(toggledQues, id);
+    // return this.updateQuestion(toggledQues, id);
   }
 
   //DELETE APIs
 
   public deleteQuestion(id: number) {
-    let url = `${baseUrl}/questions/${id}`;
-    return this.http.delete<boolean>(url);
+    // let url = `${baseUrl}/questions/${id}`;
+    // return this.http.delete<boolean>(url);
   }
 }

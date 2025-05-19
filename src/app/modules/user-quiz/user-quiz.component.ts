@@ -1,40 +1,47 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, computed, inject, Inject, Input, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Question } from 'src/app/models/question';
+import { QuestionService } from 'src/app/services/question.service';
 import { QuizService } from 'src/app/services/quiz.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
 
 @Component({
-  selector: 'app-user-quiz',
-  templateUrl: './user-quiz.component.html',
-  styleUrls: ['./user-quiz.component.scss']
+    selector: 'app-user-quiz',
+    templateUrl: './user-quiz.component.html',
+    styleUrls: ['./user-quiz.component.scss'],
+    standalone: false
 })
 export class UserQuizComponent implements OnInit {
 
+  questionService = inject(QuestionService)
+
   quizQuestions: Question[] = [];
   
-  @Input() quizId: number = -1;
-  dataLoaded: boolean = false;
-
-  quizTime: number = -1;
-
-  quizMetaData: any;
+  quizTime: number = 10;
 
   scoreGenerated: boolean = false;
   scoreDetails: any;
 
   scoreSubscription: Subscription;
 
-  timer: number = 0;
-
   stopTimer: boolean = false;
-  loadInstructions: boolean = true;
 
-  eachQuestionWeightage: number = 0;
+  totalTime = 300; // in seconds (e.g., 5 minutes)
+  timeLeft = signal(this.totalTime); //signal for current time
+  private timerId: any;
 
-  totalTime: string;
+  // Separate computed signals
+  minutes = computed(() => this.pad(Math.floor(this.timeLeft() / 60)));
+  seconds = computed(() => this.pad(this.timeLeft() % 60));
+  quizQues: Question;
+
+  allChoices: any = [];
+  displayedQuesIndex = 0;
+  totalQuestionLength = 0;
+
+  userChoices: any[] = [];
 
   constructor(
     private quizService: QuizService,
@@ -43,100 +50,111 @@ export class UserQuizComponent implements OnInit {
     private trackerService: TrackerService,) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      if(id){
-        this.quizId = id;
-        this.prepareQuiz(this.quizId);
-      }
-    })
+    // this.route.paramMap.subscribe(params => {
+    //   const id = Number(params.get('id'));
+    //   if(id){
+    //     this.quizId = id;
+    //     this.prepareQuiz(this.quizId);
+    //   }
+      
+    // })
 
-    this.scoreSubscription = this.usrQuizService.receiveScoreGeneratedEvent().subscribe(resp => {
-      if(resp){
-        this.scoreGenerated = true;
-        this.scoreDetails = resp;
-      }
-    })
+    // this.scoreSubscription = this.usrQuizService.receiveScoreGeneratedEvent().subscribe(resp => {
+    //   if(resp){
+    //     this.scoreGenerated = true;
+    //     this.scoreDetails = resp;
+    //   }
+    // })
+    this.quizQuestions = this.questionService.questions();
+    this.totalQuestionLength = this.quizQuestions.length;
+    if(this.quizQuestions && this.totalQuestionLength > 0) {
+      this.prepareQuiz();
+    }
   }
 
-  prepareQuiz(id: number) {
-    this.getQuestionsByQuizId(this.quizId);
-    this.quizTime = this.quizService.getSelectedQuizTime(this.quizId);
-    if(this.quizTime) {
-      this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
-    }
-    this.quizMetaData = this.quizService.getQuizMetaData(this.quizId)
-    this.timer = this.quizTime * 60;
-    this.stopTimer = false;
+  prepareQuiz() {
+    // if(this.quizTime) {
+    //   this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
+    // }
+    // this.timer = this.quizTime * 60;
+    // this.stopTimer = false;
+    this.quizQuestions.forEach((ques, index) => {
+      this.userChoices.push({
+        qIndex: index,
+        marking: undefined,
+        choiceIndex: undefined
+      })
+    });
+    this.startQuiz();
     
   }
 
-  getQuestionsByQuizId(id: number) {
-    this.quizService.getQuestionsByQuizId(id).subscribe({
-      next: (resp: any) => {
-        this.quizQuestions = resp;
-        this.eachQuestionWeightage = (this.quizMetaData.maxMarks)/(this.quizQuestions.length);
-        this.dataLoaded = true;
-      },
-      error: (e)=> console.log(e)
-    })
-  }
 
-  ngOnDestroy(): void {
-    this.scoreSubscription.unsubscribe();
-  }
 
-  startTimer() {
-    let t = window.setInterval(() => {
-      if(this.timer <= 0){
-        this.stopTimer = true;
-        clearInterval(t)
-      } else if(!this.stopTimer) {
-        this.timer--;
-      } else{
-        let userTime = (this.quizTime * 60) - this.timer;
-        clearInterval(t)
+  startTimer(): void {
+    console.log('Timer Started')
+    this.timerId = setInterval(() => {
+      if(this.timeLeft() > 0) {
+        this.timeLeft.update(time => time - 1);
+      }else {
+        clearInterval(this.timerId);
+        this.onTimeUp();
       }
-    }, 1000)
+    }, 1000);
   }
 
-  formattedTime() {
-    const min = Math.floor(this.timer/60)
-    const sec = this.timer - min*60;
-    let time = '';
-    let minStr = '';
-    let secStr = '';
-    if(min > 0 && min < 10){
-      minStr = `0${min}`;
-    }else if(min === 0){
-      minStr = `00`;
-    }else {
-      minStr = `${min}`;
-    }
-
-    if(sec > 0 && sec < 10){
-      secStr = `0${sec}`;
-    }else if(sec === 0){
-      secStr = `00`;
-    }else {
-      secStr = `${sec}`;
-    }
-    
-    time = `${minStr}:${secStr} / ${this.totalTime}`;
-
-    if(min <= 0 && sec <= 0){
-      time = 'Times Up';
-    }
-    return time;
+  pad(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
   }
 
-  finishQuiz() {
-    this.trackerService.broadcastFinishTestEvent();
+  onTimeUp(): void {
+    console.log('Time is up! Submit the quiz.');
+    // handle auto-submit or timeout UI
   }
+
+
 
   startQuiz() {
-    this.loadInstructions = false;
     this.startTimer();
+    this.displayCurrentQuestion(0);
+  }
+
+  randomizeChoices() {
+    this.allChoices = [...this.quizQues.incorrect_answers, this.quizQues.correct_answer];
+    this.shuffleArray(this.allChoices);
+  }
+
+  shuffleArray(array: any) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    [array[i], array[j]] = [array[j], array[i]]; // swap elements
+  }
+  return array;
+}
+
+  navigateQues(direction: 'prev' | 'next') {
+    if(direction === 'next') {
+      this.displayCurrentQuestion(this.displayedQuesIndex+1);
+    }else {
+      this.displayCurrentQuestion(this.displayedQuesIndex-1);
+    }
+  }
+
+  displayCurrentQuestion(index: number) {
+    this.displayedQuesIndex = index;
+    this.quizQues = this.quizQuestions[index];
+    this.randomizeChoices();
+  }
+
+  userChoice(choice: string, index: number) {
+    this.userChoices[this.displayedQuesIndex].choiceIndex = index
+    if(this.quizQues.correct_answer === choice) {
+      this.userChoices[this.displayedQuesIndex].marking = 'correct'
+    }else {
+      this.userChoices[this.displayedQuesIndex].marking = 'incorrect'
+    }
+
+    console.log(this.userChoices);
   }
 
 }

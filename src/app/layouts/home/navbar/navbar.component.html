@@ -1,36 +1,10 @@
-<mat-toolbar color="primary" style="background: none; color: #000;">
+<mat-toolbar color="primary" style="background: none;">
   <mat-toolbar-row>
     <object style="cursor: pointer; width: 300px;margin-top: 5px;" type="image/svg+xml"
       data="assets/logo-2.svg"></object>
-    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-      <ul fxLayout="row" fxLayoutGap="40px">
-        <li>
-          <button mat-icon-button routerLink="/login">
-            <mat-label>Login</mat-label>
-          </button>
-        </li>
-        <li>
-          <button mat-icon-button routerLink="/signup">
-            <mat-label>Register</mat-label>
-          </button>
-        </li>
-        <li>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-label>Guest</mat-label>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>manage_accounts</mat-icon>
-                Admin
-              </button>
-              <button mat-menu-item>
-                <mat-icon>person</mat-icon>
-                User
-              </button>
-            </mat-menu>
-          </button>
-        </li>
-      </ul>
+    <div class="nav-tabs">
+      <a routerLink="/login">Login</a>
+      <a routerLink="/signup">Register</a>
     </div>
-
   </mat-toolbar-row>
 </mat-toolbar>

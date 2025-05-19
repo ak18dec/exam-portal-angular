@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+mat-form-field {
+    flex: 0 0 85%;
+    @include mat.form-field-overrides ((
+      outlined-caret-color: var(--mat-sys-primary),
+      outlined-label-text-size: 14px,
+      outlined-outline-color: #c4c6d0,
+      outlined-hover-outline-color: var(--mat-sys-primary),
+    ));
+}
+
+.filter-section {
+    display: flex;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    width: 80%;
+}
+
+.add-user-btn {
+    margin: 0 0 0 20px; // top right bottom left
+}

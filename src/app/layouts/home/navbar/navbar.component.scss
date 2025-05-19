@@ -1,8 +1,25 @@
-.example-spacer {
-    flex: 1 1 auto;
-    justify-content: space-evenly;
+mat-toolbar-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-ul li {
-    list-style: none;
+.nav-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-tabs > a {
+    font-size: 14px;
+    font-weight: 400;
+    min-width: 100px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        font-weight: 500;
+        font-size: 15px;
+        color: var(--mat-sys-primary);
+    }
 }

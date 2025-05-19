@@ -2,12 +2,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { GuestDialogComponent } from './guest-dialog/guest-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
 
@@ -22,12 +22,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  openDialog(): void {
-    this.dialog.open(GuestDialogComponent, {
-      width: '280px'
-    });
-  }
-
 
 }

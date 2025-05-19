@@ -1,12 +1,48 @@
+@use '@angular/material' as mat;
+
 mat-card {
-    max-width: 400px;
-    margin: auto;
-    text-align: center;
-    padding: 30px;
-  }
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+  @include mat.card-overrides((
+    subtitle-text-color: #0000008a,
+    outlined-container-color: white,
+    subtitle-text-size: smaller,
+    subtitle-text-weight: 400,
+    title-text-line-height: 20px,
+    subtitle-text-line-height: 20px
+  ));
+}
+
+.mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.mat-mdc-card-title {
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 500
+}
   
+.mat-mdc-card-subtitle {
+  margin-top: -5px;
+  margin-bottom: 16px;
+  a {
+      text-decoration: none;
+      float: right;
+      font-size: small;
+  }
+}
+
 mat-form-field {
     display: block;
+    @include mat.form-field-overrides ((
+      outlined-caret-color: var(--mat-sys-primary),
+      outlined-label-text-size: 14px,
+      outlined-outline-color: #c4c6d0,
+      outlined-hover-outline-color: var(--mat-sys-primary),
+    ));
 }
 
 mat-form-field {
@@ -14,21 +50,11 @@ mat-form-field {
       font-size: smaller;
       line-height: 0.2;
     }
-  }
-
-mat-card-subtitle {
-    a {
-        text-decoration: none;
-        float: right;
-        font-size: smaller;
-        color: #3F51B5
-    }
 }
 
 p a {
     text-decoration: none;
     font-weight: bold;
-    color: #3F51B5
 }
 .login-logo {
     height: 250px;

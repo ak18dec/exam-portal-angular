@@ -7,8 +7,7 @@
 <div class="homepage-container" *ngIf="(isHandset$ | async) ? true : false">
     <object class="welcome-logo" type="image/svg+xml" data="assets/mobile/welcome-logo.svg"></object>
     <div class="btns">
-        <button mat-raised-button color="primary" routerLink="/login">Login</button>
+        <button mat-flat-button color="primary" routerLink="/login">Login</button>
         <button mat-stroked-button color="primary" routerLink="/signup">Register</button>
-        <button mat-stroked-button color="primary" (click)="openDialog()">Guest</button>
     </div>
 </div>

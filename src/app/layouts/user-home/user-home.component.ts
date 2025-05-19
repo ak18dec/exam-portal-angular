@@ -5,9 +5,10 @@ import { map, shareReplay } from 'rxjs/operators';
 import { NavService } from 'src/app/services/nav.service';
 
 @Component({
-  selector: 'app-user-home',
-  templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.scss']
+    selector: 'app-user-home',
+    templateUrl: './user-home.component.html',
+    styleUrls: ['./user-home.component.scss'],
+    standalone: false
 })
 export class UserHomeComponent implements OnInit {
   

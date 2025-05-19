@@ -1,27 +1,59 @@
-<mat-list style="margin-top: 50px;padding-top: 20px;">
-    <div mat-subheader>Available Quizzes ({{ (filteredList$ | async)?.length }})</div><!-- ({{($search | async)?.length}})-->
+<!-- <mat-list style="margin-top: 50px;padding-top: 20px;">
+    <div mat-subheader>Available Quizzes ({{ (filteredList$ | async)?.length }})</div>
     <mat-form-field style="width: 95%; margin-left: 10px;" *ngIf="true">
-      <mat-icon matPrefix style="color: #00000061;">search</mat-icon>
+      <mat-icon matPrefix>search</mat-icon>
       <input matInput autocomplete="off" style="margin-bottom: 5px;padding-left: 5px;" [formControl]="search">
     </mat-form-field>
     <div *ngFor="let item of filteredList$ | async">
       <mat-card style="margin-bottom: 8px;border-radius: 0;padding-bottom: 8px;">
         <h4 style="margin-bottom: 4px;">{{ item.title }}</h4>
-        <p style="color: #0000008a;font-size: smaller;">{{ item.description }}</p>
-      <!-- <mat-chip-list appearance="outline">
-        <mat-chip color="primary" 
-          appearance="outline"
-          [ngClass]="{'difficulty-level-easy':item.proficiencyId === 1, 
-          'difficulty-level-medium': item.proficiencyId === 2, 
-          'difficulty-level-hard':item.proficiencyId === 3}">
-          {{ item.proficiencyId === 1 ? 'Easy' : (item.proficiencyId === 2 ? 'Medium' : 'Hard') }}
-        </mat-chip>
-      </mat-chip-list> -->
-      
+        <p style="font-size: smaller;">{{ item.description }}</p>
         <mat-divider></mat-divider>
         <p style="font-size: smaller;padding-top: 10px;">{{ item.questionIds.length }} Questions &bull; {{ item.maxTime }} mins
-          <span style="float: right; color: #3f51b5; cursor: pointer;" (click)="startQuiz(item.id)">Start Quiz</span>
+          <span style="float: right; cursor: pointer;" (click)="startQuiz(item.id)">Start Quiz</span>
         </p>
       </mat-card>
     </div>
-  </mat-list>
+  </mat-list> -->
+<mat-card class="mat-elevation-z0 outline" appearance="outlined">
+  <mat-card-title>Create Quiz</mat-card-title>
+  <mat-divider></mat-divider>
+  <div class="container">
+    <mat-card-content>
+      <form [formGroup]="quizForm" (ngSubmit)="generateQuiz()">
+        <mat-form-field appearance="outline">
+          <mat-label>Number of Questions</mat-label>
+          <input matInput formControlName="noOfQues">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Category</mat-label>
+          <mat-select formControlName="categoryId">
+            @for (category of categories; track category.id) {
+            <mat-option [value]="category.id">{{category.label}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Difficulty</mat-label>
+          <select matNativeControl formControlName="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Type</mat-label>
+          <select matNativeControl formControlName="type">
+            <option value="any">Any Type</option>
+            <option value="multiple">Multiple Choice</option>
+            <option value="boolean">True / False</option>
+          </select>
+        </mat-form-field>
+        <div class="form-buttons">
+          <button mat-flat-button color="primary" type="submit" [disabled]="!validateParams()">Generate Quiz</button>
+          <button mat-stroked-button type="button">Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </div>
+</mat-card>
