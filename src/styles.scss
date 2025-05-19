@@ -37,6 +37,11 @@ html {
         container-background-color: var(--mat-sys-primary-container),
         container-text-color: var(--mat-sys-primary),
     ));
+
+    @include mat.menu-overrides((
+        item-label-text-color: var(--mat-sys-primary),
+        item-icon-color: var(--mat-sys-primary),
+    ));
 }
 :root {
     --mdc-filled-button-container-height: 40px;
