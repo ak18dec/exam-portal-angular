@@ -3,15 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
 import { LoginComponent } from './layouts/home/login/login.component';
 import { SignupComponent } from './layouts/home/signup/signup.component';
-import { QuestionsComponent } from './modules/questions/questions.component';
 import { CategoryComponent } from './modules/categories/categories.component';
 import { DefaultsComponent } from './layouts/defaults/defaults.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { UsersComponent } from './modules/users/users.component';
 import { UserComponent } from './modules/users/user/user.component';
-import { QuestionComponent } from './modules/questions/question/question.component';
-import { QuizComponent } from './modules/quiz/quiz.component';
-import { QuizFormComponent } from './modules/quiz/quiz-form/quiz-form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
 import { UserHomeComponent } from './layouts/user-home/user-home.component';
@@ -80,32 +76,6 @@ const routes: Routes = [
         path: 'categories',
         component: CategoryComponent
       },
-      {
-        path: 'quizes',
-        component: QuizComponent
-      },
-      {
-        path: 'quizes/new',
-        component: QuizFormComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'quizes/:id',
-        component: QuizFormComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'questions',
-        component: QuestionsComponent
-      },
-      {
-        path: 'questions/new',
-        component: QuestionComponent
-      },
-      {
-        path: 'questions/:id',
-        component: QuestionComponent
-      }
     ]
   },
   {
