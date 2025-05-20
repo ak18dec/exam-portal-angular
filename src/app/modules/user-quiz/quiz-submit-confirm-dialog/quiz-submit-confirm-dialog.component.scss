@@ -1,0 +1,16 @@
+.confirmation-message {
+    text-align: center;
+    @media (min-width: 32rem) {
+        margin-top: 20px;
+    }
+    mat-icon {
+        color: var(--mat-sys-primary);
+    }
+}
+
+.dialog-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}

@@ -9,11 +9,12 @@ import { TimerComponent } from 'src/app/modules/timer/timer.component';
 import { UserQuestionComponent } from 'src/app/modules/user-question/user-question.component';
 import { QuestionTrackerComponent } from 'src/app/modules/question-tracker/question-tracker.component';
 import { UserQuizComponent } from 'src/app/modules/user-quiz/user-quiz.component';
-import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-question/quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
+import { QuizSubmitConfirmDialogComponent1 } from 'src/app/modules/user-question/quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 import { UserAnalyticsComponent } from 'src/app/modules/user-analytics/user-analytics.component';
 import { UserQuizListComponent } from 'src/app/modules/user-quiz-list/user-quiz-list.component';
 import { QuizScoreComponent } from 'src/app/modules/quiz-score/quiz-score.component';
 import { QuizCertificateComponent } from 'src/app/modules/quiz-certificate/quiz-certificate.component';
+import { QuizSubmitConfirmDialogComponent } from 'src/app/modules/user-quiz/quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 
 
 
@@ -25,11 +26,12 @@ import { QuizCertificateComponent } from 'src/app/modules/quiz-certificate/quiz-
     UserQuestionComponent,
     QuestionTrackerComponent,
     UserQuizComponent,
-    QuizSubmitConfirmDialogComponent,
+    QuizSubmitConfirmDialogComponent1,
     UserAnalyticsComponent,
     UserQuizListComponent,
     QuizScoreComponent,
     QuizCertificateComponent,
+    QuizSubmitConfirmDialogComponent
   ],
   imports: [
     CommonModule,

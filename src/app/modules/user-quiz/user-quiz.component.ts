@@ -1,4 +1,5 @@
 import { Component, computed, inject, Inject, Input, OnInit, signal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Question } from 'src/app/models/question';
@@ -6,6 +7,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { QuizService } from 'src/app/services/quiz.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { UserquizService } from 'src/app/services/userquiz.service';
+import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 
 @Component({
     selector: 'app-user-quiz',
@@ -42,6 +44,8 @@ export class UserQuizComponent implements OnInit {
   totalQuestionLength = 0;
 
   userChoices: any[] = [];
+
+  readonly dialog = inject(MatDialog)
 
   constructor(
     private quizService: QuizService,
@@ -115,7 +119,7 @@ export class UserQuizComponent implements OnInit {
 
 
   startQuiz() {
-    this.startTimer();
+    // this.startTimer();
     this.displayCurrentQuestion(0);
   }
 
@@ -158,6 +162,19 @@ export class UserQuizComponent implements OnInit {
   submitQuiz() {
     console.log('Submit Clicked')
     console.log(this.userChoices)
+    this.confirmDialog();
   }
+
+  confirmDialog(): void {
+      let dialogRef = this.dialog.open(QuizSubmitConfirmDialogComponent, {
+        width: '400px',
+        data: Object.assign({},this.userChoices)
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log("Success", result);
+      });
+    }
+  
 
 }

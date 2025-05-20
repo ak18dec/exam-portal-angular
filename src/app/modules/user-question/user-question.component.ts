@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/models/question';
-import { QuizSubmitConfirmDialogComponent } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
+import { QuizSubmitConfirmDialogComponent1 } from './quiz-submit-confirm-dialog/quiz-submit-confirm-dialog.component';
 import { TimerService } from 'src/app/services/timer.service';
 import { TrackerService } from 'src/app/services/tracker.service';
 import { Subscription } from 'rxjs';
@@ -189,7 +189,7 @@ export class UserQuestionComponent implements OnInit, OnDestroy {
 
   openConfirmDialog(): void {
 
-    let dialogRef = this.dialog.open(QuizSubmitConfirmDialogComponent, {
+    let dialogRef = this.dialog.open(QuizSubmitConfirmDialogComponent1, {
       width: '330px',
       height: '190px'
     });
