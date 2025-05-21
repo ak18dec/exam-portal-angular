@@ -10,7 +10,7 @@
         padding-left: 6px;
 
         .question-main {
-            background: var(--mat-sys-primary-container);
+            // background: var(--mat-sys-primary-container);
             border-radius: 28px;
             height: 100%;
             display: flex;
@@ -21,7 +21,8 @@
             .desc {
                 width: 100%;
                 height: 40%;
-                background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+                // background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+                background: var(--mat-sys-primary-container);
                 border-radius: 28px;
                 display: flex;
                 justify-content: center;
@@ -58,7 +59,8 @@
             .choices {
                 width: 100%;
                 height: 60%;
-                background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+                // background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+                background: var(--mat-sys-primary-container);
                 border-radius: 28px;
                 display: flex;
                 flex-direction: column;
@@ -112,6 +114,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-top: 10px;
 
         .timer-main {
             display: flex;
@@ -123,6 +126,7 @@
             .container {
                 zoom: 0.65;
                 background: var(--mat-sys-primary-container);
+                border: 2px solid var(--mat-sys-primary);
                 border-radius: 28px;
                 height: 243px;
                 width: 264px;
@@ -179,6 +183,7 @@
             .tr-container {
                 zoom: 0.65;
                 background: var(--mat-sys-primary-container);
+                border: 2px solid var(--mat-sys-primary);
                 border-radius: 28px;
                 height: 100%;
                 width: 264px;
