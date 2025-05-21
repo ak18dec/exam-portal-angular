@@ -56,17 +56,25 @@
         <div class="side">
             <div class="timer-main">
                 <div class="container">
-                    <div class="timer">
-                        <div class="time">
-                            <span>{{ minutes() }}</span>
+                    @if (!timesUp) {
+                        <div class="timer">
+                            <div class="time">
+                                <span>{{ minutes() }}</span>
+                            </div>
+                            <div class="separator">
+                                <span>:</span>
+                            </div>
+                            <div class="time">
+                                <span>{{ seconds() }}</span>
+                            </div>
                         </div>
-                        <div class="separator">
-                            <span>:</span>
+                    } @else {
+                        <div class="timer">
+                            <div class="times-up">
+                                <span>Times Up</span>
+                            </div>
                         </div>
-                        <div class="time">
-                            <span>{{ seconds() }}</span>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
             <div class="tracker-main">

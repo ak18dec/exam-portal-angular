@@ -77,9 +77,10 @@ export class UserQuizComponent implements OnInit {
 
   stopTimer: boolean = false;
 
-  totalTime = 300; // in seconds (e.g., 5 minutes)
+  totalTime = 10; // in seconds (e.g., 5 minutes)
   timeLeft = signal(this.totalTime); //signal for current time
   private timerId: any;
+  timesUp: boolean = false;
 
   // Separate computed signals
   minutes = computed(() => this.pad(Math.floor(this.timeLeft() / 60)));
@@ -124,11 +125,6 @@ export class UserQuizComponent implements OnInit {
   }
 
   prepareQuiz() {
-    // if(this.quizTime) {
-    //   this.totalTime = Number.isInteger(this.quizTime) ? `${this.quizTime}:00` : `${this.quizTime}`;
-    // }
-    // this.timer = this.quizTime * 60;
-    // this.stopTimer = false;
     this.quizQuestions.forEach((ques, index) => {
       this.userChoices.push({
         qIndex: index,
@@ -144,6 +140,7 @@ export class UserQuizComponent implements OnInit {
 
   startTimer(): void {
     console.log('Timer Started')
+    this.timesUp = false;
     this.timerId = setInterval(() => {
       if(this.timeLeft() > 0) {
         this.timeLeft.update(time => time - 1);
@@ -161,12 +158,13 @@ export class UserQuizComponent implements OnInit {
   onTimeUp(): void {
     console.log('Time is up! Submit the quiz.');
     // handle auto-submit or timeout UI
+    this.timesUp = true;
   }
 
 
 
   startQuiz() {
-    // this.startTimer();
+    this.startTimer();
     this.displayCurrentQuestion(0);
   }
 
