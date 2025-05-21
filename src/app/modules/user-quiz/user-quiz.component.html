@@ -15,61 +15,65 @@
 </div> -->
 
 <div class="main">
-    <div class="question">
+    <div class="main-container">
         <div class="question-main">
-            <div class="desc">
-                <a mat-button class="ques-nav" 
-                    (click)="navigateQues('prev')" 
-                    [disabled]="displayedQuesIndex===0">
-                     Back
-                </a>
-                <div class="ques-text"><p>{{`Q ${displayedQuesIndex+1}.`}} {{ quizQues.question }}</p></div>
-                @if (displayedQuesIndex !== totalQuestionLength-1) {
+            <div class="question">
+                <div class="desc">
+                    <a mat-button class="ques-nav" (click)="navigateQues('prev')" [disabled]="displayedQuesIndex===0">
+                        Back
+                    </a>
+                    <div class="ques-text">
+                        <p>{{`Q ${displayedQuesIndex+1}.`}} {{ quizQues.question }}</p>
+                    </div>
+                    @if (displayedQuesIndex !== totalQuestionLength-1) {
                     <a mat-button class="ques-nav" (click)="navigateQues('next')">
-                    Next
+                        Next
                     </a>
-                } @else {
+                    } @else {
                     <a mat-button class="ques-nav" (click)="submitQuiz()">
-                    Submit
+                        Submit
                     </a>
-                }
-            </div>
-            <div class="choices">
-                @for (choice of allChoices; track $index) {
-                    <span class="choice" 
-                        [class.selected]="$index === userChoices[displayedQuesIndex].choiceIndex"
-                        (click)="userChoice(choice, $index)">
-                        <span class="choice-text">{{ choice }}</span>
-                        <mat-icon class="check-icon" *ngIf="$index === userChoices[displayedQuesIndex].choiceIndex">
-                            check_circle_outline
-                        </mat-icon>
-                    </span>
-                }
-            </div>
-        </div>
-        
-    </div>
-    <div class="side">
-        <div class="timer-main">
-            <div class="container">
-                <div class="timer">
-                    <div class="time">
-                        <span>{{ minutes() }}</span>
+                    }
+                </div>
+                <div class="choices">
+                    <div class="choice-list">
+                        @for (choice of allChoices; track $index) {
+                        <span class="choice" [class.selected]="$index === userChoices[displayedQuesIndex].choiceIndex"
+                            (click)="userChoice(choice, $index)">
+                            <span class="choice-text">{{ choice }}</span>
+                            <mat-icon class="check-icon" *ngIf="$index === userChoices[displayedQuesIndex].choiceIndex">
+                                check_circle_outline
+                            </mat-icon>
+                        </span>
+                        }
                     </div>
-                    <div class="separator">
-                        <span>:</span>
-                    </div>
-                    <div class="time">
-                        <span>{{ seconds() }}</span>
+                    <div class="clear-ans-btn">
+                        <a mat-button (click)="clearAns()">Clear Ans</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="tracker-main">
-            <div class="tr-container">
+        <div class="side">
+            <div class="timer-main">
+                <div class="container">
+                    <div class="timer">
+                        <div class="time">
+                            <span>{{ minutes() }}</span>
+                        </div>
+                        <div class="separator">
+                            <span>:</span>
+                        </div>
+                        <div class="time">
+                            <span>{{ seconds() }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tracker-main">
+                <div class="tr-container">
+                </div>
             </div>
         </div>
     </div>
+
 </div>
-
-

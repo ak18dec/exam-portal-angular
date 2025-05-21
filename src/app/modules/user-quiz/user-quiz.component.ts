@@ -19,7 +19,54 @@ export class UserQuizComponent implements OnInit {
 
   questionService = inject(QuestionService)
 
-  quizQuestions: Question[] = [];
+  quizQuestions: Question[] = [{
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "General Knowledge",
+      "question": "Macintosh has named six of its operating systems after big cats. What big cat did Macintosh name their 2007 release after? ",
+      "correct_answer": "Leopard",
+      "incorrect_answers": [
+        "Tiger",
+        "Panther",
+        "Puma"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "General Knowledge",
+      "question": "In a standard set of playing cards, which is the only king without a moustache?",
+      "correct_answer": "Hearts",
+      "incorrect_answers": [
+        "Spades",
+        "Diamonds",
+        "Clubs"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "General Knowledge",
+      "question": "What is the highest number of Michelin stars a restaurant can receive?",
+      "correct_answer": "Three",
+      "incorrect_answers": [
+        "Four",
+        "Five",
+        "Six"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "General Knowledge",
+      "question": "What was the soft drink Pepsi originally introduced as?",
+      "correct_answer": "Brad&#039;s Drink",
+      "incorrect_answers": [
+        "Pepsin Pop",
+        "Carolina Cola",
+        "Pepsin Syrup"
+      ]
+    }];
   
   quizTime: number = 10;
 
@@ -69,7 +116,7 @@ export class UserQuizComponent implements OnInit {
     //     this.scoreDetails = resp;
     //   }
     // })
-    this.quizQuestions = this.questionService.questions();
+    // this.quizQuestions = this.questionService.questions();
     this.totalQuestionLength = this.quizQuestions.length;
     if(this.quizQuestions && this.totalQuestionLength > 0) {
       this.prepareQuiz();
@@ -176,5 +223,9 @@ export class UserQuizComponent implements OnInit {
       });
     }
   
+    clearAns() {
+      this.userChoices[this.displayedQuesIndex].marking = undefined;
+      this.userChoices[this.displayedQuesIndex].choiceIndex = undefined;
+    }
 
 }
