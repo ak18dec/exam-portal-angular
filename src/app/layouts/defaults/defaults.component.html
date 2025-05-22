@@ -1,4 +1,4 @@
-<app-header (toggleSideBarForMe)="sideBarToggler($event)" [showToggleOption]="true" [isMobileDevice]="(isHandset$ | async) ? true : false"></app-header>
+<app-header (toggleSideBarForMe)="sideBarToggler($event)" [showToggleOption]="false" [isMobileDevice]="(isHandset$ | async) ? true : false"></app-header>
 
 <mat-drawer-container>
     <mat-drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="sideBarOpen">

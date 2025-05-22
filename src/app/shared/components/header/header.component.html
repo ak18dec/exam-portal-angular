@@ -12,8 +12,8 @@
         </div>
         
 
-        <div *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && !isMobileDevice" class="section-center">
-            <ul class="user-menu">
+        <div class="section-center">
+            <ul class="user-menu" *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && !isMobileDevice">
                 <li>
                     <button mat-button [routerLink]="['/user/quizzes']" routerLinkActive="active">
                         Quizzes
