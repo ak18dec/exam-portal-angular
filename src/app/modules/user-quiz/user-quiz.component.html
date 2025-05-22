@@ -15,73 +15,89 @@
 </div> -->
 
 <div class="main">
-    <div class="main-container">
-        <div class="question-main">
-            <div class="question">
-                <div class="desc">
-                    <a mat-button class="ques-nav" (click)="navigateQues('prev')" [disabled]="displayedQuesIndex===0">
-                        Back
-                    </a>
-                    <div class="ques-text">
-                        <p>{{`Q ${displayedQuesIndex+1}.`}} {{ quizQues.question }}</p>
-                    </div>
-                    @if (displayedQuesIndex !== totalQuestionLength-1) {
-                    <a mat-button class="ques-nav" (click)="navigateQues('next')">
-                        Next
-                    </a>
-                    } @else {
-                    <a mat-button class="ques-nav" (click)="submitQuiz()">
-                        Submit
-                    </a>
-                    }
-                </div>
-                <div class="choices">
-                    <div class="choice-list">
-                        @for (choice of allChoices; track $index) {
-                        <span class="choice" [class.selected]="$index === userChoices[displayedQuesIndex].choiceIndex"
-                            (click)="userChoice(choice, $index)">
-                            <span class="choice-text">{{ choice }}</span>
-                            <mat-icon class="check-icon" *ngIf="$index === userChoices[displayedQuesIndex].choiceIndex">
-                                check_circle_outline
-                            </mat-icon>
-                        </span>
+    @if (quizSubmitted) {
+        <div class="quiz-score">
+        <h1>Score</h1>
+        <div class="details">
+            <p>Score: <strong>100</strong></p>
+            <p>Correct Questions: <strong>05</strong></p>
+            <p>Incorrect Questions: <strong>00</strong></p>
+            <p>Total Attempted Questions: <strong>05</strong></p>
+            <p>Total Questions: <strong>05</strong></p>
+        </div>
+        <br />
+        <div class="play-again-btn">
+            <button mat-stroked-button routerLink="/user/quizzes">Play a new game</button>
+        </div>  
+    </div>
+    }@else {
+        <div class="main-container">
+            <div class="question-main">
+                <div class="question">
+                    <div class="desc">
+                        <a mat-button class="ques-nav" (click)="navigateQues('prev')" [disabled]="displayedQuesIndex===0">
+                            Back
+                        </a>
+                        <div class="ques-text">
+                            <p>{{`Q ${displayedQuesIndex+1}.`}} {{ quizQues.question }}</p>
+                        </div>
+                        @if (displayedQuesIndex !== totalQuestionLength-1) {
+                        <a mat-button class="ques-nav" (click)="navigateQues('next')">
+                            Next
+                        </a>
+                        } @else {
+                        <a mat-button class="ques-nav" (click)="submitQuiz()">
+                            Submit
+                        </a>
                         }
                     </div>
-                    <div class="clear-ans-btn">
-                        <a mat-button (click)="clearAns()">Clear Ans</a>
+                    <div class="choices">
+                        <div class="choice-list">
+                            @for (choice of allChoices; track $index) {
+                            <span class="choice" [class.selected]="$index === userChoices[displayedQuesIndex].choiceIndex"
+                                (click)="userChoice(choice, $index)">
+                                <span class="choice-text">{{ choice }}</span>
+                                <mat-icon class="check-icon" *ngIf="$index === userChoices[displayedQuesIndex].choiceIndex">
+                                    check_circle_outline
+                                </mat-icon>
+                            </span>
+                            }
+                        </div>
+                        <div class="clear-ans-btn">
+                            <a mat-button (click)="clearAns()">Clear Ans</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side">
+                <div class="timer-main">
+                    <div class="container">
+                        @if (!timesUp) {
+                            <div class="timer">
+                                <div class="time">
+                                    <span>{{ minutes() }}</span>
+                                </div>
+                                <div class="separator">
+                                    <span>:</span>
+                                </div>
+                                <div class="time">
+                                    <span>{{ seconds() }}</span>
+                                </div>
+                            </div>
+                        } @else {
+                            <div class="timer">
+                                <div class="times-up">
+                                    <span>Times Up</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="tracker-main">
+                    <div class="tr-container">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="side">
-            <div class="timer-main">
-                <div class="container">
-                    @if (!timesUp) {
-                        <div class="timer">
-                            <div class="time">
-                                <span>{{ minutes() }}</span>
-                            </div>
-                            <div class="separator">
-                                <span>:</span>
-                            </div>
-                            <div class="time">
-                                <span>{{ seconds() }}</span>
-                            </div>
-                        </div>
-                    } @else {
-                        <div class="timer">
-                            <div class="times-up">
-                                <span>Times Up</span>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="tracker-main">
-                <div class="tr-container">
-                </div>
-            </div>
-        </div>
-    </div>
-
+    }
 </div>

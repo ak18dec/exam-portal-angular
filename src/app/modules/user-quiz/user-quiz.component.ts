@@ -93,6 +93,8 @@ export class UserQuizComponent implements OnInit {
 
   userChoices: any[] = [];
 
+  quizSubmitted: boolean = false;
+
   readonly dialog = inject(MatDialog)
 
   constructor(
@@ -118,6 +120,7 @@ export class UserQuizComponent implements OnInit {
     //   }
     // })
     // this.quizQuestions = this.questionService.questions();
+    this.quizSubmitted = false;
     this.totalQuestionLength = this.quizQuestions.length;
     if(this.quizQuestions && this.totalQuestionLength > 0) {
       this.prepareQuiz();
@@ -218,6 +221,7 @@ export class UserQuizComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         console.log("Success", result);
+        this.quizSubmitted = true;
       });
     }
   
