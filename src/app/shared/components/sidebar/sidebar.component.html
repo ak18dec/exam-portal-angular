@@ -4,8 +4,6 @@
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/">Dashboard</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/users">Users</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/categories">Categories</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/questions">Questions</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/quizes">Quizes</a>
     </span>
 
     <span *ngIf="loginService.getUserRole() === 'ROLE_NORMAL' && isMobileDevice">

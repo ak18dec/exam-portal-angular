@@ -1,13 +1,23 @@
 <app-navbar *ngIf="(isHandset$ | async) ? false : true"></app-navbar>
 
-<div class="homepage-container" *ngIf="(isHandset$ | async) ? false : true">
-    <object class="welcome-logo" type="image/svg+xml" data="assets/homewall.svg"></object>
+<div class="homepage-container">
+    <!-- <object class="welcome-logo" type="image/svg+xml" data="assets/homewall.svg"></object> -->
+     <div class="hero-text">
+        <h1><span>Quiz</span><span>4</span><span>All</span></h1>
+        <h4><span>The best place to </span><span class="highlight">learn</span><span> and </span><span class="highlight">play</span><span> for kids</span></h4>
+     </div>
+     <div class="cta">
+        <button mat-stroked-button routerLink="/signup">
+            Get Started
+            <mat-icon iconPositionEnd>arrow_forward_ios</mat-icon>
+        </button>
+     </div>
 </div>
 
-<div class="homepage-container" *ngIf="(isHandset$ | async) ? true : false">
+<!-- <div class="homepage-container" *ngIf="(isHandset$ | async) ? true : false">
     <object class="welcome-logo" type="image/svg+xml" data="assets/mobile/welcome-logo.svg"></object>
     <div class="btns">
         <button mat-flat-button color="primary" routerLink="/login">Login</button>
         <button mat-stroked-button color="primary" routerLink="/signup">Register</button>
     </div>
-</div>
+</div> -->
